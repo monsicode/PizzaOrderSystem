@@ -13,6 +13,8 @@ public abstract class Product {
     protected final String nameProduct;
     protected StatusProduct statusProduct;
 
+    // three large margaritas --> are they different  or should be grouped ?
+
     public Product(String nameProduct, StatusProduct statusProduct) {
         this.id = UUID.randomUUID().toString();
         this.nameProduct = nameProduct;

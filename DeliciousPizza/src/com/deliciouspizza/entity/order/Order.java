@@ -23,6 +23,7 @@ public class Order {
     private User employee;
     private String addressDelivery;
 
+    // do i really need this constructor ? // thought that the price had a problem, -> no problem
     public Order() {
         this.id = UUID.randomUUID().toString();
         this.order = new HashMap<>();

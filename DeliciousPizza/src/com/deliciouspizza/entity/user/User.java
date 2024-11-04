@@ -8,11 +8,20 @@ public abstract class User {
     private final String id;
     protected final String username;
     protected final String password;
+    protected int age;
 
+    //to think about
     public User(String username, String password) {
         this.id = UUID.randomUUID().toString();
         this.username = username;
         this.password = password;
+    }
+
+    public User(String username, String password, int age) {
+        this.id = UUID.randomUUID().toString();
+        this.username = username;
+        this.password = password;
+        this.age = age;
     }
 
     public String getUsername() {

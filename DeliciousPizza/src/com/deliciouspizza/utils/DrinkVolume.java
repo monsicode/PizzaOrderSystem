@@ -7,7 +7,7 @@ public enum DrinkVolume {
     VENTI(4.50),
     TRENTA(5.20);
 
-    private final double price; // Обем в fl oz
+    private final double price;
 
     DrinkVolume(double price) {
         this.price = price;
