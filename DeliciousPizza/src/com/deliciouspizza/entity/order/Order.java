@@ -8,18 +8,23 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
+import java.util.UUID;
 
 public class Order {
 
-    private Map<Product, Integer> order;
+    private final String id;
+
+    private final Map<Product, Integer> order;
     private StatusOrder statusOrder;
-    private LocalDateTime orderDate;
+    private final LocalDateTime orderDate;
     private double totalPrice;
     private User customer;
     private User employee;
     private String addressDelivery;
 
     public Order() {
+        this.id = UUID.randomUUID().toString();
         this.order = new HashMap<>();
         this.orderDate = LocalDateTime.now();
         this.totalPrice = 0.0;
@@ -27,10 +32,11 @@ public class Order {
 
     public Order(Map<Product, Integer> order, StatusOrder statusOrder, User customer, User employee,
                  String addressDelivery) {
+        this.id = UUID.randomUUID().toString();
         this.order = order;
         this.statusOrder = statusOrder;
-        this.orderDate = LocalDateTime.now(); // Задаваме текущата дата
-        this.totalPrice = calculateTotalPrice(order); // Изчисляваме цената от добавените продукти
+        this.orderDate = LocalDateTime.now();
+        this.totalPrice = calculateTotalPrice(order);
         this.customer = customer;
         this.employee = employee;
         this.addressDelivery = addressDelivery;
@@ -82,5 +88,18 @@ public class Order {
 
     public String getAddressDelivery() {
         return addressDelivery;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        Order order = (Order) object;
+        return Objects.equals(id, order.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }
