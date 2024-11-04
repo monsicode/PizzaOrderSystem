@@ -1,4 +1,11 @@
 package com.deliciouspizza.entity.product;
 
-public class Food extends Product {
+import com.deliciouspizza.utils.StatusProduct;
+
+public abstract class Food extends Product {
+
+    public Food(String nameProduct, double price, StatusProduct statusProduct) {
+        super(nameProduct, price, statusProduct);
+    }
+
 }
