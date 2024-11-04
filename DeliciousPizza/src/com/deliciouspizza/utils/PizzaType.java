@@ -1,12 +1,23 @@
 package com.deliciouspizza.utils;
 
 public enum PizzaType {
-    MARGHERITA,
-    PEPPERONI,
-    HAWAIIAN,
-    VEGGIE,
-    BBQ_CHICKEN,
-    FOUR_CHEESE,
-    SEAFOOD,
-    MEAT_LOVERS
+    MARGHERITA(8.00),
+    PEPPERONI(9.00),
+    HAWAIIAN(10.00),
+    VEGGIE(9.50),
+    BBQ_CHICKEN(11.00),
+    FOUR_CHEESE(10.50),
+    SEAFOOD(12.00),
+    MEAT_LOVERS(11.50);
+
+    private final double price;
+
+    PizzaType(double price) {
+        this.price = price;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
 }

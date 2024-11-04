@@ -4,22 +4,19 @@ import com.deliciouspizza.utils.PizzaSize;
 import com.deliciouspizza.utils.PizzaType;
 import com.deliciouspizza.utils.StatusProduct;
 
-public class Pizza extends Food{
+public class Pizza extends Food {
 
     private final PizzaType pizzaType;
     private final PizzaSize pizzaSize;
 
-    public Pizza(String nameProduct, double price, StatusProduct statusProduct, PizzaType pizzaType, PizzaSize pizzaSize) {
-        super(nameProduct, price, statusProduct);
+    public Pizza(String nameProduct, StatusProduct statusProduct, PizzaType pizzaType, PizzaSize pizzaSize) {
+        super(nameProduct, statusProduct);
         this.pizzaType = pizzaType;
         this.pizzaSize = pizzaSize;
     }
 
-    public PizzaType getPizzaType() {
-        return pizzaType;
-    }
-
-    public PizzaSize getPizzaSize() {
-        return pizzaSize;
+    @Override
+    public double calculatePrice() {
+        return pizzaType.getPrice() + pizzaSize.getAdditionalPrice();
     }
 }
