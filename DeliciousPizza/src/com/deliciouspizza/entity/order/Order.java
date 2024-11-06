@@ -44,6 +44,7 @@ public class Order {
     }
 
     public void addProduct(Product product, int quantity) {
+        //if product is active
         order.put(product, order.getOrDefault(product, 0) + quantity);
         totalPrice += product.calculatePrice() * quantity;
     }
@@ -103,4 +104,17 @@ public class Order {
     public int hashCode() {
         return Objects.hashCode(id);
     }
+
+    @Override
+    public String toString() {
+        StringBuilder orderItems = new StringBuilder();
+        for (Map.Entry<Product, Integer> entry : order.entrySet()) {
+            orderItems.append("\n\t").append(entry.getKey().toString())
+                .append(", Quantity: ").append(entry.getValue());
+        }
+
+        return "Order" +
+            "order=" + orderItems;
+    }
+
 }

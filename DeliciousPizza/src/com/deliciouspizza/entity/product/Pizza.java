@@ -4,13 +4,14 @@ import com.deliciouspizza.utils.PizzaSize;
 import com.deliciouspizza.utils.PizzaType;
 import com.deliciouspizza.utils.StatusProduct;
 
-public class Pizza extends Food {
+import java.util.Objects;
 
+public class Pizza extends Food {
+    //private static Map<id, pizza>
     private final PizzaType pizzaType;
     private final PizzaSize pizzaSize;
 
-    public Pizza(String nameProduct, StatusProduct statusProduct, PizzaType pizzaType, PizzaSize pizzaSize) {
-        super(nameProduct, statusProduct);
+    public Pizza(PizzaType pizzaType, PizzaSize pizzaSize) {
         this.pizzaType = pizzaType;
         this.pizzaSize = pizzaSize;
     }
@@ -19,4 +20,18 @@ public class Pizza extends Food {
     public double calculatePrice() {
         return pizzaType.getPrice() + pizzaSize.getAdditionalPrice();
     }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        Pizza pizza = (Pizza) object;
+        return pizzaType == pizza.pizzaType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(pizzaType);
+    }
+
 }

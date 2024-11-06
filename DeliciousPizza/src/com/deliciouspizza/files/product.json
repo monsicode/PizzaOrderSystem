@@ -1,0 +1,44 @@
+[
+  {
+    "id": "1",
+    "type": "Food",
+    "price": 8.50,
+    "active": true
+  },
+  {
+    "id": "2",
+    "type": "Food",
+    "price": 9.00,
+    "active": true
+  },
+  {
+    "id": "3",
+    "type": "Food",
+    "price": 9.50,
+    "active": true
+  },
+  {
+    "id": "4",
+    "type": "Drink",
+    "price": 1.50,
+    "active": true
+  },
+  {
+    "id": "5",
+    "type": "Drink",
+    "price": 1.50,
+    "active": true
+  },
+  {
+    "id": "6",
+    "type": "Sauce",
+    "price": 0.50,
+    "active": true
+  },
+  {
+    "id": "7",
+    "type": "Sauce",
+    "price": 0.75,
+    "active": true
+  }
+]

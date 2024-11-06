@@ -1,24 +1,24 @@
 package com.deliciouspizza.entity.product;
 
-import com.deliciouspizza.utils.DrinkVolume;
+import com.deliciouspizza.entity.order.Order;
 import com.deliciouspizza.utils.PizzaSize;
 import com.deliciouspizza.utils.PizzaType;
 import com.deliciouspizza.utils.StatusProduct;
 
-import java.util.Objects;
-import java.util.UUID;
-
 public abstract class Product {
-    private final String id;
-    protected final String nameProduct;
+
     protected StatusProduct statusProduct;
 
-    // three large margaritas --> are they different  or should be grouped ?
+    // large margaritas --> are they different  or should be grouped ?
 
-    public Product(String nameProduct, StatusProduct statusProduct) {
-        this.id = UUID.randomUUID().toString();
-        this.nameProduct = nameProduct;
-        this.statusProduct = statusProduct;
+    public Product() {
+        this.statusProduct = StatusProduct.ACTIVE;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+            " status = " + statusProduct + '\'';
     }
 
     public void activateProduct() {
@@ -29,33 +29,33 @@ public abstract class Product {
         statusProduct = StatusProduct.INACTIVE;
     }
 
-    public String getNameProduct() {
-        return nameProduct;
-    }
-
     public StatusProduct getStatusProduct() {
         return statusProduct;
     }
 
     public abstract double calculatePrice();
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        Product product = (Product) object;
-        return Objects.equals(id, product.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
-    }
-
+    @SuppressWarnings("checkstyle:MagicNumber")
     public static void main(String[] args) {
-        Product p1 = new Pizza("bab", StatusProduct.ACTIVE, PizzaType.MARGHERITA, PizzaSize.LARGE);
-        Product p2 = new Drink("cola", StatusProduct.ACTIVE, true, DrinkVolume.GRANDE);
-        System.out.println(p2.calculatePrice());
+//       Product p1 = new Pizza("bab", StatusProduct.ACTIVE, PizzaType.MARGHERITA, PizzaSize.LARGE);
+//       Product p2 = new Drink("cola", StatusProduct.ACTIVE, true, DrinkVolume.GRANDE);
+
+        //  equal(), hash() -> във всяко едно листо
+        Product p1 = new Pizza(PizzaType.MARGHERITA, PizzaSize.LARGE);
+        Product p2 = new Pizza(PizzaType.MARGHERITA, PizzaSize.SMALL);
+
+        Order o = new Order();
+        o.addProduct(p1, 1);
+        o.addProduct(p2, 6);
+
+        System.out.println(o);
+
+//        System.out.println(p1.equals(p2));
+//        p1.deactivateProduct();
+//
+//        System.out.println(p1.getStatusProduct());
+//        System.out.println(p2.getStatusProduct());
+
     }
 
 }

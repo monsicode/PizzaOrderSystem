@@ -1,17 +1,17 @@
 package com.deliciouspizza.entity.product;
 
-import com.deliciouspizza.utils.StatusProduct;
+import com.deliciouspizza.utils.SauceList;
 
 public class Sauce extends Product {
 
-    private static final double PRICE_SAUCE = 0.5;
+    private final SauceList sauce;
 
-    public Sauce(String nameProduct, StatusProduct statusProduct) {
-        super(nameProduct, statusProduct);
+    public Sauce(SauceList sauce) {
+        this.sauce = sauce;
     }
 
     @Override
     public double calculatePrice() {
-        return PRICE_SAUCE;
+        return sauce.getPrice();
     }
 }
