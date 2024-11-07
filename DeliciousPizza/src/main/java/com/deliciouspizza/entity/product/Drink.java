@@ -1,16 +1,18 @@
 package com.deliciouspizza.entity.product;
 
-import com.deliciouspizza.utils.DrinkList;
+import com.deliciouspizza.utils.DrinkType;
 import com.deliciouspizza.utils.DrinkVolume;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import java.util.Objects;
 
-@JsonIgnoreProperties(ignoreUnknown = true)  // Игнориране на непознати полета
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonPropertyOrder({"type", "drink", "volume", "statusProduct" })
 public class Drink extends Product {
 
     // later to add in User to have age. if user is under 18 -> exception
-    private final DrinkList drink;
+    private final DrinkType drink;
     private final DrinkVolume volume;
 
     public Drink() {
@@ -18,7 +20,7 @@ public class Drink extends Product {
         volume = null;
     }
 
-    public Drink(DrinkList drink, DrinkVolume volume) {
+    public Drink(DrinkType drink, DrinkVolume volume) {
         this.drink = drink;
         this.volume = volume;
     }
@@ -32,7 +34,7 @@ public class Drink extends Product {
         return drink.getisAlcoholic();
     }
 
-    public DrinkList getDrink() {
+    public DrinkType getDrink() {
         return drink;
     }
 

@@ -1,12 +1,12 @@
 package com.deliciouspizza.entity.product;
 
-import com.deliciouspizza.utils.SauceList;
+import com.deliciouspizza.utils.SauceType;
 
 public class Sauce extends Product {
 
-    private final SauceList sauce;
+    private final SauceType sauce;
 
-    public Sauce(SauceList sauce) {
+    public Sauce(SauceType sauce) {
         this.sauce = sauce;
     }
 

@@ -1,6 +1,6 @@
 package com.deliciouspizza.utils;
 
-public enum DrinkList {
+public enum DrinkType {
     COKE(false, 2.50),
     PEPSI(false, 2.40),
     WATER(false, 1.50),
@@ -16,7 +16,7 @@ public enum DrinkList {
     private final boolean isAlcoholic;
     private final double price;
 
-    DrinkList(boolean isAlcoholic, double price) {
+    DrinkType(boolean isAlcoholic, double price) {
         this.isAlcoholic = isAlcoholic;
         this.price = price;
     }

@@ -1,1 +1,12 @@
-[{"type":"pizza","statusProduct":"ACTIVE","pizzaType":"MARGHERITA","pizzaSize":"LARGE"},{"type":"drink","statusProduct":"ACTIVE","drink":"COKE","volume":"GRANDE","isAlcoholic":false}]
+{
+  "pizza_margherita" : {
+    "pizzaType" : "MARGHERITA",
+    "pizzaSize" : "LARGE",
+    "statusProduct" : "ACTIVE"
+  },
+  "pizza_pepperoni" : {
+    "pizzaType" : "PEPPERONI",
+    "pizzaSize" : "SMALL",
+    "statusProduct" : "ACTIVE"
+  }
+}

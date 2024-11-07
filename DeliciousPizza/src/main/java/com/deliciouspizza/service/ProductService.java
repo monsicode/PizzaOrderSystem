@@ -21,6 +21,7 @@ public class ProductService {
 
     // getMenu || getActiveProducts --> unmodified(Set<Product>)
     // void activateProduct/deactivate(Product)
+    // getAvailability(Product);
 
     // deactivate(p1);{
         // p1.inacvite();

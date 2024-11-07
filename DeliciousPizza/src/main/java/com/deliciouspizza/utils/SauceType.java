@@ -1,6 +1,6 @@
 package com.deliciouspizza.utils;
 
-public enum SauceList {
+public enum SauceType {
     TOMATO_SAUCE(1.00),
     GARLIC_SAUCE(1.20),
     BBQ_SAUCE(1.50),
@@ -12,7 +12,7 @@ public enum SauceList {
 
     private final double price;
 
-    SauceList(double price) {
+    SauceType(double price) {
         this.price = price;
     }
 

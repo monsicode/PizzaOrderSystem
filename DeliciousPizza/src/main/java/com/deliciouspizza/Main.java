@@ -1,10 +1,10 @@
 package com.deliciouspizza;
 
 import com.deliciouspizza.entity.product.Drink;
-import com.deliciouspizza.entity.product.Product;
 import com.deliciouspizza.entity.product.Pizza;
-
-import com.deliciouspizza.utils.DrinkList;
+import com.deliciouspizza.entity.product.Product;
+import com.deliciouspizza.repository.ProductRepository;
+import com.deliciouspizza.utils.DrinkType;
 import com.deliciouspizza.utils.DrinkVolume;
 import com.deliciouspizza.utils.PizzaSize;
 import com.deliciouspizza.utils.PizzaType;
@@ -16,27 +16,27 @@ import java.io.IOException;
 public class Main {
 
     private static final String FILE_PATH = "src/main/resources/product.json";
-
     public static void main(String[] args) {
 
-        ObjectMapper objectMapper = new ObjectMapper();
+        ProductRepository repository = new ProductRepository();
 
-        Product product = new Pizza(PizzaType.MARGHERITA, PizzaSize.LARGE);
-        Product product2 = new Drink(DrinkList.COKE, DrinkVolume.GRANDE);
+        // Добавяне на продукти
+        Product pizza1 = new Pizza(PizzaType.MARGHERITA, PizzaSize.LARGE);
+        Product pizza2 = new Pizza(PizzaType.PEPPERONI, PizzaSize.SMALL);
+        Product pizza3 = new Pizza(PizzaType.PEPPERONI, PizzaSize.SMALL);
+        repository.addProduct(pizza1);
+        repository.addProduct(pizza2);
+        repository.addProduct(pizza3);
 
-        try {
+        // Записване на продуктите в JSON файл
+        repository.saveProducts();
 
-            objectMapper.writeValue(new File(FILE_PATH), new Product[] { product, product2 });
-            System.out.println("Обектите са записани в product.json");
+        // Зареждане на продуктите от JSON файл
+        repository.loadProducts();
 
-            // Зареждане на продуктите обратно от JSON файла
-            Product[] loadedProducts = objectMapper.readValue(new File(FILE_PATH), Product[].class);
-            for (Product p : loadedProducts) {
-                System.out.println("Зареден обект: " + p);
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        // Извеждаме продуктите
+        System.out.println(repository.getProductsMap());
     }
+
+
 }

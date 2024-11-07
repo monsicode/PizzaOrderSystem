@@ -3,9 +3,11 @@ package com.deliciouspizza.entity.product;
 import com.deliciouspizza.utils.PizzaSize;
 import com.deliciouspizza.utils.PizzaType;
 import com.deliciouspizza.utils.StatusProduct;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import java.util.Objects;
 
+@JsonPropertyOrder({"type", "pizzaType", "pizzaSize", "statusProduct" })
 public class Pizza extends Food {
     //private static Map<id, pizza>
     private final PizzaType pizzaType;
@@ -51,7 +53,7 @@ public class Pizza extends Food {
     public String toString() {
         return "Pizza{" +
             "pizzaSize=" + pizzaSize +
-            ", pizzaType=" + pizzaType +
+            ",pizzaType=" + pizzaType +
             '}';
     }
 }
