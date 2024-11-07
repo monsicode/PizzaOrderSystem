@@ -11,6 +11,11 @@ public class Pizza extends Food {
     private final PizzaType pizzaType;
     private final PizzaSize pizzaSize;
 
+    public Pizza(){
+        pizzaSize = null;
+        pizzaType = null;
+    }
+
     public Pizza(PizzaType pizzaType, PizzaSize pizzaSize) {
         this.pizzaType = pizzaType;
         this.pizzaSize = pizzaSize;
@@ -34,4 +39,19 @@ public class Pizza extends Food {
         return Objects.hashCode(pizzaType);
     }
 
+    public PizzaSize getPizzaSize() {
+        return pizzaSize;
+    }
+
+    public PizzaType getPizzaType() {
+        return pizzaType;
+    }
+
+    @Override
+    public String toString() {
+        return "Pizza{" +
+            "pizzaSize=" + pizzaSize +
+            ", pizzaType=" + pizzaType +
+            '}';
+    }
 }
