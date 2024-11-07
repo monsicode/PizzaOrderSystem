@@ -1,0 +1,24 @@
+{
+  "drink_coke_coke" : {
+    "drink" : "COKE",
+    "volume" : "GRANDE",
+    "statusProduct" : "ACTIVE",
+    "isAlcoholic" : false
+  },
+  "pizza_margherita" : {
+    "pizzaType" : "MARGHERITA",
+    "pizzaSize" : "LARGE",
+    "statusProduct" : "ACTIVE"
+  },
+  "drink_beer_beer" : {
+    "drink" : "BEER",
+    "volume" : "GRANDE",
+    "statusProduct" : "ACTIVE",
+    "isAlcoholic" : true
+  },
+  "pizza_pepperoni" : {
+    "pizzaType" : "PEPPERONI",
+    "pizzaSize" : "SMALL",
+    "statusProduct" : "ACTIVE"
+  }
+}
