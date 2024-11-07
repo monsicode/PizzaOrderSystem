@@ -2,18 +2,17 @@ package com.deliciouspizza.entity.product;
 
 import com.deliciouspizza.utils.PizzaSize;
 import com.deliciouspizza.utils.PizzaType;
-import com.deliciouspizza.utils.StatusProduct;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import java.util.Objects;
 
-@JsonPropertyOrder({"type", "pizzaType", "pizzaSize", "statusProduct" })
+@JsonPropertyOrder({"type", "pizzaType", "pizzaSize", "statusProduct"})
 public class Pizza extends Food {
     //private static Map<id, pizza>
     private final PizzaType pizzaType;
     private final PizzaSize pizzaSize;
 
-    public Pizza(){
+    public Pizza() {
         pizzaSize = null;
         pizzaType = null;
     }
@@ -26,6 +25,12 @@ public class Pizza extends Food {
     @Override
     public double calculatePrice() {
         return pizzaType.getPrice() + pizzaSize.getAdditionalPrice();
+    }
+
+    @Override
+    public String generateKey() {
+        key = "pizza_" + pizzaType.toString().toLowerCase();
+        return key;
     }
 
     @Override
@@ -54,6 +59,7 @@ public class Pizza extends Food {
         return "Pizza{" +
             "pizzaSize=" + pizzaSize +
             ",pizzaType=" + pizzaType +
-            '}';
+            "}\n";
     }
+
 }

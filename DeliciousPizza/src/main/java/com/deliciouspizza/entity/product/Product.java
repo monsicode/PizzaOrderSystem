@@ -4,16 +4,18 @@ import com.deliciouspizza.utils.StatusProduct;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
-@JsonSubTypes({
-    @JsonSubTypes.Type(value = Pizza.class, name = "pizza"),
-    @JsonSubTypes.Type(value = Drink.class, name = "drink"),
-    @JsonSubTypes.Type(value = Sauce.class, name = "sauce")
-})
+//do i need this ?
+//@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
+//@JsonSubTypes({
+//    @JsonSubTypes.Type(value = Pizza.class, name = "pizza"),
+//    @JsonSubTypes.Type(value = Drink.class, name = "drink"),
+//    @JsonSubTypes.Type(value = Sauce.class, name = "sauce")
+//})
 
 public abstract class Product {
 
     protected StatusProduct statusProduct;
+    protected String key;
 
     public Product() {
         this.statusProduct = StatusProduct.ACTIVE;
@@ -33,6 +35,6 @@ public abstract class Product {
 
     public abstract double calculatePrice();
 
-
+    public abstract String generateKey();
 
 }

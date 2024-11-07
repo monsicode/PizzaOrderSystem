@@ -1,40 +1,36 @@
 package com.deliciouspizza.service;
 
+import com.deliciouspizza.entity.product.Product;
+import com.deliciouspizza.repository.ProductRepository;
+
+import java.util.Map;
+
+//catch here !
+
 public class ProductService {
-    //Map<Status, Set<Product>> --> EnumMap ? --> repository
-    //-> faster getActive, slower deactivate
+    private final ProductRepository productRepository;
 
-    //Map<Product, Status> -> opposite
+    //TODO Singleton
+    @SuppressWarnings("checkstyle:TodoComment")
 
-    //Map<Product, Status> active o(1)
-    //Map<Product, Status> unactive o(1)    or Set<Products>
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
-    //как ше активираш продукт
+    public Map<String, Product> getActiveProducts() {
+        return productRepository.getActiveProductsMap();
+    }
 
-    //Product p1 = new Pizza(StatusProduct.ACTIVE, PizzaType.MARGHERITA, PizzaSize.LARGE);
-    //Product p2 = new Pizza(StatusProduct.ACTIVE, PizzaType.MARGHERITA, PizzaSize.LARGE);
+    public void addNewProduct(Product product) {
+        productRepository.addProduct(product);
+    }
 
-    //Product d1 = new Drink(...);
-    //Product d2 = new Drink(...);
+    public void deactivateProduct(Product product) {
+        productRepository.deactivateProduct(product);
+    }
 
-    //ProdRepository --> curData
-
-    // getMenu || getActiveProducts --> unmodified(Set<Product>)
-    // void activateProduct/deactivate(Product)
-    // getAvailability(Product);
-
-    // deactivate(p1);{
-        // p1.inacvite();
-        // active.add(p1),
-        // unactive.remove();
-    // }
-
-
-    //? update()
-
-    // loadProductFromJson --> repository
-    // saveProductToJson  --> repo
-    // CRUD operations
-
+    public double getProductPrice(Product product) {
+        return product.calculatePrice();
+    }
 
 }

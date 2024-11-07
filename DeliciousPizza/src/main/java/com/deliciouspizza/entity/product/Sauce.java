@@ -14,4 +14,10 @@ public class Sauce extends Product {
     public double calculatePrice() {
         return sauce.getPrice();
     }
+
+    @Override
+    public String generateKey() {
+        key = "sauce_" + sauce.toString().toLowerCase();
+        return key;
+    }
 }

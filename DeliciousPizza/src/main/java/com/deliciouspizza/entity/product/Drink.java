@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonPropertyOrder({"type", "drink", "volume", "statusProduct" })
+@JsonPropertyOrder({"type", "drink", "volume", "statusProduct"})
 public class Drink extends Product {
 
     // later to add in User to have age. if user is under 18 -> exception
@@ -27,7 +27,14 @@ public class Drink extends Product {
 
     @Override
     public double calculatePrice() {
+        //check if drink is null --> exception
         return drink.getPrice() + volume.getPrice();
+    }
+
+    @Override
+    public String generateKey() {
+        key = "drink_" + drink.toString().toLowerCase() + "_" + volume.toString().toLowerCase();
+        return key;
     }
 
     public boolean getIsAlcoholic() {
@@ -46,8 +53,8 @@ public class Drink extends Product {
     public String toString() {
         return "Drink{" +
             "drink=" + drink +
-            ", volume=" + volume +
-            '}';
+            ",volume=" + volume +
+            "}\n";
     }
 
     @Override
@@ -62,4 +69,5 @@ public class Drink extends Product {
     public int hashCode() {
         return Objects.hashCode(drink);
     }
+
 }

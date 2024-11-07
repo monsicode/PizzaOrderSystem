@@ -21,13 +21,6 @@ public enum DrinkType {
         this.price = price;
     }
 
-    @Override
-    public String toString() {
-        return "DrinkList{" +
-            "isAlcoholic=" + isAlcoholic +
-            '}';
-    }
-
     public boolean getisAlcoholic() {
         return isAlcoholic;
     }
