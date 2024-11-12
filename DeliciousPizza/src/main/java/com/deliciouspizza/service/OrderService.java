@@ -48,7 +48,7 @@ public class OrderService {
         }
     }
 
-    //dosent look okey 
+    //dosent look okey --> to remove or modify
     public void changeAddressOfDelivery(Customer customer, String newAddress) {
         customer.setAddress(newAddress);
     }

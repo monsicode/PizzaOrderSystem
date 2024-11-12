@@ -1,0 +1,10 @@
+{
+  "daka" : {
+    "username" : "daka",
+    "rights" : "CUSTOMER",
+    "address" : "ул. Пиротска 10",
+    "age" : 25,
+    "hashedPassword" : "$2a$10$j.3mU9F.oJowkxern5t9V.rEhtuWPGjjFWEuZEmW62IvK8NMbk0wi",
+    "userType" : "customer"
+  }
+}

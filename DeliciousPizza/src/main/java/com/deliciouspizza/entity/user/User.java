@@ -1,33 +1,51 @@
 package com.deliciouspizza.entity.user;
 
-import java.util.Objects;
-import java.util.UUID;
+import com.deliciouspizza.utils.UserRights;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.mindrot.jbcrypt.BCrypt;
 
+import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    include = JsonTypeInfo.As.PROPERTY,
+    property = "userType"
+)
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = Customer.class, name = "customer"),
+    @JsonSubTypes.Type(value = Employee.class, name = "employee")
+})
 public abstract class User {
 
-    //to remove id , username will be unique
-    private final String id;
     protected final String username;
-    protected final String password;
-    protected int age;
-   // Set<Orders> orderHistory;
 
-    //to think about
-    public User(String username, String password) {
-        this.id = UUID.randomUUID().toString();
-        this.username = username;
-        this.password = password;
-    }
+    @JsonProperty("hashedPassword")
+    protected final String hashedPassword;
 
-    public User(String username, String password, int age) {
-        this.id = UUID.randomUUID().toString();
+    protected UserRights rights;
+
+    @JsonProperty("userType") // За да гарантираме, че ще се записва в JSON
+    protected String userType;
+
+    public User(String username, String hashedPassword) {
         this.username = username;
-        this.password = password;
-        this.age = age;
+        this.hashedPassword = hashedPassword;
     }
 
     public String getUsername() {
         return username;
+    }
+
+    public UserRights getRights() {
+        return rights;
+    }
+
+    public boolean checkPassword(String plainPassword) {
+        return BCrypt.checkpw(plainPassword, this.hashedPassword);
     }
 
     @Override
@@ -35,11 +53,11 @@ public abstract class User {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
         User user = (User) object;
-        return Objects.equals(id, user.id);
+        return Objects.equals(username, user.username);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id);
+        return Objects.hashCode(username);
     }
 }

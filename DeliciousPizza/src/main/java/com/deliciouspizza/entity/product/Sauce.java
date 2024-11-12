@@ -6,8 +6,14 @@ public class Sauce extends Product {
 
     private final SauceType sauce;
 
+    public Sauce() {
+        this.sauce = null;
+        this.type = "sauce";
+    }
+
     public Sauce(SauceType sauce) {
         this.sauce = sauce;
+        this.type = "sauce";
     }
 
     @Override

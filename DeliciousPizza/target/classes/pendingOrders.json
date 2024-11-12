@@ -1,1 +1,11 @@
-[ ]
+[ {
+  "order" : {
+    "Pizza{pizzaSize=LARGE,pizzaType=MARGHERITA}\n" : 2,
+    "Drink{drink=COKE,volume=GRANDE}\n" : 1
+  },
+  "statusOrder" : "PROCESSING",
+  "orderDate" : [ 2024, 11, 12, 13, 43, 27, 130678200 ],
+  "totalPrice" : 31.5,
+  "usernameCustomer" : "petkan123",
+  "addressDelivery" : "Baba Yaga 37"
+} ]

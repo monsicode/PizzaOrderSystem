@@ -15,11 +15,13 @@ public class Pizza extends Food {
     public Pizza() {
         pizzaSize = null;
         pizzaType = null;
+        this.type = "pizza";
     }
 
     public Pizza(PizzaType pizzaType, PizzaSize pizzaSize) {
         this.pizzaType = pizzaType;
         this.pizzaSize = pizzaSize;
+        this.type = "pizza";
     }
 
     @Override

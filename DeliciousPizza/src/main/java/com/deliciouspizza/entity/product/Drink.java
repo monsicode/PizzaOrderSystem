@@ -18,11 +18,13 @@ public class Drink extends Product {
     public Drink() {
         drink = null;
         volume = null;
+        this.type = "drink";
     }
 
     public Drink(DrinkType drink, DrinkVolume volume) {
         this.drink = drink;
         this.volume = volume;
+        this.type = "drink";
     }
 
     @Override

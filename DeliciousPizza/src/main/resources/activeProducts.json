@@ -5,12 +5,9 @@
     "statusProduct" : "ACTIVE",
     "isAlcoholic" : false
   },
-  "sauce_bbq_sauce" : {
-    "statusProduct" : "ACTIVE"
-  },
   "pizza_pepperoni" : {
     "pizzaType" : "PEPPERONI",
-    "pizzaSize" : "SMALL",
+    "pizzaSize" : "LARGE",
     "statusProduct" : "ACTIVE"
   },
   "drink_beer_grande" : {
@@ -18,5 +15,15 @@
     "volume" : "GRANDE",
     "statusProduct" : "ACTIVE",
     "isAlcoholic" : true
+  },
+  "pizza_seafood" : {
+    "pizzaType" : "SEAFOOD",
+    "pizzaSize" : "SMALL",
+    "statusProduct" : "ACTIVE"
+  },
+  "pizza_margherita" : {
+    "pizzaType" : "MARGHERITA",
+    "pizzaSize" : "LARGE",
+    "statusProduct" : "ACTIVE"
   }
 }

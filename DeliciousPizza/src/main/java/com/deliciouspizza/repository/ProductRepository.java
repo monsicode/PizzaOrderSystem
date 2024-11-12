@@ -21,7 +21,10 @@ public class ProductRepository {
     public ProductRepository() {
         inactiveProducts = new HashMap<>();
         activeProducts = new HashMap<>();
-        objectMapper = new ObjectMapper(); // Инициализираме objectMapper тук
+        objectMapper = new ObjectMapper();
+
+        loadActiveProducts();
+        loadInActiveProducts();
     }
 
     // Метод за добавяне на продукт с уникален ключ
