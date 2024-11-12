@@ -1,7 +1,6 @@
 package com.deliciouspizza.entity.order;
 
 import com.deliciouspizza.entity.product.Product;
-import com.deliciouspizza.entity.user.User;
 import com.deliciouspizza.utils.StatusOrder;
 
 import java.time.LocalDateTime;
@@ -19,8 +18,7 @@ public class Order {
     private StatusOrder statusOrder;
     private final LocalDateTime orderDate;
     private double totalPrice;
-    private User customer;
-    private User employee;
+    private String usernameCustomer;
     private String addressDelivery;
 
     // do i really need this constructor ? // thought that the price had a problem, -> no problem
@@ -31,15 +29,23 @@ public class Order {
         this.totalPrice = 0.0;
     }
 
-    public Order(Map<Product, Integer> order, StatusOrder statusOrder, User customer, User employee,
+    public Order(Map<Product, Integer> order, String addressDelivery) {
+        this.id = UUID.randomUUID().toString();
+        this.order = order;
+        this.orderDate = LocalDateTime.now();
+        this.statusOrder = StatusOrder.PROCESSING;
+        this.totalPrice = calculateTotalPrice(order);
+        this.addressDelivery = addressDelivery;
+    }
+
+    public Order(Map<Product, Integer> order, StatusOrder statusOrder, String usernameCustomer,
                  String addressDelivery) {
         this.id = UUID.randomUUID().toString();
         this.order = order;
         this.statusOrder = statusOrder;
         this.orderDate = LocalDateTime.now();
         this.totalPrice = calculateTotalPrice(order);
-        this.customer = customer;
-        this.employee = employee;
+        this.usernameCustomer = usernameCustomer;
         this.addressDelivery = addressDelivery;
     }
 
@@ -72,20 +78,16 @@ public class Order {
         return statusOrder;
     }
 
+    public void setStatusOrder(StatusOrder statusOrder) {
+        this.statusOrder = statusOrder;
+    }
+
     public LocalDateTime getOrderDate() {
         return orderDate;
     }
 
     public double getTotalPrice() {
         return totalPrice;
-    }
-
-    public User getCustomer() {
-        return customer;
-    }
-
-    public User getEmployee() {
-        return employee;
     }
 
     public String getAddressDelivery() {
@@ -109,12 +111,10 @@ public class Order {
     public String toString() {
         StringBuilder orderItems = new StringBuilder();
         for (Map.Entry<Product, Integer> entry : order.entrySet()) {
-            orderItems.append("\n\t").append(entry.getKey().toString())
-                .append(", Quantity: ").append(entry.getValue());
+            orderItems.append("\n\t").append(entry.getKey().toString()).append(", Quantity: ").append(entry.getValue());
         }
 
-        return "Order" +
-            "order=" + orderItems;
+        return "Order" + "order=" + orderItems;
     }
 
 }

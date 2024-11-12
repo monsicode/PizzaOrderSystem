@@ -1,5 +1,5 @@
 {
-  "drink_coke_coke" : {
+  "drink_coke_grande" : {
     "drink" : "COKE",
     "volume" : "GRANDE",
     "statusProduct" : "ACTIVE",
@@ -8,15 +8,15 @@
   "sauce_bbq_sauce" : {
     "statusProduct" : "ACTIVE"
   },
-  "drink_beer_beer" : {
-    "drink" : "BEER",
-    "volume" : "GRANDE",
-    "statusProduct" : "ACTIVE",
-    "isAlcoholic" : true
-  },
   "pizza_pepperoni" : {
     "pizzaType" : "PEPPERONI",
     "pizzaSize" : "SMALL",
     "statusProduct" : "ACTIVE"
+  },
+  "drink_beer_grande" : {
+    "drink" : "BEER",
+    "volume" : "GRANDE",
+    "statusProduct" : "ACTIVE",
+    "isAlcoholic" : true
   }
 }

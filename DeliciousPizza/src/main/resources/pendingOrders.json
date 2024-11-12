@@ -1,0 +1,10 @@
+[ {
+  "order" : {
+    "Pizza{pizzaSize=LARGE,pizzaType=MARGHERITA}\n" : 1,
+    "Drink{drink=COKE,volume=GRANDE}\n" : 2
+  },
+  "statusOrder" : "PROCESSING",
+  "orderDate" : [ 2024, 11, 12, 11, 32, 25, 788731200 ],
+  "totalPrice" : 25.5,
+  "addressDelivery" : "456 Elm St."
+} ]

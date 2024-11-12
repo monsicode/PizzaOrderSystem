@@ -5,10 +5,12 @@ import java.util.UUID;
 
 public abstract class User {
 
+    //to remove id , username will be unique
     private final String id;
     protected final String username;
     protected final String password;
     protected int age;
+   // Set<Orders> orderHistory;
 
     //to think about
     public User(String username, String password) {
