@@ -2,7 +2,7 @@ package com.deliciouspizza.entity.user;
 
 public class Customer extends User {
 
-    private final String address;
+    private String address;
 
     public Customer(String username, String password, String address) {
         super(username, password);
@@ -13,4 +13,7 @@ public class Customer extends User {
         return address;
     }
 
+    public void setAddress(String address) {
+        this.address = address;
+    }
 }

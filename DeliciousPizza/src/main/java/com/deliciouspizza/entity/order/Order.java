@@ -18,35 +18,19 @@ public class Order {
     private StatusOrder statusOrder;
     private final LocalDateTime orderDate;
     private double totalPrice;
-    private String usernameCustomer;
+    private final String usernameCustomer;
     private String addressDelivery;
 
-    // do i really need this constructor ? // thought that the price had a problem, -> no problem
-    public Order() {
-        this.id = UUID.randomUUID().toString();
-        this.order = new HashMap<>();
-        this.orderDate = LocalDateTime.now();
-        this.totalPrice = 0.0;
-    }
+    //checkProductsAvailability(order)
 
-    public Order(Map<Product, Integer> order, String addressDelivery) {
+    public Order(Map<Product, Integer> order, String usernameCustomer) {
         this.id = UUID.randomUUID().toString();
         this.order = order;
         this.orderDate = LocalDateTime.now();
         this.statusOrder = StatusOrder.PROCESSING;
         this.totalPrice = calculateTotalPrice(order);
-        this.addressDelivery = addressDelivery;
-    }
-
-    public Order(Map<Product, Integer> order, StatusOrder statusOrder, String usernameCustomer,
-                 String addressDelivery) {
-        this.id = UUID.randomUUID().toString();
-        this.order = order;
-        this.statusOrder = statusOrder;
-        this.orderDate = LocalDateTime.now();
-        this.totalPrice = calculateTotalPrice(order);
         this.usernameCustomer = usernameCustomer;
-        this.addressDelivery = addressDelivery;
+        this.addressDelivery = null;
     }
 
     public void addProduct(Product product, int quantity) {
@@ -92,6 +76,14 @@ public class Order {
 
     public String getAddressDelivery() {
         return addressDelivery;
+    }
+
+    public void setAddressDelivery(String addressDelivery) {
+        this.addressDelivery = addressDelivery;
+    }
+
+    public String getUsernameCustomer() {
+        return usernameCustomer;
     }
 
     @Override

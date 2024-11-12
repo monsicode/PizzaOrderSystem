@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 //-----------------
@@ -35,7 +36,7 @@ public class OrderRepository {
         objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
         objectMapper.findAndRegisterModules();
-       // loadPendingOrders(); // Зарежда чакащите поръчки от JSON файла при стартиране
+        // loadPendingOrders(); // Зарежда чакащите поръчки от JSON файла при стартиране
     }
 
     public void addOrder(Order order) {
@@ -51,7 +52,7 @@ public class OrderRepository {
 
     private void loadPendingOrders() {
         try {
-            if (jsonFile.exists()) {
+            if (jsonFile.exists() && jsonFile.length() > 0) {
                 BlockingQueue<Order> loadedOrders =
                     objectMapper.readValue(jsonFile, new TypeReference<LinkedBlockingQueue<Order>>() {
                     });
@@ -65,7 +66,6 @@ public class OrderRepository {
     private void savePendingOrders() {
         try {
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(jsonFile, pendingOrders);
-            System.out.println("Поръчките бяха успешно записани.");
         } catch (IOException e) {
             e.printStackTrace();
             System.err.println("Грешка при записването на поръчките.");
@@ -81,16 +81,5 @@ public class OrderRepository {
         System.out.println("Завършена поръчка: " + order);
         savePendingOrders();
     }
-
-//    public void completeOrder() {
-//        Order completedOrder = pendingOrders.poll();  // Взимаме и премахваме следващата поръчка
-//        if (completedOrder != null) {
-//            completedOrder.setStatusOrder(StatusOrder.COMPLETED);
-//            System.out.println("Завършена поръчка: " + completedOrder);
-//            savePendingOrders(); // Запазваме състоянието на опашката
-//        } else {
-//            System.out.println("Няма поръчки за приключване.");
-//        }
-//    }
 
 }

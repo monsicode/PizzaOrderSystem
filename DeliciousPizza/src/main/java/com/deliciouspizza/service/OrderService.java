@@ -2,67 +2,59 @@ package com.deliciouspizza.service;
 
 import com.deliciouspizza.entity.order.Order;
 import com.deliciouspizza.entity.product.Product;
+import com.deliciouspizza.entity.user.Customer;
 import com.deliciouspizza.repository.OrderRepository;
 import com.deliciouspizza.utils.StatusOrder;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.BlockingQueue;
 
 //----------------------------------
 
-//createOrder(List<Product>)   with one or more products
-//orderProcessing()
-//currentOrder()
+//createOrder(List<Product>)   with one or more products --> ОК
+//orderProcessing() --> ОК
+//currentOrder() --> ok
 //finishedOrders(User) for the user {return unmodify user.getOrderHistory}
 //repeatOrder(User) {}
-
+//changeAddressOfDelivery -- ok
+//userRepo --> user.json
 //----------------------------------
 
 public class OrderService {
-
     private final OrderRepository orderRepository = new OrderRepository();
-    //userRepo --> user.json
     private Order currentOrder;
 
-    public Order createOrder(Map<Product, Integer> productsWithQuantities, String addressDelivary) {
-        currentOrder = new Order(productsWithQuantities, addressDelivary);
-        //orderRepository.saveOrder(currentOrder);
-        return currentOrder;
+    public void createOrder(Map<Product, Integer> productsWithQuantities, Customer customer) {
+        Order order = new Order(productsWithQuantities, customer.getUsername());
+        order.setAddressDelivery(customer.getAddress());
+        orderRepository.addOrder(order);
     }
 
-    // Обработва текущата поръчка (маркира я като "приключена" и я запазва)
     public void processCurrentOrder() {
-        if (currentOrder != null) {
-            currentOrder.setStatusOrder(StatusOrder.COMPLETED);
-            //orderRepository.saveOrder(currentOrder); // Презаписваме текущата поръчка като "приключена"
-            currentOrder = null; // Освобождаваме текущата поръчка след приключване
-        } else {
-            throw new IllegalStateException("Няма текуща поръчка за обработка.");
+        try {
+            Order currentOrder = orderRepository.getNextOrder();
+            System.out.println("Обработка на поръчка започна: " + currentOrder);
+
+            if (currentOrder != null) {
+                orderRepository.completeOrder(currentOrder);
+            } else {
+                System.out.println("Няма поръчки за обработка.");
+            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            System.err.println("Грешка при обработката на поръчката: " + e.getMessage());
         }
     }
 
-    public List<Order> getFinishedOrders() {
-        //return orderRepository.getFinished();
-        return null;
+    //dosent look okey 
+    public void changeAddressOfDelivery(Customer customer, String newAddress) {
+        customer.setAddress(newAddress);
     }
 
-    // Връща текущата поръчка, ако има такава
-    public Optional<Order> getCurrentOrder() {
-        return Optional.ofNullable(currentOrder);
-    }
-
-    //should i repeat the order by given order? todo: other way
-    public Order repeatOrder(Order order, String addressDelivary) {
-        //if( !orderRepository.isOrdererFinished(order)){
-        //  throw IllegalArgumentException(This order dosen't exist to be repeated!);
-        // }
-
-        // Създаваме нова поръчка със същите продукти
-        Order repeatedOrder = new Order(order.getOrder(), addressDelivary);
-        // orderRepository.saveOrder(repeatedOrder);
-        currentOrder = repeatedOrder;
-        return repeatedOrder;
+    public BlockingQueue<Order> getPendingOrders() {
+        return orderRepository.getPendingOrders();  // Връща текущите чакащи поръчки
     }
 
 }
