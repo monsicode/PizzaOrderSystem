@@ -33,9 +33,10 @@ public class Drink extends Product {
         return drink.getPrice() + volume.getPrice();
     }
 
+    //to remove volume
     @Override
     public String generateKey() {
-        key = "drink_" + drink.toString().toLowerCase() + "_" + volume.toString().toLowerCase();
+        key = "drink_" + drink.toString().toLowerCase();
         return key;
     }
 
@@ -55,8 +56,9 @@ public class Drink extends Product {
     public String toString() {
         return "Drink{" +
             "drink=" + drink +
-            ",volume=" + volume +
-            "}\n";
+            ", volume=" + volume +
+            ", type='" + type + '\'' +
+            '}';
     }
 
     @Override

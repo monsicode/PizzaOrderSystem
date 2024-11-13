@@ -26,9 +26,9 @@ public class OrderService {
     private final OrderRepository orderRepository = new OrderRepository();
     private Order currentOrder;
 
-    public void createOrder(Map<Product, Integer> productsWithQuantities, Customer customer) {
+    //removed Map<> as param
+    public void createOrder(Map<String, Integer> productsWithQuantities, Customer customer) {
         Order order = new Order(productsWithQuantities, customer.getUsername());
-        order.setAddressDelivery(customer.getAddress());
         orderRepository.addOrder(order);
     }
 

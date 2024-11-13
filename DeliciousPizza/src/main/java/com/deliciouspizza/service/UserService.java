@@ -1,5 +1,6 @@
 package com.deliciouspizza.service;
 
+import com.deliciouspizza.entity.order.Order;
 import com.deliciouspizza.entity.user.Customer;
 import com.deliciouspizza.entity.user.User;
 import com.deliciouspizza.repository.UserRepository;
@@ -53,4 +54,8 @@ public class UserService {
             return false;
         }
     }
+
+//    public void addToOrderHistory(String usernameCustomer, Order order) {
+//        userRepository.addToOrderHistory(usernameCustomer, order);
+//    }
 }

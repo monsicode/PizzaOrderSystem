@@ -5,7 +5,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
+import java.util.Objects;
+
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    include = JsonTypeInfo.As.PROPERTY,
+    property = "type"
+)
 @JsonSubTypes({
     @JsonSubTypes.Type(value = Pizza.class, name = "pizza"),
     @JsonSubTypes.Type(value = Drink.class, name = "drink"),
@@ -16,6 +22,7 @@ public abstract class Product {
 
     protected StatusProduct statusProduct;
     protected String key;
+    //howManyInStock;
 
     @JsonProperty("type") // За да гарантираме, че ще се записва в JSON
     protected String type;

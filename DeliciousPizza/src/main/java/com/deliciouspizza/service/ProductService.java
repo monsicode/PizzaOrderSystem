@@ -8,7 +8,7 @@ import java.util.Map;
 //catch here !
 
 public class ProductService {
-    private final ProductRepository productRepository;
+    private ProductRepository productRepository;
 
     //TODO Singleton
     @SuppressWarnings("checkstyle:TodoComment")
@@ -31,6 +31,14 @@ public class ProductService {
 
     public double getProductPrice(Product product) {
         return product.calculatePrice();
+    }
+
+    public Product getActiveProduct(String product){
+       return productRepository.getActiveProduct(product);
+    }
+
+    public Product getInctiveProduct(String product){
+        return productRepository.getInactiveProduct(product);
     }
 
 }

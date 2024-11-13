@@ -1,5 +1,6 @@
 package com.deliciouspizza.repository;
 
+import com.deliciouspizza.Singleton;
 import com.deliciouspizza.entity.order.Order;
 import com.deliciouspizza.utils.StatusOrder;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -28,6 +29,8 @@ public class OrderRepository {
     private final ObjectMapper objectMapper;
     private final File jsonFile = new File(FILE_PATH_ORDERS);
 
+    // private static final ProductRepository productRepository = Singleton.getInstance(ProductRepository.class);
+
     //за периодично записване
     //private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
@@ -36,7 +39,8 @@ public class OrderRepository {
         objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
         objectMapper.findAndRegisterModules();
-        // loadPendingOrders(); // Зарежда чакащите поръчки от JSON файла при стартиране
+
+        //loadPendingOrders(); // Зарежда чакащите поръчки от JSON файла при стартиране
     }
 
     public void addOrder(Order order) {

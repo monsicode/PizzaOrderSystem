@@ -1,6 +1,8 @@
 package com.deliciouspizza.entity.order;
 
+import com.deliciouspizza.Singleton;
 import com.deliciouspizza.entity.product.Product;
+import com.deliciouspizza.repository.ProductRepository;
 import com.deliciouspizza.utils.StatusOrder;
 
 import java.time.LocalDateTime;
@@ -10,51 +12,70 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
+
+// StorageProduct
+// class StorageProductRepository
+
+// order --> checkProduct
+
+// Singleton<ProductRepository>
+
+//StorageProduct  =
+//storagfe.checkProductsAvailability....
+//checkProductsAvailability(order)
+
 public class Order {
 
     private final String id;
 
-    private final Map<Product, Integer> order;
+    private final Map<String, Integer> order;
     private StatusOrder statusOrder;
     private final LocalDateTime orderDate;
     private double totalPrice;
     private final String usernameCustomer;
-    private String addressDelivery;
 
-    //checkProductsAvailability(order)
+    private ProductRepository productRepository = Singleton.getInstance(ProductRepository.class);
 
-    public Order(Map<Product, Integer> order, String usernameCustomer) {
+    public Order(Map<String, Integer> order, String usernameCustomer) {
         this.id = UUID.randomUUID().toString();
-        this.order = order;
         this.orderDate = LocalDateTime.now();
         this.statusOrder = StatusOrder.PROCESSING;
         this.totalPrice = calculateTotalPrice(order);
         this.usernameCustomer = usernameCustomer;
-        this.addressDelivery = null;
+        this.order = order;
+    }
+
+    public Order(String usernameCustomer) {
+        this.id = UUID.randomUUID().toString();
+        this.orderDate = LocalDateTime.now();
+        this.statusOrder = StatusOrder.PROCESSING;
+        this.totalPrice = 0;
+        this.usernameCustomer = usernameCustomer;
+        order = new HashMap<>();
     }
 
     public void addProduct(Product product, int quantity) {
         //if product is active
-        order.put(product, order.getOrDefault(product, 0) + quantity);
+        order.put(product.generateKey(), order.getOrDefault(product, 0) + quantity);
         totalPrice += product.calculatePrice() * quantity;
     }
 
     public void removeProduct(Product product) {
-        if (order.containsKey(product)) {
-            totalPrice -= product.calculatePrice() * order.get(product);
-            order.remove(product);
+        if (order.containsKey(product.generateKey())) {
+            totalPrice -= product.calculatePrice() * order.get(product.generateKey());
+            order.remove(product.generateKey());
         }
     }
 
-    private double calculateTotalPrice(Map<Product, Integer> order) {
+    private double calculateTotalPrice(Map<String, Integer> order) {
         double total = 0.0;
-        for (Map.Entry<Product, Integer> entry : order.entrySet()) {
-            total += entry.getKey().calculatePrice() * entry.getValue();
+        for (Map.Entry<String, Integer> entry : order.entrySet()) {
+            total += productRepository.getActiveProduct(entry.getKey()).calculatePrice() * entry.getValue();
         }
         return total;
     }
 
-    public Map<Product, Integer> getOrder() {
+    public Map<String, Integer> getOrder() {
         return Collections.unmodifiableMap(order);
     }
 
@@ -72,14 +93,6 @@ public class Order {
 
     public double getTotalPrice() {
         return totalPrice;
-    }
-
-    public String getAddressDelivery() {
-        return addressDelivery;
-    }
-
-    public void setAddressDelivery(String addressDelivery) {
-        this.addressDelivery = addressDelivery;
     }
 
     public String getUsernameCustomer() {
@@ -102,11 +115,11 @@ public class Order {
     @Override
     public String toString() {
         StringBuilder orderItems = new StringBuilder();
-        for (Map.Entry<Product, Integer> entry : order.entrySet()) {
+        for (Map.Entry<String, Integer> entry : order.entrySet()) {
             orderItems.append("\n\t").append(entry.getKey().toString()).append(", Quantity: ").append(entry.getValue());
         }
 
-        return "Order" + "order=" + orderItems;
+        return "Order = " + orderItems;
     }
 
 }

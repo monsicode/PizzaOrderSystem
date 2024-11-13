@@ -35,19 +35,6 @@ public class Pizza extends Food {
         return key;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        Pizza pizza = (Pizza) object;
-        return pizzaType == pizza.pizzaType;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(pizzaType);
-    }
-
     public PizzaSize getPizzaSize() {
         return pizzaSize;
     }
@@ -56,12 +43,13 @@ public class Pizza extends Food {
         return pizzaType;
     }
 
+
     @Override
     public String toString() {
         return "Pizza{" +
-            "pizzaSize=" + pizzaSize +
-            ",pizzaType=" + pizzaType +
-            "}\n";
+            "pizzaType=" + pizzaType +
+            ", pizzaSize=" + pizzaSize +
+            ", type='" + type + '\'' +
+            '}';
     }
-
 }

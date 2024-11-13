@@ -1,10 +1,12 @@
 package com.deliciouspizza.repository;
 
+import com.deliciouspizza.entity.order.Order;
 import com.deliciouspizza.entity.user.Customer;
 import com.deliciouspizza.entity.user.Employee;
 import com.deliciouspizza.entity.user.User;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,6 +26,8 @@ public class UserRepository {
 
     public UserRepository() {
         objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.findAndRegisterModules();
 //        objectMapper.registerSubtypes(Customer.class, Employee.class);
         users = loadUsers();
     }
@@ -71,4 +75,20 @@ public class UserRepository {
     public Map<String, User> getAllUsers() {
         return users;
     }
+
+
+//    public void addToOrderHistory(String usernameCustomer, Order order) {
+//        User user = findUserByUsername(usernameCustomer);
+//
+//        if (user == null) {
+//            System.out.println("Потребителят не съществува.");
+//        }
+//        //check type if customer
+//
+//        Customer customer = (Customer) user;
+//
+//        customer.addOrderToHistory(order);
+//        saveUsers();
+//    }
+
 }

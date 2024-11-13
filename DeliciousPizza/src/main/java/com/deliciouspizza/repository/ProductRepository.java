@@ -2,6 +2,7 @@ package com.deliciouspizza.repository;
 
 import com.deliciouspizza.entity.product.Product;
 import com.deliciouspizza.utils.StatusProduct;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
@@ -87,7 +88,9 @@ public class ProductRepository {
     public void loadActiveProducts() {
         try {
             // Зареждаме Map от JSON файл
-            activeProducts = objectMapper.readValue(new File(FILE_PATH_ACTIVE_PRODUCTS), Map.class);
+//            activeProducts = objectMapper.readValue(new File(FILE_PATH_ACTIVE_PRODUCTS), Map.class);
+            activeProducts = objectMapper.readValue(new File(FILE_PATH_ACTIVE_PRODUCTS),
+                new TypeReference<Map<String, Product>>() {});
             System.out.println("Продуктите са заредени от файла.");
         } catch (IOException e) {
             e.printStackTrace();
@@ -97,10 +100,23 @@ public class ProductRepository {
     public void loadInActiveProducts() {
         try {
             // Зареждаме Map от JSON файл
-            inactiveProducts = objectMapper.readValue(new File(FILE_PATH_INACTIVE_PRODUCTS), Map.class);
+//            inactiveProducts = objectMapper.readValue(new File(FILE_PATH_INACTIVE_PRODUCTS), Map.class);
+            inactiveProducts = objectMapper.readValue(new File(FILE_PATH_INACTIVE_PRODUCTS),
+                new TypeReference<Map<String, Product>>() {});
             System.out.println("Продуктите са заредени от файла.");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    public Product getActiveProduct(String productName){
+        return activeProducts.get(productName);
+    }
+
+    public Product getInactiveProduct(String productName){
+        return inactiveProducts.get(productName);
+    }
+
+
+
 }
