@@ -33,18 +33,11 @@ public abstract class Product {
         this.statusProduct = StatusProduct.ACTIVE;
     }
 
-    public void activateProduct() throws ProductAlreadyActiveException {
-        if (statusProduct == StatusProduct.INACTIVE) {
-            throw new ProductAlreadyActiveException("The product is already active!");
-        }
+    public void activateProduct() {
         statusProduct = StatusProduct.ACTIVE;
     }
 
-    public void deactivateProduct() throws ProductAlreadyDeactivatedException {
-        if (statusProduct == StatusProduct.INACTIVE) {
-            throw new ProductAlreadyDeactivatedException("The product is already deactivated!");
-        }
-
+    public void deactivateProduct() {
         statusProduct = StatusProduct.INACTIVE;
     }
 

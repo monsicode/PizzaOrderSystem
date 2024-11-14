@@ -1,44 +1,64 @@
 package com.deliciouspizza.service;
 
+import com.deliciouspizza.Singleton;
 import com.deliciouspizza.entity.product.Product;
+import com.deliciouspizza.exception.ProductAlreadyActiveException;
+import com.deliciouspizza.exception.ProductAlreadyDeactivatedException;
 import com.deliciouspizza.repository.ProductRepository;
 
 import java.util.Map;
 
-//catch here !
-
 public class ProductService {
-    private ProductRepository productRepository;
 
-    //TODO Singleton
-    @SuppressWarnings("checkstyle:TodoComment")
+    private static final ProductRepository PRODUCT_REPOSITORY = Singleton.getInstance(ProductRepository.class);
 
-    public ProductService(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    public Map<String, Product> getAllActiveProducts() {
+        return PRODUCT_REPOSITORY.getAllActiveProducts();
     }
 
-    public Map<String, Product> getActiveProducts() {
-        return productRepository.getActiveProductsMap();
+    public Map<String, Product> getAllInactiveProducts() {
+        return PRODUCT_REPOSITORY.getAllInactiveProducts();
     }
 
     public void addNewProduct(Product product) {
-        productRepository.addProduct(product);
+        try {
+            PRODUCT_REPOSITORY.addProduct(product);
+        } catch (IllegalArgumentException err) {
+            System.out.println(err.getMessage());
+        }
     }
 
     public void deactivateProduct(Product product) {
-        productRepository.deactivateProduct(product);
+        try {
+            PRODUCT_REPOSITORY.deactivateProduct(product);
+        } catch (ProductAlreadyDeactivatedException | IllegalArgumentException err) {
+            System.out.println(err.getMessage());
+        }
+    }
+
+    public void activateProduct(Product product) {
+        try {
+            PRODUCT_REPOSITORY.activateProduct(product);
+        } catch (ProductAlreadyActiveException | IllegalArgumentException err) {
+            System.out.println(err.getMessage());
+        }
     }
 
     public double getProductPrice(Product product) {
         return product.calculatePrice();
     }
 
-    public Product getActiveProduct(String product){
-       return productRepository.getActiveProduct(product);
+    //do we need this methods ?
+    public Product getActiveProduct(String product) {
+        return PRODUCT_REPOSITORY.getActiveProduct(product);
     }
 
-    public Product getInctiveProduct(String product){
-        return productRepository.getInactiveProduct(product);
+    public Product getInactiveProduct(String product) {
+        return PRODUCT_REPOSITORY.getInactiveProduct(product);
+    }
+
+    public Product getProduct(String product) {
+        return PRODUCT_REPOSITORY.getProduct(product);
     }
 
 }

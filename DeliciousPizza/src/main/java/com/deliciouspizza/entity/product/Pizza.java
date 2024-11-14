@@ -64,6 +64,6 @@ public class Pizza extends Food {
             "pizzaType=" + pizzaType +
             ", pizzaSize=" + pizzaSize +
             ", type='" + type + '\'' +
-            '}';
+            "}\n";
     }
 }

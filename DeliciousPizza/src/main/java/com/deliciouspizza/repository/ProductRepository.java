@@ -1,6 +1,8 @@
 package com.deliciouspizza.repository;
 
 import com.deliciouspizza.entity.product.Product;
+import com.deliciouspizza.exception.ProductAlreadyActiveException;
+import com.deliciouspizza.exception.ProductAlreadyDeactivatedException;
 import com.deliciouspizza.utils.StatusProduct;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,6 +12,8 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+
+//exceptions --> catch-ed
 
 public class ProductRepository {
     private static final String FILE_PATH_INACTIVE_PRODUCTS = "src/main/resources/inactiveProduct.json";
@@ -28,95 +32,125 @@ public class ProductRepository {
         loadInActiveProducts();
     }
 
-    // Метод за добавяне на продукт с уникален ключ
+    // We add the product to the Map, only if the key is unique
     public void addProduct(Product product) {
         String key = product.generateKey();
 
-        // Добавяме продукта в Map-а само ако ключът е уникален
-        if (key != null && !inactiveProducts.containsKey(key) && product.getStatusProduct() == StatusProduct.INACTIVE) {
+        //Checks to add in inactive.json
+        if (!inactiveProducts.containsKey(key) && product.getStatusProduct() == StatusProduct.INACTIVE) {
             inactiveProducts.put(key, product);
-            saveProducts(FILE_PATH_INACTIVE_PRODUCTS, inactiveProducts); // Метод за запазване на промените в JSON
+            saveProducts(FILE_PATH_INACTIVE_PRODUCTS, inactiveProducts);
+            System.out.println("Product added successfully!");
 
-        } else if (key != null && product.getStatusProduct() == StatusProduct.ACTIVE &&
-            !activeProducts.containsKey(key)) {
-
+            //Checks to add in active.json
+        } else if (product.getStatusProduct() == StatusProduct.ACTIVE && !activeProducts.containsKey(key)) {
             activeProducts.put(key, product);
             saveProducts(FILE_PATH_ACTIVE_PRODUCTS, activeProducts);
+            System.out.println("Product added successfully!");
 
         } else {
-            System.out.println("Продуктът вече съществува или ключът е невалиден.");
+            throw new IllegalArgumentException("Product can't be added, because it already exist!");
         }
     }
 
-    public Map<String, Product> getActiveProductsMap() {
+    public Map<String, Product> getAllActiveProducts() {
         return Collections.unmodifiableMap(activeProducts);
     }
 
-    public Map<String, Product> getInActiveProductsMap() {
+    public Map<String, Product> getAllInactiveProducts() {
         return Collections.unmodifiableMap(inactiveProducts);
     }
 
-    public void activateProduct(Product product) {
+    public void activateProduct(Product product) throws ProductAlreadyActiveException {
         String key = product.generateKey();
-        //if checks
+
+        if (getProduct(key) == null) {
+            throw new IllegalArgumentException("Product doesn't exist");
+        }
+
+        if (getActiveProduct(key) != null) {
+            throw new ProductAlreadyActiveException("The product is already active!");
+        }
+
+        product.activateProduct();
         inactiveProducts.remove(key);
         activeProducts.put(key, product);
         saveProducts(FILE_PATH_ACTIVE_PRODUCTS, activeProducts);
         saveProducts(FILE_PATH_INACTIVE_PRODUCTS, inactiveProducts);
+        System.out.println("Product activated successfully!");
+
     }
 
-    public void deactivateProduct(Product product) {
+    public void deactivateProduct(Product product) throws ProductAlreadyDeactivatedException {
         String key = product.generateKey();
+
+        if (getProduct(key) == null) {
+            throw new IllegalArgumentException("Product doesn't exist");
+        }
+
+        if (getInactiveProduct(key) != null) {
+            throw new ProductAlreadyDeactivatedException("The product is already deactivated!");
+        }
+
         product.deactivateProduct();
         activeProducts.remove(key);
         inactiveProducts.put(key, product);
         saveProducts(FILE_PATH_ACTIVE_PRODUCTS, activeProducts);
         saveProducts(FILE_PATH_INACTIVE_PRODUCTS, inactiveProducts);
+        System.out.println("Product deactivated successfully!");
     }
 
+    //Write Map to JSON file
     private void saveProducts(String path, Map<String, Product> productsMap) {
         try {
-            // Записване на Map в JSON файл
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(path), productsMap);
-            System.out.println("Продуктите са записани в файла.");
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Грешка при запис на продуктите.");
+            System.out.println("Error saving products!");
         }
     }
 
+    //Load Map from JSON file
     public void loadActiveProducts() {
         try {
-            // Зареждаме Map от JSON файл
-//            activeProducts = objectMapper.readValue(new File(FILE_PATH_ACTIVE_PRODUCTS), Map.class);
             activeProducts = objectMapper.readValue(new File(FILE_PATH_ACTIVE_PRODUCTS),
-                new TypeReference<Map<String, Product>>() {});
-            System.out.println("Продуктите са заредени от файла.");
+                new TypeReference<Map<String, Product>>() {
+                });
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("Error loading active products!");
         }
     }
 
     public void loadInActiveProducts() {
         try {
-            // Зареждаме Map от JSON файл
-//            inactiveProducts = objectMapper.readValue(new File(FILE_PATH_INACTIVE_PRODUCTS), Map.class);
             inactiveProducts = objectMapper.readValue(new File(FILE_PATH_INACTIVE_PRODUCTS),
-                new TypeReference<Map<String, Product>>() {});
-            System.out.println("Продуктите са заредени от файла.");
+                new TypeReference<Map<String, Product>>() {
+                });
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("Error loading inactive products!");
         }
     }
 
-    public Product getActiveProduct(String productName){
+    public Product getActiveProduct(String productName) {
         return activeProducts.get(productName);
     }
 
-    public Product getInactiveProduct(String productName){
+    public Product getInactiveProduct(String productName) {
         return inactiveProducts.get(productName);
     }
 
+    public Product getProduct(String productName) {
+        if (inactiveProducts.containsKey(productName)) {
+            return inactiveProducts.get(productName);
 
+        } else if (activeProducts.containsKey(productName)) {
+            return activeProducts.get(productName);
+
+        } else {
+            throw new IllegalArgumentException("Product doesn't exist!");
+        }
+    }
 
 }

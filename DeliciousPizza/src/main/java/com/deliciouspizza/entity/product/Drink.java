@@ -72,7 +72,7 @@ public class Drink extends Product {
             "drink=" + drink +
             ", volume=" + volume +
             ", type='" + type + '\'' +
-            '}';
+            "}\n";
     }
 
     @Override
