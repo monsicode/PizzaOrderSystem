@@ -4,8 +4,9 @@ import com.deliciouspizza.utils.DrinkType;
 import com.deliciouspizza.utils.DrinkVolume;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-
 import java.util.Objects;
+
+//exceptions --> thrown
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder({"type", "drink", "volume", "statusProduct"})
@@ -29,18 +30,31 @@ public class Drink extends Product {
 
     @Override
     public double calculatePrice() {
-        //check if drink is null --> exception
+        if (drink == null) {
+            throw new IllegalArgumentException("Drink type is null, can't calculate price!");
+        }
+        if (volume == null) {
+            throw new IllegalArgumentException("Drink volume is null, can't calculate price!");
+        }
+
         return drink.getPrice() + volume.getPrice();
     }
 
-    //to remove volume
     @Override
     public String generateKey() {
+        if (drink == null) {
+            throw new IllegalArgumentException("Drink type is null, can't generate key!");
+        }
+
         key = "drink_" + drink.toString().toLowerCase();
         return key;
     }
 
     public boolean getIsAlcoholic() {
+        if (drink == null) {
+            throw new IllegalArgumentException("Drink type is null, can't get if it's alcoholic!");
+        }
+
         return drink.getisAlcoholic();
     }
 
