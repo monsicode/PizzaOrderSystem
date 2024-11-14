@@ -1,11 +1,11 @@
 package com.deliciouspizza.exception;
 
-public class ProductAlreadyDeactivated extends RuntimeException {
-    public ProductAlreadyDeactivated(String message) {
+public class ProductAlreadyDeactivatedException extends Exception {
+    public ProductAlreadyDeactivatedException(String message) {
         super(message);
     }
 
-    public ProductAlreadyDeactivated(String message, Throwable cause) {
+    public ProductAlreadyDeactivatedException(String message, Throwable cause) {
         super(message, cause);
     }
 }
