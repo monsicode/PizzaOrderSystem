@@ -1,9 +1,11 @@
 package com.deliciouspizza.entity.product;
 
 import com.deliciouspizza.utils.SauceType;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 //exceptions --> thrown
 
+@JsonPropertyOrder({"type", "sauce", "statusProduct"})
 public class Sauce extends Product {
 
     private final SauceType sauce;
@@ -35,5 +37,16 @@ public class Sauce extends Product {
 
         key = "sauce_" + sauce.toString().toLowerCase();
         return key;
+    }
+
+    public SauceType getSauce() {
+        return sauce;
+    }
+
+    @Override
+    public String toString() {
+        return "Sauce{" +
+            "sauce=" + sauce +
+            "}\n";
     }
 }
