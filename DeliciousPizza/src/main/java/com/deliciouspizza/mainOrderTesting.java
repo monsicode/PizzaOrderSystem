@@ -10,18 +10,12 @@
 //
 //public class mainOrderTesting {
 //    public static void main(String[] args) {
-//        Product pizza1 = new Pizza(PizzaType.MARGHERITA, PizzaSize.LARGE);
+//        Product pizza1 = new Pizza(PizzaType.MARGHERITA, PizzaSize.MEDIUM);
 //        Product pizza2 = new Pizza(PizzaType.PEPPERONI, PizzaSize.SMALL);
 //
-//        User user1 = new Customer("monkata", "password123", "ул. Пиротска 10", 25);
+//        User user1 = new Customer("random", "123", "ул. Nqkva 10", 40);
 //
-//        Order order = new Order("monkata");
-//
-//        order.addProduct(pizza1,2);
-//        order.addProduct(pizza2,4);
-//
-//        System.out.println(order.getTotalPrice());
-//        System.out.println(order.getOrder());
+//        Order order = new Order("random");
 //
 //
 //    }

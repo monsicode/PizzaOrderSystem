@@ -1,6 +1,5 @@
 package com.deliciouspizza.repository;
 
-import com.deliciouspizza.Singleton;
 import com.deliciouspizza.entity.order.Order;
 import com.deliciouspizza.utils.StatusOrder;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -8,7 +7,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -24,12 +22,10 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 //-----------------
 
 public class OrderRepository {
-    private BlockingQueue<Order> pendingOrders;
+    private final BlockingQueue<Order> pendingOrders;
     private static final String FILE_PATH_ORDERS = "src/main/resources/pendingOrders.json";
     private final ObjectMapper objectMapper;
     private final File jsonFile = new File(FILE_PATH_ORDERS);
-
-    // private static final ProductRepository productRepository = Singleton.getInstance(ProductRepository.class);
 
     //за периодично записване
     //private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
@@ -40,7 +36,8 @@ public class OrderRepository {
         objectMapper.registerModule(new JavaTimeModule());
         objectMapper.findAndRegisterModules();
 
-        //loadPendingOrders(); // Зарежда чакащите поръчки от JSON файла при стартиране
+        //should uncomment later
+       // loadPendingOrders(); // Зарежда чакащите поръчки от JSON файла при стартиране
     }
 
     public void addOrder(Order order) {
@@ -63,7 +60,7 @@ public class OrderRepository {
                 pendingOrders.addAll(loadedOrders);
             }
         } catch (IOException e) {
-            System.err.println("Грешка при зареждане на поръчките: " + e.getMessage());
+            System.err.println("Error loading orders: " + e.getMessage());
         }
     }
 
@@ -72,7 +69,7 @@ public class OrderRepository {
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(jsonFile, pendingOrders);
         } catch (IOException e) {
             e.printStackTrace();
-            System.err.println("Грешка при записването на поръчките.");
+            System.err.println("Error saving the orders!");
         }
     }
 
@@ -82,7 +79,7 @@ public class OrderRepository {
 
     public void completeOrder(Order order) {
         order.setStatusOrder(StatusOrder.COMPLETED);
-        System.out.println("Завършена поръчка: " + order);
+        System.out.println("Completed order: " + order);
         savePendingOrders();
     }
 

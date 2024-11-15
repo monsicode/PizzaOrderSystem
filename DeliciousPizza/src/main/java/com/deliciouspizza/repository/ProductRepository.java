@@ -18,6 +18,9 @@ import java.util.Map;
 public class ProductRepository {
     private static final String FILE_PATH_INACTIVE_PRODUCTS = "src/main/resources/inactiveProduct.json";
     private static final String FILE_PATH_ACTIVE_PRODUCTS = "src/main/resources/activeProducts.json";
+    private final File jsonFileActive = new File(FILE_PATH_ACTIVE_PRODUCTS);
+    private final File jsonFileInactive = new File(FILE_PATH_INACTIVE_PRODUCTS);
+
 
     private Map<String, Product> inactiveProducts;
     private Map<String, Product> activeProducts;
@@ -113,9 +116,12 @@ public class ProductRepository {
     //Load Map from JSON file
     public void loadActiveProducts() {
         try {
-            activeProducts = objectMapper.readValue(new File(FILE_PATH_ACTIVE_PRODUCTS),
-                new TypeReference<Map<String, Product>>() {
+            if (jsonFileActive.length() == 0) {
+                activeProducts = new HashMap<>();
+            } else {
+                activeProducts = objectMapper.readValue(jsonFileActive, new TypeReference<Map<String, Product>>() {
                 });
+            }
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Error loading active products!");
@@ -124,9 +130,13 @@ public class ProductRepository {
 
     public void loadInActiveProducts() {
         try {
-            inactiveProducts = objectMapper.readValue(new File(FILE_PATH_INACTIVE_PRODUCTS),
-                new TypeReference<Map<String, Product>>() {
-                });
+            if (jsonFileInactive.length() == 0) {
+                inactiveProducts = new HashMap<>();
+            } else {
+                inactiveProducts = objectMapper.readValue(jsonFileInactive,
+                    new TypeReference<Map<String, Product>>() {
+                    });
+            }
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Error loading inactive products!");
@@ -151,6 +161,11 @@ public class ProductRepository {
         } else {
             throw new IllegalArgumentException("Product doesn't exist!");
         }
+    }
+
+    public boolean isProductActive(Product product) {
+        String key = product.generateKey();
+        return activeProducts.containsKey(key);
     }
 
 }

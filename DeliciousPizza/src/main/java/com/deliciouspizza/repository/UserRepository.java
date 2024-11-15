@@ -2,7 +2,6 @@ package com.deliciouspizza.repository;
 
 import com.deliciouspizza.entity.order.Order;
 import com.deliciouspizza.entity.user.Customer;
-import com.deliciouspizza.entity.user.Employee;
 import com.deliciouspizza.entity.user.User;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,14 +11,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class UserRepository {
     //Petkan:passwd, age, addres ....
 
     private Map<String, User> users = new HashMap<>();
-    ;
     private static final String USER_FILE = "src/main/resources/users.json";
-    private ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper;
     private final File jsonFile = new File(USER_FILE);
     TypeReference<Map<String, User>> typeRef = new TypeReference<>() {
     };
@@ -63,6 +62,9 @@ public class UserRepository {
     // Получаване на потребител по потребителско име
     public User findUserByUsername(String username) {
         User user = users.get(username);
+        if (user == null) {
+            System.out.println("Не беше намерен потребител с име: " + username);
+        }
         return user;
     }
 
@@ -76,19 +78,33 @@ public class UserRepository {
         return users;
     }
 
+    public void addToOrderHistory(String usernameCustomer, Order order) {
+        User user = findUserByUsername(usernameCustomer);
 
-//    public void addToOrderHistory(String usernameCustomer, Order order) {
-//        User user = findUserByUsername(usernameCustomer);
-//
-//        if (user == null) {
-//            System.out.println("Потребителят не съществува.");
-//        }
-//        //check type if customer
-//
-//        Customer customer = (Customer) user;
-//
-//        customer.addOrderToHistory(order);
-//        saveUsers();
-//    }
+        if (user == null) {
+            System.out.println("Потребителят не съществува.");
+            return;
+        }
+        //check type if customer
+
+        Customer customer = (Customer) user;
+
+        customer.addOrderToHistory(order);
+
+        saveUsers();
+    }
+
+    public Set<Order> getOrderHistory(String usernameCustomer) {
+        User user = findUserByUsername(usernameCustomer);
+
+        if (user == null) {
+            System.out.println("Потребителят не съществува.");
+        }
+
+        //check type if customer
+        Customer customer = (Customer) user;
+
+        return customer.getOrderHistory();
+    }
 
 }

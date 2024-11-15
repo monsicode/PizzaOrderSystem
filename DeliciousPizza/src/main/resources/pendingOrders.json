@@ -1,10 +1,10 @@
 [ {
   "order" : {
-    "pizza_margherita" : 1,
-    "drink_coke" : 2
+    "drink_beer" : 3,
+    "pizza_pepperoni" : 1
   },
   "statusOrder" : "PROCESSING",
-  "orderDate" : [ 2024, 11, 13, 16, 39, 58, 716030700 ],
-  "totalPrice" : 25.5,
+  "orderDate" : [ 2024, 11, 15, 11, 38, 12, 433642600 ],
+  "totalPrice" : 33.0,
   "usernameCustomer" : "daka"
 } ]

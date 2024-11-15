@@ -1,7 +1,5 @@
 package com.deliciouspizza.entity.product;
 
-import com.deliciouspizza.exception.ProductAlreadyActiveException;
-import com.deliciouspizza.exception.ProductAlreadyDeactivatedException;
 import com.deliciouspizza.utils.StatusProduct;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;

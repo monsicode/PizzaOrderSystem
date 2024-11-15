@@ -1,8 +1,8 @@
 {
-  "pizza_seafood" : {
+  "pizza_margherita" : {
     "type" : "pizza",
-    "pizzaType" : "SEAFOOD",
-    "pizzaSize" : "SMALL",
+    "pizzaType" : "MARGHERITA",
+    "pizzaSize" : "MEDIUM",
     "statusProduct" : "INACTIVE"
   }
 }

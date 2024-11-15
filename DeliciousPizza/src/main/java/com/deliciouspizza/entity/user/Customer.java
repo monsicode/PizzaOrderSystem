@@ -13,7 +13,7 @@ public class Customer extends User {
 
     private String address;
     private int age;
-//    protected Set<Order> orderHistory;
+    protected final Set<Order> orderHistory = new HashSet<>();
 
     public Customer() {
         super("", "");
@@ -25,7 +25,6 @@ public class Customer extends User {
         this.address = address;
         this.age = age;
         rights = UserRights.CUSTOMER;
-//        orderHistory = new HashSet<>();
         this.userType = "customer";
     }
 
@@ -37,16 +36,16 @@ public class Customer extends User {
         return age;
     }
 
-//    public Set<Order> getOrderHistory() {
-//        return Collections.unmodifiableSet(orderHistory);
-//    }
+    public Set<Order> getOrderHistory() {
+        return Collections.unmodifiableSet(orderHistory);
+    }
 
     public void setAddress(String address) {
         this.address = address;
     }
 
-//    public void addOrderToHistory(Order order) {
-//        orderHistory.add(order);
-//    }
+    public void addOrderToHistory(Order order) {
+        orderHistory.add(order);
+    }
 
 }

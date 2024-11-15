@@ -1,21 +1,19 @@
 package com.deliciouspizza.service;
 
+import com.deliciouspizza.Singleton;
 import com.deliciouspizza.entity.order.Order;
 import com.deliciouspizza.entity.user.Customer;
 import com.deliciouspizza.entity.user.User;
 import com.deliciouspizza.repository.UserRepository;
-import com.deliciouspizza.utils.UserRights;
 import org.mindrot.jbcrypt.BCrypt;
-
-import java.util.Optional;
-
-//register
-//sigIn
-//Exit
 
 public class UserService {
 
-    private UserRepository userRepository = new UserRepository();
+    private static final UserRepository userRepository = Singleton.getInstance(UserRepository.class);
+
+    public boolean checkIfUserExists(String username) {
+        return userRepository.userExists(username);
+    }
 
     public void registerCustomer(String username, String plainPassword, String address, int age) {
         if (userRepository.userExists(username)) {
@@ -55,7 +53,7 @@ public class UserService {
         }
     }
 
-//    public void addToOrderHistory(String usernameCustomer, Order order) {
-//        userRepository.addToOrderHistory(usernameCustomer, order);
-//    }
+    public void addToOrderHistory(String usernameCustomer, Order order) {
+        userRepository.addToOrderHistory(usernameCustomer, order);
+    }
 }

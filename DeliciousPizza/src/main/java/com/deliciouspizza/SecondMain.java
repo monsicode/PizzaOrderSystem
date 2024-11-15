@@ -1,94 +1,95 @@
-//package com.deliciouspizza;
+package com.deliciouspizza;
+
+import com.deliciouspizza.entity.order.Order;
+import com.deliciouspizza.entity.product.Drink;
+import com.deliciouspizza.entity.product.Pizza;
+import com.deliciouspizza.entity.product.Product;
+import com.deliciouspizza.entity.user.Customer;
+import com.deliciouspizza.service.OrderService;
+import com.deliciouspizza.service.UserService;
+import com.deliciouspizza.utils.DrinkType;
+import com.deliciouspizza.utils.DrinkVolume;
+import com.deliciouspizza.utils.PizzaSize;
+import com.deliciouspizza.utils.PizzaType;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class SecondMain {
+
+    public static void main(String[] args) {
+
+        UserService userService = new UserService();
+        OrderService orderService = new OrderService();
 //
-//import com.deliciouspizza.entity.order.Order;
-//import com.deliciouspizza.entity.product.Drink;
-//import com.deliciouspizza.entity.product.Pizza;
-//import com.deliciouspizza.entity.product.Product;
-//import com.deliciouspizza.entity.user.Customer;
-//import com.deliciouspizza.entity.user.User;
-//import com.deliciouspizza.repository.UserRepository;
-//import com.deliciouspizza.service.UserService;
-//import com.deliciouspizza.utils.DrinkType;
-//import com.deliciouspizza.utils.DrinkVolume;
-//import com.deliciouspizza.utils.PizzaSize;
-//import com.deliciouspizza.utils.PizzaType;
+//        userService.registerCustomer("daka", "password123", "ул. Пиротска 10", 25);
+//        userService.registerCustomer("monka", "password123", "ул. Пиротска 10", 25);
 //
-//import java.util.HashMap;
-//import java.util.Map;
-//import java.util.Scanner;
+        Product pizza = new Pizza(PizzaType.MARGHERITA, PizzaSize.LARGE);
+        Product drink = new Drink(DrinkType.COKE, DrinkVolume.GRANDE);
+
+        Map<String, Integer> productsWithQuantities1 = new HashMap<>();
+        productsWithQuantities1.put(pizza.generateKey(), 2);
+        productsWithQuantities1.put(drink.generateKey(), 1);
 //
-//public class SecondMain {
+        Order order1 = new Order(productsWithQuantities1, "daka");
 //
-//    public static void main(String[] args) {
+      userService.addToOrderHistory("daka", order1);
 //
-//        UserService userService = new UserService();
-////        userService.registerCustomer("daka", "password123", "ул. Пиротска 10", 25);
-////        userService.registerCustomer("monka", "password123", "ул. Пиротска 10", 25);
+       System.out.println(orderService.getFinishedOrders("daka"));
+
+
+//        Scanner scanner = new Scanner(System.in);
 //
-////        Customer user1 = new Customer("daka", "password123", "ул. Пиротска 10", 25 );
+//        //Registration
+//        System.out.println("Регистрация на нов потребител");
 //
-//        Product pizza = new Pizza(PizzaType.MARGHERITA, PizzaSize.LARGE);
-//        Product drink = new Drink(DrinkType.COKE, DrinkVolume.GRANDE);
+//        System.out.print("Въведете потребителско име: ");
+//        String username = scanner.nextLine();
 //
-//        Map<String, Integer> productsWithQuantities1 = new HashMap<>();
-//        productsWithQuantities1.put(pizza.generateKey(), 2);
-//        productsWithQuantities1.put(drink.generateKey(), 1);
+//       if( userService.checkIfUserExists(username)){
+//           System.out.println("this username already exists");
+//       }
 //
-//        Order order1 = new Order(productsWithQuantities1, "123 Main St.");
+//        System.out.print("Въведете парола: ");
+//        String password = scanner.nextLine();
 //
-//        userService.addToOrderHistory("monka", order1 );
-////
-////        user1.addOrderToHistory(order1);
-////
-////        System.out.println(user1.getOrderHistory());
+//        System.out.print("Въведете адрес: ");
+//        String address = scanner.nextLine();
 //
-//       // Scanner scanner = new Scanner(System.in);
+//        System.out.print("Въведете възраст: ");
+//        int age = Integer.parseInt(scanner.nextLine());
 //
-////        //Registration
-////        System.out.println("Регистрация на нов потребител");
-////
-////        System.out.print("Въведете потребителско име: ");
-////        String username = scanner.nextLine();
-////
-////        System.out.print("Въведете парола: ");
-////        String password = scanner.nextLine();
-////
-////        System.out.print("Въведете адрес: ");
-////        String address = scanner.nextLine();
-////
-////        System.out.print("Въведете възраст: ");
-////        int age = Integer.parseInt(scanner.nextLine());
-////
-////        userService.registerCustomer(username, password, address, age);
+//        userService.registerCustomer(username, password, address, age);
 //
-////         Логване
-////        System.out.println("\nЛогване на потребител");
-////        System.out.println("----------------------\n");
-////
-////        System.out.print("Въведете потребителско име: ");
-////        String loginUsername = scanner.nextLine();
-////
-////        System.out.print("Въведете парола: ");
-////        String loginPassword = scanner.nextLine();
-////
-////       boolean isLoggedIn = userService.loginUser(loginUsername, loginPassword);
-////
-////        // Логване с грешна парола
-////        if (!isLoggedIn) {
-////            System.out.print("\nОпитайте отново с правилна парола или въведете нова: ");
-////            String retryPassword = scanner.nextLine();
-////            isLoggedIn = userService.loginUser(loginUsername, retryPassword);
-////        }
-////
-////        // Завършване на програмата
-////        if (isLoggedIn) {
-////            System.out.println("\nУспешно сте влезли в системата.");
-////        } else {
-////            System.out.println("\nНе успяхте да влезете в системата.");
-////        }
-////
-////        // Затваряме скенера
-////        scanner.close();
-////    }
-//    }
-//}
+//        //Логване
+//        System.out.println("\nЛогване на потребител");
+//        System.out.println("----------------------\n");
+//
+//        System.out.print("Въведете потребителско име: ");
+//        String loginUsername = scanner.nextLine();
+//
+//        System.out.print("Въведете парола: ");
+//        String loginPassword = scanner.nextLine();
+//
+//        boolean isLoggedIn = userService.loginUser(loginUsername, loginPassword);
+//
+//        // Логване с грешна парола
+//        if (!isLoggedIn) {
+//            System.out.print("\nОпитайте отново с правилна парола или въведете нова: ");
+//            String retryPassword = scanner.nextLine();
+//            isLoggedIn = userService.loginUser(loginUsername, retryPassword);
+//        }
+//
+//        // Завършване на програмата
+//        if (isLoggedIn) {
+//            System.out.println("\nУспешно сте влезли в системата.");
+//        } else {
+//            System.out.println("\nНе успяхте да влезете в системата.");
+//        }
+//
+//        // Затваряме скенера
+//        scanner.close();
+    }
+}

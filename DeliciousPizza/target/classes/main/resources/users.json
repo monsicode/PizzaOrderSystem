@@ -4,27 +4,17 @@
     "rights" : "CUSTOMER",
     "address" : "ул. Пиротска 10",
     "age" : 25,
-    "orderHistory" : [ ],
-    "hashedPassword" : "$2a$10$4Mq1qbKbRoDBvK7.urTUte9Cp3DQJPtmTkyrWmADD2dS1AtrF8.3m",
-    "userType" : "customer"
-  },
-  "monka" : {
-    "username" : "monka",
-    "rights" : "CUSTOMER",
-    "address" : "ул. Пиротска 10",
-    "age" : 25,
     "orderHistory" : [ {
       "order" : {
-        "drink_coke_grande" : 1,
-        "pizza_margherita" : 2
+        "pizza_margherita" : 2,
+        "drink_coke" : 1
       },
       "statusOrder" : "PROCESSING",
-      "orderDate" : [ 2024, 11, 13, 12, 29, 0, 347366900 ],
-      "totalPrice" : 0.0,
-      "usernameCustomer" : "123 Main St.",
-      "addressDelivery" : null
+      "orderDate" : [ 2024, 11, 14, 12, 26, 54, 783240500 ],
+      "totalPrice" : 31.5,
+      "usernameCustomer" : "daka"
     } ],
-    "hashedPassword" : "$2a$10$t6htQ3cpwogKYJIn9wGY3eQ5EwvkbQxOhBLqvHJf6KOgisZrqH4MO",
+    "hashedPassword" : "$2a$10$9u190pZm7pbc0twMsfyLJeBVIxCytAZIMW9cZF7hC54GIIAX1hVA2",
     "userType" : "customer"
   }
 }
