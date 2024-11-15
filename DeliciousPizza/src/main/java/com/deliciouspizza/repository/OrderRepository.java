@@ -8,7 +8,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -28,9 +30,15 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 public class OrderRepository {
     private final BlockingQueue<Order> pendingOrders;
+    private final Set<Order> historyOrders = ConcurrentHashMap.newKeySet();
+
     private static final String FILE_PATH_ORDERS = "src/main/resources/pendingOrders.json";
+    private static final String FILE_PATH_HISTORY_ORDERS = "src/main/resources/historyOrders.json";
+
     private final ObjectMapper objectMapper;
+
     private final File jsonFile = new File(FILE_PATH_ORDERS);
+    private final File historyJsonFile = new File(FILE_PATH_HISTORY_ORDERS);
 
     private final Map<String, Order> activeOrders = new ConcurrentHashMap<>();
 
@@ -40,6 +48,7 @@ public class OrderRepository {
         objectMapper.registerModule(new JavaTimeModule());
         objectMapper.findAndRegisterModules();
 
+        historyOrders.addAll(loadHistoryOrders());
         //should uncomment later
         // loadPendingOrders(); // Зарежда чакащите поръчки от JSON файла при стартиране
     }
@@ -55,7 +64,7 @@ public class OrderRepository {
         return order;
     }
 
-    private void loadPendingOrders() {
+    private synchronized void loadPendingOrders() {
         try {
             if (jsonFile.exists() && jsonFile.length() > 0) {
                 BlockingQueue<Order> loadedOrders =
@@ -68,6 +77,19 @@ public class OrderRepository {
         }
     }
 
+    private synchronized Set<Order> loadHistoryOrders() {
+        try {
+            if (historyJsonFile.exists() && historyJsonFile.length() > 0) {
+                return objectMapper.readValue(historyJsonFile, new TypeReference<Set<Order>>() {
+                });
+            }
+        } catch (IOException e) {
+            System.err.println("Error loading completed orders: " + e.getMessage());
+        }
+        return new HashSet<>();
+    }
+
+
     private synchronized void savePendingOrders() {
         try {
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(jsonFile, pendingOrders);
@@ -77,12 +99,23 @@ public class OrderRepository {
         }
     }
 
+    private synchronized void saveHistoryOrders() {
+        try {
+            objectMapper.writerWithDefaultPrettyPrinter().writeValue(historyJsonFile, historyOrders);
+            System.out.println("Order history saved to file.");
+        } catch (IOException e) {
+            System.err.println("Error saving the completed order history: " + e.getMessage());
+        }
+    }
+
     public BlockingQueue<Order> getPendingOrders() {
         return pendingOrders;
     }
 
     public void completeOrder(Order order) {
         order.setStatusOrder(StatusOrder.COMPLETED);
+        historyOrders.add(order);
+        saveHistoryOrders();
         System.out.println("Completed order: " + order);
         savePendingOrders();
     }
@@ -90,7 +123,6 @@ public class OrderRepository {
     public synchronized void shutdown() {
         savePendingOrders();
     }
-
 
     public void startNewOrder(String username) {
         if (activeOrders.putIfAbsent(username, new Order()) != null) {
@@ -132,6 +164,11 @@ public class OrderRepository {
 
         addOrder(order);
         System.out.println("Order finalized and saved for user: " + username);
+    }
+
+
+    public Set<Order> getCompletedOrders() {
+        return new HashSet<>(historyOrders); // Връщаме копие за безопасност
     }
 
 

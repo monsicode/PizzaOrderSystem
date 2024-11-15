@@ -7,15 +7,20 @@ public class TestingOrderService {
     public static void main(String[] args) {
         OrderService orderService = new OrderService();
 
-        System.out.println("Starting new order for customer1...");
-        orderService.startNewOrder("customer1");
+        System.out.println("Starting new order for customer2...");
+        orderService.startNewOrder("customer2");
+        orderService.startNewOrder("customer3");
 
         System.out.println("Adding product to order...");
-        orderService.addProductToActiveOrder("customer1", "sauce_garlic_sauce", 2);
-        orderService.addProductToActiveOrder("customer1", "drink_coke", 3);
+        orderService.addProductToActiveOrder("customer2", "pizza_pepperoni", 2);
+        orderService.addProductToActiveOrder("customer2", "drink_coke", 1);
+
+        orderService.addProductToActiveOrder("customer3", "pizza_pepperoni", 2);
+
 
         System.out.println("Finalizing order for customer1...");
-        orderService.finalizeOrder("customer1");
+        orderService.finalizeOrder("customer2");
+        orderService.finalizeOrder("customer3");
 
         System.out.println("Employee starts processing orders...");
         orderService.processCurrentOrder();

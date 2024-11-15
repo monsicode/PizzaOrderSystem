@@ -1,0 +1,11 @@
+[ {
+  "order" : {
+    "pizza_pepperoni" : 2,
+    "drink_coke" : 1
+  },
+  "statusOrder" : "COMPLETED",
+  "orderDate" : [ 2024, 11, 15, 18, 19, 17, 333562200 ],
+  "totalPrice" : 30.5,
+  "usernameCustomer" : "customer2",
+  "orderId" : 2
+} ]
