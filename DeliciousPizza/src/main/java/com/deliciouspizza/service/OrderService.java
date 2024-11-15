@@ -2,20 +2,14 @@ package com.deliciouspizza.service;
 
 import com.deliciouspizza.Singleton;
 import com.deliciouspizza.entity.order.Order;
-import com.deliciouspizza.entity.user.Customer;
+import com.deliciouspizza.exception.InactiveProductException;
 import com.deliciouspizza.repository.OrderRepository;
-import com.deliciouspizza.repository.UserRepository;
 
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ConcurrentHashMap;
 
 //----------------------------------
-
-//createOrder(List<Product>)   with one or more products --> ОК
-//orderProcessing() --> ОК
-//currentOrder() --> ok
-//finishedOrders(User) for the user {return unmodify user.getOrderHistory}
 //repeatOrder(User) {}
 //userRepo --> user.json
 //----------------------------------
@@ -23,19 +17,35 @@ import java.util.concurrent.BlockingQueue;
 public class OrderService {
 
     private static final OrderRepository ORDER_REPOSITORY = Singleton.getInstance(OrderRepository.class);
-    private static final UserRepository USER_REPOSITORY = Singleton.getInstance(UserRepository.class);
 
-    //removed Map<> as param
-    public void createOrder(Map<String, Integer> productsWithQuantities, Customer customer) {
-        Order order = new Order(productsWithQuantities, customer.getUsername());
-        ORDER_REPOSITORY.addOrder(order);
+    private final Map<String, Order> activeOrders = new ConcurrentHashMap<>();
+
+    public void startNewOrder(String username) {
+        try {
+            ORDER_REPOSITORY.startNewOrder(username);
+        } catch (IllegalStateException err) {
+            System.out.println(err.getMessage());
+        }
     }
 
-    public void createOrder(Order order, String usernameCustomer) {
-        order.setUsernameCustomer(usernameCustomer);
-        ORDER_REPOSITORY.addOrder(order);
+    public void addProductToActiveOrder(String username, String productKey, int quantity) {
+        try {
+            ORDER_REPOSITORY.addProductToActiveOrder(username, productKey, quantity);
+        } catch (IllegalStateException e) {
+            System.out.println("Cannot add product to order: " + e.getMessage());
+        }
     }
 
+    //for customers
+    public void finalizeOrder(String username) {
+        try {
+            ORDER_REPOSITORY.finalizeOrder(username);
+        } catch (IllegalStateException err) {
+            System.out.println(err.getMessage());
+        }
+    }
+
+    //for employees
     public void processCurrentOrder() {
         try {
             Order currentOrder = ORDER_REPOSITORY.getNextOrder();
@@ -56,8 +66,8 @@ public class OrderService {
         return ORDER_REPOSITORY.getPendingOrders();
     }
 
-    public Set<Order> getFinishedOrders(String username) {
-        return USER_REPOSITORY.getOrderHistory(username);
-    }
+//    public Set<Order> getFinishedOrders(String username) {
+//        return USER_REPOSITORY.getOrderHistory(username);
+//    }
 
 }

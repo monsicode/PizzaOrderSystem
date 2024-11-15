@@ -1,13 +1,16 @@
 package com.deliciouspizza.repository;
 
 import com.deliciouspizza.entity.order.Order;
+import com.deliciouspizza.exception.InactiveProductException;
 import com.deliciouspizza.utils.StatusOrder;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -19,6 +22,8 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 //finishOrderForUser(User, Order);
 //savePendingOrder(Order) --> save pending order to the file
 //loadPendingOrders()
+//за периодично записване
+//private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 //-----------------
 
 public class OrderRepository {
@@ -27,8 +32,7 @@ public class OrderRepository {
     private final ObjectMapper objectMapper;
     private final File jsonFile = new File(FILE_PATH_ORDERS);
 
-    //за периодично записване
-    //private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+    private final Map<String, Order> activeOrders = new ConcurrentHashMap<>();
 
     public OrderRepository() {
         pendingOrders = new LinkedBlockingQueue<>();
@@ -37,7 +41,7 @@ public class OrderRepository {
         objectMapper.findAndRegisterModules();
 
         //should uncomment later
-       // loadPendingOrders(); // Зарежда чакащите поръчки от JSON файла при стартиране
+        // loadPendingOrders(); // Зарежда чакащите поръчки от JSON файла при стартиране
     }
 
     public void addOrder(Order order) {
@@ -64,7 +68,7 @@ public class OrderRepository {
         }
     }
 
-    private void savePendingOrders() {
+    private synchronized void savePendingOrders() {
         try {
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(jsonFile, pendingOrders);
         } catch (IOException e) {
@@ -82,5 +86,53 @@ public class OrderRepository {
         System.out.println("Completed order: " + order);
         savePendingOrders();
     }
+
+    public synchronized void shutdown() {
+        savePendingOrders();
+    }
+
+
+    public void startNewOrder(String username) {
+        if (activeOrders.putIfAbsent(username, new Order()) != null) {
+            throw new IllegalStateException("User already has an active order. Finish it before starting a new one.");
+        }
+
+        Order newOrder = activeOrders.get(username);
+        if (newOrder != null) {
+            newOrder.setUsernameCustomer(username);
+        }
+
+        System.out.println("New order started for user: " + username);
+    }
+
+    public void addProductToActiveOrder(String username, String productKey, int quantity) {
+        Order order = activeOrders.get(username);
+
+        if (order == null) {
+            throw new IllegalStateException("User does not have an active order. Start an order first.");
+        }
+
+        try {
+            order.addProduct(productKey, quantity);
+        } catch (InactiveProductException e) {
+            System.out.println("Cannot add product to order: " + e.getMessage());
+        }
+    }
+
+    public void finalizeOrder(String username) {
+        Order order = activeOrders.remove(username);
+
+        if (order == null) {
+            throw new IllegalStateException("User does not have an active order to finalize.");
+        }
+
+        if (order.getOrder().isEmpty()) {
+            throw new IllegalStateException("Order cannot be finalized as it has no products.");
+        }
+
+        addOrder(order);
+        System.out.println("Order finalized and saved for user: " + username);
+    }
+
 
 }
