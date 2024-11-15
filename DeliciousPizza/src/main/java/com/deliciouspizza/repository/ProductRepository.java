@@ -163,9 +163,8 @@ public class ProductRepository {
         }
     }
 
-    public boolean isProductActive(Product product) {
-        String key = product.generateKey();
-        return activeProducts.containsKey(key);
+    public boolean isProductActive(String productKey) {
+        return activeProducts.containsKey(productKey);
     }
 
 }

@@ -24,25 +24,34 @@ public class MainOrderTest {
 
         Order order = new Order();
         Order order2 = new Order();
-        try {
-            order.addProduct(product2, 2);
-            order.addProduct(product3, 2);
+        Order orde5 = new Order();
+        Order order6 = new Order();
+        Order order9 = new Order();
 
-            order2.addProduct(product4, 1);
-            order2.addProduct(product5, 3);
+        try {
+            order.addProduct("sauce_garlic_sauce", 2);
+            order.addProduct("drink_coke", 2);
+
+            order.removeProduct("sauce_garlic_sauce", 1);
+            order.removeProduct("drink_coke", 1);
 
         } catch (Exception err) {
             System.out.println(err.getMessage());
         }
 
-        OrderService service = new OrderService();
+        System.out.println(order9.getOrderId());
 
-        service.createOrder(order, "monkata");
-        service.createOrder(order2, "daka");
+//        System.out.println(order);
+//        System.out.println(order.getTotalPrice());
 
-        service.getPendingOrders();
-
-        service.processCurrentOrder();
+//        OrderService service = new OrderService();
+//
+//        service.createOrder(order, "monkata");
+//        service.createOrder(order2, "daka");
+//
+//        service.getPendingOrders();
+//
+//        service.processCurrentOrder();
     }
 
 }

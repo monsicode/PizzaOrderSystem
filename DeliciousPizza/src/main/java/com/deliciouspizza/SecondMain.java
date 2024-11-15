@@ -37,7 +37,6 @@ public class SecondMain {
 //
       userService.addToOrderHistory("daka", order1);
 //
-       System.out.println(orderService.getFinishedOrders("daka"));
 
 
 //        Scanner scanner = new Scanner(System.in);
