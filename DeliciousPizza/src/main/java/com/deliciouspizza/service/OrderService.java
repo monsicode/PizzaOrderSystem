@@ -2,9 +2,10 @@ package com.deliciouspizza.service;
 
 import com.deliciouspizza.Singleton;
 import com.deliciouspizza.entity.order.Order;
-import com.deliciouspizza.exception.InactiveProductException;
 import com.deliciouspizza.repository.OrderRepository;
+import com.deliciouspizza.repository.UserRepository;
 
+import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
@@ -17,6 +18,8 @@ import java.util.concurrent.ConcurrentHashMap;
 public class OrderService {
 
     private static final OrderRepository ORDER_REPOSITORY = Singleton.getInstance(OrderRepository.class);
+    private static final UserRepository USER_REPOSITORY = Singleton.getInstance(UserRepository.class);
+
 
     private final Map<String, Order> activeOrders = new ConcurrentHashMap<>();
 
@@ -49,10 +52,12 @@ public class OrderService {
     public void processCurrentOrder() {
         try {
             Order currentOrder = ORDER_REPOSITORY.getNextOrder();
-            System.out.println("Order processing started:  " + currentOrder);
+            System.out.println("Order processing started:");
 
             if (currentOrder != null) {
                 ORDER_REPOSITORY.completeOrder(currentOrder);
+                String username = currentOrder.getUsernameCustomer();
+                USER_REPOSITORY.addToOrderHistory(username, currentOrder);
             } else {
                 System.out.println("There are no orders to process.");
             }
@@ -64,6 +69,14 @@ public class OrderService {
 
     public BlockingQueue<Order> getPendingOrders() {
         return ORDER_REPOSITORY.getPendingOrders();
+    }
+
+    public long getCountOrderInPeriod(LocalDateTime from, LocalDateTime to) {
+        return ORDER_REPOSITORY.getCountOrderInPeriod(from, to);
+    }
+
+    public double getProfitInPeriod(LocalDateTime from, LocalDateTime to) {
+        return ORDER_REPOSITORY.getProfitInPeriod(from, to);
     }
 
 //    public Set<Order> getFinishedOrders(String username) {

@@ -49,4 +49,10 @@ public class Sauce extends Product {
             "sauce=" + sauce +
             "}\n";
     }
+
+    @Override
+    public String getFormattedDetails() {
+        return String.valueOf(sauce).replaceAll("_", " ");
+    }
+
 }

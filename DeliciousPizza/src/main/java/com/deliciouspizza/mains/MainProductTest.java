@@ -1,4 +1,4 @@
-package com.deliciouspizza;
+package com.deliciouspizza.mains;
 
 import com.deliciouspizza.entity.product.Drink;
 import com.deliciouspizza.entity.product.Pizza;

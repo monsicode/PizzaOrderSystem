@@ -1,10 +1,9 @@
-package com.deliciouspizza;
+package com.deliciouspizza.mains;
 
 import com.deliciouspizza.entity.order.Order;
 import com.deliciouspizza.entity.product.Drink;
 import com.deliciouspizza.entity.product.Pizza;
 import com.deliciouspizza.entity.product.Product;
-import com.deliciouspizza.entity.user.Customer;
 import com.deliciouspizza.service.OrderService;
 import com.deliciouspizza.service.UserService;
 import com.deliciouspizza.utils.DrinkType;
@@ -14,7 +13,6 @@ import com.deliciouspizza.utils.PizzaType;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public class SecondMain {
 

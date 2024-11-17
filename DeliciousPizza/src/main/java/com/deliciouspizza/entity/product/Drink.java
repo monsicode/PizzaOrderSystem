@@ -67,6 +67,11 @@ public class Drink extends Product {
     }
 
     @Override
+    public String getFormattedDetails() {
+        return String.format("Drink %s: Volume = %s", drink, volume);
+    }
+
+    @Override
     public String toString() {
         return "Drink{" +
             "drink=" + drink +

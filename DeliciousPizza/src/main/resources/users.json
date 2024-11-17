@@ -1,20 +1,38 @@
 {
-  "daka" : {
-    "username" : "daka",
+  "monkata" : {
+    "username" : "monkata",
     "rights" : "CUSTOMER",
-    "address" : "ул. Пиротска 10",
-    "age" : 25,
+    "address" : "baba",
+    "age" : 23,
     "orderHistory" : [ {
       "order" : {
-        "pizza_margherita" : 2,
-        "drink_coke" : 1
+        "pizza_pepperoni" : 2
       },
-      "statusOrder" : "PROCESSING",
-      "orderDate" : [ 2024, 11, 14, 12, 26, 54, 783240500 ],
-      "totalPrice" : 31.5,
-      "usernameCustomer" : "daka"
+      "statusOrder" : "COMPLETED",
+      "orderDate" : [ 2024, 11, 17, 15, 36, 19, 34815700 ],
+      "totalPrice" : 24.0,
+      "usernameCustomer" : "monkata",
+      "orderId" : 1
+    }, {
+      "order" : {
+        "pizza_pepperoni" : 3
+      },
+      "statusOrder" : "COMPLETED",
+      "orderDate" : [ 2024, 11, 17, 15, 48, 32, 947623900 ],
+      "totalPrice" : 36.0,
+      "usernameCustomer" : "monkata",
+      "orderId" : 2
+    }, {
+      "order" : {
+        "drink_beer" : 3
+      },
+      "statusOrder" : "COMPLETED",
+      "orderDate" : [ 2024, 11, 17, 16, 27, 34, 526933400 ],
+      "totalPrice" : 21.0,
+      "usernameCustomer" : "monkata",
+      "orderId" : 15
     } ],
-    "hashedPassword" : "$2a$10$9u190pZm7pbc0twMsfyLJeBVIxCytAZIMW9cZF7hC54GIIAX1hVA2",
+    "hashedPassword" : "$2a$10$51xwDr0.HhabH1cxvf8.0e1INyJNcwNzGBtUGrmRDwAqCWwKty6LW",
     "userType" : "customer"
   }
 }

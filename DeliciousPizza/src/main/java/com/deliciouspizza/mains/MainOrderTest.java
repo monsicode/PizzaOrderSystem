@@ -1,11 +1,10 @@
-package com.deliciouspizza;
+package com.deliciouspizza.mains;
 
 import com.deliciouspizza.entity.order.Order;
 import com.deliciouspizza.entity.product.Drink;
 import com.deliciouspizza.entity.product.Pizza;
 import com.deliciouspizza.entity.product.Product;
 import com.deliciouspizza.entity.product.Sauce;
-import com.deliciouspizza.service.OrderService;
 import com.deliciouspizza.utils.DrinkType;
 import com.deliciouspizza.utils.DrinkVolume;
 import com.deliciouspizza.utils.PizzaSize;

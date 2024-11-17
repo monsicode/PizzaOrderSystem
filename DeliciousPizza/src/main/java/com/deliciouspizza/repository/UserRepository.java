@@ -3,6 +3,7 @@ package com.deliciouspizza.repository;
 import com.deliciouspizza.entity.order.Order;
 import com.deliciouspizza.entity.user.Customer;
 import com.deliciouspizza.entity.user.User;
+import com.deliciouspizza.exception.UserNotFoundException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -14,7 +15,6 @@ import java.util.Map;
 import java.util.Set;
 
 public class UserRepository {
-    //Petkan:passwd, age, addres ....
 
     private Map<String, User> users = new HashMap<>();
     private static final String USER_FILE = "src/main/resources/users.json";
@@ -34,23 +34,22 @@ public class UserRepository {
     private Map<String, User> loadUsers() {
         try {
             if (jsonFile.exists() && jsonFile.length() > 0) {
-                Map<String, User> users = objectMapper.readValue(jsonFile, typeRef);
+                users = objectMapper.readValue(jsonFile, typeRef);
                 return users;
             } else {
                 return new HashMap<>();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Error loading users: " + e.getMessage());
             return new HashMap<>();
         }
     }
 
-    // Записване на потребители в JSON файл
     private void saveUsers() {
         try {
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(jsonFile, users);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Error saving users: " + e.getMessage());
         }
     }
 
@@ -59,52 +58,54 @@ public class UserRepository {
         saveUsers();
     }
 
-    // Получаване на потребител по потребителско име
-    public User findUserByUsername(String username) {
+    public User getUserByUsername(String username) {
         User user = users.get(username);
+
         if (user == null) {
-            System.out.println("Не беше намерен потребител с име: " + username);
+            throw new UserNotFoundException("User with username " + username + " not found");
         }
+
         return user;
     }
 
-    // Проверка дали потребител съществува
-    public boolean userExists(String username) {
+    public boolean isUsernamePresent(String username) {
         return users.containsKey(username);
     }
 
-    // Връщане на всички потребители (по избор)
     public Map<String, User> getAllUsers() {
         return users;
     }
 
     public void addToOrderHistory(String usernameCustomer, Order order) {
-        User user = findUserByUsername(usernameCustomer);
+        try {
+            User user = getUserByUsername(usernameCustomer);
+            if (!(user instanceof Customer customer)) {
+                throw new IllegalStateException("User is not of type Customer!");
+            }
 
-        if (user == null) {
-            System.out.println("Потребителят не съществува.");
-            return;
+            customer.addOrderToHistory(order);
+
+            saveUsers();
+
+        } catch (UserNotFoundException err) {
+            System.out.println(err.getMessage());
         }
-        //check type if customer
-
-        Customer customer = (Customer) user;
-
-        customer.addOrderToHistory(order);
-
-        saveUsers();
     }
 
     public Set<Order> getOrderHistory(String usernameCustomer) {
-        User user = findUserByUsername(usernameCustomer);
+        try {
+            User user = getUserByUsername(usernameCustomer);
 
-        if (user == null) {
-            System.out.println("Потребителят не съществува.");
+            if (!(user instanceof Customer customer)) {
+                throw new IllegalStateException("User is not of type Customer!");
+            }
+
+            return customer.getOrderHistory();
+
+        } catch (UserNotFoundException err) {
+            System.out.println(err.getMessage());
         }
-
-        //check type if customer
-        Customer customer = (Customer) user;
-
-        return customer.getOrderHistory();
+        return null;
     }
 
 }

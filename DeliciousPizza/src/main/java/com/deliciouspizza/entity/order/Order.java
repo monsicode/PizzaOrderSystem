@@ -6,6 +6,7 @@ import com.deliciouspizza.exception.InactiveProductException;
 import com.deliciouspizza.exception.ProductNotInOrderException;
 import com.deliciouspizza.repository.ProductRepository;
 import com.deliciouspizza.utils.StatusOrder;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -27,6 +28,7 @@ import java.util.UUID;
 //storagfe.checkProductsAvailability....
 //checkProductsAvailability(order)
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Order {
 
     private static int idCounter = 0; // Статичен брояч за уникални ID
@@ -87,7 +89,7 @@ public class Order {
 
         order.put(productKey, order.getOrDefault(productKey, 0) + quantity);
         totalPrice += (productRepository.getProduct(productKey).calculatePrice() * quantity);
-        System.out.println("Product added successfully!");
+        //System.out.println("Product added successfully!");
     }
 
     public void removeProduct(String productKey, Integer quantity) throws ProductNotInOrderException {

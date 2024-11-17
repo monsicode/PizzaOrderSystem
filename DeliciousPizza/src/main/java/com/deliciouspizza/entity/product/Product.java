@@ -47,4 +47,5 @@ public abstract class Product {
 
     public abstract String generateKey();
 
+    public abstract String getFormattedDetails();
 }

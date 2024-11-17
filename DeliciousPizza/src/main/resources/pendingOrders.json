@@ -1,10 +1,1 @@
-[ {
-  "order" : {
-    "pizza_pepperoni" : 2
-  },
-  "statusOrder" : "PROCESSING",
-  "orderDate" : [ 2024, 11, 15, 18, 19, 17, 333562200 ],
-  "totalPrice" : 24.0,
-  "usernameCustomer" : "customer3",
-  "orderId" : 3
-} ]
+[ ]

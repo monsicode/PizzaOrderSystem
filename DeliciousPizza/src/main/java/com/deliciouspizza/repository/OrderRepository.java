@@ -8,6 +8,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -49,8 +52,8 @@ public class OrderRepository {
         objectMapper.findAndRegisterModules();
 
         historyOrders.addAll(loadHistoryOrders());
-        //should uncomment later
-        // loadPendingOrders(); // Зарежда чакащите поръчки от JSON файла при стартиране
+
+        loadPendingOrders();
     }
 
     public void addOrder(Order order) {
@@ -89,7 +92,6 @@ public class OrderRepository {
         return new HashSet<>();
     }
 
-
     private synchronized void savePendingOrders() {
         try {
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(jsonFile, pendingOrders);
@@ -116,7 +118,7 @@ public class OrderRepository {
         order.setStatusOrder(StatusOrder.COMPLETED);
         historyOrders.add(order);
         saveHistoryOrders();
-        System.out.println("Completed order: " + order);
+        System.out.println("Order completed! ");
         savePendingOrders();
     }
 
@@ -125,11 +127,13 @@ public class OrderRepository {
     }
 
     public void startNewOrder(String username) {
+
         if (activeOrders.putIfAbsent(username, new Order()) != null) {
             throw new IllegalStateException("User already has an active order. Finish it before starting a new one.");
         }
 
         Order newOrder = activeOrders.get(username);
+
         if (newOrder != null) {
             newOrder.setUsernameCustomer(username);
         }
@@ -164,12 +168,41 @@ public class OrderRepository {
 
         addOrder(order);
         System.out.println("Order finalized and saved for user: " + username);
+        System.out.println(order);
     }
-
 
     public Set<Order> getCompletedOrders() {
         return new HashSet<>(historyOrders); // Връщаме копие за безопасност
     }
 
+    public long getCountOrderInPeriod(LocalDateTime from, LocalDateTime to) {
+        long count = 0;
 
+        for (Order order : historyOrders) {
+            LocalDateTime orderDate = order.getOrderDate();
+
+            if (!orderDate.isBefore(from) && !orderDate.isAfter(to)) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    public double getProfitInPeriod(LocalDateTime from, LocalDateTime to) {
+        double totalProfit = 0;
+
+        for (Order order : historyOrders) {
+            double curOrderPrice = order.getTotalPrice();
+            LocalDateTime orderDate = order.getOrderDate();
+
+            if (!orderDate.isBefore(from) && !orderDate.isAfter(to)) {
+                totalProfit += curOrderPrice;
+            }
+        }
+
+        return BigDecimal.valueOf(totalProfit)
+            .setScale(2, RoundingMode.HALF_UP)
+            .doubleValue();
+    }
 }
