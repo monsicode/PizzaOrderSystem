@@ -1,29 +1,29 @@
-//package com.deliciouspizza;
-//
-//import com.deliciouspizza.entity.order.Order;
-//import com.deliciouspizza.entity.product.Drink;
-//import com.deliciouspizza.entity.product.Pizza;
-//import com.deliciouspizza.entity.product.Product;
-//import com.deliciouspizza.entity.product.Sauce;
-//import com.deliciouspizza.entity.user.Customer;
-//import com.deliciouspizza.repository.OrderRepository;
-//import com.deliciouspizza.repository.ProductRepository;
-//import com.deliciouspizza.service.OrderService;
-//import com.deliciouspizza.service.ProductService;
-//import com.deliciouspizza.utils.DrinkType;
-//import com.deliciouspizza.utils.DrinkVolume;
-//import com.deliciouspizza.utils.PizzaSize;
-//import com.deliciouspizza.utils.PizzaType;
-//import com.deliciouspizza.utils.SauceType;
-//
-//import java.util.HashMap;
-//import java.util.Map;
-//import java.util.concurrent.BlockingQueue;
-//
-//public class Main {
-//
-//    //main test for ProductService and Repository
-//    public static void main(String[] args) {
+import com.deliciouspizza.entity.product.Product;
+
+import com.deliciouspizza.entity.order.Order;
+import com.deliciouspizza.entity.product.Drink;
+import com.deliciouspizza.entity.product.Pizza;
+import com.deliciouspizza.entity.product.Product;
+import com.deliciouspizza.entity.product.Sauce;
+import com.deliciouspizza.entity.user.Customer;
+import com.deliciouspizza.repository.OrderRepository;
+import com.deliciouspizza.repository.ProductRepository;
+import com.deliciouspizza.service.OrderService;
+import com.deliciouspizza.service.ProductService;
+import com.deliciouspizza.utils.DrinkType;
+import com.deliciouspizza.utils.DrinkVolume;
+import com.deliciouspizza.utils.PizzaSize;
+import com.deliciouspizza.utils.PizzaType;
+import com.deliciouspizza.utils.SauceType;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.BlockingQueue;
+
+public class Main {
+
+    //    //main test for ProductService and Repository
+    public static void main(String[] args) {
 //
 ////       ProductRepository repository = new ProductRepository();
 ////        ProductRepository repository = Singleton.getInstance(ProductRepository.class);
@@ -64,24 +64,27 @@
 //        // Създаване на OrderRepository
 //        OrderRepository orderRepository = new OrderRepository();
 //
-//        // Създаване на продукти и добавяне в поръчка
-//        Product pizza = new Pizza(PizzaType.MARGHERITA, PizzaSize.LARGE);
-//        Product drink = new Drink(DrinkType.COKE, DrinkVolume.GRANDE);
-//        Product pizza2 = new Pizza(PizzaType.PEPPERONI, PizzaSize.LARGE);
-//
-//        Map<String, Integer> productsWithQuantities1 = new HashMap<>();
-//        productsWithQuantities1.put(pizza.generateKey(), 2);
-//        productsWithQuantities1.put(drink.generateKey(), 1);
-//
-//        Map<String, Integer> productsWithQuantities2 = new HashMap<>();
-//        productsWithQuantities2.put(pizza.generateKey(), 1);
-//        productsWithQuantities2.put(drink.generateKey(), 2);
-//
-//        Map<String, Integer> productsWithQuantities3 = new HashMap<>();
-//        productsWithQuantities3.put(pizza2.generateKey(), 4);
-//        productsWithQuantities3.put(drink.generateKey(), 2);
-//
-//        Order order1 = new Order(productsWithQuantities1, "monkata");
+        // Създаване на продукти и добавяне в поръчка
+        Product pizza = new Pizza(PizzaType.MARGHERITA, PizzaSize.LARGE);
+        Product drink = new Drink(DrinkType.COKE, DrinkVolume.GRANDE);
+        Product pizza2 = new Pizza(PizzaType.PEPPERONI, PizzaSize.LARGE);
+
+        Map<String, Integer> productsWithQuantities1 = new HashMap<>();
+        productsWithQuantities1.put(pizza.generateKey(), 2);
+        productsWithQuantities1.put(drink.generateKey(), 1);
+
+        Map<String, Integer> productsWithQuantities2 = new HashMap<>();
+        productsWithQuantities2.put(pizza.generateKey(), 1);
+        productsWithQuantities2.put(drink.generateKey(), 2);
+
+        Map<String, Integer> productsWithQuantities3 = new HashMap<>();
+        productsWithQuantities3.put(pizza2.generateKey(), 4);
+        productsWithQuantities3.put(drink.generateKey(), 2);
+
+        Order order1 = new Order(productsWithQuantities1, "monkata");
+
+
+
 //        Order order2 = new Order(productsWithQuantities2, "daka");
 //        Order order3 = new Order(productsWithQuantities2, "Dupe");
 //
@@ -118,5 +121,5 @@
 //////        System.out.println("Orders loaded from JSON:");
 //////        orderRepository.getPendingOrders().forEach(System.out::println);
 //////    }
-//    }
-//}
+    }
+}

@@ -4,6 +4,7 @@ import com.deliciouspizza.utils.DrinkType;
 import com.deliciouspizza.utils.DrinkVolume;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import java.util.Objects;
 
 //exceptions --> thrown
@@ -91,6 +92,13 @@ public class Drink extends Product {
     @Override
     public int hashCode() {
         return Objects.hashCode(drink);
+    }
+
+
+    //possible of thrwoing exception
+    @Override
+    public boolean isItGoodForUnderAgedCustomers() {
+        return !getIsAlcoholic();
     }
 
 }

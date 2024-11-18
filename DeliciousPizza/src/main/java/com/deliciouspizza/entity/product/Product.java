@@ -48,4 +48,9 @@ public abstract class Product {
     public abstract String generateKey();
 
     public abstract String getFormattedDetails();
+
+    public boolean isItGoodForUnderAgedCustomers() {
+        return true;
+    }
+
 }

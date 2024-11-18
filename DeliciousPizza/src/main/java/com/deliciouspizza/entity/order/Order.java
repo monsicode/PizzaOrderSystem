@@ -1,10 +1,12 @@
 package com.deliciouspizza.entity.order;
 
 import com.deliciouspizza.Singleton;
+import com.deliciouspizza.entity.product.Drink;
 import com.deliciouspizza.entity.product.Product;
 import com.deliciouspizza.exception.InactiveProductException;
 import com.deliciouspizza.exception.ProductNotInOrderException;
 import com.deliciouspizza.repository.ProductRepository;
+import com.deliciouspizza.service.ProductService;
 import com.deliciouspizza.utils.StatusOrder;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -15,7 +17,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.UUID;
 
 // StorageProduct
 // class StorageProductRepository
@@ -40,7 +41,7 @@ public class Order {
     private double totalPrice;
     private String usernameCustomer;
 
-    private final ProductRepository productRepository = Singleton.getInstance(ProductRepository.class);
+    private static final ProductRepository PRODUCT_REPOSITORY = Singleton.getInstance(ProductRepository.class);
 
     public Order() {
         synchronized (Order.class) {
@@ -73,7 +74,6 @@ public class Order {
         order = new HashMap<>();
     }
 
-    //handle where?
     public void addProduct(String productKey, int quantity) throws InactiveProductException {
         if (productKey.isEmpty()) {
             throw new IllegalArgumentException("Product cannot be null.");
@@ -83,13 +83,12 @@ public class Order {
             throw new IllegalArgumentException("Quantity cannot be less than 1");
         }
 
-        if (!productRepository.isProductActive(productKey)) {
+        if (!PRODUCT_REPOSITORY.isProductActive(productKey)) {
             throw new InactiveProductException("This product is inactive, can't be added to order!");
         }
 
         order.put(productKey, order.getOrDefault(productKey, 0) + quantity);
-        totalPrice += (productRepository.getProduct(productKey).calculatePrice() * quantity);
-        //System.out.println("Product added successfully!");
+        totalPrice += (PRODUCT_REPOSITORY.getProduct(productKey).calculatePrice() * quantity);
     }
 
     public void removeProduct(String productKey, Integer quantity) throws ProductNotInOrderException {
@@ -115,14 +114,14 @@ public class Order {
             System.out.println("Product quantity updated successfully.");
         }
 
-        totalPrice -= (productRepository.getProduct(productKey).calculatePrice() * order.get(productKey));
+        totalPrice -= (PRODUCT_REPOSITORY.getProduct(productKey).calculatePrice() * order.getOrDefault(productKey, 1));
         System.out.println("Product removed successfully!");
     }
 
     private double calculateTotalPrice(Map<String, Integer> order) {
         double total = 0.0;
         for (Map.Entry<String, Integer> entry : order.entrySet()) {
-            total += productRepository.getActiveProduct(entry.getKey()).calculatePrice() * entry.getValue();
+            total += PRODUCT_REPOSITORY.getActiveProduct(entry.getKey()).calculatePrice() * entry.getValue();
         }
         return total;
     }
@@ -148,7 +147,7 @@ public class Order {
     }
 
     public Integer getQuantityProduct(String productKey) {
-        return order.get(productKey);
+        return order.getOrDefault(productKey, 0);
     }
 
     public double getTotalPrice() {

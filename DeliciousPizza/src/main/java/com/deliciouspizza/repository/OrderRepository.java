@@ -2,6 +2,7 @@ package com.deliciouspizza.repository;
 
 import com.deliciouspizza.entity.order.Order;
 import com.deliciouspizza.exception.InactiveProductException;
+import com.deliciouspizza.exception.ProductNotInOrderException;
 import com.deliciouspizza.utils.StatusOrder;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -148,11 +149,45 @@ public class OrderRepository {
             throw new IllegalStateException("User does not have an active order. Start an order first.");
         }
 
+        //check if product exist
+
         try {
-            order.addProduct(productKey, quantity);
+            //order.addProduct(productKey, quantity);
+            activeOrders.get(username).addProduct(productKey, quantity);
         } catch (InactiveProductException e) {
             System.out.println("Cannot add product to order: " + e.getMessage());
         }
+    }
+
+    public Order getCurrentOrderForUser(String username) {
+        Order order = activeOrders.get(username);
+        if (order == null) {
+            throw new IllegalStateException("User does not have an order.");
+        }
+
+        if (order.getOrder().isEmpty()) {
+            System.out.println("Order is empty.");
+        }
+
+        return order;
+    }
+
+    public void removeFromCurrentOrderForUser(String username, String productKey, Integer quantity) {
+        Order order = activeOrders.get(username);
+        if (order == null) {
+            throw new IllegalStateException("User does not have an active order to finalize.");
+        }
+
+        if (order.getOrder().isEmpty()) {
+            System.out.println("Order is empty.");
+        }
+
+        try {
+            order.removeProduct(productKey, quantity);
+        } catch (ProductNotInOrderException | IllegalArgumentException err) {
+            System.out.println(err.getMessage());
+        }
+
     }
 
     public void finalizeOrder(String username) {

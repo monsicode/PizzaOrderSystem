@@ -167,4 +167,15 @@ public class ProductRepository {
         return activeProducts.containsKey(productKey);
     }
 
+    public boolean isItGoodForUnderAgedCustomers(String key) {
+        Product product = activeProducts.get(key);
+
+        // productNotFoundException to add
+        if (product == null) {
+            throw new IllegalArgumentException("Product not found!");
+        }
+
+        return product.isItGoodForUnderAgedCustomers();
+    }
+
 }

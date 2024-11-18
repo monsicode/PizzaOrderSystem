@@ -92,6 +92,7 @@ public class UserRepository {
         }
     }
 
+    //check if its a bad/good practice ; can make it only for customers directly
     public Set<Order> getOrderHistory(String usernameCustomer) {
         try {
             User user = getUserByUsername(usernameCustomer);
@@ -106,6 +107,24 @@ public class UserRepository {
             System.out.println(err.getMessage());
         }
         return null;
+    }
+
+    public int getAgeCustomer(String username) {
+        try {
+            User user = getUserByUsername(username);
+
+            if (!(user instanceof Customer customer)) {
+                throw new IllegalStateException("User is not of type Customer!");
+            }
+
+            return customer.getAge();
+
+        } catch (UserNotFoundException err) {
+            System.out.println(err.getMessage());
+        }
+
+        return 0;
+
     }
 
 }
