@@ -1,12 +1,11 @@
 package com.deliciouspizza.entity.order;
 
 import com.deliciouspizza.Singleton;
-import com.deliciouspizza.entity.product.Drink;
 import com.deliciouspizza.entity.product.Product;
 import com.deliciouspizza.exception.InactiveProductException;
+import com.deliciouspizza.exception.ProductDoesNotExistException;
 import com.deliciouspizza.exception.ProductNotInOrderException;
 import com.deliciouspizza.repository.ProductRepository;
-import com.deliciouspizza.service.ProductService;
 import com.deliciouspizza.utils.StatusOrder;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -88,34 +87,45 @@ public class Order {
         }
 
         order.put(productKey, order.getOrDefault(productKey, 0) + quantity);
-        totalPrice += (PRODUCT_REPOSITORY.getProduct(productKey).calculatePrice() * quantity);
+
+        try {
+            Product product = PRODUCT_REPOSITORY.getProduct(productKey);
+            totalPrice += (product.calculatePrice() * quantity);
+        } catch (ProductDoesNotExistException err) {
+            System.out.println(err.getMessage());
+        }
+
     }
 
     public void removeProduct(String productKey, Integer quantity) throws ProductNotInOrderException {
         if (productKey.isEmpty()) {
-            throw new IllegalArgumentException("Product cannot be null.");
-        }
-
-        int currentQuantity = getQuantityProduct(productKey);
-
-        if (quantity > currentQuantity) {
-            throw new IllegalArgumentException(
-                "The quantity you want to remove has to be less or equal to current quantity!");
+            throw new IllegalArgumentException("Product key cannot be null.");
         }
 
         if (!order.containsKey(productKey)) {
             throw new ProductNotInOrderException("The product is not in the order and cannot be removed.");
         }
 
+        int currentQuantity = getQuantityProduct(productKey);
+        if (quantity > currentQuantity) {
+            throw new IllegalArgumentException(
+                "The quantity you want to remove has to be less or equal to current quantity!");
+        }
+
         if (currentQuantity == quantity) {
             order.remove(productKey);
         } else {
             order.put(productKey, currentQuantity - quantity);
-            System.out.println("Product quantity updated successfully.");
         }
 
-        totalPrice -= (PRODUCT_REPOSITORY.getProduct(productKey).calculatePrice() * order.getOrDefault(productKey, 1));
-        System.out.println("Product removed successfully!");
+        try {
+            Product product = PRODUCT_REPOSITORY.getProduct(productKey);
+            totalPrice -= (product.calculatePrice() * order.getOrDefault(productKey, 1));
+            System.out.println("Product removed successfully!");
+
+        } catch (ProductDoesNotExistException err) {
+            System.out.println(err.getMessage());
+        }
     }
 
     private double calculateTotalPrice(Map<String, Integer> order) {

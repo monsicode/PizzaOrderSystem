@@ -3,6 +3,7 @@ package com.deliciouspizza.service;
 import com.deliciouspizza.Singleton;
 import com.deliciouspizza.entity.order.Order;
 import com.deliciouspizza.exception.ErrorInProductNameException;
+import com.deliciouspizza.exception.ProductDoesNotExistException;
 import com.deliciouspizza.repository.OrderRepository;
 import com.deliciouspizza.repository.ProductRepository;
 import com.deliciouspizza.repository.UserRepository;
@@ -29,11 +30,12 @@ public class OrderService {
     private final Map<String, Order> activeOrders = new ConcurrentHashMap<>();
 
     public void startNewOrder(String username) {
-        try {
-            ORDER_REPOSITORY.startNewOrder(username);
-        } catch (IllegalStateException err) {
-            System.out.println(err.getMessage());
-        }
+//        try {
+//            ORDER_REPOSITORY.startNewOrder(username);
+//        } catch (IllegalStateException err) {
+//            System.out.println(err.getMessage());
+//        }
+        ORDER_REPOSITORY.startNewOrder(username);
     }
 
     public void addProductToActiveOrder(String username, String productKey, int quantity)
@@ -45,7 +47,7 @@ public class OrderService {
                 System.out.println("Sorry, you can't have this drink, you are under aged");
             }
 
-        } catch (IllegalStateException | IllegalArgumentException e) {
+        } catch (IllegalStateException | ProductDoesNotExistException e) {
             throw new ErrorInProductNameException(e.getMessage(), e);
         }
     }
@@ -111,9 +113,5 @@ public class OrderService {
         return USER_REPOSITORY.getAgeCustomer(username) > ADULT_AGE ||
             PRODUCT_REPOSITORY.isItGoodForUnderAgedCustomers(productKey);
     }
-
-//    public Set<Order> getFinishedOrders(String username) {
-//        return USER_REPOSITORY.getOrderHistory(username);
-//    }
 
 }

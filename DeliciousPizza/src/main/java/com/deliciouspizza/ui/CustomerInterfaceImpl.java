@@ -16,16 +16,13 @@ import java.util.Set;
 
 public class CustomerInterfaceImpl implements CustomerInterface {
 
-    private static final String RESET = "\u001B[0m"; // Нулира цвета до стандартен
-    //    final String RED = "\u001B[31m"; // Червен текст
-//    final String GREEN = "\u001B[32m"; // Зелен текст
-    private static final String YELLOW = "\u001B[33m"; // Жълт текст
-    //  final String BLUE = "\u001B[34m"; // Син текст
+    private static final String RESET = "\u001B[0m";
+    private static final String YELLOW = "\u001B[33m";
 
     private final UserService userService = new UserService();
     private final OrderService orderService = Singleton.getInstance(OrderService.class);
     private static final ProductService PRODUCT_SERVICE = Singleton.getInstance(ProductService.class);
-    private Scanner scanner;
+    private final Scanner scanner;
 
     public CustomerInterfaceImpl(Scanner scanner) {
         this.scanner = scanner;
@@ -107,16 +104,13 @@ public class CustomerInterfaceImpl implements CustomerInterface {
         System.exit(0);
     }
 
-    @SuppressWarnings("checkstyle:MagicNumber")
     public void showOrderMenu(String username) {
-        System.out.println("\n");
-        System.out.println(" Welcome to Delicious Pizza " + YELLOW + username + RESET + " !");
+        System.out.println("\n Welcome to Delicious Pizza " + YELLOW + username + RESET + " !");
         System.out.println("------------------------");
         System.out.println("1. Create new order");
         System.out.println("2. View order history");
         System.out.println("3. Menu ");
-        System.out.println("4. Exit");
-        System.out.println("\n");
+        System.out.println("4. Exit \n");
 
         int choice = scanner.nextInt();
         scanner.nextLine();
@@ -126,15 +120,7 @@ public class CustomerInterfaceImpl implements CustomerInterface {
                 createOrder(username);
                 break;
             case 2:
-                Set<Order> orderHistory = userService.getOrderHistory(username);
-
-                if (orderHistory.isEmpty()) {
-                    System.out.println("No orders in history.");
-                } else {
-
-                    System.out.println("Order history:");
-                    printOrderHistory(orderHistory);
-                }
+                showHistoryOrdersForCustomer(username);
                 showOrderMenu(username);
                 break;
             case 3:
@@ -143,15 +129,33 @@ public class CustomerInterfaceImpl implements CustomerInterface {
                 break;
             case 4:
                 System.out.println("Exiting...");
-                return; // Излизане от поръчковото меню и връщане към основното меню
+                return;
             default:
                 System.out.println("Invalid choice!");
         }
     }
 
-    public void createOrder(String username) {
+    private void showHistoryOrdersForCustomer(String username) {
+        Set<Order> orderHistory = userService.getOrderHistory(username);
 
-        orderService.startNewOrder(username);
+        if (orderHistory.isEmpty()) {
+            System.out.println("No orders in history.");
+        } else {
+
+            System.out.println("Order history:");
+            printOrderHistory(orderHistory);
+        }
+    }
+
+    public void createOrder(String username) {
+        try {
+            orderService.startNewOrder(username);
+        } catch (IllegalStateException err) {
+            System.out.println(err.getMessage());
+            showCurrentOrder(username);
+
+            finishOrEditOrder(username);
+        }
 
         boolean creatingOrder = true;
 
@@ -162,21 +166,14 @@ public class CustomerInterfaceImpl implements CustomerInterface {
             String response = scanner.nextLine();
 
             if (response.equalsIgnoreCase("N")) {
+                showCurrentOrder(username);
+                creatingOrder = finishOrEditOrder(username);
 
-                Map<String, Integer> orderMap = orderService.getCurrentOrderForUser(username);
-
-                System.out.println("Your order contains:");
-
-                for (Map.Entry<String, Integer> entry : orderMap.entrySet()) {
-                    String product = entry.getKey().replaceAll("_", " ");
-                    int quantity = entry.getValue();
-                    System.out.printf(" - %s, Quantity: %d\n", product, quantity);
+                if (creatingOrder) {
+                    showOrderMenu(username);
                 }
 
-                creatingOrder = finishOrEditOrder(username);
-                showOrderMenu(username);
             }
-
         }
     }
 
@@ -191,21 +188,17 @@ public class CustomerInterfaceImpl implements CustomerInterface {
         try {
             orderService.addProductToActiveOrder(username, productKey, quantity);
         } catch (ErrorInProductNameException err) {
+
             System.out.println(err.getMessage());
             System.out.println("Do you want to try again? (Y/N)");
             String response = scanner.nextLine();
 
             if (response.equalsIgnoreCase("N")) {
                 finishOrEditOrder(username);
-            }
-//            } else if (!response.equalsIgnoreCase("Y")) {
-//                System.out.println("Моля, отговорете с 'Y' за да добавите още продукти или 'N' за да завършите.");
-//            }
-            else {
+            } else {
                 addingProduct(username);
             }
         }
-
     }
 
     private void removeProduct(String username) {
@@ -221,29 +214,38 @@ public class CustomerInterfaceImpl implements CustomerInterface {
     }
 
     public void editOrder(String username) {
-        System.out.println("\n");
-        System.out.println("------------------------");
-        System.out.println("       Edit order    ");
-        System.out.println("------------------------");
-        System.out.println("1. Add product");
-        System.out.println("2. Remove product");
-        System.out.println("3. Return");
+        boolean editing = true;
 
-        int choice = scanner.nextInt();
-        scanner.nextLine();
+        while (editing) {
+            System.out.println("\n");
+            System.out.println("------------------------");
+            System.out.println("       Edit order    ");
+            System.out.println("------------------------");
+            System.out.println("1. Add product");
+            System.out.println("2. Remove product");
+            System.out.println("3. Return");
 
-        switch (choice) {
-            case 1:
-                addingProduct(username);
-                finishOrEditOrder(username);
-                break;
-            case 2:
-                removeProduct(username);
-                break;
-            default:
-                System.out.println("Invalid choice!");
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (choice) {
+                case 1:
+                    addingProduct(username);
+                    showCurrentOrder(username);
+                    break;
+                case 2:
+                    removeProduct(username);
+                    showCurrentOrder(username);
+                    break;
+                case 3:
+                    editing = false;
+                    break;
+                default:
+                    System.out.println("Invalid choice!");
+            }
         }
 
+        finishOrEditOrder(username);
     }
 
     @SuppressWarnings("checkstyle:MagicNumber")
@@ -278,6 +280,18 @@ public class CustomerInterfaceImpl implements CustomerInterface {
         };
     }
 
+    private void showCurrentOrder(String username) {
+        Map<String, Integer> orderMap = orderService.getCurrentOrderForUser(username);
+
+        System.out.println("Your order contains:");
+
+        for (Map.Entry<String, Integer> entry : orderMap.entrySet()) {
+            String product = entry.getKey().replaceAll("_", " ");
+            int quantity = entry.getValue();
+            System.out.printf(" - %s, Quantity: %d\n", product, quantity);
+        }
+    }
+
     private void printOrderHistory(Set<Order> orderHistory) {
         int count = 1;
         for (Order order : orderHistory) {
@@ -300,7 +314,7 @@ public class CustomerInterfaceImpl implements CustomerInterface {
     }
 
     private static void printMenu() {
-        System.out.println("Списък на активните продукти:");
+        System.out.println("List with active products:");
         Map<String, Product> activeProducts = PRODUCT_SERVICE.getAllActiveProducts();
         for (Map.Entry<String, Product> entry : activeProducts.entrySet()) {
             String key = entry.getKey();

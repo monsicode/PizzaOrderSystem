@@ -4,6 +4,7 @@ import com.deliciouspizza.Singleton;
 import com.deliciouspizza.entity.product.Product;
 import com.deliciouspizza.exception.ProductAlreadyActiveException;
 import com.deliciouspizza.exception.ProductAlreadyDeactivatedException;
+import com.deliciouspizza.exception.ProductDoesNotExistException;
 import com.deliciouspizza.repository.ProductRepository;
 
 import java.util.Map;
@@ -55,10 +56,6 @@ public class ProductService {
 
     public Product getInactiveProduct(String product) {
         return PRODUCT_REPOSITORY.getInactiveProduct(product);
-    }
-
-    public Product getProduct(String product) {
-        return PRODUCT_REPOSITORY.getProduct(product);
     }
 
 }

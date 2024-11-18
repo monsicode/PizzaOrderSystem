@@ -1,5 +1,6 @@
 package com.deliciouspizza.repository;
 
+import com.deliciouspizza.Singleton;
 import com.deliciouspizza.entity.order.Order;
 import com.deliciouspizza.exception.InactiveProductException;
 import com.deliciouspizza.exception.ProductNotInOrderException;
@@ -35,6 +36,8 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 public class OrderRepository {
     private final BlockingQueue<Order> pendingOrders;
     private final Set<Order> historyOrders = ConcurrentHashMap.newKeySet();
+
+    private static final ProductRepository PRODUCT_REPOSITORY = Singleton.getInstance(ProductRepository.class);
 
     private static final String FILE_PATH_ORDERS = "src/main/resources/pendingOrders.json";
     private static final String FILE_PATH_HISTORY_ORDERS = "src/main/resources/historyOrders.json";
@@ -154,7 +157,7 @@ public class OrderRepository {
         try {
             //order.addProduct(productKey, quantity);
             activeOrders.get(username).addProduct(productKey, quantity);
-        } catch (InactiveProductException e) {
+        } catch (InactiveProductException | IllegalArgumentException e) {
             System.out.println("Cannot add product to order: " + e.getMessage());
         }
     }
@@ -176,6 +179,10 @@ public class OrderRepository {
         Order order = activeOrders.get(username);
         if (order == null) {
             throw new IllegalStateException("User does not have an active order to finalize.");
+        }
+
+        if (PRODUCT_REPOSITORY.isProductActive(productKey)) {
+
         }
 
         if (order.getOrder().isEmpty()) {
