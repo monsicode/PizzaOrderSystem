@@ -3,6 +3,7 @@ package com.deliciouspizza.service;
 import com.deliciouspizza.Singleton;
 import com.deliciouspizza.entity.order.Order;
 import com.deliciouspizza.entity.user.Customer;
+import com.deliciouspizza.entity.user.Employee;
 import com.deliciouspizza.entity.user.User;
 import com.deliciouspizza.exception.UserNotFoundException;
 import com.deliciouspizza.repository.UserRepository;
@@ -28,6 +29,25 @@ public class UserService {
         String hashedPassword = BCrypt.hashpw(plainPassword, BCrypt.gensalt());
 
         User newUser = new Customer(username, hashedPassword, address, age);
+        try {
+            USER_REPOSITORY.addUser(newUser);
+        } catch (Exception e) {
+            System.out.println("Error when saving the user " + e.getMessage());
+        }
+
+        System.out.println("The user is successfully registered!");
+    }
+
+    public void registerEmployee(String username, String plainPassword) {
+        if (USER_REPOSITORY.isUsernamePresent(username)) {
+            System.out.println("User with this username already exists.");
+            return;
+        }
+
+        String hashedPassword = BCrypt.hashpw(plainPassword, BCrypt.gensalt());
+
+        User newUser = new Employee(username, hashedPassword);
+
         try {
             USER_REPOSITORY.addUser(newUser);
         } catch (Exception e) {

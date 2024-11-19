@@ -81,5 +81,11 @@
     "orderHistory" : [ ],
     "hashedPassword" : "$2a$10$n2kKedBb6SSjiWQs4DJCkecHoDT26N0xzjChO0dpGRkGHghfML2wm",
     "userType" : "customer"
+  },
+  "worker1" : {
+    "username" : "worker1",
+    "rights" : "ADMIN",
+    "hashedPassword" : "$2a$10$qdnAfcTa4n0gyNIXdWCJRO6a9bd8x/SptEEWL67tQSVsrV.NGvJDS",
+    "userType" : "employee"
   }
 }

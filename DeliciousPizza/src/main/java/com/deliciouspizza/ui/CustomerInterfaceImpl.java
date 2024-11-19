@@ -313,9 +313,9 @@ public class CustomerInterfaceImpl implements CustomerInterface {
     }
 
     private void printMenu(String title, String... options) {
-        System.out.println(BLUE + "\n------------------------" + RESET);
+        System.out.println(YELLOW + "\n------------------------" + RESET);
         System.out.println("      " + title + "    ");
-        System.out.println(BLUE + "------------------------" + RESET);
+        System.out.println(YELLOW + "------------------------" + RESET);
         for (int i = 0; i < options.length; i++) {
             System.out.println((i + 1) + ". " + options[i]);
         }

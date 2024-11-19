@@ -4,8 +4,7 @@ public enum DrinkVolume {
     SHORT(3),
     TALL(3.50),
     GRANDE(4),
-    VENTI(4.50),
-    TRENTA(5.20);
+    VENTI(4.50);
 
     private final double price;
 

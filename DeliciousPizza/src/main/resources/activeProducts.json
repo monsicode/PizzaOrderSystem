@@ -23,5 +23,11 @@
     "volume" : "GRANDE",
     "statusProduct" : "ACTIVE",
     "isAlcoholic" : true
+  },
+  "pizza_seafood" : {
+    "type" : "pizza",
+    "pizzaType" : "SEAFOOD",
+    "pizzaSize" : "SMALL",
+    "statusProduct" : "ACTIVE"
   }
 }

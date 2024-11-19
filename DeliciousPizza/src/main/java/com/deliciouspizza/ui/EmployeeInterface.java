@@ -5,5 +5,6 @@ public interface EmployeeInterface extends UserInterface {
 
     void viewPendingOrders();
 
-    void viewCompletedOrders();
+    void addNewProduct();
+
 }

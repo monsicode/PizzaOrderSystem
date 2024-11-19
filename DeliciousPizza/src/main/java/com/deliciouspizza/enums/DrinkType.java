@@ -11,7 +11,8 @@ public enum DrinkType {
     LEMONADE(false, 2.00),
     GREEN_TEA(false, 2.20),
     BEER(true, 3.00),
-    WINE(true, 5.00);
+    WINE(true, 5.00),
+    WHISKEY(true, 6.00);
 
     private final boolean isAlcoholic;
     private final double price;

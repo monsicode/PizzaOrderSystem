@@ -24,9 +24,12 @@ public class MainProductTest {
         Product product4 = new Pizza(PizzaType.PEPPERONI, PizzaSize.MEDIUM);
         Product product5 = new Drink(DrinkType.BEER, DrinkVolume.GRANDE);
 
+        Drink pr = new Drink();
+
+
         service.addNewProduct(product4);
         service.addNewProduct(product5);
-      //  service.deactivateProduct(product1);
+        //  service.deactivateProduct(product1);
 //        service.activateProduct(product2);
 
 //        System.out.println(service.getAllActiveProducts());

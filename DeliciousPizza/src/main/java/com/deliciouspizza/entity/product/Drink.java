@@ -96,7 +96,6 @@ public class Drink extends Product {
 
 
     //possible of thrwoing exception
-
     @Override
     public boolean isItGoodForUnderAgedCustomers() {
         return !getIsAlcoholic();
