@@ -6,7 +6,6 @@ import com.deliciouspizza.ui.UserInterface;
 import java.util.Scanner;
 
 public class TestCustomerInterfaceImpl {
-
     private static UserInterface currentUserInterface;
 
     public static void main(String[] args) {

@@ -10,6 +10,7 @@ import com.deliciouspizza.service.UserService;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.InputMismatchException;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
@@ -37,27 +38,23 @@ public class CustomerInterfaceImpl implements CustomerInterface {
 
     @Override
     public void displayMenu() {
-        System.out.println("    Delicious Pizza     ");
-        System.out.println("------------------------");
-        System.out.println("1. Register");
-        System.out.println("2. Log in");
-        System.out.println("3. Exit");
 
-        int choice = scanner.nextInt();
-        scanner.nextLine();
+        boolean running = true;
 
-        switch (choice) {
-            case FIRST_CHOICE:
-                handleRegistration();
-                break;
-            case SECOND_CHOICE:
-                handleLogin();
-                break;
-            case THIRD_CHOICE:
-                handleExit();
-                break;
-            default:
-                System.out.println("Invalid choice!");
+        while (running) {
+            printMenu("Delicious Pizza", "Register", "Log in", "Exit");
+
+            int choice = getValidatedChoice();
+
+            switch (choice) {
+                case FIRST_CHOICE -> handleRegistration();
+                case SECOND_CHOICE -> handleLogin();
+                case THIRD_CHOICE -> {
+                    handleExit();
+                    running = false;
+                }
+                default -> System.out.println("Invalid choice!");
+            }
         }
     }
 
@@ -165,31 +162,25 @@ public class CustomerInterfaceImpl implements CustomerInterface {
     }
 
     public void showMainMenuCustomer(String username) {
+        boolean continueSession = true;
 
-        printMainMenuCustomer(username);
+        while (continueSession) {
+            printMainMenuCustomer(username);
 
-        int choice = scanner.nextInt();
-        scanner.nextLine();
+            int choice = getValidatedChoice();
 
-        switch (choice) {
-            case FIRST_CHOICE:
-                createOrder(username);
-                break;
-            case SECOND_CHOICE:
-                viewHistoryOfOrders(username);
-                break;
-            case THIRD_CHOICE:
-                viewProductMenu();
-                break;
-            case FOURTH_CHOICE:
-                System.out.println("Exiting...");
-                isLoggedIn = false;
-                displayMenu();
-                break;
-            default:
-                System.out.println("Invalid choice!");
+            switch (choice) {
+                case FIRST_CHOICE -> createOrder(username);
+                case SECOND_CHOICE -> viewHistoryOfOrders(username);
+                case THIRD_CHOICE -> viewProductMenu();
+                case FOURTH_CHOICE -> {
+                    System.out.println("Logging out...");
+                    continueSession = false;
+                }
+                default -> System.out.println("Invalid choice!");
+            }
         }
-        showMainMenuCustomer(username);
+        displayMenu();
     }
 
     private void addingProduct(String username) {
@@ -229,58 +220,37 @@ public class CustomerInterfaceImpl implements CustomerInterface {
         orderService.removeFromCurrentOrderForUser(username, productKey, quantity);
     }
 
-    private void printEditOrderMenu() {
-        System.out.println("\n------------------------");
-        System.out.println("       Edit order    ");
-        System.out.println("------------------------");
-        System.out.println("1. Add product");
-        System.out.println("2. Remove product");
-        System.out.println("3. Return");
-    }
+    private void editOrder(String username) {
 
-    public void editOrder(String username) {
         boolean editing = true;
 
         while (editing) {
-            printEditOrderMenu();
 
-            int choice = scanner.nextInt();
-            scanner.nextLine();
+            printMenu("Edit order", "Add product", "Remove product", "Return");
+
+            int choice = getValidatedChoice();
 
             switch (choice) {
-                case FIRST_CHOICE:
+                case FIRST_CHOICE -> {
                     addingProduct(username);
                     showCurrentOrder(username);
-                    break;
-                case SECOND_CHOICE:
+                }
+                case SECOND_CHOICE -> {
                     removeProduct(username);
                     showCurrentOrder(username);
-                    break;
-                case THIRD_CHOICE:
-                    editing = false;
-                    break;
-                default:
-                    System.out.println("Invalid choice!");
+                }
+                case THIRD_CHOICE -> editing = false;
+                default -> System.out.println("Invalid choice!");
             }
         }
-
         finishOrEditOrder(username);
-    }
-
-    private void printCreatOrderMenu() {
-        System.out.println("\n------------------------");
-        System.out.println("       Create order    ");
-        System.out.println("------------------------");
-        System.out.println("1. Finish order");
-        System.out.println("2. Edit order");
     }
 
     private boolean finishOrEditOrder(String username) {
 
-        printCreatOrderMenu();
+        printMenu("Create Order", "Finish order", "Edit order");
 
-        int choice = scanner.nextInt();
-        scanner.nextLine();
+        int choice = getValidatedChoice();
 
         return switch (choice) {
             case FIRST_CHOICE -> {
@@ -330,5 +300,28 @@ public class CustomerInterfaceImpl implements CustomerInterface {
             System.out.println("-----------------------------------");
         }
     }
+
+    private void printMenu(String title, String... options) {
+        System.out.println("\n------------------------");
+        System.out.println("      " + title + "    ");
+        System.out.println("------------------------");
+        for (int i = 0; i < options.length; i++) {
+            System.out.println((i + 1) + ". " + options[i]);
+        }
+    }
+
+    private int getValidatedChoice() {
+        while (true) {
+            try {
+                int choice = scanner.nextInt();
+                scanner.nextLine();
+                return choice;
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input! Please enter a valid number.");
+                scanner.nextLine();
+            }
+        }
+    }
+
 
 }
