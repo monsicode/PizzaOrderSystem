@@ -1,7 +1,7 @@
 package com.deliciouspizza.entity.product;
 
-import com.deliciouspizza.utils.PizzaSize;
-import com.deliciouspizza.utils.PizzaType;
+import com.deliciouspizza.enums.PizzaSize;
+import com.deliciouspizza.enums.PizzaType;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 //exceptions --> thrown

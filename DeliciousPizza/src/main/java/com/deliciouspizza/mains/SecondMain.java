@@ -6,10 +6,10 @@ import com.deliciouspizza.entity.product.Pizza;
 import com.deliciouspizza.entity.product.Product;
 import com.deliciouspizza.service.OrderService;
 import com.deliciouspizza.service.UserService;
-import com.deliciouspizza.utils.DrinkType;
-import com.deliciouspizza.utils.DrinkVolume;
-import com.deliciouspizza.utils.PizzaSize;
-import com.deliciouspizza.utils.PizzaType;
+import com.deliciouspizza.enums.DrinkType;
+import com.deliciouspizza.enums.DrinkVolume;
+import com.deliciouspizza.enums.PizzaSize;
+import com.deliciouspizza.enums.PizzaType;
 
 import java.util.HashMap;
 import java.util.Map;

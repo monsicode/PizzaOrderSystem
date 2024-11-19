@@ -4,7 +4,7 @@ import com.deliciouspizza.entity.product.Product;
 import com.deliciouspizza.exception.ProductAlreadyActiveException;
 import com.deliciouspizza.exception.ProductAlreadyDeactivatedException;
 import com.deliciouspizza.exception.ProductDoesNotExistException;
-import com.deliciouspizza.utils.StatusProduct;
+import com.deliciouspizza.enums.StatusProduct;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

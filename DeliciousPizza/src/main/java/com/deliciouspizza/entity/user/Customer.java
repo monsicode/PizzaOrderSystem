@@ -1,7 +1,7 @@
 package com.deliciouspizza.entity.user;
 
 import com.deliciouspizza.entity.order.Order;
-import com.deliciouspizza.utils.UserRights;
+import com.deliciouspizza.enums.UserRights;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import java.util.Collections;

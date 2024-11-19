@@ -1,7 +1,6 @@
 package com.deliciouspizza.entity.user;
 
-import com.deliciouspizza.utils.UserRights;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.deliciouspizza.enums.UserRights;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.mindrot.jbcrypt.BCrypt;
 

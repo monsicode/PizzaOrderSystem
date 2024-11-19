@@ -1,6 +1,6 @@
 package com.deliciouspizza.entity.product;
 
-import com.deliciouspizza.utils.SauceType;
+import com.deliciouspizza.enums.SauceType;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 //exceptions --> thrown

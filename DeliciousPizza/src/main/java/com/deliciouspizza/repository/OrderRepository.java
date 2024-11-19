@@ -4,7 +4,7 @@ import com.deliciouspizza.Singleton;
 import com.deliciouspizza.entity.order.Order;
 import com.deliciouspizza.exception.InactiveProductException;
 import com.deliciouspizza.exception.ProductNotInOrderException;
-import com.deliciouspizza.utils.StatusOrder;
+import com.deliciouspizza.enums.StatusOrder;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

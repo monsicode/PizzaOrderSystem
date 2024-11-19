@@ -1,4 +1,4 @@
-package com.deliciouspizza.utils;
+package com.deliciouspizza.enums;
 
 public enum StatusOrder {
     NEW,

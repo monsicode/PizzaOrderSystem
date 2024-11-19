@@ -1,7 +1,7 @@
 package com.deliciouspizza.entity.product;
 
-import com.deliciouspizza.utils.DrinkType;
-import com.deliciouspizza.utils.DrinkVolume;
+import com.deliciouspizza.enums.DrinkType;
+import com.deliciouspizza.enums.DrinkVolume;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 

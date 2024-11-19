@@ -6,7 +6,7 @@ import com.deliciouspizza.exception.InactiveProductException;
 import com.deliciouspizza.exception.ProductDoesNotExistException;
 import com.deliciouspizza.exception.ProductNotInOrderException;
 import com.deliciouspizza.repository.ProductRepository;
-import com.deliciouspizza.utils.StatusOrder;
+import com.deliciouspizza.enums.StatusOrder;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.math.BigDecimal;

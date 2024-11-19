@@ -1,4 +1,4 @@
-package com.deliciouspizza.utils;
+package com.deliciouspizza.enums;
 
 public enum SauceType {
     TOMATO_SAUCE(1.00),
