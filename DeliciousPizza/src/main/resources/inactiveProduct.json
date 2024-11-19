@@ -4,5 +4,10 @@
     "pizzaType" : "BBQ_CHICKEN",
     "pizzaSize" : "MEDIUM",
     "statusProduct" : "INACTIVE"
+  },
+  "sauce_garlic_sauce" : {
+    "type" : "sauce",
+    "sauce" : "GARLIC_SAUCE",
+    "statusProduct" : "INACTIVE"
   }
 }

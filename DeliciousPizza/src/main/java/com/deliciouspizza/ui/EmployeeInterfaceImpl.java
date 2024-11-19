@@ -26,6 +26,8 @@ public class EmployeeInterfaceImpl implements EmployeeInterface {
 
     private static final String RESET = "\u001B[0m";
     private static final String BLUE = "\u001B[34m";
+    private static final String RED = "\u001B[31m";
+    private static final String GREEN = "\u001B[32m";
 
     private static final String ADMIN_HASHED_PASSWORD = "$2a$10$QVQziCS3KXdEwgTQrT3LieiUrr5yd1iuwwYgOymQFoPqbnTJL1csq";
     private static final int ATTEMPTS_PASSWORD = 3;
@@ -193,8 +195,8 @@ public class EmployeeInterfaceImpl implements EmployeeInterface {
 
             int choice = getValidatedChoice();
             switch (choice) {
-                //  case FIRST_CHOICE -> deactivateProduct();
-                //case SECOND_CHOICE -> activateProduct();
+                case FIRST_CHOICE -> getNumberOfOrders();
+                case SECOND_CHOICE -> getProfit();
                 case THIRD_CHOICE -> seeingReports = false;
                 default -> System.out.println("Invalid choice!");
             }
@@ -204,10 +206,7 @@ public class EmployeeInterfaceImpl implements EmployeeInterface {
     }
 
     private void getNumberOfOrders() {
-        System.out.println("\nYou need to enter time period");
-
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
         System.out.println("\nYou need to enter time period");
 
         System.out.println("From (yyyy-MM-dd):");
@@ -218,8 +217,26 @@ public class EmployeeInterfaceImpl implements EmployeeInterface {
         String toInput = scanner.nextLine();
         LocalDate to = LocalDate.parse(toInput, formatter);
 
-        int numberOfrders = ORDER_SERVICE.getCountOrderInPeriod(from, to);
+        long numberOfrders = ORDER_SERVICE.getCountOrderInPeriod(from.atTime(00, 00), to.atTime(00, 00));
 
+        System.out.println("Number of orders between " + from + " and " + to + " is: " + GREEN + numberOfrders + RESET);
+    }
+
+    private void getProfit() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        System.out.println("\nYou need to enter time period");
+
+        System.out.println("From (yyyy-MM-dd):");
+        String fromInput = scanner.nextLine();
+        LocalDate from = LocalDate.parse(fromInput, formatter);
+
+        System.out.println("To (yyyy-MM-dd):");
+        String toInput = scanner.nextLine();
+        LocalDate to = LocalDate.parse(toInput, formatter);
+
+        double profit = ORDER_SERVICE.getProfitInPeriod(from.atTime(00, 00), to.atTime(00, 00));
+
+        System.out.println("Number of orders between " + from + " and " + to + " is: " + GREEN + profit + RESET);
     }
 
     private void maintainProduct(String username) {

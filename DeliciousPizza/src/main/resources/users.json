@@ -39,7 +39,7 @@
       "orderDate" : [ 2024, 11, 19, 12, 52, 31, 552720400 ],
       "totalPrice" : 6.5,
       "usernameCustomer" : "monkata",
-      "orderId" : 20
+      "orderId" : 4
     }, {
       "order" : {
         "drink_coke" : 2
@@ -48,7 +48,16 @@
       "orderDate" : [ 2024, 11, 19, 13, 3, 44, 745304500 ],
       "totalPrice" : 13.0,
       "usernameCustomer" : "monkata",
-      "orderId" : 21
+      "orderId" : 5
+    }, {
+      "order" : {
+        "pizza_pepperoni" : 1
+      },
+      "statusOrder" : "COMPLETED",
+      "orderDate" : [ 2024, 11, 19, 13, 4, 8, 777237600 ],
+      "totalPrice" : 12.0,
+      "usernameCustomer" : "monkata",
+      "orderId" : 25
     } ],
     "hashedPassword" : "$2a$10$51xwDr0.HhabH1cxvf8.0e1INyJNcwNzGBtUGrmRDwAqCWwKty6LW",
     "userType" : "customer"
@@ -68,7 +77,7 @@
       "orderDate" : [ 2024, 11, 17, 18, 43, 17, 857712000 ],
       "totalPrice" : 45.9,
       "usernameCustomer" : "daka",
-      "orderId" : 4
+      "orderId" : 6
     } ],
     "hashedPassword" : "$2a$10$lIRnvnMsWN17fT78CDmvYOm2S4/dnpZaLhlcmAGKIkMwwCut/x39i",
     "userType" : "customer"
@@ -105,7 +114,7 @@
       "orderDate" : [ 2024, 11, 19, 12, 50, 24, 950835300 ],
       "totalPrice" : 55.5,
       "usernameCustomer" : "dakata",
-      "orderId" : 19
+      "orderId" : 7
     } ],
     "hashedPassword" : "$2a$10$n2kKedBb6SSjiWQs4DJCkecHoDT26N0xzjChO0dpGRkGHghfML2wm",
     "userType" : "customer"
@@ -114,6 +123,12 @@
     "username" : "worker1",
     "rights" : "ADMIN",
     "hashedPassword" : "$2a$10$qdnAfcTa4n0gyNIXdWCJRO6a9bd8x/SptEEWL67tQSVsrV.NGvJDS",
+    "userType" : "employee"
+  },
+  "dankis" : {
+    "username" : "dankis",
+    "rights" : "ADMIN",
+    "hashedPassword" : "$2a$10$dgPR3wncUbrdJfZ6Qe902eaPRzcxkrIWdjDi4UswSoXAQszUzBczq",
     "userType" : "employee"
   }
 }
