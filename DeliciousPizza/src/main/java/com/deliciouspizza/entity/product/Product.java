@@ -1,6 +1,7 @@
 package com.deliciouspizza.entity.product;
 
 import com.deliciouspizza.enums.StatusProduct;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -47,8 +48,10 @@ public abstract class Product {
 
     public abstract String generateKey();
 
+    @JsonIgnore
     public abstract String getFormattedDetails();
 
+    @JsonIgnore
     public boolean isItGoodForUnderAgedCustomers() {
         return true;
     }
