@@ -6,8 +6,8 @@ import com.deliciouspizza.ui.UserInterface;
 import java.util.Scanner;
 
 public class TestCustomerInterfaceImpl {
-    private static CustomerInterfaceImpl currentUserInterface;
-//    private static UserInterface currentUserInterface;
+
+    private static UserInterface currentUserInterface;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -15,11 +15,8 @@ public class TestCustomerInterfaceImpl {
         boolean running = true;
 
         while (running) {
-            System.out.println("Enter username");
-            String username = scanner.nextLine();
-        //    currentUserInterface.displayMenu();
 
-            currentUserInterface.showOrderMenu(username);
+            currentUserInterface.displayMenu();
 
         }
 

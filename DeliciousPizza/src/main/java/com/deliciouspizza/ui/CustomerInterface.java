@@ -1,9 +1,9 @@
 package com.deliciouspizza.ui;
 
 public interface CustomerInterface extends UserInterface {
-    void createOrder();
+    void createOrder(String username);
 
-    void viewHistoryOfOrders();
+    void viewHistoryOfOrders(String username);
 
     void viewProductMenu();
 }

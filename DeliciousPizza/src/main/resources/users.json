@@ -63,5 +63,23 @@
     "orderHistory" : [ ],
     "hashedPassword" : "$2a$10$t34uO8d2dHIMaadNh5bz5OKgb41CGT7wlD6GpJe8ZIOoGCaH.6fYG",
     "userType" : "customer"
+  },
+  "PeTkan" : {
+    "username" : "PeTkan",
+    "rights" : "CUSTOMER",
+    "address" : "Petkan str.",
+    "age" : 12,
+    "orderHistory" : [ ],
+    "hashedPassword" : "$2a$10$avod/9VCIJy4.s.FekkDUu.xSnobYxtspALYGddEBcLoEjku2/iSu",
+    "userType" : "customer"
+  },
+  "dakata" : {
+    "username" : "dakata",
+    "rights" : "CUSTOMER",
+    "address" : "dakata str.",
+    "age" : 18,
+    "orderHistory" : [ ],
+    "hashedPassword" : "$2a$10$n2kKedBb6SSjiWQs4DJCkecHoDT26N0xzjChO0dpGRkGHghfML2wm",
+    "userType" : "customer"
   }
 }

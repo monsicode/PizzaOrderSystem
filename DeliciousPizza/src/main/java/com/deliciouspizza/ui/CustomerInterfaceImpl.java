@@ -24,23 +24,15 @@ public class CustomerInterfaceImpl implements CustomerInterface {
     private static final ProductService PRODUCT_SERVICE = Singleton.getInstance(ProductService.class);
     private final Scanner scanner;
 
+    private boolean isLoggedIn = false;
+
+    private static final int FIRST_CHOICE = 1;
+    private static final int SECOND_CHOICE = 2;
+    private static final int THIRD_CHOICE = 3;
+    private static final int FOURTH_CHOICE = 4;
+
     public CustomerInterfaceImpl(Scanner scanner) {
         this.scanner = scanner;
-    }
-
-    @Override
-    public void viewHistoryOfOrders() {
-
-    }
-
-    @Override
-    public void viewProductMenu() {
-
-    }
-
-    @Override
-    public void createOrder() {
-
     }
 
     @Override
@@ -52,16 +44,16 @@ public class CustomerInterfaceImpl implements CustomerInterface {
         System.out.println("3. Exit");
 
         int choice = scanner.nextInt();
-        scanner.nextLine(); // За да хванем останалия нов ред след въвеждането на числото
+        scanner.nextLine();
 
         switch (choice) {
-            case 1:
+            case FIRST_CHOICE:
                 handleRegistration();
                 break;
-            case 2:
+            case SECOND_CHOICE:
                 handleLogin();
                 break;
-            case 3:
+            case THIRD_CHOICE:
                 handleExit();
                 break;
             default:
@@ -76,10 +68,10 @@ public class CustomerInterfaceImpl implements CustomerInterface {
         System.out.print("Enter password: ");
         String password = scanner.nextLine();
 
-        boolean isLoggedIn = userService.loginUser(username, password);
+        isLoggedIn = userService.loginUser(username, password);
 
         if (isLoggedIn) {
-            showOrderMenu(username);
+            showMainMenuCustomer(username);
         }
     }
 
@@ -104,38 +96,8 @@ public class CustomerInterfaceImpl implements CustomerInterface {
         System.exit(0);
     }
 
-    public void showOrderMenu(String username) {
-        System.out.println("\n Welcome to Delicious Pizza " + YELLOW + username + RESET + " !");
-        System.out.println("------------------------");
-        System.out.println("1. Create new order");
-        System.out.println("2. View order history");
-        System.out.println("3. Menu ");
-        System.out.println("4. Exit \n");
-
-        int choice = scanner.nextInt();
-        scanner.nextLine();
-
-        switch (choice) {
-            case 1:
-                createOrder(username);
-                break;
-            case 2:
-                showHistoryOrdersForCustomer(username);
-                showOrderMenu(username);
-                break;
-            case 3:
-                printMenu();
-                showOrderMenu(username);
-                break;
-            case 4:
-                System.out.println("Exiting...");
-                return;
-            default:
-                System.out.println("Invalid choice!");
-        }
-    }
-
-    private void showHistoryOrdersForCustomer(String username) {
+    @Override
+    public void viewHistoryOfOrders(String username) {
         Set<Order> orderHistory = userService.getOrderHistory(username);
 
         if (orderHistory.isEmpty()) {
@@ -147,17 +109,33 @@ public class CustomerInterfaceImpl implements CustomerInterface {
         }
     }
 
+    @Override
+    public void viewProductMenu() {
+        System.out.println("List with active products:");
+        Map<String, Product> activeProducts = PRODUCT_SERVICE.getAllActiveProducts();
+        for (Map.Entry<String, Product> entry : activeProducts.entrySet()) {
+            String key = entry.getKey();
+            Product product = entry.getValue();
+
+            String details = product.getFormattedDetails();
+
+            System.out.printf(" - %-35s KEY: %s\n", details, key);
+        }
+        System.out.println("-----------------------------------");
+    }
+
+    @Override
     public void createOrder(String username) {
+        boolean creatingOrder = true;
+
         try {
             orderService.startNewOrder(username);
         } catch (IllegalStateException err) {
             System.out.println(err.getMessage());
             showCurrentOrder(username);
 
-            finishOrEditOrder(username);
+            creatingOrder = finishOrEditOrder(username);
         }
-
-        boolean creatingOrder = true;
 
         while (creatingOrder) {
             addingProduct(username);
@@ -166,15 +144,52 @@ public class CustomerInterfaceImpl implements CustomerInterface {
             String response = scanner.nextLine();
 
             if (response.equalsIgnoreCase("N")) {
+
                 showCurrentOrder(username);
                 creatingOrder = finishOrEditOrder(username);
 
                 if (creatingOrder) {
-                    showOrderMenu(username);
+                    showMainMenuCustomer(username);
                 }
-
             }
         }
+    }
+
+    private void printMainMenuCustomer(String username) {
+        System.out.println("\n Welcome to Delicious Pizza " + YELLOW + username + RESET + " !");
+        System.out.println("------------------------");
+        System.out.println("1. Create new order");
+        System.out.println("2. View order history");
+        System.out.println("3. Menu ");
+        System.out.println("4. Log out \n");
+    }
+
+    public void showMainMenuCustomer(String username) {
+
+        printMainMenuCustomer(username);
+
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        switch (choice) {
+            case FIRST_CHOICE:
+                createOrder(username);
+                break;
+            case SECOND_CHOICE:
+                viewHistoryOfOrders(username);
+                break;
+            case THIRD_CHOICE:
+                viewProductMenu();
+                break;
+            case FOURTH_CHOICE:
+                System.out.println("Exiting...");
+                isLoggedIn = false;
+                displayMenu();
+                break;
+            default:
+                System.out.println("Invalid choice!");
+        }
+        showMainMenuCustomer(username);
     }
 
     private void addingProduct(String username) {
@@ -198,6 +213,7 @@ public class CustomerInterfaceImpl implements CustomerInterface {
             } else {
                 addingProduct(username);
             }
+
         }
     }
 
@@ -213,31 +229,34 @@ public class CustomerInterfaceImpl implements CustomerInterface {
         orderService.removeFromCurrentOrderForUser(username, productKey, quantity);
     }
 
+    private void printEditOrderMenu() {
+        System.out.println("\n------------------------");
+        System.out.println("       Edit order    ");
+        System.out.println("------------------------");
+        System.out.println("1. Add product");
+        System.out.println("2. Remove product");
+        System.out.println("3. Return");
+    }
+
     public void editOrder(String username) {
         boolean editing = true;
 
         while (editing) {
-            System.out.println("\n");
-            System.out.println("------------------------");
-            System.out.println("       Edit order    ");
-            System.out.println("------------------------");
-            System.out.println("1. Add product");
-            System.out.println("2. Remove product");
-            System.out.println("3. Return");
+            printEditOrderMenu();
 
             int choice = scanner.nextInt();
             scanner.nextLine();
 
             switch (choice) {
-                case 1:
+                case FIRST_CHOICE:
                     addingProduct(username);
                     showCurrentOrder(username);
                     break;
-                case 2:
+                case SECOND_CHOICE:
                     removeProduct(username);
                     showCurrentOrder(username);
                     break;
-                case 3:
+                case THIRD_CHOICE:
                     editing = false;
                     break;
                 default:
@@ -248,30 +267,29 @@ public class CustomerInterfaceImpl implements CustomerInterface {
         finishOrEditOrder(username);
     }
 
-    @SuppressWarnings("checkstyle:MagicNumber")
-    private boolean finishOrEditOrder(String username) {
-        System.out.println("\n");
-        System.out.println("------------------------");
+    private void printCreatOrderMenu() {
+        System.out.println("\n------------------------");
         System.out.println("       Create order    ");
         System.out.println("------------------------");
         System.out.println("1. Finish order");
         System.out.println("2. Edit order");
-        System.out.println("3. Return");
+    }
+
+    private boolean finishOrEditOrder(String username) {
+
+        printCreatOrderMenu();
 
         int choice = scanner.nextInt();
         scanner.nextLine();
 
         return switch (choice) {
-            case 1 -> {
+            case FIRST_CHOICE -> {
                 orderService.finalizeOrder(username);
                 yield false;
             }
-            case 2 -> {
+            case SECOND_CHOICE -> {
                 editOrder(username);
                 yield true;
-            }
-            case 3 -> {
-                yield false;
             }
             default -> {
                 System.out.println("Invalid choice!");
@@ -311,22 +329,6 @@ public class CustomerInterfaceImpl implements CustomerInterface {
             count++;
             System.out.println("-----------------------------------");
         }
-    }
-
-    private static void printMenu() {
-        System.out.println("List with active products:");
-        Map<String, Product> activeProducts = PRODUCT_SERVICE.getAllActiveProducts();
-        for (Map.Entry<String, Product> entry : activeProducts.entrySet()) {
-            String key = entry.getKey();
-            Product product = entry.getValue();
-
-            // Извикваме getFormattedDetails()
-            String details = product.getFormattedDetails();
-
-            // Подравняване на изхода
-            System.out.printf(" - %-35s KEY: %s\n", details, key);
-        }
-        System.out.println("-----------------------------------");
     }
 
 }
