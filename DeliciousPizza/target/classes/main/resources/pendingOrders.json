@@ -1,33 +1,5 @@
 [ {
   "order" : {
-    "pizza_pepperoni" : 3,
-    "drink_coke" : 3
-  },
-  "statusOrder" : "PROCESSING",
-  "orderDate" : [ 2024, 11, 19, 12, 50, 24, 950835300 ],
-  "totalPrice" : 55.5,
-  "usernameCustomer" : "dakata",
-  "orderId" : 19
-}, {
-  "order" : {
-    "drink_coke" : 1
-  },
-  "statusOrder" : "PROCESSING",
-  "orderDate" : [ 2024, 11, 19, 12, 52, 31, 552720400 ],
-  "totalPrice" : 6.5,
-  "usernameCustomer" : "monkata",
-  "orderId" : 20
-}, {
-  "order" : {
-    "drink_coke" : 2
-  },
-  "statusOrder" : "PROCESSING",
-  "orderDate" : [ 2024, 11, 19, 13, 3, 44, 745304500 ],
-  "totalPrice" : 13.0,
-  "usernameCustomer" : "monkata",
-  "orderId" : 21
-}, {
-  "order" : {
     "pizza_pepperoni" : 1
   },
   "statusOrder" : "PROCESSING",

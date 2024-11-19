@@ -1,7 +1,7 @@
 {
-  "pizza_margherita" : {
+  "pizza_bbq_chicken" : {
     "type" : "pizza",
-    "pizzaType" : "MARGHERITA",
+    "pizzaType" : "BBQ_CHICKEN",
     "pizzaSize" : "MEDIUM",
     "statusProduct" : "INACTIVE"
   }

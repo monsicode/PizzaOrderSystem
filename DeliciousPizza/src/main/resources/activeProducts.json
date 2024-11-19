@@ -29,5 +29,16 @@
     "pizzaType" : "SEAFOOD",
     "pizzaSize" : "SMALL",
     "statusProduct" : "ACTIVE"
+  },
+  "sauce_pesto" : {
+    "type" : "sauce",
+    "sauce" : "PESTO",
+    "statusProduct" : "ACTIVE"
+  },
+  "pizza_margherita" : {
+    "type" : "pizza",
+    "pizzaType" : "MARGHERITA",
+    "pizzaSize" : "MEDIUM",
+    "statusProduct" : "ACTIVE"
   }
 }

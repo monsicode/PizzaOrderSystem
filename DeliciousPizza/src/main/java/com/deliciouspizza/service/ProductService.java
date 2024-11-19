@@ -55,7 +55,6 @@ public class ProductService {
         return 0;
     }
 
-
     //do we need this methods ?
     public Product getActiveProduct(String product) {
         return PRODUCT_REPOSITORY.getActiveProduct(product);
@@ -64,5 +63,11 @@ public class ProductService {
     public Product getInactiveProduct(String product) {
         return PRODUCT_REPOSITORY.getInactiveProduct(product);
     }
+
+    //catching the exception in EmplpoyeeImpl
+    public Product getProductByKey(String productKey) {
+        return PRODUCT_REPOSITORY.getProduct(productKey);
+    }
+
 
 }
