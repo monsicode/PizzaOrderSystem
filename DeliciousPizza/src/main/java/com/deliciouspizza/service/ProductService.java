@@ -45,9 +45,16 @@ public class ProductService {
         }
     }
 
-    public double getProductPrice(Product product) {
-        return product.calculatePrice();
+    public double getProductPriceByKey(String productKey) {
+        try {
+            Product product = PRODUCT_REPOSITORY.getProduct(productKey);
+            return product.calculatePrice();
+        } catch (ProductDoesNotExistException err) {
+            System.out.println(err.getMessage());
+        }
+        return 0;
     }
+
 
     //do we need this methods ?
     public Product getActiveProduct(String product) {

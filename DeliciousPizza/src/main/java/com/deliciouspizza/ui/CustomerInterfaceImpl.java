@@ -19,6 +19,10 @@ public class CustomerInterfaceImpl implements CustomerInterface {
 
     private static final String RESET = "\u001B[0m";
     private static final String YELLOW = "\u001B[33m";
+    private static final String RED = "\u001B[31m";
+    private static final String GREEN = "\u001B[32m";
+    private static final String BLUE = "\u001B[34m";
+
 
     private final UserService userService = new UserService();
     private final OrderService orderService = Singleton.getInstance(OrderService.class);
@@ -272,12 +276,19 @@ public class CustomerInterfaceImpl implements CustomerInterface {
         Map<String, Integer> orderMap = orderService.getCurrentOrderForUser(username);
 
         System.out.println("Your order contains:");
+        System.out.println("-----------------------------------");
 
         for (Map.Entry<String, Integer> entry : orderMap.entrySet()) {
+            String productKey = entry.getKey();
             String product = entry.getKey().replaceAll("_", " ");
+            product = product.substring(0, 1).toUpperCase() + product.substring(1).toLowerCase();
             int quantity = entry.getValue();
-            System.out.printf(" - %s, Quantity: %d\n", product, quantity);
+            double price = PRODUCT_SERVICE.getProductPriceByKey(productKey) * quantity;
+            System.out.printf(RED + " - " + RESET + " %-20s Quantity: %-2d  Price: $%.2f\n", product, quantity, price);
         }
+
+        System.out.println("-----------------------------------");
+        System.out.printf("Total Price: $%.2f\n", orderService.getTotalPriceOfOrderForCustomer(username));
     }
 
     private void printOrderHistory(Set<Order> orderHistory) {
@@ -302,9 +313,9 @@ public class CustomerInterfaceImpl implements CustomerInterface {
     }
 
     private void printMenu(String title, String... options) {
-        System.out.println("\n------------------------");
+        System.out.println(BLUE + "\n------------------------" + RESET);
         System.out.println("      " + title + "    ");
-        System.out.println("------------------------");
+        System.out.println(BLUE + "------------------------" + RESET);
         for (int i = 0; i < options.length; i++) {
             System.out.println((i + 1) + ". " + options[i]);
         }
@@ -322,6 +333,5 @@ public class CustomerInterfaceImpl implements CustomerInterface {
             }
         }
     }
-
 
 }

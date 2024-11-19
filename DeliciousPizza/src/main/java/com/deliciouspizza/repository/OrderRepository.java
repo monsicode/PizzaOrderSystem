@@ -47,7 +47,7 @@ public class OrderRepository {
     private final File jsonFile = new File(FILE_PATH_ORDERS);
     private final File historyJsonFile = new File(FILE_PATH_HISTORY_ORDERS);
 
-    private final Map<String, Order> activeOrders = new ConcurrentHashMap<>();
+    private final Map<String, Order> activeOrdersForCustomers = new ConcurrentHashMap<>();
 
     public OrderRepository() {
         pendingOrders = new LinkedBlockingQueue<>();
@@ -132,11 +132,11 @@ public class OrderRepository {
 
     public void startNewOrder(String username) {
 
-        if (activeOrders.putIfAbsent(username, new Order()) != null) {
+        if (activeOrdersForCustomers.putIfAbsent(username, new Order()) != null) {
             throw new IllegalStateException("User already has an active order. Finish it before starting a new one.");
         }
 
-        Order newOrder = activeOrders.get(username);
+        Order newOrder = activeOrdersForCustomers.get(username);
 
         if (newOrder != null) {
             newOrder.setUsernameCustomer(username);
@@ -146,7 +146,7 @@ public class OrderRepository {
     }
 
     public void addProductToActiveOrder(String username, String productKey, int quantity) {
-        Order order = activeOrders.get(username);
+        Order order = activeOrdersForCustomers.get(username);
 
         if (order == null) {
             throw new IllegalStateException("User does not have an active order. Start an order first.");
@@ -156,14 +156,14 @@ public class OrderRepository {
 
         try {
             //order.addProduct(productKey, quantity);
-            activeOrders.get(username).addProduct(productKey, quantity);
+            activeOrdersForCustomers.get(username).addProduct(productKey, quantity);
         } catch (InactiveProductException | IllegalArgumentException e) {
             System.out.println("Cannot add product to order: " + e.getMessage());
         }
     }
 
     public Order getCurrentOrderForUser(String username) {
-        Order order = activeOrders.get(username);
+        Order order = activeOrdersForCustomers.get(username);
         if (order == null) {
             throw new IllegalStateException("User does not have an order.");
         }
@@ -176,7 +176,7 @@ public class OrderRepository {
     }
 
     public void removeFromCurrentOrderForUser(String username, String productKey, Integer quantity) {
-        Order order = activeOrders.get(username);
+        Order order = activeOrdersForCustomers.get(username);
         if (order == null) {
             throw new IllegalStateException("User does not have an active order to finalize.");
         }
@@ -198,7 +198,7 @@ public class OrderRepository {
     }
 
     public void finalizeOrder(String username) {
-        Order order = activeOrders.remove(username);
+        Order order = activeOrdersForCustomers.remove(username);
 
         if (order == null) {
             throw new IllegalStateException("User does not have an active order to finalize.");
@@ -247,4 +247,15 @@ public class OrderRepository {
             .setScale(2, RoundingMode.HALF_UP)
             .doubleValue();
     }
+
+    public double getTotalPriceOfOrder(String username) {
+        try {
+            Order order = getCurrentOrderForUser(username);
+            return order.getTotalPrice();
+        } catch (IllegalStateException err) {
+            System.out.println(err.getMessage());
+        }
+        return 0;
+    }
+
 }

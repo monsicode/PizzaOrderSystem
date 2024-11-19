@@ -78,6 +78,10 @@ public class OrderService {
         }
     }
 
+    public double getTotalPriceOfOrderForCustomer(String username) {
+        return ORDER_REPOSITORY.getTotalPriceOfOrder(username);
+    }
+
     //for employees
     public void processCurrentOrder() {
         try {
