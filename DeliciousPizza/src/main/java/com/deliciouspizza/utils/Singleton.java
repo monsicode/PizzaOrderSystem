@@ -1,4 +1,4 @@
-package com.deliciouspizza;
+package com.deliciouspizza.utils;
 
 import java.util.HashMap;
 import java.util.Map;

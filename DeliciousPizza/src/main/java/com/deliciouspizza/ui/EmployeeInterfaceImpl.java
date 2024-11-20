@@ -1,6 +1,5 @@
 package com.deliciouspizza.ui;
 
-import com.deliciouspizza.Singleton;
 import com.deliciouspizza.entity.product.Drink;
 import com.deliciouspizza.entity.product.Pizza;
 import com.deliciouspizza.entity.product.Product;
@@ -11,37 +10,22 @@ import com.deliciouspizza.enums.PizzaSize;
 import com.deliciouspizza.enums.PizzaType;
 import com.deliciouspizza.enums.SauceType;
 import com.deliciouspizza.exception.ProductDoesNotExistException;
-import com.deliciouspizza.service.OrderService;
-import com.deliciouspizza.service.ProductService;
-import com.deliciouspizza.service.UserService;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.InputMismatchException;
 import java.util.Map;
 import java.util.Scanner;
 
-public class EmployeeInterfaceImpl implements EmployeeInterface {
-
-    private static final String RESET = "\u001B[0m";
-    private static final String BLUE = "\u001B[34m";
-    private static final String RED = "\u001B[31m";
-    private static final String GREEN = "\u001B[32m";
+public class EmployeeInterfaceImpl extends UserInterfaceImpl implements EmployeeInterface {
 
     private static final String ADMIN_HASHED_PASSWORD = "$2a$10$QVQziCS3KXdEwgTQrT3LieiUrr5yd1iuwwYgOymQFoPqbnTJL1csq";
     private static final int ATTEMPTS_PASSWORD = 3;
-    //to think about / fix
-    private static final UserService USER_SERVICE = Singleton.getInstance(UserService.class);
-    private static final OrderService ORDER_SERVICE = Singleton.getInstance(OrderService.class);
-    private static final ProductService PRODUCT_SERVICE = Singleton.getInstance(ProductService.class);
+
     private final Scanner scanner;
 
     private boolean isLoggedIn = false;
 
-    private static final int FIRST_CHOICE = 1;
-    private static final int SECOND_CHOICE = 2;
-    private static final int THIRD_CHOICE = 3;
     private static final int FOURTH_CHOICE = 4;
     private static final int FIFTH_CHOICE = 5;
     private static final int SIXTH_CHOICE = 6;
@@ -49,6 +33,7 @@ public class EmployeeInterfaceImpl implements EmployeeInterface {
     private static final int EIGHTH_CHOICE = 8;
 
     public EmployeeInterfaceImpl(Scanner scanner) {
+        super(scanner);
         this.scanner = scanner;
     }
 
@@ -81,7 +66,7 @@ public class EmployeeInterfaceImpl implements EmployeeInterface {
         System.out.print("Enter password: ");
         String password = scanner.nextLine();
 
-        isLoggedIn = USER_SERVICE.loginUser(username, password);
+        isLoggedIn = userService.loginUser(username, password);
 
         if (isLoggedIn) {
             showMainMenuEmployee(username);
@@ -124,12 +109,17 @@ public class EmployeeInterfaceImpl implements EmployeeInterface {
         String password = scanner.nextLine();
         System.out.println("\n");
 
-        USER_SERVICE.registerEmployee(username, password);
+        userService.registerEmployee(username, password);
     }
 
     @Override
     public void handleExit() {
         System.exit(0);
+    }
+
+    @Override
+    public void showMainMenuUser(String username) {
+        showMainMenuEmployee(username);
     }
 
     @Override
@@ -148,17 +138,17 @@ public class EmployeeInterfaceImpl implements EmployeeInterface {
             }
         };
 
-        PRODUCT_SERVICE.addNewProduct(product);
+        productService.addNewProduct(product);
     }
 
     @Override
     public void processOrder() {
-        ORDER_SERVICE.processCurrentOrder();
+        orderService.processCurrentOrder();
     }
 
     @Override
     public void viewPendingOrders() {
-        System.out.println(ORDER_SERVICE.getPendingOrders());
+        System.out.println(orderService.getPendingOrders());
     }
 
     public void showMainMenuEmployee(String username) {
@@ -172,7 +162,7 @@ public class EmployeeInterfaceImpl implements EmployeeInterface {
                 case FIRST_CHOICE -> addNewProduct();
                 case SECOND_CHOICE -> processOrder();
                 case THIRD_CHOICE -> viewPendingOrders();
-                case FOURTH_CHOICE -> System.out.println(PRODUCT_SERVICE.getAllInactiveProducts());
+                case FOURTH_CHOICE -> viewInactiveProducts();
                 case FIFTH_CHOICE -> viewProductMenu();
                 case SIXTH_CHOICE -> maintainProduct(username);
                 case SEVENTH_CHOICE -> reports(username);
@@ -183,7 +173,6 @@ public class EmployeeInterfaceImpl implements EmployeeInterface {
                 default -> System.out.println("Invalid choice!");
             }
         }
-        displayMenu();
     }
 
     private void reports(String username) {
@@ -217,9 +206,9 @@ public class EmployeeInterfaceImpl implements EmployeeInterface {
         String toInput = scanner.nextLine();
         LocalDate to = LocalDate.parse(toInput, formatter);
 
-        long numberOfrders = ORDER_SERVICE.getCountOrderInPeriod(from.atTime(00, 00), to.atTime(00, 00));
+        long numberOfrders = orderService.getCountOrderInPeriod(from.atTime(00, 00), to.atTime(00, 00));
 
-        System.out.println("Number of orders between " + from + " and " + to + " is: " + GREEN + numberOfrders + RESET);
+        System.out.println("Number of orders between " + from + " and " + to + " is: " + BLUE + numberOfrders + RESET);
     }
 
     private void getProfit() {
@@ -234,9 +223,9 @@ public class EmployeeInterfaceImpl implements EmployeeInterface {
         String toInput = scanner.nextLine();
         LocalDate to = LocalDate.parse(toInput, formatter);
 
-        double profit = ORDER_SERVICE.getProfitInPeriod(from.atTime(00, 00), to.atTime(00, 00));
+        double profit = orderService.getProfitInPeriod(from.atTime(00, 00), to.atTime(00, 00));
 
-        System.out.println("Number of orders between " + from + " and " + to + " is: " + GREEN + profit + RESET);
+        System.out.println("Number of orders between " + from + " and " + to + " is: " + BLUE + profit + RESET);
     }
 
     private void maintainProduct(String username) {
@@ -265,13 +254,13 @@ public class EmployeeInterfaceImpl implements EmployeeInterface {
         Product product = null;
 
         try {
-            product = PRODUCT_SERVICE.getProductByKey(productKey);
+            product = productService.getProductByKey(productKey);
         } catch (ProductDoesNotExistException err) {
             System.out.println(err.getMessage());
         }
 
         if (product != null) {
-            PRODUCT_SERVICE.deactivateProduct(product);
+            productService.deactivateProduct(product);
         }
 
     }
@@ -283,13 +272,13 @@ public class EmployeeInterfaceImpl implements EmployeeInterface {
         Product product = null;
 
         try {
-            product = PRODUCT_SERVICE.getProductByKey(productKey);
+            product = productService.getProductByKey(productKey);
         } catch (ProductDoesNotExistException err) {
             System.out.println(err.getMessage());
         }
 
         if (product != null) {
-            PRODUCT_SERVICE.activateProduct(product);
+            productService.activateProduct(product);
         }
 
     }
@@ -307,24 +296,13 @@ public class EmployeeInterfaceImpl implements EmployeeInterface {
         System.out.println("8. Log out \n");
     }
 
-    private void printMenu(String title, String... options) {
-        System.out.println("\n" + title);
+    @Override
+    protected void printMenu(String title, String... options) {
+        System.out.println(BLUE + "\n------------------------" + RESET);
+        System.out.println("      " + title + "    ");
         System.out.println(BLUE + "------------------------" + RESET);
         for (int i = 0; i < options.length; i++) {
             System.out.println((i + 1) + ". " + options[i]);
-        }
-    }
-
-    private int getValidatedChoice() {
-        while (true) {
-            try {
-                int choice = scanner.nextInt();
-                scanner.nextLine();
-                return choice;
-            } catch (InputMismatchException e) {
-                System.out.println("Invalid input! Please enter a valid number.");
-                scanner.nextLine();
-            }
         }
     }
 
@@ -396,16 +374,30 @@ public class EmployeeInterfaceImpl implements EmployeeInterface {
 
     private void viewProductMenu() {
         System.out.println("List with active products:");
-        Map<String, Product> activeProducts = PRODUCT_SERVICE.getAllActiveProducts();
+        Map<String, Product> activeProducts = productService.getAllActiveProducts();
         for (Map.Entry<String, Product> entry : activeProducts.entrySet()) {
             String key = entry.getKey();
             Product product = entry.getValue();
 
             String details = product.getFormattedDetails();
 
-            System.out.printf(" - %-35s KEY: %s\n", details, key);
+            System.out.printf(BLUE + "- " + RESET + "%-35s KEY: %s\n", details, key);
         }
-        System.out.println("-----------------------------------");
+        System.out.println(BLUE + "-----------------------------------" + RESET);
+    }
+
+    private void viewInactiveProducts() {
+        System.out.println("List with" + BLUE + " inactive " + RESET + "products:");
+        Map<String, Product> activeProducts = productService.getAllInactiveProducts();
+        for (Map.Entry<String, Product> entry : activeProducts.entrySet()) {
+            String key = entry.getKey();
+            Product product = entry.getValue();
+
+            String details = product.getFormattedDetails();
+
+            System.out.printf(BLUE + "- " + RESET + "%-35s KEY: %s\n", details, key);
+        }
+        System.out.println(BLUE + "-----------------------------------" + RESET);
     }
 
 }

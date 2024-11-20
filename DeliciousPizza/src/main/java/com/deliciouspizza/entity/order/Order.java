@@ -1,6 +1,6 @@
 package com.deliciouspizza.entity.order;
 
-import com.deliciouspizza.Singleton;
+import com.deliciouspizza.utils.Singleton;
 import com.deliciouspizza.entity.product.Product;
 import com.deliciouspizza.exception.InactiveProductException;
 import com.deliciouspizza.exception.ProductDoesNotExistException;

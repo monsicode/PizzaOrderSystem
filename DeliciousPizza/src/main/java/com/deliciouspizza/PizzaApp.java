@@ -1,24 +1,22 @@
-package com.deliciouspizza.mains;
+package com.deliciouspizza;
 
-import com.deliciouspizza.ui.EmployeeInterfaceImpl;
 import com.deliciouspizza.ui.UserInterface;
+import com.deliciouspizza.ui.UserInterfaceImpl;
 
 import java.util.Scanner;
 
-public class TestEmployeeInterfaceImpl {
+public class PizzaApp {
     private static UserInterface currentUserInterface;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        currentUserInterface = new EmployeeInterfaceImpl(scanner);
+        currentUserInterface = new UserInterfaceImpl(scanner);
         boolean running = true;
 
         while (running) {
-            currentUserInterface.showMainMenuUser("worker1");
+            currentUserInterface.displayMenu();
         }
 
         scanner.close();
     }
-
 }
-

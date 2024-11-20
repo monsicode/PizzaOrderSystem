@@ -1,6 +1,6 @@
 package com.deliciouspizza.service;
 
-import com.deliciouspizza.Singleton;
+import com.deliciouspizza.utils.Singleton;
 import com.deliciouspizza.entity.product.Product;
 import com.deliciouspizza.exception.ProductAlreadyActiveException;
 import com.deliciouspizza.exception.ProductAlreadyDeactivatedException;
@@ -68,6 +68,5 @@ public class ProductService {
     public Product getProductByKey(String productKey) {
         return PRODUCT_REPOSITORY.getProduct(productKey);
     }
-
 
 }

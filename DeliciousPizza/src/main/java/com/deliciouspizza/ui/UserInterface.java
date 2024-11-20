@@ -8,4 +8,7 @@ public interface UserInterface {
     void handleRegistration();
 
     void handleExit();
+
+    void showMainMenuUser(String username);
+
 }

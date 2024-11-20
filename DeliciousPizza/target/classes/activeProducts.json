@@ -6,11 +6,6 @@
     "statusProduct" : "ACTIVE",
     "isAlcoholic" : false
   },
-  "sauce_garlic_sauce" : {
-    "type" : "sauce",
-    "sauce" : "GARLIC_SAUCE",
-    "statusProduct" : "ACTIVE"
-  },
   "pizza_pepperoni" : {
     "type" : "pizza",
     "pizzaType" : "PEPPERONI",
@@ -38,6 +33,19 @@
   "pizza_margherita" : {
     "type" : "pizza",
     "pizzaType" : "MARGHERITA",
+    "pizzaSize" : "MEDIUM",
+    "statusProduct" : "ACTIVE"
+  },
+  "drink_whiskey" : {
+    "type" : "drink",
+    "drink" : "WHISKEY",
+    "volume" : "GRANDE",
+    "statusProduct" : "ACTIVE",
+    "isAlcoholic" : true
+  },
+  "pizza_veggie_medium" : {
+    "type" : "pizza",
+    "pizzaType" : "VEGGIE",
     "pizzaSize" : "MEDIUM",
     "statusProduct" : "ACTIVE"
   }

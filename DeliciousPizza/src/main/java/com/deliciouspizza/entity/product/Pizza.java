@@ -41,12 +41,11 @@ public class Pizza extends Food {
             throw new IllegalArgumentException("Pizza type is null, can't generate key!");
         }
 
-        //do I need this for as extra key identifier
-//        if (pizzaSize == null) {
-//            throw new IllegalArgumentException("Pizza type is null, can't generate key!");
-//        } + pizzaSize.toString().toLowerCase()
+        if (pizzaSize == null) {
+            throw new IllegalArgumentException("Pizza type is null, can't generate key!");
+        }
 
-        key = "pizza_" + pizzaType.toString().toLowerCase();
+        key = "pizza_" + pizzaType.toString().toLowerCase() + "_" + pizzaSize.toString().toLowerCase();
         return key;
     }
 

@@ -47,7 +47,11 @@ public class Drink extends Product {
             throw new IllegalArgumentException("Drink type is null, can't generate key!");
         }
 
-        key = "drink_" + drink.toString().toLowerCase();
+        if (volume == null) {
+            throw new IllegalArgumentException("Drink volume is null, can't generate key!");
+        }
+
+        key = "drink_" + drink.toString().toLowerCase() + "_" + volume.toString().toLowerCase();
         return key;
     }
 

@@ -1,6 +1,6 @@
 package com.deliciouspizza.repository;
 
-import com.deliciouspizza.Singleton;
+import com.deliciouspizza.utils.Singleton;
 import com.deliciouspizza.entity.order.Order;
 import com.deliciouspizza.exception.InactiveProductException;
 import com.deliciouspizza.exception.ProductNotInOrderException;
@@ -108,7 +108,7 @@ public class OrderRepository {
     private synchronized void saveHistoryOrders() {
         try {
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(historyJsonFile, historyOrders);
-            System.out.println("Order history saved to file.");
+            System.out.println("Order saved to history.");
         } catch (IOException e) {
             System.err.println("Error saving the completed order history: " + e.getMessage());
         }

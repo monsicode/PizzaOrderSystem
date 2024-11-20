@@ -1,10 +1,11 @@
 package com.deliciouspizza.service;
 
-import com.deliciouspizza.Singleton;
+import com.deliciouspizza.utils.Singleton;
 import com.deliciouspizza.entity.order.Order;
 import com.deliciouspizza.entity.user.Customer;
 import com.deliciouspizza.entity.user.Employee;
 import com.deliciouspizza.entity.user.User;
+import com.deliciouspizza.enums.UserRights;
 import com.deliciouspizza.exception.UserNotFoundException;
 import com.deliciouspizza.repository.UserRepository;
 import org.mindrot.jbcrypt.BCrypt;
@@ -74,6 +75,16 @@ public class UserService {
         }
 
         return false;
+    }
+
+    public UserRights getUserRights(String username) {
+        try {
+            return USER_REPOSITORY.getUserByUsername(username).getRights();
+        } catch (UserNotFoundException err) {
+            System.out.println(err.getMessage());
+        }
+
+        return null;
     }
 
     public void addToOrderHistory(String usernameCustomer, Order order) {

@@ -57,7 +57,35 @@
       "orderDate" : [ 2024, 11, 19, 13, 4, 8, 777237600 ],
       "totalPrice" : 12.0,
       "usernameCustomer" : "monkata",
-      "orderId" : 25
+      "orderId" : 6
+    }, {
+      "order" : {
+        "drink_coke" : 1
+      },
+      "statusOrder" : "COMPLETED",
+      "orderDate" : [ 2024, 11, 19, 13, 41, 58, 201575600 ],
+      "totalPrice" : 6.5,
+      "usernameCustomer" : "monkata",
+      "orderId" : 7
+    }, {
+      "order" : {
+        "pizza_pepperoni" : 1,
+        "drink_coke" : 3
+      },
+      "statusOrder" : "COMPLETED",
+      "orderDate" : [ 2024, 11, 19, 13, 58, 41, 258829800 ],
+      "totalPrice" : 43.5,
+      "usernameCustomer" : "monkata",
+      "orderId" : 8
+    }, {
+      "order" : {
+        "drink_coke" : 3
+      },
+      "statusOrder" : "COMPLETED",
+      "orderDate" : [ 2024, 11, 19, 14, 44, 57, 835838400 ],
+      "totalPrice" : 19.5,
+      "usernameCustomer" : "monkata",
+      "orderId" : 31
     } ],
     "hashedPassword" : "$2a$10$51xwDr0.HhabH1cxvf8.0e1INyJNcwNzGBtUGrmRDwAqCWwKty6LW",
     "userType" : "customer"
@@ -77,7 +105,7 @@
       "orderDate" : [ 2024, 11, 17, 18, 43, 17, 857712000 ],
       "totalPrice" : 45.9,
       "usernameCustomer" : "daka",
-      "orderId" : 6
+      "orderId" : 9
     } ],
     "hashedPassword" : "$2a$10$lIRnvnMsWN17fT78CDmvYOm2S4/dnpZaLhlcmAGKIkMwwCut/x39i",
     "userType" : "customer"
@@ -114,7 +142,7 @@
       "orderDate" : [ 2024, 11, 19, 12, 50, 24, 950835300 ],
       "totalPrice" : 55.5,
       "usernameCustomer" : "dakata",
-      "orderId" : 7
+      "orderId" : 10
     } ],
     "hashedPassword" : "$2a$10$n2kKedBb6SSjiWQs4DJCkecHoDT26N0xzjChO0dpGRkGHghfML2wm",
     "userType" : "customer"
@@ -125,10 +153,28 @@
     "hashedPassword" : "$2a$10$qdnAfcTa4n0gyNIXdWCJRO6a9bd8x/SptEEWL67tQSVsrV.NGvJDS",
     "userType" : "employee"
   },
-  "dankis" : {
-    "username" : "dankis",
+  "baba" : {
+    "username" : "baba",
+    "rights" : "CUSTOMER",
+    "address" : "baba str.",
+    "age" : 88,
+    "orderHistory" : [ ],
+    "hashedPassword" : "$2a$10$dRm.ONWQyh6D1r8VkB3xdO4gCNk9n7ihSW6gULNQ7KU/5dlA5nOlq",
+    "userType" : "customer"
+  },
+  "" : {
+    "username" : "",
+    "rights" : "CUSTOMER",
+    "address" : "",
+    "age" : 1,
+    "orderHistory" : [ ],
+    "hashedPassword" : "$2a$10$a3ly.RTC897xxbodY23ZXuIArZ2YkYzb/HvjUX0Mk4ulxIhXLjn4W",
+    "userType" : "customer"
+  },
+  "w2" : {
+    "username" : "w2",
     "rights" : "ADMIN",
-    "hashedPassword" : "$2a$10$dgPR3wncUbrdJfZ6Qe902eaPRzcxkrIWdjDi4UswSoXAQszUzBczq",
+    "hashedPassword" : "$2a$10$bP1Zi2gW4gy7MFiCQTgVuupP1vtDfuZhPnurTdZhG2QGOa7amQXgu",
     "userType" : "employee"
   }
 }

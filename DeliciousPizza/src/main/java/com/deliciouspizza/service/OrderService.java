@@ -1,6 +1,6 @@
 package com.deliciouspizza.service;
 
-import com.deliciouspizza.Singleton;
+import com.deliciouspizza.utils.Singleton;
 import com.deliciouspizza.entity.order.Order;
 import com.deliciouspizza.exception.ErrorInProductNameException;
 import com.deliciouspizza.exception.ProductDoesNotExistException;
@@ -87,6 +87,7 @@ public class OrderService {
         try {
             Order currentOrder = ORDER_REPOSITORY.getNextOrder();
             System.out.println("Order processing started:");
+            System.out.println(currentOrder + "\n");
 
             if (currentOrder != null) {
                 ORDER_REPOSITORY.completeOrder(currentOrder);
@@ -95,6 +96,7 @@ public class OrderService {
             } else {
                 System.out.println("There are no orders to process.");
             }
+
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             System.err.println("Error processing the order " + e.getMessage());

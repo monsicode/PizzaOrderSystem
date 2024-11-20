@@ -1,8 +1,0 @@
-{
-  "pizza_bbq_chicken" : {
-    "type" : "pizza",
-    "pizzaType" : "BBQ_CHICKEN",
-    "pizzaSize" : "MEDIUM",
-    "statusProduct" : "INACTIVE"
-  }
-}

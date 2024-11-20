@@ -1,48 +1,30 @@
 package com.deliciouspizza.ui;
 
-import com.deliciouspizza.Singleton;
 import com.deliciouspizza.entity.order.Order;
 import com.deliciouspizza.entity.product.Product;
 import com.deliciouspizza.exception.ErrorInProductNameException;
-import com.deliciouspizza.service.OrderService;
-import com.deliciouspizza.service.ProductService;
-import com.deliciouspizza.service.UserService;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.InputMismatchException;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
-public class CustomerInterfaceImpl implements CustomerInterface {
+public class CustomerInterfaceImpl extends UserInterfaceImpl implements CustomerInterface {
 
-    private static final String RESET = "\u001B[0m";
-    private static final String YELLOW = "\u001B[33m";
-    private static final String RED = "\u001B[31m";
-    private static final String GREEN = "\u001B[32m";
-    private static final String BLUE = "\u001B[34m";
-
-
-    private final UserService userService = new UserService();
-    private final OrderService orderService = Singleton.getInstance(OrderService.class);
-    private static final ProductService PRODUCT_SERVICE = Singleton.getInstance(ProductService.class);
     private final Scanner scanner;
 
     private boolean isLoggedIn = false;
 
-    private static final int FIRST_CHOICE = 1;
-    private static final int SECOND_CHOICE = 2;
-    private static final int THIRD_CHOICE = 3;
     private static final int FOURTH_CHOICE = 4;
 
     public CustomerInterfaceImpl(Scanner scanner) {
+        super(scanner);
         this.scanner = scanner;
     }
 
     @Override
     public void displayMenu() {
-
         boolean running = true;
 
         while (running) {
@@ -98,6 +80,11 @@ public class CustomerInterfaceImpl implements CustomerInterface {
     }
 
     @Override
+    public void showMainMenuUser(String username) {
+        showMainMenuCustomer(username);
+    }
+
+    @Override
     public void viewHistoryOfOrders(String username) {
         Set<Order> orderHistory = userService.getOrderHistory(username);
 
@@ -113,16 +100,16 @@ public class CustomerInterfaceImpl implements CustomerInterface {
     @Override
     public void viewProductMenu() {
         System.out.println("List with active products:");
-        Map<String, Product> activeProducts = PRODUCT_SERVICE.getAllActiveProducts();
+        Map<String, Product> activeProducts = productService.getAllActiveProducts();
         for (Map.Entry<String, Product> entry : activeProducts.entrySet()) {
             String key = entry.getKey();
             Product product = entry.getValue();
 
             String details = product.getFormattedDetails();
 
-            System.out.printf(" - %-35s KEY: %s\n", details, key);
+            System.out.printf(YELLOW + "- " + RESET + "%-35s KEY: %s\n", details, key);
         }
-        System.out.println("-----------------------------------");
+        System.out.println(YELLOW + "-----------------------------------" + RESET);
     }
 
     @Override
@@ -184,7 +171,6 @@ public class CustomerInterfaceImpl implements CustomerInterface {
                 default -> System.out.println("Invalid choice!");
             }
         }
-        displayMenu();
     }
 
     private void addingProduct(String username) {
@@ -283,18 +269,20 @@ public class CustomerInterfaceImpl implements CustomerInterface {
             String product = entry.getKey().replaceAll("_", " ");
             product = product.substring(0, 1).toUpperCase() + product.substring(1).toLowerCase();
             int quantity = entry.getValue();
-            double price = PRODUCT_SERVICE.getProductPriceByKey(productKey) * quantity;
-            System.out.printf(RED + " - " + RESET + " %-20s Quantity: %-2d  Price: $%.2f\n", product, quantity, price);
+            double price = productService.getProductPriceByKey(productKey) * quantity;
+            System.out.printf(YELLOW + " - " + RESET + " %-20s Quantity: %-2d  Price: $%.2f\n", product, quantity,
+                price);
         }
 
         System.out.println("-----------------------------------");
-        System.out.printf("Total Price: $%.2f\n", orderService.getTotalPriceOfOrderForCustomer(username));
+        System.out.printf("Total Price: " + YELLOW + "$%.2f\n" + RESET,
+            orderService.getTotalPriceOfOrderForCustomer(username));
     }
 
     private void printOrderHistory(Set<Order> orderHistory) {
         int count = 1;
         for (Order order : orderHistory) {
-            System.out.println("Order #" + count + ":");
+            System.out.println(YELLOW + "Order #" + count + ":" + RESET);
 
             LocalDateTime orderDate = order.getOrderDate();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
@@ -312,26 +300,8 @@ public class CustomerInterfaceImpl implements CustomerInterface {
         }
     }
 
-    private void printMenu(String title, String... options) {
-        System.out.println(YELLOW + "\n------------------------" + RESET);
-        System.out.println("      " + title + "    ");
-        System.out.println(YELLOW + "------------------------" + RESET);
-        for (int i = 0; i < options.length; i++) {
-            System.out.println((i + 1) + ". " + options[i]);
-        }
-    }
+    public void repeatAnOrder() {
 
-    private int getValidatedChoice() {
-        while (true) {
-            try {
-                int choice = scanner.nextInt();
-                scanner.nextLine();
-                return choice;
-            } catch (InputMismatchException e) {
-                System.out.println("Invalid input! Please enter a valid number.");
-                scanner.nextLine();
-            }
-        }
     }
 
 }

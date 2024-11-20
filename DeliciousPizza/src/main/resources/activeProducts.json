@@ -42,5 +42,11 @@
     "volume" : "GRANDE",
     "statusProduct" : "ACTIVE",
     "isAlcoholic" : true
+  },
+  "pizza_veggie_medium" : {
+    "type" : "pizza",
+    "pizzaType" : "VEGGIE",
+    "pizzaSize" : "MEDIUM",
+    "statusProduct" : "ACTIVE"
   }
 }
