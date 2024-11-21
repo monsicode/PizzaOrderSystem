@@ -1,12 +1,12 @@
-//package com.deliciouspizza.mains;
-//
-//import com.deliciouspizza.service.OrderService;
-//
-//public class TestingOrderService {
-//
-//    public static void main(String[] args) {
-//        OrderService orderService = new OrderService();
-//
+package com.deliciouspizza.mains;
+
+import com.deliciouspizza.service.OrderService;
+
+public class TestingOrderService {
+
+    public static void main(String[] args) {
+        OrderService orderService = new OrderService();
+
 //        System.out.println("Starting new order for customer2...");
 //
 //        orderService.startNewOrder("customer2");
@@ -20,17 +20,17 @@
 //        orderService.addProductToActiveOrder("customer3", "pizza_pepperoni", 2);
 //
 //        System.out.println(orderService.getCurrentOrderForUser("customer2"));
+
+        //  orderService.getCurrentOrderForUser()
+
+//        System.out.println("Finalizing order for customers...");
 //
-//      //  orderService.getCurrentOrderForUser()
+//        orderService.finalizeOrder("customer2");
+//        orderService.finalizeOrder("customer3");
 //
-////        System.out.println("Finalizing order for customers...");
-////
-////        orderService.finalizeOrder("customer2");
-////        orderService.finalizeOrder("customer3");
-////
-////        System.out.println("Employee starts processing orders...");
-////        orderService.processCurrentOrder();
-////        orderService.processCurrentOrder();
-//
-//    }
-//}
+//        System.out.println("Employee starts processing orders...");
+        orderService.processCurrentOrder();
+//        orderService.processCurrentOrder();
+
+    }
+}

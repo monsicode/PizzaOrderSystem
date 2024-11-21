@@ -13,7 +13,7 @@ public class TestEmployeeInterfaceImpl {
         boolean running = true;
 
         while (running) {
-            currentUserInterface.showMainMenuUser("worker1");
+            currentUserInterface.showMainMenuEmployee("worker1");
         }
 
         scanner.close();

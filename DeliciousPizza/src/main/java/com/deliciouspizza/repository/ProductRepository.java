@@ -5,6 +5,7 @@ import com.deliciouspizza.exception.ProductAlreadyActiveException;
 import com.deliciouspizza.exception.ProductAlreadyDeactivatedException;
 import com.deliciouspizza.exception.ProductDoesNotExistException;
 import com.deliciouspizza.enums.StatusProduct;
+import com.deliciouspizza.utils.Singleton;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -21,6 +22,8 @@ public class ProductRepository {
     private static final String FILE_PATH_ACTIVE_PRODUCTS = "src/main/resources/activeProducts.json";
     private final File jsonFileActive = new File(FILE_PATH_ACTIVE_PRODUCTS);
     private final File jsonFileInactive = new File(FILE_PATH_INACTIVE_PRODUCTS);
+
+    private final Warehouse warehouse = Singleton.getInstance(Warehouse.class);
 
 
     private Map<String, Product> inactiveProducts;
@@ -140,20 +143,25 @@ public class ProductRepository {
         // We add the product to the Map, only if the key is unique
         String key = product.generateKey();
 
-        //Checks to add in inactive.json
-        if (!inactiveProducts.containsKey(key) && product.getStatusProduct() == StatusProduct.INACTIVE) {
-            inactiveProducts.put(key, product);
-            saveProducts(FILE_PATH_INACTIVE_PRODUCTS, inactiveProducts);
-            System.out.println("Product added successfully!");
+        //If the product exists in the warehouse --> we can add it to the menu or check it as not active for now
+        if (warehouse.doesProductExist(key)) {
+            //Checks to add in inactive.json
+            if (!inactiveProducts.containsKey(key) && product.getStatusProduct() == StatusProduct.INACTIVE) {
+                inactiveProducts.put(key, product);
+                saveProducts(FILE_PATH_INACTIVE_PRODUCTS, inactiveProducts);
+                System.out.println("Product added successfully!");
 
-            //Checks to add in active.json
-        } else if (product.getStatusProduct() == StatusProduct.ACTIVE && !activeProducts.containsKey(key)) {
-            activeProducts.put(key, product);
-            saveProducts(FILE_PATH_ACTIVE_PRODUCTS, activeProducts);
-            System.out.println("Product added successfully!");
+                //Checks to add in active.json
+            } else if (product.getStatusProduct() == StatusProduct.ACTIVE && !activeProducts.containsKey(key)) {
+                activeProducts.put(key, product);
+                saveProducts(FILE_PATH_ACTIVE_PRODUCTS, activeProducts);
+                System.out.println("Product added successfully!");
 
+            } else {
+                throw new IllegalArgumentException("Product can't be added, because it already exist!");
+            }
         } else {
-            throw new IllegalArgumentException("Product can't be added, because it already exist!");
+            System.out.println("Sorry, we don't have this product in the warehouse");
         }
     }
 

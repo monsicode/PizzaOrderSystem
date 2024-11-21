@@ -1,5 +1,6 @@
 package com.deliciouspizza.repository;
 
+import com.deliciouspizza.entity.order.Order;
 import com.deliciouspizza.entity.product.Product;
 import com.deliciouspizza.utils.Singleton;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -7,8 +8,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Warehouse {
     private static final ProductRepository PRODUCT_REPOSITORY = Singleton.getInstance(ProductRepository.class);
@@ -25,7 +26,7 @@ public class Warehouse {
     private final ObjectMapper objectMapper;
 
     public Warehouse() {
-        this.productStock = new HashMap<>();
+        this.productStock = new ConcurrentHashMap<>();
         objectMapper = new ObjectMapper();
 
         loadStock();
@@ -56,7 +57,7 @@ public class Warehouse {
         }
     }
 
-    public void addStock(Product product, int quantity) {
+    public synchronized void addStock(Product product, int quantity) {
         if (product == null) {
             throw new IllegalArgumentException("Product can't be null");
         }
@@ -67,16 +68,49 @@ public class Warehouse {
         saveStock();
     }
 
-    public void reduceStock(String productName, int quantity) {
+    public synchronized void reduceStock(String productName, int quantity) {
         if (!productStock.containsKey(productName) || productStock.get(productName) < quantity) {
-            throw new IllegalArgumentException("Not enough stock for product: " + productName);
+            throw new IllegalArgumentException("Not enough stock of product: " + productName);
         }
-        productStock.put(productName, productStock.get(productName) - quantity);
+
+        int remainingStock = productStock.get(productName) - quantity;
+
+        if (remainingStock == 0) {
+            productStock.remove(productName);
+        } else {
+            productStock.put(productName, remainingStock);
+        }
+
         saveStock();
     }
 
-    public boolean hasEnoughStock(String productName, int requestedQuantity) {
+    public synchronized void reduceStockWithOrder(Order order) {
+        for (Map.Entry<String, Integer> entry : order.getOrder().entrySet()) {
+            String productName = entry.getKey();
+            int quantity = entry.getValue();
+
+            if (!productStock.containsKey(productName) || productStock.get(productName) < quantity) {
+                throw new IllegalArgumentException("Not enough stock of product: " + productName);
+            }
+
+            int remainingStock = productStock.get(productName) - quantity;
+
+            if (remainingStock == 0) {
+                productStock.remove(productName);
+            } else {
+                productStock.put(productName, remainingStock);
+            }
+        }
+
+        saveStock();
+    }
+
+    public synchronized boolean hasEnoughStock(String productName, int requestedQuantity) {
         return productStock.getOrDefault(productName, 0) >= requestedQuantity;
+    }
+
+    public boolean doesProductExist(String productKey) {
+        return productStock.containsKey(productKey);
     }
 
     public void printStock() {
@@ -88,7 +122,10 @@ public class Warehouse {
 
             product = capitalizeWords(product.replaceAll("_", " "));
 
-            System.out.printf(BLUE + "- " + RESET + "%-30s %sStock: %-3d%s\n", product, GREEN, stock, RESET);
+            System.out.printf(BLUE + "- " + RESET + "%-30s %sStock: %-3d%s" + BLUE + "   KEY" + RESET + ":%s\n",
+                product,
+                GREEN, stock,
+                RESET, entry.getKey());
         }
         System.out.println(BLUE + "----------------------------" + RESET);
     }
@@ -106,5 +143,9 @@ public class Warehouse {
         }
         return capitalizedString.toString().trim();
     }
+
+//    public Product getProductByKey(String productKey) {
+//        return productStock.get(productKey);
+//    }
 
 }

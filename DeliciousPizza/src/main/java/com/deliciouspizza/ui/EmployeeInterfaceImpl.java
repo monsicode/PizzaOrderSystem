@@ -254,7 +254,7 @@ public class EmployeeInterfaceImpl extends UserInterfaceImpl implements Employee
 
     }
 
-    private void addMoreProductsInStock() {
+    public void addMoreProductsInStock() {
         Product product = creatProduct();
 
         System.out.println("How much of this product would you like to order? :");

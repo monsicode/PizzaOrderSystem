@@ -1,5 +1,6 @@
 package com.deliciouspizza.entity.order;
 
+import com.deliciouspizza.repository.Warehouse;
 import com.deliciouspizza.utils.Singleton;
 import com.deliciouspizza.entity.product.Product;
 import com.deliciouspizza.exception.InactiveProductException;
@@ -41,6 +42,7 @@ public class Order {
     private String usernameCustomer;
 
     private static final ProductRepository PRODUCT_REPOSITORY = Singleton.getInstance(ProductRepository.class);
+    private final Warehouse warehouse = Singleton.getInstance(Warehouse.class);
 
     public Order() {
         synchronized (Order.class) {
@@ -86,6 +88,14 @@ public class Order {
             throw new InactiveProductException("This product is inactive, can't be added to order!");
         }
 
+        //if we add a product to the order, we have to make sure we have it in the warehouse
+        try {
+            warehouse.reduceStock(productKey, quantity);
+        } catch (IllegalArgumentException err) {
+            System.out.println(err.getMessage());
+            return;
+        }
+
         order.put(productKey, order.getOrDefault(productKey, 0) + quantity);
 
         try {
@@ -94,7 +104,6 @@ public class Order {
         } catch (ProductDoesNotExistException err) {
             System.out.println(err.getMessage());
         }
-
     }
 
     public void removeProduct(String productKey, Integer quantity) throws ProductNotInOrderException {
@@ -201,4 +210,5 @@ public class Order {
     public int getOrderId() {
         return id;
     }
+
 }

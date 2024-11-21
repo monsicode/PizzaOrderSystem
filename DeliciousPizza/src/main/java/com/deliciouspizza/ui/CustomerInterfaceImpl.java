@@ -4,6 +4,8 @@ import com.deliciouspizza.entity.order.Order;
 import com.deliciouspizza.entity.product.Product;
 import com.deliciouspizza.enums.StatusOrder;
 import com.deliciouspizza.exception.ErrorInProductNameException;
+import com.deliciouspizza.repository.Warehouse;
+import com.deliciouspizza.utils.Singleton;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -15,6 +17,7 @@ import java.util.Set;
 public class CustomerInterfaceImpl extends UserInterfaceImpl implements CustomerInterface {
 
     private final Scanner scanner;
+    private final Warehouse warehouse = Singleton.getInstance(Warehouse.class);
 
     private boolean isLoggedIn = false;
 
@@ -306,6 +309,7 @@ public class CustomerInterfaceImpl extends UserInterfaceImpl implements Customer
         }
     }
 
+    @SuppressWarnings("checkstyle:MethodLength")
     public void repeatAnOrder(String username) {
         Set<Order> orderHistory = userService.getOrderHistory(username);
 
@@ -323,6 +327,14 @@ public class CustomerInterfaceImpl extends UserInterfaceImpl implements Customer
         Order selectedOrder = orderMap.get(selectedOrderNumber);
 
         if (selectedOrder != null) {
+
+            try {
+                warehouse.reduceStockWithOrder(selectedOrder);
+            } catch (IllegalArgumentException err) {
+                System.out.println(err.getMessage());
+                return;
+            }
+
             selectedOrder.setStatusOrder(StatusOrder.PROCESSING);
             selectedOrder.resetOrderDate();
 
