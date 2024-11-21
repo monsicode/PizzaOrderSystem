@@ -1,0 +1,110 @@
+package com.deliciouspizza.repository;
+
+import com.deliciouspizza.entity.product.Product;
+import com.deliciouspizza.utils.Singleton;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Warehouse {
+    private static final ProductRepository PRODUCT_REPOSITORY = Singleton.getInstance(ProductRepository.class);
+    private final Map<String, Integer> productStock;
+
+    private static final String RESET = "\u001B[0m";
+    private static final String BLUE = "\u001B[34m";
+    private static final String GREEN = "\u001B[32m";
+
+    private static final String FILE_PATH_STOCK = "src/main/resources/stock.json";
+    private final File jsonFileStock = new File(FILE_PATH_STOCK);
+
+
+    private final ObjectMapper objectMapper;
+
+    public Warehouse() {
+        this.productStock = new HashMap<>();
+        objectMapper = new ObjectMapper();
+
+        loadStock();
+    }
+
+    public void loadStock() {
+        try {
+            if (!jsonFileStock.exists() || jsonFileStock.length() == 0) {
+                productStock.clear();
+            } else {
+                ObjectMapper mapper = new ObjectMapper();
+                productStock.putAll(mapper.readValue(jsonFileStock, new TypeReference<Map<String, Integer>>() {
+                }));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error loading stock data.");
+        }
+    }
+
+    public void saveStock() {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.writerWithDefaultPrettyPrinter().writeValue(jsonFileStock, productStock);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error saving stock data.");
+        }
+    }
+
+    public void addStock(Product product, int quantity) {
+        if (product == null) {
+            throw new IllegalArgumentException("Product can't be null");
+        }
+
+        String productKey = product.generateKey();
+
+        productStock.put(productKey, productStock.getOrDefault(productKey, 0) + quantity);
+        saveStock();
+    }
+
+    public void reduceStock(String productName, int quantity) {
+        if (!productStock.containsKey(productName) || productStock.get(productName) < quantity) {
+            throw new IllegalArgumentException("Not enough stock for product: " + productName);
+        }
+        productStock.put(productName, productStock.get(productName) - quantity);
+        saveStock();
+    }
+
+    public boolean hasEnoughStock(String productName, int requestedQuantity) {
+        return productStock.getOrDefault(productName, 0) >= requestedQuantity;
+    }
+
+    public void printStock() {
+        System.out.println("Product Stock List:");
+        System.out.println(BLUE + "----------------------------" + RESET);
+        for (Map.Entry<String, Integer> entry : productStock.entrySet()) {
+            String product = entry.getKey();
+            int stock = entry.getValue();
+
+            product = capitalizeWords(product.replaceAll("_", " "));
+
+            System.out.printf(BLUE + "- " + RESET + "%-30s %sStock: %-3d%s\n", product, GREEN, stock, RESET);
+        }
+        System.out.println(BLUE + "----------------------------" + RESET);
+    }
+
+    private String capitalizeWords(String input) {
+        String[] words = input.split("_");
+        StringBuilder capitalizedString = new StringBuilder();
+
+        for (String word : words) {
+            if (!word.isEmpty()) {
+                capitalizedString.append(word.substring(0, 1).toUpperCase());
+                capitalizedString.append(word.substring(1).toLowerCase());
+                capitalizedString.append(" ");
+            }
+        }
+        return capitalizedString.toString().trim();
+    }
+
+}

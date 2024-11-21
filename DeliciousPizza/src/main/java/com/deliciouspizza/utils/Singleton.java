@@ -4,25 +4,25 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Singleton<T> {
-    private static final Map<Class<?>, Object> instances = new HashMap<>();
+    private static final Map<Class<?>, Object> INSTANCES = new HashMap<>();
 
     private Singleton() {
-        // Приватен конструктор за предотвратяване на директно създаване на обекти
+        // Private constructor to prevent direct object creation
     }
 
     @SuppressWarnings("unchecked")
     public static <T> T getInstance(Class<T> clazz) {
-        synchronized (instances) {
-            if (!instances.containsKey(clazz)) {
+        synchronized (INSTANCES) {
+            if (!INSTANCES.containsKey(clazz)) {
                 try {
                     // Създава нова инстанция, ако няма вече такава
-                    instances.put(clazz, clazz.getDeclaredConstructor().newInstance());
+                    INSTANCES.put(clazz, clazz.getDeclaredConstructor().newInstance());
                 } catch (Exception e) {
                     e.printStackTrace();
-                    throw new RuntimeException("Не може да се създаде инстанция на " + clazz.getName());
+                    throw new RuntimeException("Cannot create an instance of " + clazz.getName());
                 }
             }
-            return (T) instances.get(clazz);
+            return (T) INSTANCES.get(clazz);
         }
     }
 }

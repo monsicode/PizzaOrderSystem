@@ -1,12 +1,11 @@
 package com.deliciouspizza.mains;
 
 import com.deliciouspizza.ui.EmployeeInterfaceImpl;
-import com.deliciouspizza.ui.UserInterface;
 
 import java.util.Scanner;
 
 public class TestEmployeeInterfaceImpl {
-    private static UserInterface currentUserInterface;
+    private static EmployeeInterfaceImpl currentUserInterface;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);

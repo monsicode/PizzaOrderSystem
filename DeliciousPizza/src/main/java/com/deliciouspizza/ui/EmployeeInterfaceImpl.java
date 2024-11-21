@@ -10,6 +10,8 @@ import com.deliciouspizza.enums.PizzaSize;
 import com.deliciouspizza.enums.PizzaType;
 import com.deliciouspizza.enums.SauceType;
 import com.deliciouspizza.exception.ProductDoesNotExistException;
+import com.deliciouspizza.repository.Warehouse;
+import com.deliciouspizza.utils.Singleton;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.time.LocalDate;
@@ -22,6 +24,7 @@ public class EmployeeInterfaceImpl extends UserInterfaceImpl implements Employee
     private static final String ADMIN_HASHED_PASSWORD = "$2a$10$QVQziCS3KXdEwgTQrT3LieiUrr5yd1iuwwYgOymQFoPqbnTJL1csq";
     private static final int ATTEMPTS_PASSWORD = 3;
 
+    protected final Warehouse warehouse = Singleton.getInstance(Warehouse.class);
     private final Scanner scanner;
 
     private boolean isLoggedIn = false;
@@ -120,8 +123,7 @@ public class EmployeeInterfaceImpl extends UserInterfaceImpl implements Employee
         showMainMenuEmployee(username);
     }
 
-    @Override
-    public void addNewProduct() {
+    private Product creatProduct() {
         printMenu("What type of product would you like to add?", "Pizza", "Drink", "Sauce");
 
         int choice = getValidatedChoice();
@@ -131,12 +133,18 @@ public class EmployeeInterfaceImpl extends UserInterfaceImpl implements Employee
             case SECOND_CHOICE -> createDrink();
             case THIRD_CHOICE -> createSauce();
             default -> {
-                System.out.println("Invalid choice! No product created.");
+                System.out.println("Invalid choice! ");
                 yield null;
             }
         };
 
-        productService.addNewProduct(product);
+        return product;
+
+    }
+
+    @Override
+    public void addNewProduct() {
+        productService.addNewProduct(creatProduct());
     }
 
     @Override
@@ -166,6 +174,7 @@ public class EmployeeInterfaceImpl extends UserInterfaceImpl implements Employee
                 case SEVENTH_CHOICE -> reports(username);
                 case EIGHTH_CHOICE -> {
                     System.out.println("Logging out...");
+                    isLoggedIn = false;
                     continueSession = false;
                 }
                 default -> System.out.println("Invalid choice!");
@@ -189,7 +198,6 @@ public class EmployeeInterfaceImpl extends UserInterfaceImpl implements Employee
             }
         }
 
-        showMainMenuEmployee(username);
     }
 
     private void getNumberOfOrders() {
@@ -230,19 +238,30 @@ public class EmployeeInterfaceImpl extends UserInterfaceImpl implements Employee
         boolean maintaining = true;
 
         while (maintaining) {
-            printMenu("Maintain product", "Deactivate product", "Activate product", "Add more in stock", "Return");
+            printMenu("Maintain product", "Deactivate product", "Activate product", "View warehouse for products",
+                "Add more in stock", "Return");
 
             int choice = getValidatedChoice();
             switch (choice) {
                 case FIRST_CHOICE -> deactivateProduct();
                 case SECOND_CHOICE -> activateProduct();
-                case THIRD_CHOICE -> System.out.println("In the process of making");
-                case FOURTH_CHOICE -> maintaining = false;
+                case THIRD_CHOICE -> warehouse.printStock();
+                case FOURTH_CHOICE -> addMoreProductsInStock();
+                case FIFTH_CHOICE -> maintaining = false;
                 default -> System.out.println("Invalid choice!");
             }
         }
 
-        showMainMenuEmployee(username);
+    }
+
+    private void addMoreProductsInStock() {
+        Product product = creatProduct();
+
+        System.out.println("How much of this product would you like to order? :");
+        Integer quantity = scanner.nextInt();
+        scanner.nextLine();
+
+        warehouse.addStock(product, quantity);
     }
 
     private void deactivateProduct() {
@@ -349,7 +368,7 @@ public class EmployeeInterfaceImpl extends UserInterfaceImpl implements Employee
 
         System.out.println("\nWhat size would you like to include:");
         System.out.println(BLUE + "------------------------" + RESET);
-        displayProductTypes(PizzaSize.class);
+        displayProductTypes(DrinkVolume.class);
 
         int drinkVolume = getValidatedChoice();
         DrinkVolume selectDrinkVolume = getProductChoice(DrinkVolume.class, drinkVolume);

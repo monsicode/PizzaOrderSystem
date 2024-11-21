@@ -169,6 +169,7 @@ public class CustomerInterfaceImpl extends UserInterfaceImpl implements Customer
                 case FOURTH_CHOICE -> viewProductMenu();
                 case FIFTH_CHOICE -> {
                     System.out.println("Logging out...");
+                    isLoggedIn = false;
                     continueSession = false;
                 }
                 default -> System.out.println("Invalid choice!");

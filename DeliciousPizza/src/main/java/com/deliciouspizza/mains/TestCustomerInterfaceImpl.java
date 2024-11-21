@@ -1,7 +1,6 @@
 package com.deliciouspizza.mains;
 
 import com.deliciouspizza.ui.CustomerInterfaceImpl;
-import com.deliciouspizza.ui.UserInterface;
 
 import java.util.Scanner;
 

@@ -18,16 +18,16 @@ public class MainProductTest {
 
         Product product1 = new Pizza(PizzaType.MARGHERITA, PizzaSize.MEDIUM);
         Product product11 = new Pizza(PizzaType.MARGHERITA, PizzaSize.LARGE);
-        Product product2 = new Drink(DrinkType.COKE, DrinkVolume.GRANDE);
+//        Product product2 = new Drink(DrinkType.COKE, DrinkVolume.GRANDE);
         Product product3 = new Sauce(SauceType.GARLIC_SAUCE);
 
         Product product4 = new Pizza(PizzaType.PEPPERONI, PizzaSize.MEDIUM);
-        Product product5 = new Drink(DrinkType.BEER, DrinkVolume.GRANDE);
+//        Product product5 = new Drink(DrinkType.BEER, DrinkVolume.GRANDE);
 
         Drink pr = new Drink();
 
         service.addNewProduct(product4);
-        service.addNewProduct(product5);
+//        service.addNewProduct(product5);
         //  service.deactivateProduct(product1);
 //        service.activateProduct(product2);
 
@@ -36,7 +36,6 @@ public class MainProductTest {
 //
 //        Product p = service.getProduct("pizza_margherita");
 //        System.out.println(p);
-
 
     }
 

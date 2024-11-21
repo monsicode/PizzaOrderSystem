@@ -15,11 +15,11 @@ public class MainOrderTest {
 
     public static void main(String[] args) {
         Product product1 = new Pizza(PizzaType.MARGHERITA, PizzaSize.MEDIUM);
-        Product product2 = new Drink(DrinkType.COKE, DrinkVolume.GRANDE);
+//        Product product2 = new Drink(DrinkType.COKE, DrinkVolume.GRANDE);
         Product product3 = new Sauce(SauceType.GARLIC_SAUCE);
 
         Product product4 = new Pizza(PizzaType.PEPPERONI, PizzaSize.MEDIUM);
-        Product product5 = new Drink(DrinkType.BEER, DrinkVolume.GRANDE);
+//        Product product5 = new Drink(DrinkType.BEER, DrinkVolume.GRANDE);
 
         Order order = new Order();
         Order order2 = new Order();

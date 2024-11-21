@@ -25,17 +25,15 @@ public class SecondMain {
 //        userService.registerCustomer("monka", "password123", "ул. Пиротска 10", 25);
 //
         Product pizza = new Pizza(PizzaType.MARGHERITA, PizzaSize.LARGE);
-        Product drink = new Drink(DrinkType.COKE, DrinkVolume.GRANDE);
+//        Product drink = new Drink(DrinkType.COKE, DrinkVolume.GRANDE);
 
         Map<String, Integer> productsWithQuantities1 = new HashMap<>();
         productsWithQuantities1.put(pizza.generateKey(), 2);
-        productsWithQuantities1.put(drink.generateKey(), 1);
+//        productsWithQuantities1.put(drink.generateKey(), 1);
 //
         Order order1 = new Order(productsWithQuantities1, "daka");
 //
-      userService.addToOrderHistory("daka", order1);
-//
-
+        userService.addToOrderHistory("daka", order1);
 
 //        Scanner scanner = new Scanner(System.in);
 //

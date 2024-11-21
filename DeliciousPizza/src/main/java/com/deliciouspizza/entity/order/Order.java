@@ -25,7 +25,7 @@ import java.util.Objects;
 // Singleton<ProductRepository>
 
 //StorageProduct  =
-//storagfe.checkProductsAvailability....
+//storage.checkProductsAvailability....
 //checkProductsAvailability(order)
 
 @JsonIgnoreProperties(ignoreUnknown = true)

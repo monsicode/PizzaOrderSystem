@@ -12,10 +12,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Main {
-
-    //    //main test for ProductService and Repository
+    //main test for ProductService and Repository
     public static void main(String[] args) {
-//
 ////       ProductRepository repository = new ProductRepository();
 ////        ProductRepository repository = Singleton.getInstance(ProductRepository.class);
 ////        Product pizza1 = new Pizza(PizzaType.MARGHERITA, PizzaSize.LARGE);
@@ -57,24 +55,22 @@ public class Main {
 //
         // Създаване на продукти и добавяне в поръчка
         Product pizza = new Pizza(PizzaType.MARGHERITA, PizzaSize.LARGE);
-        Product drink = new Drink(DrinkType.COKE, DrinkVolume.GRANDE);
+//        Product drink = new Drink(DrinkType.COKE, DrinkVolume.GRANDE);
         Product pizza2 = new Pizza(PizzaType.PEPPERONI, PizzaSize.LARGE);
 
         Map<String, Integer> productsWithQuantities1 = new HashMap<>();
         productsWithQuantities1.put(pizza.generateKey(), 2);
-        productsWithQuantities1.put(drink.generateKey(), 1);
+//        productsWithQuantities1.put(drink.generateKey(), 1);
 
         Map<String, Integer> productsWithQuantities2 = new HashMap<>();
         productsWithQuantities2.put(pizza.generateKey(), 1);
-        productsWithQuantities2.put(drink.generateKey(), 2);
+//        productsWithQuantities2.put(drink.generateKey(), 2);
 
         Map<String, Integer> productsWithQuantities3 = new HashMap<>();
         productsWithQuantities3.put(pizza2.generateKey(), 4);
-        productsWithQuantities3.put(drink.generateKey(), 2);
+//        productsWithQuantities3.put(drink.generateKey(), 2);
 
         Order order1 = new Order(productsWithQuantities1, "monkata");
-
-
 
 //        Order order2 = new Order(productsWithQuantities2, "daka");
 //        Order order3 = new Order(productsWithQuantities2, "Dupe");
