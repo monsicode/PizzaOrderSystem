@@ -26,7 +26,6 @@ public class MainProductTest {
 
         Drink pr = new Drink();
 
-
         service.addNewProduct(product4);
         service.addNewProduct(product5);
         //  service.deactivateProduct(product1);
@@ -37,6 +36,8 @@ public class MainProductTest {
 //
 //        Product p = service.getProduct("pizza_margherita");
 //        System.out.println(p);
+
+
     }
 
 }

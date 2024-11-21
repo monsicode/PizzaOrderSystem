@@ -78,6 +78,14 @@ public class OrderService {
         }
     }
 
+    public void finalizeRepeatedOrder(Order order) {
+        try {
+            ORDER_REPOSITORY.finalizeRepeatedOrder(order);
+        } catch (IllegalStateException err) {
+            System.out.println(err.getMessage());
+        }
+    }
+
     public double getTotalPriceOfOrderForCustomer(String username) {
         return ORDER_REPOSITORY.getTotalPriceOfOrder(username);
     }

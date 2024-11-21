@@ -2,10 +2,12 @@ package com.deliciouspizza.ui;
 
 import com.deliciouspizza.entity.order.Order;
 import com.deliciouspizza.entity.product.Product;
+import com.deliciouspizza.enums.StatusOrder;
 import com.deliciouspizza.exception.ErrorInProductNameException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
@@ -15,8 +17,6 @@ public class CustomerInterfaceImpl extends UserInterfaceImpl implements Customer
     private final Scanner scanner;
 
     private boolean isLoggedIn = false;
-
-    private static final int FOURTH_CHOICE = 4;
 
     public CustomerInterfaceImpl(Scanner scanner) {
         super(scanner);
@@ -92,8 +92,9 @@ public class CustomerInterfaceImpl extends UserInterfaceImpl implements Customer
             System.out.println("No orders in history.");
         } else {
 
+            Map<Integer, Order> temp = new HashMap<>();
             System.out.println("Order history:");
-            printOrderHistory(orderHistory);
+            printOrderHistory(orderHistory, temp);
         }
     }
 
@@ -148,8 +149,9 @@ public class CustomerInterfaceImpl extends UserInterfaceImpl implements Customer
         System.out.println("------------------------");
         System.out.println("1. Create new order");
         System.out.println("2. View order history");
-        System.out.println("3. Menu ");
-        System.out.println("4. Log out \n");
+        System.out.println("3. Repeat an order");
+        System.out.println("4. Menu ");
+        System.out.println("5. Log out \n");
     }
 
     public void showMainMenuCustomer(String username) {
@@ -163,8 +165,9 @@ public class CustomerInterfaceImpl extends UserInterfaceImpl implements Customer
             switch (choice) {
                 case FIRST_CHOICE -> createOrder(username);
                 case SECOND_CHOICE -> viewHistoryOfOrders(username);
-                case THIRD_CHOICE -> viewProductMenu();
-                case FOURTH_CHOICE -> {
+                case THIRD_CHOICE -> repeatAnOrder(username);
+                case FOURTH_CHOICE -> viewProductMenu();
+                case FIFTH_CHOICE -> {
                     System.out.println("Logging out...");
                     continueSession = false;
                 }
@@ -279,9 +282,11 @@ public class CustomerInterfaceImpl extends UserInterfaceImpl implements Customer
             orderService.getTotalPriceOfOrderForCustomer(username));
     }
 
-    private void printOrderHistory(Set<Order> orderHistory) {
+    private void printOrderHistory(Set<Order> orderHistory, Map<Integer, Order> orderMap) {
         int count = 1;
         for (Order order : orderHistory) {
+            orderMap.put(count, order);
+
             System.out.println(YELLOW + "Order #" + count + ":" + RESET);
 
             LocalDateTime orderDate = order.getOrderDate();
@@ -292,7 +297,7 @@ public class CustomerInterfaceImpl extends UserInterfaceImpl implements Customer
 
             for (Map.Entry<String, Integer> entry : order.getOrder().entrySet()) {
                 String product = entry.getKey().replaceAll("_", " ");
-                System.out.printf(" - %s, Количество: %d\n", product, entry.getValue());
+                System.out.printf(" - %s, Quantity: %d\n", product, entry.getValue());
             }
 
             count++;
@@ -300,8 +305,31 @@ public class CustomerInterfaceImpl extends UserInterfaceImpl implements Customer
         }
     }
 
-    public void repeatAnOrder() {
+    public void repeatAnOrder(String username) {
+        Set<Order> orderHistory = userService.getOrderHistory(username);
 
+        if (orderHistory.isEmpty()) {
+            System.out.println("No order history found.");
+            return;
+        }
+
+        Map<Integer, Order> orderMap = new HashMap<>();
+        printOrderHistory(orderHistory, orderMap);
+
+        System.out.print("Select an order number to repeat: ");
+        int selectedOrderNumber = getValidatedChoice();
+
+        Order selectedOrder = orderMap.get(selectedOrderNumber);
+
+        if (selectedOrder != null) {
+            selectedOrder.setStatusOrder(StatusOrder.PROCESSING);
+            selectedOrder.resetOrderDate();
+
+            orderService.finalizeRepeatedOrder(selectedOrder);
+            System.out.println("Order repeated successfully!");
+        } else {
+            System.out.println("Invalid order number. Try again.");
+        }
     }
 
 }

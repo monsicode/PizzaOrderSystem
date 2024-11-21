@@ -13,7 +13,7 @@ public class Customer extends User {
 
     private String address;
     private int age;
-    protected final Set<Order> orderHistory = new HashSet<>();
+    private final Set<Order> orderHistory = new HashSet<>();
 
     public Customer() {
         super("", "");

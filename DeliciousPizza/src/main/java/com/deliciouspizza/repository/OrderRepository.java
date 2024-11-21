@@ -258,4 +258,13 @@ public class OrderRepository {
         return 0;
     }
 
+    public void finalizeRepeatedOrder(Order order) {
+
+        if (order == null) {
+            throw new IllegalStateException("Order doesn't exit to be repeated");
+        }
+
+        addOrder(order);
+    }
+
 }

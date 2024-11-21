@@ -26,8 +26,6 @@ public class EmployeeInterfaceImpl extends UserInterfaceImpl implements Employee
 
     private boolean isLoggedIn = false;
 
-    private static final int FOURTH_CHOICE = 4;
-    private static final int FIFTH_CHOICE = 5;
     private static final int SIXTH_CHOICE = 6;
     private static final int SEVENTH_CHOICE = 7;
     private static final int EIGHTH_CHOICE = 8;

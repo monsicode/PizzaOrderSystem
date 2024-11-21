@@ -36,7 +36,7 @@ public class Order {
 
     private final Map<String, Integer> order;
     private StatusOrder statusOrder;
-    private final LocalDateTime orderDate;
+    private LocalDateTime orderDate;
     private double totalPrice;
     private String usernameCustomer;
 
@@ -150,6 +150,10 @@ public class Order {
 
     public void setUsernameCustomer(String usernameCustomer) {
         this.usernameCustomer = usernameCustomer;
+    }
+
+    public void resetOrderDate() {
+        this.orderDate = LocalDateTime.now();
     }
 
     public LocalDateTime getOrderDate() {
