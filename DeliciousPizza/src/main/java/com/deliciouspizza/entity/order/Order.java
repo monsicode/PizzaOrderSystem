@@ -10,6 +10,9 @@ import com.deliciouspizza.repository.ProductRepository;
 import com.deliciouspizza.enums.StatusOrder;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
@@ -18,21 +21,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-// StorageProduct
-// class StorageProductRepository
-
-// order --> checkProduct
-
-// Singleton<ProductRepository>
-
-//StorageProduct  =
-//storage.checkProductsAvailability....
-//checkProductsAvailability(order)
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Order {
 
-    private static int idCounter = 0; // Статичен брояч за уникални ID
+    private static final Logger LOGGER = LogManager.getLogger(Order.class);
+
+    private static int idCounter = 0;
     private final int id;
 
     private final Map<String, Integer> order;
@@ -41,7 +35,7 @@ public class Order {
     private double totalPrice;
     private String usernameCustomer;
 
-    private static final ProductRepository PRODUCT_REPOSITORY = Singleton.getInstance(ProductRepository.class);
+    private final ProductRepository productRepository = Singleton.getInstance(ProductRepository.class);
     private final Warehouse warehouse = Singleton.getInstance(Warehouse.class);
 
     public Order() {
@@ -77,32 +71,32 @@ public class Order {
 
     public void addProduct(String productKey, int quantity) throws InactiveProductException {
         if (productKey.isEmpty()) {
-            throw new IllegalArgumentException("Product cannot be null.");
+            throw new IllegalArgumentException("Product key cannot be empty.");
         }
 
         if (quantity < 1) {
             throw new IllegalArgumentException("Quantity cannot be less than 1");
         }
 
-        if (!PRODUCT_REPOSITORY.isProductActive(productKey)) {
+        if (!productRepository.isProductActive(productKey)) {
             throw new InactiveProductException("This product is inactive, can't be added to order!");
         }
 
-        //if we add a product to the order, we have to make sure we have it in the warehouse
         try {
             warehouse.reduceStock(productKey, quantity);
         } catch (IllegalArgumentException err) {
-            System.out.println(err.getMessage());
+            LOGGER.error(err.getMessage());
             return;
         }
 
         order.put(productKey, order.getOrDefault(productKey, 0) + quantity);
 
         try {
-            Product product = PRODUCT_REPOSITORY.getProduct(productKey);
+            Product product = productRepository.getProduct(productKey);
             totalPrice += (product.calculatePrice() * quantity);
+            LOGGER.info("Product {} added {} times successfully!", productKey, quantity);
         } catch (ProductDoesNotExistException err) {
-            System.out.println(err.getMessage());
+            LOGGER.error(err.getMessage());
         }
     }
 
@@ -128,19 +122,18 @@ public class Order {
         }
 
         try {
-            Product product = PRODUCT_REPOSITORY.getProduct(productKey);
+            Product product = productRepository.getProduct(productKey);
             totalPrice -= (product.calculatePrice() * order.getOrDefault(productKey, 1));
-            System.out.println("Product removed successfully!");
-
+            LOGGER.info("Product {} removed {} successfully!", productKey, quantity);
         } catch (ProductDoesNotExistException err) {
-            System.out.println(err.getMessage());
+            LOGGER.error(err.getMessage());
         }
     }
 
     private double calculateTotalPrice(Map<String, Integer> order) {
         double total = 0.0;
         for (Map.Entry<String, Integer> entry : order.entrySet()) {
-            total += PRODUCT_REPOSITORY.getActiveProduct(entry.getKey()).calculatePrice() * entry.getValue();
+            total += productRepository.getActiveProduct(entry.getKey()).calculatePrice() * entry.getValue();
         }
         return total;
     }

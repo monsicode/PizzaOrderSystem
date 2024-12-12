@@ -7,6 +7,8 @@ import com.deliciouspizza.exception.ProductDoesNotExistException;
 import com.deliciouspizza.repository.OrderRepository;
 import com.deliciouspizza.repository.ProductRepository;
 import com.deliciouspizza.repository.UserRepository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -14,12 +16,9 @@ import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 
-//----------------------------------
-//repeatOrder(User) {}
-//userRepo --> user.json
-//----------------------------------
-
 public class OrderService {
+
+    private static final Logger LOGGER = LogManager.getLogger(OrderService.class);
 
     private static final OrderRepository ORDER_REPOSITORY = Singleton.getInstance(OrderRepository.class);
     private static final UserRepository USER_REPOSITORY = Singleton.getInstance(UserRepository.class);
@@ -44,7 +43,7 @@ public class OrderService {
             if (isItGoodForUnderAgedCustomers(username, productKey)) {
                 ORDER_REPOSITORY.addProductToActiveOrder(username, productKey, quantity);
             } else {
-                System.out.println("Sorry, you can't have this drink, you are under aged");
+                LOGGER.warn("Sorry {}, you can't have this drink, you are under aged", username);
             }
 
         } catch (IllegalStateException | ProductDoesNotExistException e) {
@@ -94,15 +93,14 @@ public class OrderService {
     public void processCurrentOrder() {
         try {
             Order currentOrder = ORDER_REPOSITORY.getNextOrder();
-            System.out.println("Order processing started:");
-            System.out.println(currentOrder + "\n");
+            LOGGER.info("Started processing current order: {} ", currentOrder);
 
             if (currentOrder != null) {
                 ORDER_REPOSITORY.completeOrder(currentOrder);
                 String username = currentOrder.getUsernameCustomer();
                 USER_REPOSITORY.addToOrderHistory(username, currentOrder);
             } else {
-                System.out.println("There are no orders to process.");
+                LOGGER.warn("There are no orders to process.");
             }
 
         } catch (InterruptedException e) {

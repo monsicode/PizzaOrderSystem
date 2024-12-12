@@ -15,7 +15,6 @@ public class Singleton<T> {
         synchronized (INSTANCES) {
             if (!INSTANCES.containsKey(clazz)) {
                 try {
-                    // Създава нова инстанция, ако няма вече такава
                     INSTANCES.put(clazz, clazz.getDeclaredConstructor().newInstance());
                 } catch (Exception e) {
                     e.printStackTrace();

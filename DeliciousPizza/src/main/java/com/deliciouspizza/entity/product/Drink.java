@@ -7,13 +7,10 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import java.util.Objects;
 
-//exceptions --> thrown
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder({"type", "drink", "volume", "statusProduct"})
 public class Drink extends Product {
 
-    // later to add in User to have age. if user is under 18 -> exception
     private final DrinkType drink;
     private final DrinkVolume volume;
 

@@ -8,14 +8,14 @@ import com.deliciouspizza.enums.StatusProduct;
 import com.deliciouspizza.utils.Singleton;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
-
-//exceptions --> catch-ed
+import java.util.concurrent.ConcurrentHashMap;
 
 public class ProductRepository {
     private static final String FILE_PATH_INACTIVE_PRODUCTS = "src/main/resources/inactiveProduct.json";
@@ -24,57 +24,53 @@ public class ProductRepository {
     private final File jsonFileInactive = new File(FILE_PATH_INACTIVE_PRODUCTS);
 
     private final Warehouse warehouse = Singleton.getInstance(Warehouse.class);
-
+    private static final Logger LOGGER = LogManager.getLogger(ProductRepository.class);
 
     private Map<String, Product> inactiveProducts;
     private Map<String, Product> activeProducts;
     private final ObjectMapper objectMapper;
 
     public ProductRepository() {
-        inactiveProducts = new HashMap<>();
-        activeProducts = new HashMap<>();
+        inactiveProducts = new ConcurrentHashMap<>();
+        activeProducts = new ConcurrentHashMap<>();
         objectMapper = new ObjectMapper();
 
         loadActiveProducts();
         loadInActiveProducts();
     }
 
-    public void loadActiveProducts() {
+    public synchronized void loadActiveProducts() {
         try {
             if (jsonFileActive.length() == 0) {
-                activeProducts = new HashMap<>();
+                activeProducts = new ConcurrentHashMap<>();
             } else {
-                activeProducts = objectMapper.readValue(jsonFileActive, new TypeReference<Map<String, Product>>() {
+                activeProducts = objectMapper.readValue(jsonFileActive, new TypeReference<>() {
                 });
             }
         } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Error loading active products!");
+            LOGGER.error("Error loading active products", e);
         }
     }
 
-    public void loadInActiveProducts() {
+    public synchronized void loadInActiveProducts() {
         try {
             if (jsonFileInactive.length() == 0) {
-                inactiveProducts = new HashMap<>();
+                inactiveProducts = new ConcurrentHashMap<>();
             } else {
                 inactiveProducts = objectMapper.readValue(jsonFileInactive,
-                    new TypeReference<Map<String, Product>>() {
+                    new TypeReference<>() {
                     });
             }
         } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Error loading inactive products!");
+            LOGGER.error("Error loading inactive products", e);
         }
     }
 
-    //Write Map to JSON file
-    private void saveProducts(String path, Map<String, Product> productsMap) {
+    private synchronized void saveProducts(String path, Map<String, Product> productsMap) {
         try {
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(path), productsMap);
         } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Error saving products!");
+            LOGGER.error("Error saving products to file: {}", path, e);
         }
     }
 
@@ -90,7 +86,7 @@ public class ProductRepository {
         try {
             productValidation(product);
         } catch (ProductDoesNotExistException err) {
-            System.out.println(err.getMessage());
+            LOGGER.error("Product validation failed: {}", err.getMessage());
             return;
         }
 
@@ -105,15 +101,14 @@ public class ProductRepository {
         activeProducts.put(key, product);
         saveProducts(FILE_PATH_ACTIVE_PRODUCTS, activeProducts);
         saveProducts(FILE_PATH_INACTIVE_PRODUCTS, inactiveProducts);
-        System.out.println("Product activated successfully!");
-
+        LOGGER.info("Product activated successfully: {}", product.generateKey());
     }
 
     public void deactivateProduct(Product product) throws ProductAlreadyDeactivatedException {
         try {
             productValidation(product);
         } catch (ProductDoesNotExistException err) {
-            System.out.println(err.getMessage());
+            LOGGER.error("Product validation when deactivating product failed: {}", err.getMessage());
             return;
         }
 
@@ -128,7 +123,7 @@ public class ProductRepository {
         inactiveProducts.put(key, product);
         saveProducts(FILE_PATH_ACTIVE_PRODUCTS, activeProducts);
         saveProducts(FILE_PATH_INACTIVE_PRODUCTS, inactiveProducts);
-        System.out.println("Product deactivated successfully!");
+        LOGGER.info("Product deactivated successfully: {}", product.generateKey());
     }
 
     public Product getActiveProduct(String productName) {
@@ -149,19 +144,19 @@ public class ProductRepository {
             if (!inactiveProducts.containsKey(key) && product.getStatusProduct() == StatusProduct.INACTIVE) {
                 inactiveProducts.put(key, product);
                 saveProducts(FILE_PATH_INACTIVE_PRODUCTS, inactiveProducts);
-                System.out.println("Product added successfully!");
+                LOGGER.info("Product added successfully to inactive list: {}", product.generateKey());
 
                 //Checks to add in active.json
             } else if (product.getStatusProduct() == StatusProduct.ACTIVE && !activeProducts.containsKey(key)) {
                 activeProducts.put(key, product);
                 saveProducts(FILE_PATH_ACTIVE_PRODUCTS, activeProducts);
-                System.out.println("Product added successfully!");
+                LOGGER.info("Product added successfully to active list: {}", product.generateKey());
 
             } else {
                 throw new IllegalArgumentException("Product can't be added, because it already exist!");
             }
         } else {
-            System.out.println("Sorry, we don't have this product in the warehouse");
+            LOGGER.warn("Product does not exist in the warehouse: {}", product.generateKey());
         }
     }
 

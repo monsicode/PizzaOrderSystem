@@ -4,8 +4,6 @@ import com.deliciouspizza.enums.PizzaSize;
 import com.deliciouspizza.enums.PizzaType;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-//exceptions --> thrown
-
 @JsonPropertyOrder({"type", "pizzaType", "pizzaSize", "statusProduct"})
 public class Pizza extends Food {
     private final PizzaType pizzaType;

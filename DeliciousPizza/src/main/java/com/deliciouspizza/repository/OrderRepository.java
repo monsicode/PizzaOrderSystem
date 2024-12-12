@@ -21,23 +21,17 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-
-//-----------------
-//За бързодействие --> база данни или in-memory storage(при рестарт вс изчезва)
-//-->периодично записване на поръчките, на всеки 5-10 мин или при затваряне на приложението
-//-----------------
-//finishOrderForUser(User, Order);
-//savePendingOrder(Order) --> save pending order to the file
-//loadPendingOrders()
-//за периодично записване
-//private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-//-----------------
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class OrderRepository {
+
+    private static final Logger LOGGER = LogManager.getLogger(OrderRepository.class);
+
     private final BlockingQueue<Order> pendingOrders;
     private final Set<Order> historyOrders = ConcurrentHashMap.newKeySet();
 
-    private static final ProductRepository PRODUCT_REPOSITORY = Singleton.getInstance(ProductRepository.class);
+    private final ProductRepository productRepository = Singleton.getInstance(ProductRepository.class);
 
     private static final String FILE_PATH_ORDERS = "src/main/resources/pendingOrders.json";
     private static final String FILE_PATH_HISTORY_ORDERS = "src/main/resources/historyOrders.json";
@@ -56,18 +50,19 @@ public class OrderRepository {
         objectMapper.findAndRegisterModules();
 
         historyOrders.addAll(loadHistoryOrders());
-
         loadPendingOrders();
     }
 
     public void addOrder(Order order) {
         pendingOrders.add(order);
         savePendingOrders();
+        LOGGER.info("Order added to the queue: {}", order);
     }
 
     public Order getNextOrder() throws InterruptedException {
         Order order = pendingOrders.take();
         savePendingOrders();
+        LOGGER.info("Order retrieved from queue: {}", order);
         return order;
     }
 
@@ -80,7 +75,7 @@ public class OrderRepository {
                 pendingOrders.addAll(loadedOrders);
             }
         } catch (IOException e) {
-            System.err.println("Error loading orders: " + e.getMessage());
+            LOGGER.error("Error loading pending orders: ", e);
         }
     }
 
@@ -91,7 +86,7 @@ public class OrderRepository {
                 });
             }
         } catch (IOException e) {
-            System.err.println("Error loading completed orders: " + e.getMessage());
+            LOGGER.error("Error loading completed orders history: ", e);
         }
         return new HashSet<>();
     }
@@ -100,17 +95,16 @@ public class OrderRepository {
         try {
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(jsonFile, pendingOrders);
         } catch (IOException e) {
-            e.printStackTrace();
-            System.err.println("Error saving the orders!");
+            LOGGER.error("Error saving pending orders: ", e);
         }
     }
 
     private synchronized void saveHistoryOrders() {
         try {
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(historyJsonFile, historyOrders);
-            System.out.println("Order saved to history.");
+            LOGGER.info("Order history saved successfully.");
         } catch (IOException e) {
-            System.err.println("Error saving the completed order history: " + e.getMessage());
+            LOGGER.error("Error saving completed orders history: ", e);
         }
     }
 
@@ -122,8 +116,9 @@ public class OrderRepository {
         order.setStatusOrder(StatusOrder.COMPLETED);
         historyOrders.add(order);
         saveHistoryOrders();
-        System.out.println("Order completed! ");
         savePendingOrders();
+
+        LOGGER.info("Order completed: {}", order);
     }
 
     public synchronized void shutdown() {
@@ -142,7 +137,7 @@ public class OrderRepository {
             newOrder.setUsernameCustomer(username);
         }
 
-        System.out.println("New order started for user: " + username);
+        LOGGER.info("New order started for user: {}", username);
     }
 
     public void addProductToActiveOrder(String username, String productKey, int quantity) {
@@ -152,13 +147,11 @@ public class OrderRepository {
             throw new IllegalStateException("User does not have an active order. Start an order first.");
         }
 
-        //check if product exist
-
         try {
-            //order.addProduct(productKey, quantity);
             activeOrdersForCustomers.get(username).addProduct(productKey, quantity);
+            LOGGER.info("Added product {} to order for user {}: quantity {}", productKey, username, quantity);
         } catch (InactiveProductException | IllegalArgumentException e) {
-            System.out.println("Cannot add product to order: " + e.getMessage());
+            LOGGER.warn("Cannot add product to order for user {}: {}", username, e.getMessage());
         }
     }
 
@@ -169,7 +162,7 @@ public class OrderRepository {
         }
 
         if (order.getOrder().isEmpty()) {
-            System.out.println("Order is empty.");
+            LOGGER.warn("Current order is empty for user {}: {}", username, order);
         }
 
         return order;
@@ -181,18 +174,19 @@ public class OrderRepository {
             throw new IllegalStateException("User does not have an active order to finalize.");
         }
 
-        if (PRODUCT_REPOSITORY.isProductActive(productKey)) {
+        if (productRepository.isProductActive(productKey)) {
 
         }
 
         if (order.getOrder().isEmpty()) {
-            System.out.println("Order is empty.");
+            LOGGER.warn("Current order is empty for user {}: {}", username, order);
         }
 
         try {
             order.removeProduct(productKey, quantity);
+            LOGGER.info("Removed product {} from order for user {}: quantity {}", productKey, username, quantity);
         } catch (ProductNotInOrderException | IllegalArgumentException err) {
-            System.out.println(err.getMessage());
+            LOGGER.warn("Cannot remove product from order for user {}: {}", username, err.getMessage());
         }
 
     }
@@ -209,12 +203,11 @@ public class OrderRepository {
         }
 
         addOrder(order);
-        System.out.println("Order finalized and saved for user: " + username);
-        System.out.println(order);
+        LOGGER.info("Order finalized for user {}: {}", username, order);
     }
 
     public Set<Order> getCompletedOrders() {
-        return new HashSet<>(historyOrders); // Връщаме копие за безопасност
+        return new HashSet<>(historyOrders);
     }
 
     public long getCountOrderInPeriod(LocalDateTime from, LocalDateTime to) {
@@ -265,6 +258,7 @@ public class OrderRepository {
         }
 
         addOrder(order);
+        LOGGER.info("Order repeated successfully: {}", order);
     }
 
 }

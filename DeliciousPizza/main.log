@@ -1,0 +1,45 @@
+2024-12-11 17:33:19,121 [main] INFO com.deliciouspizza.mains.Main - some info msg
+2024-12-11 17:33:21,253 [main] INFO com.deliciouspizza.mains.Main - some info msg
+2024-12-12 15:06:29,784 [main] ERROR com.deliciouspizza.mains.MainOrderTest - This product is inactive, can't be added to order!
+2024-12-12 15:07:11,547 [main] ERROR com.deliciouspizza.mains.MainOrderTest - This product is inactive, can't be added to order!
+2024-12-12 15:09:02,819 [main] ERROR com.deliciouspizza.mains.MainOrderTest - An error occurred: This product is inactive, can't be added to order!
+com.deliciouspizza.exception.InactiveProductException: This product is inactive, can't be added to order!
+	at com.deliciouspizza.entity.order.Order.addProduct(Order.java:82) ~[classes/:?]
+	at com.deliciouspizza.mains.MainOrderTest.main(MainOrderTest.java:34) [classes/:?]
+2024-12-12 15:12:08,859 [main] ERROR com.deliciouspizza.mains.MainOrderTest - An error occurred: This product is inactive, can't be added to order!
+com.deliciouspizza.exception.InactiveProductException: This product is inactive, can't be added to order!
+	at com.deliciouspizza.entity.order.Order.addProduct(Order.java:82) ~[classes/:?]
+	at com.deliciouspizza.mains.MainOrderTest.main(MainOrderTest.java:34) [classes/:?]
+2024-12-12 15:14:09,828 [main] ERROR com.deliciouspizza.mains.MainOrderTest - An error occurred: This product is inactive, can't be added to order!
+com.deliciouspizza.exception.InactiveProductException: This product is inactive, can't be added to order!
+	at com.deliciouspizza.entity.order.Order.addProduct(Order.java:82) ~[classes/:?]
+	at com.deliciouspizza.mains.MainOrderTest.main(MainOrderTest.java:35) [classes/:?]
+2024-12-12 15:14:59,233 [main] INFO com.deliciouspizza.entity.order.Order - Product Pizza{pizzaType=PEPPERONI, pizzaSize=SMALL, type='pizza'}
+ removed successfully!
+2024-12-12 15:15:30,708 [main] INFO com.deliciouspizza.entity.order.Order - Product pizza_pepperoni_small removed successfully!
+2024-12-12 16:26:33,655 [main] INFO com.deliciouspizza.mains.Main - some info msg
+2024-12-12 16:26:52,742 [main] INFO com.deliciouspizza.entity.order.Order - Product pizza_pepperoni_small added successfully!
+2024-12-12 16:26:52,747 [main] INFO com.deliciouspizza.entity.order.Order - Product pizza_pepperoni_small removed successfully!
+2024-12-12 16:27:48,024 [main] INFO com.deliciouspizza.entity.order.Order - Product pizza_pepperoni_small added 2 times successfully!
+2024-12-12 16:27:48,028 [main] INFO com.deliciouspizza.entity.order.Order - Product pizza_pepperoni_small removed successfully!
+2024-12-12 16:28:55,973 [main] INFO com.deliciouspizza.entity.order.Order - Product pizza_pepperoni_small added 2 times successfully!
+2024-12-12 16:28:55,978 [main] INFO com.deliciouspizza.entity.order.Order - Product pizza_pepperoni_small removed 1 successfully!
+2024-12-12 19:35:38,906 [main] INFO com.repository.com.deliciouspizza.Warehouse - Stock loaded successfully from file.
+2024-12-12 19:36:04,064 [main] INFO com.repository.com.deliciouspizza.OrderRepository - New order started for user: monkata
+2024-12-12 19:36:13,239 [main] WARN com.repository.com.deliciouspizza.OrderRepository - Cannot add product to order for user monkata: This product is inactive, can't be added to order!
+2024-12-12 19:37:22,771 [main] WARN com.repository.com.deliciouspizza.OrderRepository - Cannot add product to order for user monkata: This product is inactive, can't be added to order!
+2024-12-12 19:38:05,376 [main] WARN com.repository.com.deliciouspizza.OrderRepository - Current order is empty for user monkata:
+Order : 
+2024-12-12 19:38:05,377 [main] WARN com.repository.com.deliciouspizza.OrderRepository - Current order is empty for user monkata:
+Order : 
+2024-12-12 20:07:38,921 [main] INFO com.deliciouspizza.entity.order.Order - Product abcd added 2 times successfully!
+2024-12-12 20:07:38,930 [main] INFO com.deliciouspizza.entity.order.Order - Product abcd removed -1 successfully!
+2024-12-12 20:07:38,946 [main] INFO com.deliciouspizza.entity.order.Order - Product abcd added 3 times successfully!
+2024-12-12 20:07:38,964 [main] INFO com.deliciouspizza.entity.order.Order - Product abcd added 2 times successfully!
+2024-12-12 20:07:38,965 [main] INFO com.deliciouspizza.entity.order.Order - Product abcd removed 1 successfully!
+2024-12-12 20:07:38,971 [main] INFO com.deliciouspizza.entity.order.Order - Product abcd added 2 times successfully!
+2024-12-12 20:07:38,972 [main] INFO com.deliciouspizza.entity.order.Order - Product abcd removed 2 successfully!
+2024-12-12 20:07:38,995 [main] INFO com.deliciouspizza.entity.order.Order - Product abcd added 1 times successfully!
+2024-12-12 20:07:39,027 [main] INFO com.deliciouspizza.entity.order.Order - Product abcd added 2 times successfully!
+2024-12-12 20:07:39,040 [main] INFO com.deliciouspizza.entity.order.Order - Product abcd added 2 times successfully!
+2024-12-12 20:07:39,040 [main] INFO com.deliciouspizza.entity.order.Order - Product abcd removed 1 successfully!
