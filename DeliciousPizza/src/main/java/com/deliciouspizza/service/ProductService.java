@@ -11,19 +11,19 @@ import java.util.Map;
 
 public class ProductService {
 
-    private static final ProductRepository PRODUCT_REPOSITORY = Singleton.getInstance(ProductRepository.class);
+    private final ProductRepository productRepository = Singleton.getInstance(ProductRepository.class);
 
     public Map<String, Product> getAllActiveProducts() {
-        return PRODUCT_REPOSITORY.getAllActiveProducts();
+        return productRepository.getAllActiveProducts();
     }
 
     public Map<String, Product> getAllInactiveProducts() {
-        return PRODUCT_REPOSITORY.getAllInactiveProducts();
+        return productRepository.getAllInactiveProducts();
     }
 
     public void addNewProduct(Product product) {
         try {
-            PRODUCT_REPOSITORY.addProduct(product);
+            productRepository.addProduct(product);
         } catch (IllegalArgumentException err) {
             System.out.println(err.getMessage());
         }
@@ -31,7 +31,7 @@ public class ProductService {
 
     public void deactivateProduct(Product product) {
         try {
-            PRODUCT_REPOSITORY.deactivateProduct(product);
+            productRepository.deactivateProduct(product);
         } catch (ProductAlreadyDeactivatedException | IllegalArgumentException err) {
             System.out.println(err.getMessage());
         }
@@ -39,7 +39,7 @@ public class ProductService {
 
     public void activateProduct(Product product) {
         try {
-            PRODUCT_REPOSITORY.activateProduct(product);
+            productRepository.activateProduct(product);
         } catch (ProductAlreadyActiveException | IllegalArgumentException err) {
             System.out.println(err.getMessage());
         }
@@ -47,7 +47,7 @@ public class ProductService {
 
     public double getProductPriceByKey(String productKey) {
         try {
-            Product product = PRODUCT_REPOSITORY.getProduct(productKey);
+            Product product = productRepository.getProduct(productKey);
             return product.calculatePrice();
         } catch (ProductDoesNotExistException err) {
             System.out.println(err.getMessage());
@@ -57,16 +57,16 @@ public class ProductService {
 
     //do we need this methods ?
     public Product getActiveProduct(String product) {
-        return PRODUCT_REPOSITORY.getActiveProduct(product);
+        return productRepository.getActiveProduct(product);
     }
 
     public Product getInactiveProduct(String product) {
-        return PRODUCT_REPOSITORY.getInactiveProduct(product);
+        return productRepository.getInactiveProduct(product);
     }
 
     //catching the exception in EmplpoyeeImpl
     public Product getProductByKey(String productKey) {
-        return PRODUCT_REPOSITORY.getProduct(productKey);
+        return productRepository.getProduct(productKey);
     }
 
 }
