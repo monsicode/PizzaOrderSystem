@@ -8,6 +8,8 @@ import com.deliciouspizza.entity.user.User;
 import com.deliciouspizza.enums.UserRights;
 import com.deliciouspizza.exception.UserNotFoundException;
 import com.deliciouspizza.repository.UserRepository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.Set;
@@ -15,7 +17,7 @@ import java.util.Set;
 public class UserService {
 
     private final UserRepository userRepository = Singleton.getInstance(UserRepository.class);
-    private static OrderService orderService;
+    private static final Logger LOGGER = LogManager.getLogger(UserService.class);
 
     public boolean checkIfUserExists(String username) {
         return userRepository.isUsernamePresent(username);
@@ -23,7 +25,7 @@ public class UserService {
 
     public void registerCustomer(String username, String plainPassword, String address, int age) {
         if (userRepository.isUsernamePresent(username)) {
-            System.out.println("User with this username already exists.");
+            LOGGER.warn("User with username {} already exists.", username);
             return;
         }
 
@@ -33,15 +35,15 @@ public class UserService {
         try {
             userRepository.addUser(newUser);
         } catch (Exception e) {
-            System.out.println("Error when saving the user " + e.getMessage());
+            LOGGER.error("Error when saving customer {} : {}", username, e.getMessage(), e);
         }
 
-        System.out.println("The user is successfully registered!");
+        LOGGER.info("Customer {} is successfully registered!", username);
     }
 
     public void registerEmployee(String username, String plainPassword) {
         if (userRepository.isUsernamePresent(username)) {
-            System.out.println("User with this username already exists.");
+            LOGGER.warn("Employee with username {} already exists.", username);
             return;
         }
 
@@ -52,26 +54,26 @@ public class UserService {
         try {
             userRepository.addUser(newUser);
         } catch (Exception e) {
-            System.out.println("Error when saving the user " + e.getMessage());
+            LOGGER.error("Error when saving employee {} : {}", username, e.getMessage(), e);
         }
 
-        System.out.println("The user is successfully registered!");
+        LOGGER.info("Employee {} is successfully registered!", username);
     }
 
     public boolean loginUser(String username, String plainPassword) {
         try {
             User user = userRepository.getUserByUsername(username);
             if (user.checkPassword(plainPassword)) {
-                System.out.println("Log in is successful!");
+                LOGGER.info("Log in for user {} is successful!", username);
                 return true;
 
             } else {
-                System.out.println("Wrong password.");
+                LOGGER.warn("Wrong password.");
                 return false;
             }
 
         } catch (UserNotFoundException err) {
-            System.out.println(err.getMessage());
+            LOGGER.error(err.getMessage(), err);
         }
 
         return false;
@@ -81,7 +83,7 @@ public class UserService {
         try {
             return userRepository.getUserByUsername(username).getRights();
         } catch (UserNotFoundException err) {
-            System.out.println(err.getMessage());
+            LOGGER.error(err.getMessage(), err);
         }
 
         return null;

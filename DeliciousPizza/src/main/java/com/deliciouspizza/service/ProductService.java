@@ -6,11 +6,14 @@ import com.deliciouspizza.exception.ProductAlreadyActiveException;
 import com.deliciouspizza.exception.ProductAlreadyDeactivatedException;
 import com.deliciouspizza.exception.ProductDoesNotExistException;
 import com.deliciouspizza.repository.ProductRepository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Map;
 
 public class ProductService {
 
+    private static final Logger LOGGER = LogManager.getLogger(ProductService.class);
     private final ProductRepository productRepository = Singleton.getInstance(ProductRepository.class);
 
     public Map<String, Product> getAllActiveProducts() {
@@ -25,7 +28,7 @@ public class ProductService {
         try {
             productRepository.addProduct(product);
         } catch (IllegalArgumentException err) {
-            System.out.println(err.getMessage());
+            LOGGER.error(err.getMessage(), err);
         }
     }
 
@@ -33,7 +36,7 @@ public class ProductService {
         try {
             productRepository.deactivateProduct(product);
         } catch (ProductAlreadyDeactivatedException | IllegalArgumentException err) {
-            System.out.println(err.getMessage());
+            LOGGER.error(err.getMessage(), err);
         }
     }
 
@@ -41,7 +44,7 @@ public class ProductService {
         try {
             productRepository.activateProduct(product);
         } catch (ProductAlreadyActiveException | IllegalArgumentException err) {
-            System.out.println(err.getMessage());
+            LOGGER.error(err.getMessage(), err);
         }
     }
 
@@ -50,21 +53,12 @@ public class ProductService {
             Product product = productRepository.getProduct(productKey);
             return product.calculatePrice();
         } catch (ProductDoesNotExistException err) {
-            System.out.println(err.getMessage());
+            LOGGER.error(err.getMessage(), err);
         }
         return 0;
     }
 
-    //do we need this methods ?
-    public Product getActiveProduct(String product) {
-        return productRepository.getActiveProduct(product);
-    }
-
-    public Product getInactiveProduct(String product) {
-        return productRepository.getInactiveProduct(product);
-    }
-
-    //catching the exception in EmplpoyeeImpl
+    //catching the exception in EmployeeImpl
     public Product getProductByKey(String productKey) {
         return productRepository.getProduct(productKey);
     }

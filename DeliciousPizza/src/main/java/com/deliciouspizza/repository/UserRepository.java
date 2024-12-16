@@ -6,54 +6,64 @@ import com.deliciouspizza.entity.user.User;
 import com.deliciouspizza.exception.UserNotFoundException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectReader;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class UserRepository {
 
-    private Map<String, User> users = new HashMap<>();
+    private Map<String, User> users = new ConcurrentHashMap<>();
     private static final String USER_FILE = "src/main/resources/users.json";
-    private final ObjectMapper objectMapper;
     private final File jsonFile = new File(USER_FILE);
     TypeReference<Map<String, User>> typeRef = new TypeReference<>() {
     };
 
+    private static final Logger LOGGER = LogManager.getLogger(UserRepository.class);
+
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+
+    static {
+        OBJECT_MAPPER.registerModule(new JavaTimeModule());
+        OBJECT_MAPPER.findAndRegisterModules();
+    }
+
     public UserRepository() {
-        objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new JavaTimeModule());
-        objectMapper.findAndRegisterModules();
-//        objectMapper.registerSubtypes(Customer.class, Employee.class);
         users = loadUsers();
     }
 
     private Map<String, User> loadUsers() {
         try {
             if (jsonFile.exists() && jsonFile.length() > 0) {
-                users = objectMapper.readValue(jsonFile, typeRef);
+                users = OBJECT_MAPPER.readValue(jsonFile, typeRef);
                 return users;
             } else {
-                return new HashMap<>();
+                return new ConcurrentHashMap<>();
             }
         } catch (IOException e) {
             System.err.println("Error loading users: " + e.getMessage());
-            return new HashMap<>();
+            return new ConcurrentHashMap<>();
         }
     }
 
     private void saveUsers() {
         try {
-            objectMapper.writerWithDefaultPrettyPrinter().writeValue(jsonFile, users);
+            OBJECT_MAPPER.writerWithDefaultPrettyPrinter().writeValue(jsonFile, users);
         } catch (IOException e) {
             System.err.println("Error saving users: " + e.getMessage());
         }
     }
 
     public void addUser(User user) {
+        LOGGER.info("Adding new user with username: {}", user.getUsername());
         users.put(user.getUsername(), user);
         saveUsers();
     }
@@ -65,6 +75,7 @@ public class UserRepository {
             throw new UserNotFoundException("User with username " + username + " not found");
         }
 
+       // LOGGER.info("User {} successfully retrieved.", username);
         return user;
     }
 
@@ -73,7 +84,8 @@ public class UserRepository {
     }
 
     public Map<String, User> getAllUsers() {
-        return users;
+        LOGGER.info("Retrieving all users. Total count: {}", users.size());
+        return Collections.unmodifiableMap(users);
     }
 
     public void addToOrderHistory(String usernameCustomer, Order order) {
@@ -84,11 +96,12 @@ public class UserRepository {
             }
 
             customer.addOrderToHistory(order);
-
             saveUsers();
 
+            LOGGER.info("Order successfully added to history for user: {}", usernameCustomer);
+
         } catch (UserNotFoundException err) {
-            System.out.println(err.getMessage());
+            LOGGER.error(err.getMessage());
         }
     }
 
@@ -104,7 +117,7 @@ public class UserRepository {
             return customer.getOrderHistory();
 
         } catch (UserNotFoundException err) {
-            System.out.println(err.getMessage());
+            LOGGER.error(err.getMessage());
         }
         return null;
     }
@@ -120,7 +133,7 @@ public class UserRepository {
             return customer.getAge();
 
         } catch (UserNotFoundException err) {
-            System.out.println(err.getMessage());
+            LOGGER.error(err.getMessage());
         }
 
         return 0;

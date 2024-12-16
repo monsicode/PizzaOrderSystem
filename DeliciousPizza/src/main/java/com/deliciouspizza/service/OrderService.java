@@ -29,12 +29,13 @@ public class OrderService {
     private final Map<String, Order> activeOrders = new ConcurrentHashMap<>();
 
     public void startNewOrder(String username) {
-//        try {
-//            ORDER_REPOSITORY.startNewOrder(username);
-//        } catch (IllegalStateException err) {
-//            System.out.println(err.getMessage());
-//        }
-        orderRepository.startNewOrder(username);
+
+        try {
+            orderRepository.startNewOrder(username);
+        } catch (IllegalStateException err) {
+            LOGGER.error(err.getMessage(), err);
+        }
+
     }
 
     public void addProductToActiveOrder(String username, String productKey, int quantity)
@@ -55,7 +56,7 @@ public class OrderService {
         try {
             orderRepository.removeFromCurrentOrderForUser(username, productKey, quantity);
         } catch (IllegalStateException err) {
-            System.out.println(err.getMessage());
+            LOGGER.error(err.getMessage(), err);
         }
     }
 
@@ -63,7 +64,7 @@ public class OrderService {
         try {
             return orderRepository.getCurrentOrderForUser(username).getOrder();
         } catch (IllegalStateException err) {
-            System.out.println(err.getMessage());
+            LOGGER.error(err.getMessage(), err);
         }
         return new HashMap<>();
     }
@@ -73,7 +74,7 @@ public class OrderService {
         try {
             orderRepository.finalizeOrder(username);
         } catch (IllegalStateException err) {
-            System.out.println(err.getMessage());
+            LOGGER.error(err.getMessage(), err);
         }
     }
 
@@ -81,7 +82,7 @@ public class OrderService {
         try {
             orderRepository.finalizeRepeatedOrder(order);
         } catch (IllegalStateException err) {
-            System.out.println(err.getMessage());
+            LOGGER.error(err.getMessage(), err);
         }
     }
 
@@ -103,9 +104,9 @@ public class OrderService {
                 LOGGER.warn("There are no orders to process.");
             }
 
-        } catch (InterruptedException e) {
+        } catch (InterruptedException err) {
             Thread.currentThread().interrupt();
-            System.err.println("Error processing the order " + e.getMessage());
+            LOGGER.error("Error processing the order {}", err.getMessage(), err);
         }
     }
 

@@ -70,10 +70,6 @@ public class Order {
     }
 
     public void addProduct(String productKey, int quantity) throws InactiveProductException {
-        if (productKey.isEmpty()) {
-            throw new IllegalArgumentException("Product key cannot be empty.");
-        }
-
         if (quantity < 1) {
             throw new IllegalArgumentException("Quantity cannot be less than 1");
         }
@@ -100,16 +96,22 @@ public class Order {
         }
     }
 
+    @SuppressWarnings("checkstyle:MethodLength")
     public void removeProduct(String productKey, Integer quantity) throws ProductNotInOrderException {
-        if (productKey.isEmpty()) {
-            throw new IllegalArgumentException("Product key cannot be null.");
+        if (productKey == null || productKey.isBlank()) {
+            throw new IllegalArgumentException("Product key cannot be empty string.");
         }
 
         if (!order.containsKey(productKey)) {
             throw new ProductNotInOrderException("The product is not in the order and cannot be removed.");
         }
 
+        if (quantity < 0) {
+            throw new IllegalArgumentException("The quantity you want to remove cannot be less than 0");
+        }
+
         int currentQuantity = getQuantityProduct(productKey);
+
         if (quantity > currentQuantity) {
             throw new IllegalArgumentException(
                 "The quantity you want to remove has to be less or equal to current quantity!");

@@ -56,7 +56,7 @@ public class OrderRepository {
     public void addOrder(Order order) {
         pendingOrders.add(order);
         savePendingOrders();
-        LOGGER.info("Order added to the queue: {}", order);
+        LOGGER.info("Order added to the queue");
     }
 
     public Order getNextOrder() throws InterruptedException {

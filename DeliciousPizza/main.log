@@ -43,3 +43,128 @@ Order :
 2024-12-12 20:07:39,027 [main] INFO com.deliciouspizza.entity.order.Order - Product abcd added 2 times successfully!
 2024-12-12 20:07:39,040 [main] INFO com.deliciouspizza.entity.order.Order - Product abcd added 2 times successfully!
 2024-12-12 20:07:39,040 [main] INFO com.deliciouspizza.entity.order.Order - Product abcd removed 1 successfully!
+2024-12-15 15:33:45,298 [main] INFO com.deliciouspizza.entity.order.Order - Product abcd added 2 times successfully!
+2024-12-15 15:33:45,306 [main] INFO com.deliciouspizza.entity.order.Order - Product abcd removed -1 successfully!
+2024-12-15 15:33:45,320 [main] INFO com.deliciouspizza.entity.order.Order - Product abcd added 3 times successfully!
+2024-12-15 15:33:45,340 [main] INFO com.deliciouspizza.entity.order.Order - Product abcd added 2 times successfully!
+2024-12-15 15:33:45,340 [main] INFO com.deliciouspizza.entity.order.Order - Product abcd removed 1 successfully!
+2024-12-15 15:33:45,347 [main] INFO com.deliciouspizza.entity.order.Order - Product abcd added 2 times successfully!
+2024-12-15 15:33:45,348 [main] INFO com.deliciouspizza.entity.order.Order - Product abcd removed 2 successfully!
+2024-12-15 15:33:45,370 [main] INFO com.deliciouspizza.entity.order.Order - Product abcd added 1 times successfully!
+2024-12-15 15:33:45,406 [main] INFO com.deliciouspizza.entity.order.Order - Product abcd added 2 times successfully!
+2024-12-15 15:33:45,416 [main] INFO com.deliciouspizza.entity.order.Order - Product abcd added 2 times successfully!
+2024-12-15 15:33:45,416 [main] INFO com.deliciouspizza.entity.order.Order - Product abcd removed 1 successfully!
+2024-12-15 15:34:13,613 [main] INFO com.deliciouspizza.repository.Warehouse - Stock loaded successfully from file.
+2024-12-15 15:34:29,561 [main] INFO com.deliciouspizza.repository.OrderRepository - New order started for user: monkata
+2024-12-15 15:34:42,493 [main] WARN com.deliciouspizza.repository.OrderRepository - Cannot add product to order for user monkata: This product is inactive, can't be added to order!
+2024-12-15 15:34:52,918 [main] WARN com.deliciouspizza.repository.OrderRepository - Current order is empty for user monkata: 
+Order : 
+2024-12-15 15:34:52,919 [main] WARN com.deliciouspizza.repository.OrderRepository - Current order is empty for user monkata: 
+Order : 
+2024-12-15 15:35:36,359 [main] INFO com.deliciouspizza.repository.OrderRepository - New order started for user: monkata
+2024-12-15 15:35:40,149 [main] INFO com.deliciouspizza.repository.Warehouse - Reduced stock of product pizza_pepperoni_small by 3 units. Remaining stock: 57
+2024-12-15 15:35:40,162 [main] INFO com.deliciouspizza.repository.Warehouse - Stock saved successfully to file.
+2024-12-15 15:35:40,163 [main] INFO com.deliciouspizza.entity.order.Order - Product pizza_pepperoni_small added 3 times successfully!
+2024-12-15 15:35:40,163 [main] INFO com.deliciouspizza.repository.OrderRepository - Added product pizza_pepperoni_small to order for user monkata: quantity 3
+2024-12-15 15:36:19,152 [main] INFO com.deliciouspizza.entity.order.Order - Product pizza_pepperoni_small removed -3 successfully!
+2024-12-15 15:36:19,152 [main] INFO com.deliciouspizza.repository.OrderRepository - Removed product pizza_pepperoni_small from order for user monkata: quantity -3
+2024-12-15 15:39:00,077 [main] INFO com.deliciouspizza.repository.Warehouse - Stock loaded successfully from file.
+2024-12-15 15:39:27,878 [main] INFO com.deliciouspizza.repository.OrderRepository - New order started for user: monkata
+2024-12-15 15:39:30,312 [main] INFO com.deliciouspizza.repository.Warehouse - Reduced stock of product pizza_pepperoni_small by 3 units. Remaining stock: 54
+2024-12-15 15:39:30,324 [main] INFO com.deliciouspizza.repository.Warehouse - Stock saved successfully to file.
+2024-12-15 15:39:30,325 [main] INFO com.deliciouspizza.entity.order.Order - Product pizza_pepperoni_small added 3 times successfully!
+2024-12-15 15:39:30,325 [main] INFO com.deliciouspizza.repository.OrderRepository - Added product pizza_pepperoni_small to order for user monkata: quantity 3
+2024-12-15 15:39:35,357 [main] INFO com.deliciouspizza.repository.OrderRepository - Order added to the queue: 
+Order : 
+	Product: pizza_pepperoni_small; Quantity: 3
+2024-12-15 15:39:35,357 [main] INFO com.deliciouspizza.repository.OrderRepository - Order finalized for user monkata: 
+Order : 
+	Product: pizza_pepperoni_small; Quantity: 3
+2024-12-15 15:39:48,112 [main] INFO com.deliciouspizza.repository.OrderRepository - New order started for user: monkata
+2024-12-15 15:39:51,258 [main] INFO com.deliciouspizza.repository.Warehouse - Reduced stock of product pizza_pepperoni_small by 2 units. Remaining stock: 52
+2024-12-15 15:39:51,261 [main] INFO com.deliciouspizza.repository.Warehouse - Stock saved successfully to file.
+2024-12-15 15:39:51,261 [main] INFO com.deliciouspizza.entity.order.Order - Product pizza_pepperoni_small added 2 times successfully!
+2024-12-15 15:39:51,261 [main] INFO com.deliciouspizza.repository.OrderRepository - Added product pizza_pepperoni_small to order for user monkata: quantity 2
+2024-12-15 15:40:08,968 [main] WARN com.deliciouspizza.repository.OrderRepository - Cannot remove product from order for user monkata: The quantity you want to remove cannot be less than 0
+2024-12-15 15:40:32,847 [main] WARN com.deliciouspizza.repository.OrderRepository - Cannot add product to order for user monkata: Quantity cannot be less than 1
+2024-12-16 16:04:22,507 [main] INFO com.deliciouspizza.entity.order.Order - Product abcd added 2 times successfully!
+2024-12-16 16:04:22,535 [main] INFO com.deliciouspizza.entity.order.Order - Product abcd added 3 times successfully!
+2024-12-16 16:04:22,559 [main] INFO com.deliciouspizza.entity.order.Order - Product abcd added 2 times successfully!
+2024-12-16 16:04:22,559 [main] INFO com.deliciouspizza.entity.order.Order - Product abcd removed 1 successfully!
+2024-12-16 16:04:22,568 [main] INFO com.deliciouspizza.entity.order.Order - Product abcd added 2 times successfully!
+2024-12-16 16:04:22,569 [main] INFO com.deliciouspizza.entity.order.Order - Product abcd removed 2 successfully!
+2024-12-16 16:04:22,597 [main] INFO com.deliciouspizza.entity.order.Order - Product abcd added 1 times successfully!
+2024-12-16 16:04:22,640 [main] INFO com.deliciouspizza.entity.order.Order - Product abcd added 2 times successfully!
+2024-12-16 16:04:22,651 [main] INFO com.deliciouspizza.entity.order.Order - Product abcd added 2 times successfully!
+2024-12-16 16:04:22,651 [main] INFO com.deliciouspizza.entity.order.Order - Product abcd removed 1 successfully!
+2024-12-16 16:04:47,627 [main] ERROR com.deliciouspizza.repository.UserRepository - Error loading users from file 'src/main/resources/users.json': No value type configured for ObjectReader
+ at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 1]
+com.fasterxml.jackson.databind.exc.InvalidDefinitionException: No value type configured for ObjectReader
+ at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 1]
+	at com.fasterxml.jackson.databind.exc.InvalidDefinitionException.from(InvalidDefinitionException.java:67) ~[jackson-databind-2.16.1.jar:2.16.1]
+	at com.fasterxml.jackson.databind.DeserializationContext.reportBadDefinition(DeserializationContext.java:1887) ~[jackson-databind-2.16.1.jar:2.16.1]
+	at com.fasterxml.jackson.databind.ObjectReader._findRootDeserializer(ObjectReader.java:2397) ~[jackson-databind-2.16.1.jar:2.16.1]
+	at com.fasterxml.jackson.databind.ObjectReader._bindAndClose(ObjectReader.java:2125) ~[jackson-databind-2.16.1.jar:2.16.1]
+	at com.fasterxml.jackson.databind.ObjectReader.readValue(ObjectReader.java:1673) ~[jackson-databind-2.16.1.jar:2.16.1]
+	at com.deliciouspizza.repository.UserRepository.loadUsers(UserRepository.java:54) ~[classes/:?]
+	at com.deliciouspizza.repository.UserRepository.<init>(UserRepository.java:44) ~[classes/:?]
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62) [?:?]
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:501) ~[?:?]
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:485) ~[?:?]
+	at com.deliciouspizza.utils.Singleton.getInstance(Singleton.java:18) ~[classes/:?]
+	at com.deliciouspizza.service.UserService.<init>(UserService.java:19) ~[classes/:?]
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62) [?:?]
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:501) [?:?]
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:485) [?:?]
+	at com.deliciouspizza.utils.Singleton.getInstance(Singleton.java:18) [classes/:?]
+	at com.deliciouspizza.ui.UserInterfaceImpl.<init>(UserInterfaceImpl.java:21) [classes/:?]
+	at com.deliciouspizza.PizzaApp.main(PizzaApp.java:13) [classes/:?]
+2024-12-16 16:04:47,676 [main] INFO com.deliciouspizza.repository.Warehouse - Stock loaded successfully from file.
+2024-12-16 16:10:00,053 [main] INFO com.deliciouspizza.repository.Warehouse - Stock loaded successfully from file.
+2024-12-16 16:10:13,669 [main] ERROR com.deliciouspizza.service.UserService - User with username monkatA not found
+com.deliciouspizza.exception.UserNotFoundException: User with username monkatA not found
+	at com.deliciouspizza.repository.UserRepository.getUserByUsername(UserRepository.java:75) ~[classes/:?]
+	at com.deliciouspizza.service.UserService.getUserRights(UserService.java:84) [classes/:?]
+	at com.deliciouspizza.ui.UserInterfaceImpl.handleLogin(UserInterfaceImpl.java:67) [classes/:?]
+	at com.deliciouspizza.ui.UserInterfaceImpl.displayMenu(UserInterfaceImpl.java:50) [classes/:?]
+	at com.deliciouspizza.PizzaApp.main(PizzaApp.java:17) [classes/:?]
+2024-12-16 16:11:13,018 [main] INFO com.deliciouspizza.repository.UserRepository - User monkata successfully retrieved.
+2024-12-16 16:11:13,031 [main] INFO com.deliciouspizza.repository.UserRepository - User monkata successfully retrieved.
+2024-12-16 16:11:13,097 [main] INFO com.deliciouspizza.service.UserService - Log in for user monkata is successful!
+2024-12-16 16:12:14,284 [main] INFO com.deliciouspizza.repository.UserRepository - User monkata successfully retrieved.
+2024-12-16 16:13:09,860 [main] INFO com.deliciouspizza.repository.OrderRepository - New order started for user: monkata
+2024-12-16 16:13:29,494 [main] INFO com.deliciouspizza.repository.UserRepository - User monkata successfully retrieved.
+2024-12-16 16:13:29,495 [main] INFO com.deliciouspizza.repository.Warehouse - Reduced stock of product pizza_pepperoni_small by 3 units. Remaining stock: 49
+2024-12-16 16:13:29,507 [main] INFO com.deliciouspizza.repository.Warehouse - Stock saved successfully to file.
+2024-12-16 16:13:29,507 [main] INFO com.deliciouspizza.entity.order.Order - Product pizza_pepperoni_small added 3 times successfully!
+2024-12-16 16:13:29,508 [main] INFO com.deliciouspizza.repository.OrderRepository - Added product pizza_pepperoni_small to order for user monkata: quantity 3
+2024-12-16 16:14:23,650 [main] WARN com.deliciouspizza.repository.OrderRepository - Cannot remove product from order for user monkata: The product is not in the order and cannot be removed.
+2024-12-16 16:14:43,674 [main] INFO com.deliciouspizza.repository.OrderRepository - Order added to the queue: 
+Order : 
+	Product: pizza_pepperoni_small; Quantity: 3
+2024-12-16 16:14:43,674 [main] INFO com.deliciouspizza.repository.OrderRepository - Order finalized for user monkata: 
+Order : 
+	Product: pizza_pepperoni_small; Quantity: 3
+2024-12-16 16:40:19,195 [main] INFO com.deliciouspizza.repository.UserRepository - User monkata successfully retrieved.
+2024-12-16 16:41:54,589 [main] INFO com.deliciouspizza.repository.Warehouse - Stock loaded successfully from file.
+2024-12-16 16:42:03,324 [main] INFO com.deliciouspizza.service.UserService - Log in for user monkata is successful!
+2024-12-16 16:42:18,903 [main] INFO com.deliciouspizza.repository.OrderRepository - New order started for user: monkata
+2024-12-16 16:43:34,041 [main] INFO com.deliciouspizza.repository.Warehouse - Stock loaded successfully from file.
+2024-12-16 16:43:41,467 [main] INFO com.deliciouspizza.service.UserService - Log in for user monkata is successful!
+2024-12-16 16:43:43,191 [main] INFO com.deliciouspizza.repository.OrderRepository - New order started for user: monkata
+2024-12-16 16:43:51,272 [main] INFO com.deliciouspizza.repository.Warehouse - Reduced stock of product pizza_pepperoni_small by 2 units. Remaining stock: 47
+2024-12-16 16:43:51,286 [main] INFO com.deliciouspizza.repository.Warehouse - Stock saved successfully to file.
+2024-12-16 16:43:51,286 [main] INFO com.deliciouspizza.entity.order.Order - Product pizza_pepperoni_small added 2 times successfully!
+2024-12-16 16:43:51,286 [main] INFO com.deliciouspizza.repository.OrderRepository - Added product pizza_pepperoni_small to order for user monkata: quantity 2
+2024-12-16 16:46:11,128 [main] INFO com.deliciouspizza.repository.Warehouse - Stock loaded successfully from file.
+2024-12-16 16:46:20,101 [main] INFO com.deliciouspizza.service.UserService - Log in for user monkata is successful!
+2024-12-16 16:49:49,716 [main] INFO com.deliciouspizza.repository.Warehouse - Stock loaded successfully from file.
+2024-12-16 16:50:05,641 [main] INFO com.deliciouspizza.service.UserService - Log in for user monkata is successful!
+2024-12-16 16:50:09,789 [main] INFO com.deliciouspizza.ui.CustomerInterfaceImpl - Order history:
+2024-12-16 17:11:27,122 [main] ERROR com.deliciouspizza.service.UserService - User with username monk not found
+com.deliciouspizza.exception.UserNotFoundException: User with username monk not found
+	at com.deliciouspizza.repository.UserRepository.getUserByUsername(UserRepository.java:75) ~[classes/:?]
+	at com.deliciouspizza.service.UserService.getUserRights(UserService.java:84) [classes/:?]
+	at com.deliciouspizza.ui.UserInterfaceImpl.handleLogin(UserInterfaceImpl.java:67) [classes/:?]
+	at com.deliciouspizza.ui.UserInterfaceImpl.displayMenu(UserInterfaceImpl.java:50) [classes/:?]
+	at com.deliciouspizza.PizzaApp.main(PizzaApp.java:17) [classes/:?]
