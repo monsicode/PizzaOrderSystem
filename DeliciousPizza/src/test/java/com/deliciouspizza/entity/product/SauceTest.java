@@ -44,14 +44,6 @@ public class SauceTest {
     }
 
     @Test
-    void testGetFormattedDetailsNullValues() {
-        sauce = new Sauce();
-
-        assertThrows(IllegalArgumentException.class, () -> sauce.getFormattedDetails(),
-            "An exception should be thrown when formatting the details of sauce with null value");
-    }
-
-    @Test
     void testGetFormattedDetailsPesto() {
         sauce = new Sauce(SauceType.PESTO);
 

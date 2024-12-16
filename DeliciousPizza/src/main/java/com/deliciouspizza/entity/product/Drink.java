@@ -24,6 +24,7 @@ public class Drink extends Product {
         this.drink = drink;
         this.volume = volume;
         this.type = "drink";
+        key = generateKey();
     }
 
     @Override
@@ -48,8 +49,7 @@ public class Drink extends Product {
             throw new IllegalArgumentException("Drink volume is null, can't generate key!");
         }
 
-        key = "drink_" + drink.toString().toLowerCase() + "_" + volume.toString().toLowerCase();
-        return key;
+        return "drink_" + drink.toString().toLowerCase() + "_" + volume.toString().toLowerCase();
     }
 
     public boolean getIsAlcoholic() {
@@ -70,7 +70,7 @@ public class Drink extends Product {
 
     @Override
     public String getFormattedDetails() {
-        return String.format("Drink %s: Volume = %s", drink, volume);
+        return String.format("Drink: %s, Volume: %s", drink, volume);
     }
 
     @Override
@@ -82,21 +82,6 @@ public class Drink extends Product {
             "}\n";
     }
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        Drink drink1 = (Drink) object;
-        return drink == drink1.drink;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(drink);
-    }
-
-
-    //possible of thrwoing exception
     @Override
     public boolean isItGoodForUnderAgedCustomers() {
         return !getIsAlcoholic();

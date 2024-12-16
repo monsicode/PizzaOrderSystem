@@ -19,6 +19,7 @@ public class Pizza extends Food {
         this.pizzaType = pizzaType;
         this.pizzaSize = pizzaSize;
         this.type = "pizza";
+        key = generateKey();
     }
 
     @Override
@@ -43,8 +44,7 @@ public class Pizza extends Food {
             throw new IllegalArgumentException("Pizza type is null, can't generate key!");
         }
 
-        key = "pizza_" + pizzaType.toString().toLowerCase() + "_" + pizzaSize.toString().toLowerCase();
-        return key;
+        return "pizza_" + pizzaType.toString().toLowerCase() + "_" + pizzaSize.toString().toLowerCase();
     }
 
     public PizzaSize getPizzaSize() {
@@ -66,6 +66,6 @@ public class Pizza extends Food {
 
     @Override
     public String getFormattedDetails() {
-        return String.format("Pizza %s: Size = %s", pizzaType, pizzaSize);
+        return String.format("Pizza: %s, Size: %s", pizzaType, pizzaSize);
     }
 }

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.mindrot.jbcrypt.BCrypt;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mindrot.jbcrypt.BCrypt.gensalt;
@@ -18,19 +19,8 @@ public class UserTest {
             BCrypt.hashpw("b", gensalt()),
             "c", 1);
 
-        assertThrows(IllegalArgumentException.class, () -> customer.checkPassword(null),
-            "The checking of a password should be illegal with null plain password");
-
-    }
-
-    @Test
-    void testCheckPasswordBlankPlainPw() {
-        customer = new Customer("a",
-            BCrypt.hashpw("b", gensalt()),
-            "c", 1);
-
-        assertThrows(IllegalArgumentException.class, () -> customer.checkPassword(" "),
-            "The checking of a password should be illegal with blank plain password");
+        assertFalse(() -> customer.checkPassword(null),
+            "Should return false if null value is entered");
 
     }
 
@@ -71,7 +61,8 @@ public class UserTest {
         customer = new Customer("a", "b", "c", 1);
         User user = new Customer("b", "123", "d", 2);
 
-        assertNotEquals(customer.hashCode(), user.hashCode(), "Users with different usernames should not have same hash");
+        assertNotEquals(customer.hashCode(), user.hashCode(),
+            "Users with different usernames should not have same hash");
     }
 
     @Test

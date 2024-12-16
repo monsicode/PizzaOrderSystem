@@ -27,7 +27,7 @@ public abstract class User {
 
     protected UserRights rights;
 
-    @JsonProperty("userType") // За да гарантираме, че ще се записва в JSON
+    @JsonProperty("userType")
     protected String userType;
 
     public User(String username, String hashedPassword) {

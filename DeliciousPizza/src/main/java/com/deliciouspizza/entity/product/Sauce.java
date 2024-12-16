@@ -3,8 +3,6 @@ package com.deliciouspizza.entity.product;
 import com.deliciouspizza.enums.SauceType;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-//exceptions --> thrown
-
 @JsonPropertyOrder({"type", "sauce", "statusProduct"})
 public class Sauce extends Product {
 
@@ -18,6 +16,7 @@ public class Sauce extends Product {
     public Sauce(SauceType sauce) {
         this.sauce = sauce;
         this.type = "sauce";
+        key = generateKey();
     }
 
     @Override
@@ -35,8 +34,7 @@ public class Sauce extends Product {
             throw new IllegalArgumentException("Sauce is null, can't generate key!");
         }
 
-        key = "sauce_" + sauce.toString().toLowerCase();
-        return key;
+        return "sauce_" + sauce.toString().toLowerCase();
     }
 
     public SauceType getSauce() {

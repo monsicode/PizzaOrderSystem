@@ -4,6 +4,7 @@ import com.deliciouspizza.entity.product.Pizza;
 import com.deliciouspizza.enums.PizzaSize;
 import com.deliciouspizza.enums.PizzaType;
 import com.deliciouspizza.exception.InactiveProductException;
+import com.deliciouspizza.exception.ProductDoesNotExistException;
 import com.deliciouspizza.exception.ProductNotInOrderException;
 import com.deliciouspizza.repository.ProductRepository;
 import com.deliciouspizza.repository.Warehouse;
@@ -118,20 +119,6 @@ public class OrderTest {
 
         verify(warehouse, times(1)).reduceStock("abcd", 3);
     }
-
-//    @Test
-//    void testAddProductNotExistingProduct() throws InactiveProductException {
-//        when(repository.isProductActive("abcd"))
-//            .thenReturn(true);
-//        when(repository.getProduct("abcd"))
-//            .thenThrow(ProductDoesNotExistException.class);
-//
-//
-//        assertThrows(ProductDoesNotExistException.class, () -> order.addProduct("abcd", 3),
-//            "An exception should be thrown when add product that does not exist");
-//
-//        verify(warehouse, times(1)).reduceStock("abcd", 3);
-//    }
 
     @Test
     void testRemoveProductNullProductKey() {

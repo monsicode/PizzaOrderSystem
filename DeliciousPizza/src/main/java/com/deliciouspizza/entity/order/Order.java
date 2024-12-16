@@ -74,6 +74,10 @@ public class Order {
             throw new IllegalArgumentException("Quantity cannot be less than 1");
         }
 
+        if (productKey == null || productKey.isBlank()) {
+            throw new IllegalArgumentException("You should enter product key");
+        }
+
         if (!productRepository.isProductActive(productKey)) {
             throw new InactiveProductException("This product is inactive, can't be added to order!");
         }
