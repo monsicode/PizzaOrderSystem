@@ -169,3 +169,69 @@ com.deliciouspizza.exception.UserNotFoundException: User with username monk not 
 	at com.deliciouspizza.ui.UserInterfaceImpl.displayMenu(UserInterfaceImpl.java:50) [classes/:?]
 	at com.deliciouspizza.PizzaApp.main(PizzaApp.java:17) [classes/:?]
 2024-12-16 17:42:02,980 [main] ERROR com.deliciouspizza.entity.order.Order - null
+2025-01-29 16:40:27,385 [main] ERROR com.deliciouspizza.service.UserService - User with username monkata123 not found
+com.deliciouspizza.exception.UserNotFoundException: User with username monkata123 not found
+	at com.deliciouspizza.repository.UserRepository.getUserByUsername(UserRepository.java:75) ~[classes/:?]
+	at com.deliciouspizza.service.UserService.getUserRights(UserService.java:84) [classes/:?]
+	at com.deliciouspizza.ui.UserInterfaceImpl.handleLogin(UserInterfaceImpl.java:67) [classes/:?]
+	at com.deliciouspizza.ui.UserInterfaceImpl.displayMenu(UserInterfaceImpl.java:50) [classes/:?]
+	at com.deliciouspizza.PizzaApp.main(PizzaApp.java:17) [classes/:?]
+2025-01-29 16:41:33,197 [main] WARN com.deliciouspizza.repository.OrderRepository - Cannot add product to order for user monkata: This product is inactive, can't be added to order!
+2025-01-29 18:34:15,282 [main] WARN com.deliciouspizza.repository.OrderRepository - Cannot add product to order for user monkata: This product is inactive, can't be added to order!
+2025-01-29 18:34:17,250 [main] WARN com.deliciouspizza.repository.OrderRepository - Current order is empty for user monkata: 
+Order : 
+2025-01-29 18:34:17,251 [main] WARN com.deliciouspizza.repository.OrderRepository - Current order is empty for user monkata: 
+Order : 
+2025-01-29 18:34:26,787 [main] ERROR com.deliciouspizza.service.OrderService - Order cannot be finalized as it has no products.
+java.lang.IllegalStateException: Order cannot be finalized as it has no products.
+	at com.deliciouspizza.repository.OrderRepository.finalizeOrder(OrderRepository.java:202) ~[classes/:?]
+	at com.deliciouspizza.service.OrderService.finalizeOrder(OrderService.java:75) [classes/:?]
+	at com.deliciouspizza.testui.CustomerInterfaceImpl.finishOrEditOrder(CustomerInterfaceImpl.java:248) [classes/:?]
+	at com.deliciouspizza.testui.CustomerInterfaceImpl.createOrder(CustomerInterfaceImpl.java:135) [classes/:?]
+	at com.deliciouspizza.testui.CustomerInterfaceImpl.showMainMenuCustomer(CustomerInterfaceImpl.java:163) [classes/:?]
+	at com.deliciouspizza.testui.CustomerInterfaceImpl.showMainMenuUser(CustomerInterfaceImpl.java:81) [classes/:?]
+	at com.deliciouspizza.testui.UserInterfaceImpl.handleLogin(UserInterfaceImpl.java:78) [classes/:?]
+	at com.deliciouspizza.command.main.LogIn.execute(LogIn.java:24) [classes/:?]
+	at com.deliciouspizza.command.CommandExecutor.start(CommandExecutor.java:16) [classes/:?]
+	at com.deliciouspizza.command.Main.main(Main.java:21) [classes/:?]
+2025-01-29 18:34:54,017 [main] WARN com.deliciouspizza.service.UserService - Wrong password.
+2025-01-30 17:44:31,700 [main] WARN com.deliciouspizza.service.UserService - Wrong password.
+2025-01-30 18:19:26,558 [main] WARN com.deliciouspizza.service.UserService - Wrong password.
+2025-01-30 18:26:45,744 [main] WARN com.deliciouspizza.service.UserService - Wrong password.
+2025-01-30 18:30:20,044 [main] WARN com.deliciouspizza.service.UserService - Wrong password.
+2025-01-31 14:16:16,349 [main] WARN com.deliciouspizza.service.UserService - Wrong password.
+2025-01-31 14:21:09,191 [main] WARN com.deliciouspizza.service.UserService - Wrong password.
+2025-01-31 14:21:25,204 [main] WARN com.deliciouspizza.service.UserService - Wrong password.
+2025-01-31 14:22:57,488 [main] WARN com.deliciouspizza.service.UserService - Wrong password.
+2025-01-31 14:24:04,619 [main] WARN com.deliciouspizza.service.UserService - Wrong password.
+2025-01-31 14:28:51,027 [main] WARN com.deliciouspizza.service.UserService - Wrong password.
+2025-01-31 15:15:19,552 [main] WARN com.deliciouspizza.service.UserService - Wrong password.
+2025-01-31 15:15:27,910 [main] WARN com.deliciouspizza.service.UserService - Wrong password.
+2025-01-31 15:16:25,664 [main] WARN com.deliciouspizza.service.UserService - Wrong password.
+2025-01-31 15:32:37,246 [main] ERROR com.deliciouspizza.service.UserService - User with username aa not found
+com.deliciouspizza.exception.UserNotFoundException: User with username aa not found
+	at com.deliciouspizza.repository.UserRepository.getUserByUsername(UserRepository.java:75) ~[classes/:?]
+	at com.deliciouspizza.service.UserService.getUserRights(UserService.java:84) [classes/:?]
+	at com.deliciouspizza.command.main.LogIn.execute(LogIn.java:32) [classes/:?]
+	at com.deliciouspizza.command.CommandExecutor.start(CommandExecutor.java:18) [classes/:?]
+	at com.deliciouspizza.client.Server.start(Server.java:60) [classes/:?]
+	at com.deliciouspizza.client.Server.main(Server.java:131) [classes/:?]
+2025-01-31 15:32:44,097 [main] WARN com.deliciouspizza.service.UserService - Wrong password.
+2025-01-31 16:22:48,064 [main] WARN com.deliciouspizza.service.UserService - Wrong password.
+2025-01-31 16:26:41,576 [main] ERROR com.deliciouspizza.service.UserService - User with username aa not found
+com.deliciouspizza.exception.UserNotFoundException: User with username aa not found
+	at com.deliciouspizza.repository.UserRepository.getUserByUsername(UserRepository.java:75) ~[classes/:?]
+	at com.deliciouspizza.service.UserService.getUserRights(UserService.java:84) [classes/:?]
+	at com.deliciouspizza.command.main.LogIn.execute(LogIn.java:32) [classes/:?]
+	at com.deliciouspizza.command.CommandExecutor.start(CommandExecutor.java:18) [classes/:?]
+	at com.deliciouspizza.client.Server.start(Server.java:60) [classes/:?]
+	at com.deliciouspizza.client.Server.main(Server.java:134) [classes/:?]
+2025-02-01 14:04:51,274 [main] ERROR com.deliciouspizza.service.UserService - User with username workN not found
+com.deliciouspizza.exception.UserNotFoundException: User with username workN not found
+	at com.deliciouspizza.repository.UserRepository.getUserByUsername(UserRepository.java:75) ~[classes/:?]
+	at com.deliciouspizza.service.UserService.getUserRights(UserService.java:84) [classes/:?]
+	at com.deliciouspizza.command.main.LogIn.execute(LogIn.java:32) [classes/:?]
+	at com.deliciouspizza.command.CommandExecutor.start(CommandExecutor.java:18) [classes/:?]
+	at com.deliciouspizza.client.Server.start(Server.java:60) [classes/:?]
+	at com.deliciouspizza.client.Server.main(Server.java:134) [classes/:?]
+2025-02-01 15:00:27,901 [main] WARN com.deliciouspizza.service.UserService - Wrong password.

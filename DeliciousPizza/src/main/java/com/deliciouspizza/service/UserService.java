@@ -12,6 +12,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.mindrot.jbcrypt.BCrypt;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 public class UserService {
@@ -19,6 +21,13 @@ public class UserService {
     private final UserRepository userRepository = Singleton.getInstance(UserRepository.class);
     private static final Logger LOGGER = LogManager.getLogger(UserService.class);
 
+    private static final Map<String, Boolean> isUserLogged = new HashMap<>();
+
+    public boolean isUserLogged(String username) {
+        return isUserLogged.containsKey(username);
+    }
+
+    //maybe to remove ?
     public boolean checkIfUserExists(String username) {
         return userRepository.isUsernamePresent(username);
     }
@@ -65,6 +74,7 @@ public class UserService {
             User user = userRepository.getUserByUsername(username);
             if (user.checkPassword(plainPassword)) {
                 LOGGER.info("Log in for user {} is successful!", username);
+                isUserLogged.putIfAbsent(username, true);
                 return true;
 
             } else {

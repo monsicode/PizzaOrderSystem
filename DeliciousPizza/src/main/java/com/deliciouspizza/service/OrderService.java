@@ -30,11 +30,9 @@ public class OrderService {
 
     public void startNewOrder(String username) {
 
-        try {
-            orderRepository.startNewOrder(username);
-        } catch (IllegalStateException err) {
-            LOGGER.error(err.getMessage(), err);
-        }
+
+        orderRepository.startNewOrder(username);
+
 
     }
 
