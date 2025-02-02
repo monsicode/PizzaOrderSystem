@@ -1,5 +1,8 @@
 package com.deliciouspizza.repository;
 
+import com.deliciouspizza.exception.ErrorInProductNameException;
+import com.deliciouspizza.exception.ProductDoesNotExistException;
+import com.deliciouspizza.exception.ProductException;
 import com.deliciouspizza.utils.Singleton;
 import com.deliciouspizza.entity.order.Order;
 import com.deliciouspizza.exception.InactiveProductException;
@@ -140,7 +143,7 @@ public class OrderRepository {
         LOGGER.info("New order started for user: {}", username);
     }
 
-    public void addProductToActiveOrder(String username, String productKey, int quantity) {
+    public void addProductToActiveOrder(String username, String productKey, int quantity) throws ProductException {
         Order order = activeOrdersForCustomers.get(username);
 
         if (order == null) {
@@ -150,8 +153,9 @@ public class OrderRepository {
         try {
             activeOrdersForCustomers.get(username).addProduct(productKey, quantity);
             LOGGER.info("Added product {} to order for user {}: quantity {}", productKey, username, quantity);
-        } catch (InactiveProductException | IllegalArgumentException e) {
-            LOGGER.warn("Cannot add product to order for user {}: {}", username, e.getMessage());
+        } catch (InactiveProductException | IllegalArgumentException | ProductDoesNotExistException |
+                 ErrorInProductNameException e) {
+            throw new ProductException(e.getMessage());
         }
     }
 
@@ -168,31 +172,27 @@ public class OrderRepository {
         return order;
     }
 
-    public void removeFromCurrentOrderForUser(String username, String productKey, Integer quantity) {
+    public void removeFromCurrentOrderForUser(String username, String productKey, Integer quantity)
+        throws ProductException {
         Order order = activeOrdersForCustomers.get(username);
         if (order == null) {
             throw new IllegalStateException("User does not have an active order to finalize.");
         }
 
-        if (productRepository.isProductActive(productKey)) {
-
-        }
-
         if (order.getOrder().isEmpty()) {
-            LOGGER.warn("Current order is empty for user {}: {}", username, order);
+            throw new IllegalStateException("Current order is empty");
         }
 
         try {
             order.removeProduct(productKey, quantity);
             LOGGER.info("Removed product {} from order for user {}: quantity {}", productKey, username, quantity);
-        } catch (ProductNotInOrderException | IllegalArgumentException err) {
-            LOGGER.warn("Cannot remove product from order for user {}: {}", username, err.getMessage());
+        } catch (ProductNotInOrderException | IllegalArgumentException | ProductDoesNotExistException err) {
+            throw new ProductException(err.getMessage());
         }
-
     }
 
     public void finalizeOrder(String username) {
-        Order order = activeOrdersForCustomers.remove(username);
+        Order order = activeOrdersForCustomers.get(username);
 
         if (order == null) {
             throw new IllegalStateException("User does not have an active order to finalize.");
@@ -202,6 +202,7 @@ public class OrderRepository {
             throw new IllegalStateException("Order cannot be finalized as it has no products.");
         }
 
+        activeOrdersForCustomers.remove(username);
         addOrder(order);
         LOGGER.info("Order finalized for user {}: {}", username, order);
     }

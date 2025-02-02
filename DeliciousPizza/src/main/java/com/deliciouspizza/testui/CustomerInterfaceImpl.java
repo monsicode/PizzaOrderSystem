@@ -3,7 +3,8 @@ package com.deliciouspizza.testui;
 import com.deliciouspizza.entity.order.Order;
 import com.deliciouspizza.entity.product.Product;
 import com.deliciouspizza.enums.StatusOrder;
-import com.deliciouspizza.exception.ErrorInProductNameException;
+import com.deliciouspizza.exception.ProductException;
+import com.deliciouspizza.exception.UnderAgedException;
 import com.deliciouspizza.repository.Warehouse;
 import com.deliciouspizza.utils.Singleton;
 
@@ -26,7 +27,7 @@ public class CustomerInterfaceImpl extends UserInterfaceImpl implements Customer
         this.scanner = scanner;
     }
 
-    public void displayMenu(String username, String password) {
+    public void displayMenu(String username, String password) throws ProductException {
         boolean running = true;
 
         while (running) {
@@ -47,7 +48,7 @@ public class CustomerInterfaceImpl extends UserInterfaceImpl implements Customer
     }
 
     @Override
-    public void handleLogin(String username, String password) {
+    public void handleLogin(String username, String password) throws ProductException {
         isLoggedIn = userService.loginUser(username, password);
 
         if (isLoggedIn) {
@@ -66,7 +67,7 @@ public class CustomerInterfaceImpl extends UserInterfaceImpl implements Customer
     }
 
     @Override
-    public void showMainMenuUser(String username) {
+    public void showMainMenuUser(String username) throws ProductException {
         showMainMenuCustomer(username);
     }
 
@@ -100,7 +101,7 @@ public class CustomerInterfaceImpl extends UserInterfaceImpl implements Customer
     }
 
     @Override
-    public void createOrder(String username) {
+    public void createOrder(String username) throws ProductException {
         boolean creatingOrder = true;
 
         try {
@@ -140,7 +141,7 @@ public class CustomerInterfaceImpl extends UserInterfaceImpl implements Customer
         System.out.println("5. Log out \n");
     }
 
-    public void showMainMenuCustomer(String username) {
+    public void showMainMenuCustomer(String username) throws ProductException {
         boolean continueSession = true;
 
         while (continueSession) {
@@ -163,7 +164,7 @@ public class CustomerInterfaceImpl extends UserInterfaceImpl implements Customer
         }
     }
 
-    private void addingProduct(String username) {
+    private void addingProduct(String username) throws ProductException {
         System.out.println("What would you like to order?");
         String productKey = scanner.nextLine();
 
@@ -173,7 +174,7 @@ public class CustomerInterfaceImpl extends UserInterfaceImpl implements Customer
 
         try {
             orderService.addProductToActiveOrder(username, productKey, quantity);
-        } catch (ErrorInProductNameException err) {
+        } catch (ProductException | UnderAgedException err) {
 
             System.out.println(err.getMessage());
             System.out.println("Do you want to try again? (Y/N)");
@@ -188,7 +189,7 @@ public class CustomerInterfaceImpl extends UserInterfaceImpl implements Customer
         }
     }
 
-    private void removeProduct(String username) {
+    private void removeProduct(String username) throws ProductException {
         System.out.println("\n");
         System.out.println("What product would you like to remove? : ");
         String productKey = scanner.nextLine();
@@ -200,7 +201,7 @@ public class CustomerInterfaceImpl extends UserInterfaceImpl implements Customer
         orderService.removeFromCurrentOrderForUser(username, productKey, quantity);
     }
 
-    private void editOrder(String username) {
+    private void editOrder(String username) throws ProductException {
 
         boolean editing = true;
 
@@ -226,7 +227,7 @@ public class CustomerInterfaceImpl extends UserInterfaceImpl implements Customer
         finishOrEditOrder(username);
     }
 
-    private boolean finishOrEditOrder(String username) {
+    private boolean finishOrEditOrder(String username) throws ProductException {
 
         printMenu("Create Order", "Finish order", "Edit order");
 

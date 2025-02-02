@@ -3,6 +3,8 @@ package com.deliciouspizza.command.main;
 import com.deliciouspizza.command.Command;
 import com.deliciouspizza.service.UserService;
 
+import java.nio.channels.SocketChannel;
+
 public class RegisterCustomer implements Command {
 
     private static final int COUNT_NEEDED_ARGUMENTS = 4;
@@ -13,7 +15,7 @@ public class RegisterCustomer implements Command {
     }
 
     @Override
-    public String execute(String[] args) {
+    public String execute(String[] args, SocketChannel client) {
 
         if (args.length != COUNT_NEEDED_ARGUMENTS) {
             return "Usage: register-customer <username> <password> <address> <age>";

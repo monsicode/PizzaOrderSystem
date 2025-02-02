@@ -11,7 +11,7 @@ import java.nio.channels.SocketChannel;
 import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 
-import com.deliciouspizza.command2.CommandExecutor;
+import com.deliciouspizza.command.CommandExecutor;
 
 public class Server {
     private static final int BUFFER_SIZE = 1024;

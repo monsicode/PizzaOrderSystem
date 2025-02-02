@@ -235,3 +235,17 @@ com.deliciouspizza.exception.UserNotFoundException: User with username workN not
 	at com.deliciouspizza.client.Server.start(Server.java:60) [classes/:?]
 	at com.deliciouspizza.client.Server.main(Server.java:134) [classes/:?]
 2025-02-01 15:00:27,901 [main] WARN com.deliciouspizza.service.UserService - Wrong password.
+2025-02-01 19:01:11,034 [main] ERROR com.deliciouspizza.entity.order.Order - Not enough stock of product: pizza_pepperoni_small
+2025-02-01 19:01:22,153 [main] WARN com.deliciouspizza.repository.OrderRepository - Cannot add product to order for user daka: This product is inactive, can't be added to order!
+2025-02-02 15:58:26,151 [main] WARN com.deliciouspizza.repository.OrderRepository - Cannot add product to order for user monkata: This product is inactive, can't be added to order!
+2025-02-02 15:58:48,020 [main] ERROR com.deliciouspizza.entity.order.Order - Not enough stock of product: pizza_pepperoni_small
+2025-02-02 15:59:32,558 [main] WARN com.deliciouspizza.repository.OrderRepository - Cannot remove product from order for user monkata: The quantity you want to remove has to be less or equal to current quantity!
+2025-02-02 15:59:48,183 [main] WARN com.deliciouspizza.repository.OrderRepository - Cannot remove product from order for user monkata: The product is not in the order and cannot be removed.
+2025-02-02 17:48:33,866 [main] WARN com.deliciouspizza.repository.OrderRepository - Cannot add product to order for user monkata: This product is inactive, can't be added to order!
+2025-02-02 19:27:25,246 [main] WARN com.deliciouspizza.service.UserService - Wrong password.
+2025-02-02 19:28:05,548 [main] WARN com.deliciouspizza.repository.ProductRepository - Product pizza_pepperoni_smal doesn't exist
+2025-02-02 19:33:33,878 [main] WARN com.deliciouspizza.repository.OrderRepository - Cannot add product to order for user monkata: This product is inactive, can't be added to order!
+2025-02-02 19:33:57,997 [main] ERROR com.deliciouspizza.repository.Warehouse - Not enough stock of product: pizza_pepperoni_small , available stock: 30
+2025-02-02 19:33:57,998 [main] WARN com.deliciouspizza.repository.OrderRepository - Cannot add product to order for user monkata: Not enough stock of product: pizza_pepperoni_small
+2025-02-02 19:54:59,557 [main] ERROR com.deliciouspizza.repository.Warehouse - Not enough stock of product: pizza_pepperoni_small , available stock: 29 
+2025-02-02 19:56:35,417 [main] WARN com.deliciouspizza.repository.OrderRepository - User monkata is interested in ordering this inactive product: pizza_pepperoni_large 

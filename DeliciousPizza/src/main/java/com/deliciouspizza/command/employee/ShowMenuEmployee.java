@@ -2,6 +2,8 @@ package com.deliciouspizza.command.employee;
 
 import com.deliciouspizza.command.Command;
 
+import java.nio.channels.SocketChannel;
+
 public class ShowMenuEmployee implements Command {
 
     private static final String RESET = "\u001B[0m";
@@ -10,7 +12,7 @@ public class ShowMenuEmployee implements Command {
     private static final String PINK = "\u001B[35m";
 
     @Override
-    public String execute(String[] args) {
+    public String execute(String[] args, SocketChannel client) {
         return String.format("""
                 
                 ===== Welcome to DeliciousPizza, %s%s%s ! =====

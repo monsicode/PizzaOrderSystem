@@ -6,12 +6,12 @@ import com.deliciouspizza.service.OrderService;
 
 import java.nio.channels.SocketChannel;
 
-public class CreateOrder implements Command {
+public class FinishOrder implements Command {
 
     private final OrderService orderService;
     private final SessionManager manager;
 
-    public CreateOrder(OrderService orderService, SessionManager manager) {
+    public FinishOrder(OrderService orderService, SessionManager manager) {
         this.orderService = orderService;
         this.manager = manager;
     }
@@ -23,8 +23,8 @@ public class CreateOrder implements Command {
             String username = manager.getUsername(client);
 
             try {
-                orderService.startNewOrder(username);
-                return "New order started! ";
+                orderService.finalizeOrder(username);
+                return "Order finalized successfully!";
             } catch (IllegalStateException err) {
                 return err.getMessage();
             }
@@ -34,4 +34,5 @@ public class CreateOrder implements Command {
         }
 
     }
+
 }

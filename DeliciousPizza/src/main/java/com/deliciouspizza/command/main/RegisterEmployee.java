@@ -4,6 +4,8 @@ import com.deliciouspizza.command.Command;
 import com.deliciouspizza.service.UserService;
 import org.mindrot.jbcrypt.BCrypt;
 
+import java.nio.channels.SocketChannel;
+
 public class RegisterEmployee implements Command {
 
     private static final int COUNT_NEEDED_ARGUMENTS = 3;
@@ -17,7 +19,7 @@ public class RegisterEmployee implements Command {
     }
 
     @Override
-    public String execute(String[] args) {
+    public String execute(String[] args, SocketChannel client) {
 
         if (args.length != COUNT_NEEDED_ARGUMENTS) {
             return "Usage: register-employee <admin password> <username> <password>";

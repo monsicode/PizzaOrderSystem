@@ -1,11 +1,12 @@
 package com.deliciouspizza.service;
 
+import com.deliciouspizza.exception.ProductException;
+import com.deliciouspizza.exception.UnderAgedException;
 import com.deliciouspizza.utils.Singleton;
 import com.deliciouspizza.entity.order.Order;
-import com.deliciouspizza.exception.ErrorInProductNameException;
-import com.deliciouspizza.exception.ProductDoesNotExistException;
 import com.deliciouspizza.repository.OrderRepository;
 import com.deliciouspizza.repository.ProductRepository;
+import com.deliciouspizza.entity.product.Drink;
 import com.deliciouspizza.repository.UserRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,7 +15,6 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class OrderService {
 
@@ -26,36 +26,25 @@ public class OrderService {
 
     private static final int ADULT_AGE = 18;
 
-    private final Map<String, Order> activeOrders = new ConcurrentHashMap<>();
-
     public void startNewOrder(String username) {
-
-
         orderRepository.startNewOrder(username);
-
-
     }
 
+    //GOOD
     public void addProductToActiveOrder(String username, String productKey, int quantity)
-        throws ErrorInProductNameException {
-        try {
-            if (isItGoodForUnderAgedCustomers(username, productKey)) {
-                orderRepository.addProductToActiveOrder(username, productKey, quantity);
-            } else {
-                LOGGER.warn("Sorry {}, you can't have this drink, you are under aged", username);
-            }
+        throws ProductException, UnderAgedException {
 
-        } catch (IllegalStateException | ProductDoesNotExistException e) {
-            throw new ErrorInProductNameException(e.getMessage(), e);
+        if (isItGoodForUnderAgedCustomers(username, productKey)) {
+            orderRepository.addProductToActiveOrder(username, productKey, quantity);
+        } else {
+            LOGGER.warn("Under aged user {} is trying to order {}", username, productKey);
+            throw new UnderAgedException("Sorry , you can't have this drink, you are under aged" + username);
         }
     }
 
-    public void removeFromCurrentOrderForUser(String username, String productKey, Integer quantity) {
-        try {
-            orderRepository.removeFromCurrentOrderForUser(username, productKey, quantity);
-        } catch (IllegalStateException err) {
-            LOGGER.error(err.getMessage(), err);
-        }
+    public void removeFromCurrentOrderForUser(String username, String productKey, Integer quantity)
+        throws ProductException {
+        orderRepository.removeFromCurrentOrderForUser(username, productKey, quantity);
     }
 
     public Map<String, Integer> getCurrentOrderForUser(String username) {
@@ -69,11 +58,7 @@ public class OrderService {
 
     //for customers
     public void finalizeOrder(String username) {
-        try {
-            orderRepository.finalizeOrder(username);
-        } catch (IllegalStateException err) {
-            LOGGER.error(err.getMessage(), err);
-        }
+        orderRepository.finalizeOrder(username);
     }
 
     public void finalizeRepeatedOrder(Order order) {
@@ -120,9 +105,11 @@ public class OrderService {
         return orderRepository.getProfitInPeriod(from, to);
     }
 
+    //to optimize -> check if its a drink? is it bad i have Drink class here ?
     private boolean isItGoodForUnderAgedCustomers(String username, String productKey) {
         return userRepository.getAgeCustomer(username) > ADULT_AGE ||
             productRepository.isItGoodForUnderAgedCustomers(productKey);
+
     }
 
 }

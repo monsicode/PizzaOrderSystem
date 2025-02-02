@@ -1,12 +1,18 @@
 package com.deliciouspizza.command;
 
+import com.deliciouspizza.command.cutomer.AddProduct;
 import com.deliciouspizza.command.cutomer.CreateOrder;
+import com.deliciouspizza.command.cutomer.FinishOrder;
+import com.deliciouspizza.command.cutomer.RemoveProduct;
+import com.deliciouspizza.command.cutomer.ViewActiveProducts;
 import com.deliciouspizza.command.main.Exit;
 import com.deliciouspizza.command.main.LogIn;
 import com.deliciouspizza.command.main.RegisterCustomer;
 import com.deliciouspizza.command.main.RegisterEmployee;
 import com.deliciouspizza.command.main.ShowMainMenu;
+import com.deliciouspizza.command2.SessionManager;
 import com.deliciouspizza.service.OrderService;
+import com.deliciouspizza.service.ProductService;
 import com.deliciouspizza.service.UserService;
 
 import java.nio.channels.SocketChannel;
@@ -47,8 +53,11 @@ public class CommandCreator {
         return tokens.toArray(new String[0]);
     }
 
-    public static Command newCommand(String clientInput, SocketChannel client, UserService userService,
-                                     OrderService orderService) {
+    public static Command newCommand(String clientInput, SessionManager manager,
+                                     SocketChannel client,
+                                     UserService userService,
+                                     OrderService orderService,
+                                     ProductService productService) {
         if (clientInput == null || clientInput.isBlank()) {
             System.out.println("No command provided.");
             return null;
@@ -58,20 +67,26 @@ public class CommandCreator {
 
         String commandName = tokens[0].toLowerCase();
 
-        return factoryCommand(commandName, client, userService, orderService);
+        return factoryCommand(commandName, manager, client, userService, orderService, productService);
 
     }
 
-    private static Command factoryCommand(String commandName, SocketChannel client, UserService userService,
-                                          OrderService orderService) {
+    private static Command factoryCommand(String commandName, SessionManager manager, SocketChannel client,
+                                          UserService userService,
+                                          OrderService orderService,
+                                          ProductService productService) {
 
         return switch (commandName) {
             case "register-customer" -> new RegisterCustomer(userService);
             case "register-employee" -> new RegisterEmployee(userService);
-            case "login" -> new LogIn(userService);
+            case "login" -> new LogIn(userService, manager);
             case "menu" -> new ShowMainMenu();
             case "exit" -> new Exit();
-            case "create-order" -> new CreateOrder(orderService, loggedUsers.get(client));
+            case "create-order" -> new CreateOrder(orderService, manager);
+            case "add-product" -> new AddProduct(orderService, manager);
+            case "remove-product" -> new RemoveProduct(orderService, manager);
+            case "finish-order" -> new FinishOrder(orderService, manager);
+            case "products" -> new ViewActiveProducts(productService);
             default -> {
                 System.out.println("Unknown command: " + commandName);
                 yield null;

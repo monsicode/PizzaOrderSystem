@@ -2,16 +2,17 @@ package com.deliciouspizza.command.cutomer;
 
 import com.deliciouspizza.command.Command;
 import com.deliciouspizza.command2.SessionManager;
+import com.deliciouspizza.exception.ProductException;
 import com.deliciouspizza.service.OrderService;
 
 import java.nio.channels.SocketChannel;
 
-public class CreateOrder implements Command {
+public class RemoveProduct implements Command {
 
     private final OrderService orderService;
     private final SessionManager manager;
 
-    public CreateOrder(OrderService orderService, SessionManager manager) {
+    public RemoveProduct(OrderService orderService, SessionManager manager) {
         this.orderService = orderService;
         this.manager = manager;
     }
@@ -19,13 +20,19 @@ public class CreateOrder implements Command {
     @Override
     public String execute(String[] args, SocketChannel client) {
 
+        if (args.length != 2) {
+            return "Usage: add-product %s %s<product-key> <quantity>";
+        }
+
         if (manager.isLoggedIn(client)) {
             String username = manager.getUsername(client);
+            String productKey = args[0];
+            int quantity = Integer.parseInt(args[1]);
 
             try {
-                orderService.startNewOrder(username);
-                return "New order started! ";
-            } catch (IllegalStateException err) {
+                orderService.removeFromCurrentOrderForUser(username, productKey, quantity);
+                return "Product " + productKey + " removed!";
+            } catch (IllegalStateException | ProductException err) {
                 return err.getMessage();
             }
 

@@ -1,6 +1,7 @@
 package com.deliciouspizza.testui;
 
 import com.deliciouspizza.enums.UserRights;
+import com.deliciouspizza.exception.ProductException;
 import com.deliciouspizza.service.OrderService;
 import com.deliciouspizza.service.ProductService;
 import com.deliciouspizza.service.UserService;
@@ -36,7 +37,7 @@ public class UserInterfaceImpl implements UserInterface {
         this.scanner = scanner;
     }
 
-    public void displayMenu(String username, String password) {
+    public void displayMenu(String username, String password) throws ProductException {
         boolean running = true;
 
         while (running) {
@@ -63,7 +64,7 @@ public class UserInterfaceImpl implements UserInterface {
 
     //done, does not need
     @Override
-    public void handleLogin(String username, String password) {
+    public void handleLogin(String username, String password) throws ProductException {
         UserRights role = userService.getUserRights(username);
 
         if (role == null) {
@@ -107,7 +108,7 @@ public class UserInterfaceImpl implements UserInterface {
     }
 
     @Override
-    public void showMainMenuUser(String username) {
+    public void showMainMenuUser(String username) throws ProductException {
     }
 
     protected void printMenu(String title, String... options) {

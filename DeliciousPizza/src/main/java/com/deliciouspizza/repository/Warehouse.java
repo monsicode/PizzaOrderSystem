@@ -67,6 +67,8 @@ public class Warehouse {
 
     public void reduceStock(String productName, int quantity) {
         if (!productStock.containsKey(productName) || productStock.get(productName) < quantity) {
+            LOGGER.error("Not enough stock of product: {}, available stock: {}, requested: {} ", productName,
+                productStock.getOrDefault(productName, 0), quantity);
             throw new IllegalArgumentException("Not enough stock of product: " + productName);
         }
 

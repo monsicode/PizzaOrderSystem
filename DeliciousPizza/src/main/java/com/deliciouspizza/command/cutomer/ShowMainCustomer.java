@@ -2,6 +2,8 @@ package com.deliciouspizza.command.cutomer;
 
 import com.deliciouspizza.command.Command;
 
+import java.nio.channels.SocketChannel;
+
 public class ShowMainCustomer implements Command {
 
     private static final String RESET = "\u001B[0m";
@@ -11,7 +13,7 @@ public class ShowMainCustomer implements Command {
     private static final String GRAY = "\u001B[90m";
 
     @Override
-    public String execute(String[] args) {
+    public String execute(String[] args, SocketChannel client) {
         return String.format("""
                 
                 ===== Welcome to DeliciousPizza, %s%s%s ! =====
@@ -21,7 +23,7 @@ public class ShowMainCustomer implements Command {
                 %s4.%s %s finish-order %s - Start a new order
                 %s5.%s %s view-history %s - View your order history
                 %s6.%s %s repeat-order %s %s<orderId>%s - Log in with your credentials
-                %s7.%s %s menu %s - View active products menu
+                %s7.%s %s products %s - View active products menu with product keys
                 %s8.%s %s logout %s - Log out of your account
                 =====================
                 Choose a command:\s""",

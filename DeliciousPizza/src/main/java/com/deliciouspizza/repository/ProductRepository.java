@@ -134,6 +134,7 @@ public class ProductRepository {
         return inactiveProducts.get(productName);
     }
 
+    //tova za warehouse-a li e ????
     public void addProduct(Product product) {
         // We add the product to the Map, only if the key is unique
         String key = product.generateKey();
@@ -160,6 +161,7 @@ public class ProductRepository {
         }
     }
 
+    //modified
     public Product getProduct(String productName) {
         if (inactiveProducts.containsKey(productName)) {
             return inactiveProducts.get(productName);
@@ -168,12 +170,17 @@ public class ProductRepository {
             return activeProducts.get(productName);
 
         } else {
+            LOGGER.warn("Product {} doesn't exist", productName);
             throw new ProductDoesNotExistException("Product doesn't exist!");
         }
     }
 
     public boolean isProductActive(String productKey) {
         return activeProducts.containsKey(productKey);
+    }
+
+    public boolean isProductInactive(String productKey) {
+        return inactiveProducts.containsKey(productKey);
     }
 
     public boolean isItGoodForUnderAgedCustomers(String key) {

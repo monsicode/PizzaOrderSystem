@@ -4,6 +4,8 @@ import com.deliciouspizza.entity.order.Order;
 import com.deliciouspizza.entity.product.Product;
 import com.deliciouspizza.enums.StatusOrder;
 import com.deliciouspizza.exception.ErrorInProductNameException;
+import com.deliciouspizza.exception.ProductException;
+import com.deliciouspizza.exception.UnderAgedException;
 import com.deliciouspizza.repository.Warehouse;
 import com.deliciouspizza.utils.Singleton;
 
@@ -190,7 +192,7 @@ public class CustomerInterfaceImpl extends UserInterfaceImpl implements Customer
 
         try {
             orderService.addProductToActiveOrder(username, productKey, quantity);
-        } catch (ErrorInProductNameException err) {
+        } catch ( ProductException | UnderAgedException err) {
 
             System.out.println(err.getMessage());
             System.out.println("Do you want to try again? (Y/N)");
@@ -214,7 +216,7 @@ public class CustomerInterfaceImpl extends UserInterfaceImpl implements Customer
         int quantity = scanner.nextInt();
         scanner.nextLine();
 
-        orderService.removeFromCurrentOrderForUser(username, productKey, quantity);
+        //orderService.removeFromCurrentOrderForUser(username, productKey, quantity);
     }
 
     private void editOrder(String username) {

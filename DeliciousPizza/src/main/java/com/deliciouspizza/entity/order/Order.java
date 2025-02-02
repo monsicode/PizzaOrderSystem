@@ -1,5 +1,6 @@
 package com.deliciouspizza.entity.order;
 
+import com.deliciouspizza.exception.ErrorInProductNameException;
 import com.deliciouspizza.repository.Warehouse;
 import com.deliciouspizza.utils.Singleton;
 import com.deliciouspizza.entity.product.Product;
@@ -69,7 +70,8 @@ public class Order {
         order = new HashMap<>();
     }
 
-    public void addProduct(String productKey, int quantity) throws InactiveProductException {
+    public void addProduct(String productKey, int quantity) throws InactiveProductException,
+        ErrorInProductNameException {
         if (quantity < 1) {
             throw new IllegalArgumentException("Quantity cannot be less than 1");
         }
@@ -78,26 +80,22 @@ public class Order {
             throw new IllegalArgumentException("You should enter product key");
         }
 
-        if (!productRepository.isProductActive(productKey)) {
+        if (!productRepository.isProductActive(productKey) && productRepository.isProductInactive(productKey)) {
+            LOGGER.warn("User is interested in ordering this inactive product: {} ", productKey);
             throw new InactiveProductException("This product is inactive, can't be added to order!");
         }
 
-        try {
-            warehouse.reduceStock(productKey, quantity);
-        } catch (IllegalArgumentException err) {
-            LOGGER.error(err.getMessage());
-            return;
+        if (!productRepository.isProductActive(productKey) && !productRepository.isProductInactive(productKey)) {
+            throw new ErrorInProductNameException("This product doesn't exist! Check for typo mistakes.");
         }
 
+        warehouse.reduceStock(productKey, quantity);
         order.put(productKey, order.getOrDefault(productKey, 0) + quantity);
 
-        try {
-            Product product = productRepository.getProduct(productKey);
-            totalPrice += (product.calculatePrice() * quantity);
-            LOGGER.info("Product {} added {} times successfully!", productKey, quantity);
-        } catch (ProductDoesNotExistException err) {
-            LOGGER.error(err.getMessage());
-        }
+        Product product = productRepository.getProduct(productKey);
+        totalPrice += (product.calculatePrice() * quantity);
+        LOGGER.info("Product {} added {} times successfully!", productKey, quantity);
+
     }
 
     @SuppressWarnings("checkstyle:MethodLength")
@@ -127,13 +125,10 @@ public class Order {
             order.put(productKey, currentQuantity - quantity);
         }
 
-        try {
-            Product product = productRepository.getProduct(productKey);
-            totalPrice -= (product.calculatePrice() * order.getOrDefault(productKey, 1));
-            LOGGER.info("Product {} removed {} successfully!", productKey, quantity);
-        } catch (ProductDoesNotExistException err) {
-            LOGGER.error(err.getMessage());
-        }
+        Product product = productRepository.getProduct(productKey);
+        totalPrice -= (product.calculatePrice() * order.getOrDefault(productKey, 1));
+        LOGGER.info("Product {} removed {} successfully!", productKey, quantity);
+
     }
 
     private double calculateTotalPrice(Map<String, Integer> order) {
