@@ -1,7 +1,7 @@
 package com.deliciouspizza.command.cutomer;
 
 import com.deliciouspizza.command.Command;
-import com.deliciouspizza.command2.SessionManager;
+import com.deliciouspizza.command.SessionManager;
 import com.deliciouspizza.service.OrderService;
 
 import java.nio.channels.SocketChannel;
@@ -24,7 +24,7 @@ public class FinishOrder implements Command {
 
             try {
                 orderService.finalizeOrder(username);
-                return "Order finalized successfully!";
+                return "Order finalized successfully!\n" + orderService.showCurrentOrderForUser(username);
             } catch (IllegalStateException err) {
                 return err.getMessage();
             }

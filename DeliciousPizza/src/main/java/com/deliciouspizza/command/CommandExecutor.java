@@ -1,6 +1,5 @@
 package com.deliciouspizza.command;
 
-import com.deliciouspizza.command2.SessionManager;
 import com.deliciouspizza.service.OrderService;
 import com.deliciouspizza.service.ProductService;
 import com.deliciouspizza.service.UserService;

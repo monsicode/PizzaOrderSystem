@@ -249,3 +249,7 @@ com.deliciouspizza.exception.UserNotFoundException: User with username workN not
 2025-02-02 19:33:57,998 [main] WARN com.deliciouspizza.repository.OrderRepository - Cannot add product to order for user monkata: Not enough stock of product: pizza_pepperoni_small
 2025-02-02 19:54:59,557 [main] ERROR com.deliciouspizza.repository.Warehouse - Not enough stock of product: pizza_pepperoni_small , available stock: 29 
 2025-02-02 19:56:35,417 [main] WARN com.deliciouspizza.repository.OrderRepository - User monkata is interested in ordering this inactive product: pizza_pepperoni_large 
+2025-02-03 10:47:53,220 [main] WARN com.deliciouspizza.repository.OrderRepository - Current order is empty for user monkata: 
+Order : 
+2025-02-03 10:47:53,228 [main] WARN com.deliciouspizza.repository.OrderRepository - Current order is empty for user monkata: 
+Order : 

@@ -5,8 +5,6 @@ import com.deliciouspizza.exception.UnderAgedException;
 import com.deliciouspizza.utils.Singleton;
 import com.deliciouspizza.entity.order.Order;
 import com.deliciouspizza.repository.OrderRepository;
-import com.deliciouspizza.repository.ProductRepository;
-import com.deliciouspizza.entity.product.Drink;
 import com.deliciouspizza.repository.UserRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,9 +20,11 @@ public class OrderService {
 
     private final OrderRepository orderRepository = Singleton.getInstance(OrderRepository.class);
     private final UserRepository userRepository = Singleton.getInstance(UserRepository.class);
-    private final ProductRepository productRepository = Singleton.getInstance(ProductRepository.class);
+    private final ProductService productService = Singleton.getInstance(ProductService.class);
 
     private static final int ADULT_AGE = 18;
+    private static final String RESET = "\u001B[0m";
+    private static final String YELLOW = "\u001B[33m";
 
     public void startNewOrder(String username) {
         orderRepository.startNewOrder(username);
@@ -108,8 +108,33 @@ public class OrderService {
     //to optimize -> check if its a drink? is it bad i have Drink class here ?
     private boolean isItGoodForUnderAgedCustomers(String username, String productKey) {
         return userRepository.getAgeCustomer(username) > ADULT_AGE ||
-            productRepository.isItGoodForUnderAgedCustomers(productKey);
+            productService.isItGoodForUnderAgedCustomers(productKey);
 
+    }
+
+    public String showCurrentOrderForUser(String username) {
+        Map<String, Integer> orderMap = getCurrentOrderForUser(username);
+        StringBuilder orderBuilder = new StringBuilder();
+
+        orderBuilder.append("Your order contains:\n");
+        orderBuilder.append("-----------------------------------\n");
+
+        for (Map.Entry<String, Integer> entry : orderMap.entrySet()) {
+            String productKey = entry.getKey();
+            String product = productKey.replaceAll("_", " ");
+            product = product.substring(0, 1).toUpperCase() + product.substring(1).toLowerCase();
+            int quantity = entry.getValue();
+            double price = productService.getProductPriceByKey(productKey) * quantity;
+
+            orderBuilder.append(String.format(YELLOW + " - " + RESET + " %-20s Quantity: %-2d  Price: $%.2f\n",
+                product, quantity, price));
+        }
+
+        orderBuilder.append("-----------------------------------\n");
+        orderBuilder.append(String.format("Total Price: " + YELLOW + "$%.2f\n" + RESET,
+            getTotalPriceOfOrderForCustomer(username)));
+
+        return orderBuilder.toString();
     }
 
 }

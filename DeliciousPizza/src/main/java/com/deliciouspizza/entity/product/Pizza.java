@@ -66,6 +66,6 @@ public class Pizza extends Food {
 
     @Override
     public String getFormattedDetails() {
-        return String.format("Pizza: %s, Size: %s", pizzaType, pizzaSize);
+        return String.format("Pizza: %s, Size: %s, Price: $%.2f", pizzaType, pizzaSize, calculatePrice());
     }
 }

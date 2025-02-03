@@ -5,7 +5,6 @@ import com.deliciouspizza.repository.Warehouse;
 import com.deliciouspizza.utils.Singleton;
 import com.deliciouspizza.entity.product.Product;
 import com.deliciouspizza.exception.InactiveProductException;
-import com.deliciouspizza.exception.ProductDoesNotExistException;
 import com.deliciouspizza.exception.ProductNotInOrderException;
 import com.deliciouspizza.repository.ProductRepository;
 import com.deliciouspizza.enums.StatusOrder;

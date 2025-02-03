@@ -1,7 +1,7 @@
 package com.deliciouspizza.command.cutomer;
 
 import com.deliciouspizza.command.Command;
-import com.deliciouspizza.command2.SessionManager;
+import com.deliciouspizza.command.SessionManager;
 import com.deliciouspizza.exception.ProductException;
 import com.deliciouspizza.service.OrderService;
 
@@ -31,7 +31,7 @@ public class RemoveProduct implements Command {
 
             try {
                 orderService.removeFromCurrentOrderForUser(username, productKey, quantity);
-                return "Product " + productKey + " removed!";
+                return "Product " + productKey + " removed!\n" + orderService.showCurrentOrderForUser(username);
             } catch (IllegalStateException | ProductException err) {
                 return err.getMessage();
             }

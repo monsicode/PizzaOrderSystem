@@ -25,7 +25,7 @@ public class ViewActiveProducts implements Command {
             Product product = entry.getValue();
             String details = product.getFormattedDetails();
 
-            result.append(String.format("- %-35s KEY: %s%n", details, key));
+            result.append(String.format("- %-45s KEY: %s%n", details, key));
         }
 
         result.append("-----------------------------------");

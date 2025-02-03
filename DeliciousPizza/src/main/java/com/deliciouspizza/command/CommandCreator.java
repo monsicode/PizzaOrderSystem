@@ -10,7 +10,6 @@ import com.deliciouspizza.command.main.LogIn;
 import com.deliciouspizza.command.main.RegisterCustomer;
 import com.deliciouspizza.command.main.RegisterEmployee;
 import com.deliciouspizza.command.main.ShowMainMenu;
-import com.deliciouspizza.command2.SessionManager;
 import com.deliciouspizza.service.OrderService;
 import com.deliciouspizza.service.ProductService;
 import com.deliciouspizza.service.UserService;
@@ -18,13 +17,9 @@ import com.deliciouspizza.service.UserService;
 import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class CommandCreator {
-
-    private static final Map<SocketChannel, String> loggedUsers = new HashMap<>();
 
     private static String[] parseCommandArguments(String input) {
         input = input.strip().replaceAll("\\s+", " ");
@@ -104,4 +99,5 @@ public class CommandCreator {
 
         return Arrays.copyOfRange(tokens, 1, tokens.length);
     }
+
 }

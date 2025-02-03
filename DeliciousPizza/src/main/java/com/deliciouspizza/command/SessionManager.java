@@ -1,4 +1,4 @@
-package com.deliciouspizza.command2;
+package com.deliciouspizza.command;
 
 import java.nio.channels.SocketChannel;
 import java.util.concurrent.ConcurrentHashMap;

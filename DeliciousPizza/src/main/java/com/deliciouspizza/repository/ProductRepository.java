@@ -185,7 +185,6 @@ public class ProductRepository {
 
     public boolean isItGoodForUnderAgedCustomers(String key) {
         Product product = activeProducts.get(key);
-
         productValidation(product);
 
         return product.isItGoodForUnderAgedCustomers();

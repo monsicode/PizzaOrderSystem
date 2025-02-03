@@ -63,4 +63,8 @@ public class ProductService {
         return productRepository.getProduct(productKey);
     }
 
+    public boolean isItGoodForUnderAgedCustomers(String key) {
+        return productRepository.isItGoodForUnderAgedCustomers(key);
+    }
+
 }

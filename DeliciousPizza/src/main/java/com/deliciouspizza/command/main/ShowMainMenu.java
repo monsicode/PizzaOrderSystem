@@ -10,6 +10,7 @@ public class ShowMainMenu implements Command {
     public String execute(String[] args, SocketChannel client) {
 
         return """
+            
             ===== Main Menu =====
             1. register-customer <username> <password> <address> <age> - Register as a customer
             2. register-employee <admin password> <username> <password> - Register as an employee

@@ -48,9 +48,13 @@ public class Sauce extends Product {
             "}\n";
     }
 
+    private String getNameSauce() {
+        return String.valueOf(sauce).replaceAll("_", " ");
+    }
+
     @Override
     public String getFormattedDetails() {
-        return String.valueOf(sauce).replaceAll("_", " ");
+        return String.format("Sauce: %s, Price: $%.2f", getNameSauce(), calculatePrice());
     }
 
 }

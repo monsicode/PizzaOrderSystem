@@ -3,7 +3,7 @@ package com.deliciouspizza.command.main;
 import com.deliciouspizza.command.Command;
 import com.deliciouspizza.command.cutomer.ShowMainCustomer;
 import com.deliciouspizza.command.employee.ShowMenuEmployee;
-import com.deliciouspizza.command2.SessionManager;
+import com.deliciouspizza.command.SessionManager;
 import com.deliciouspizza.enums.UserRights;
 import com.deliciouspizza.service.UserService;
 

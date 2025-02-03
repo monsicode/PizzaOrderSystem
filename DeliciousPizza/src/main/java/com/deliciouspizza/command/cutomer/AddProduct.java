@@ -1,7 +1,7 @@
 package com.deliciouspizza.command.cutomer;
 
 import com.deliciouspizza.command.Command;
-import com.deliciouspizza.command2.SessionManager;
+import com.deliciouspizza.command.SessionManager;
 import com.deliciouspizza.exception.ProductException;
 import com.deliciouspizza.exception.UnderAgedException;
 import com.deliciouspizza.service.OrderService;
@@ -32,7 +32,7 @@ public class AddProduct implements Command {
 
             try {
                 orderService.addProductToActiveOrder(username, productKey, quantity);
-                return "Product " + productKey + " added!";
+                return "Product " + productKey + " added!\n" + orderService.showCurrentOrderForUser(username);
             } catch (ProductException | UnderAgedException | IllegalStateException err) {
                 return err.getMessage();
             }
