@@ -74,7 +74,7 @@ public class UserInterfaceImpl implements UserInterface {
                 ? new CustomerInterfaceImpl(scanner)
                 : new EmployeeInterfaceImpl(scanner);
 
-            isLoggedIn = userService.loginUser(username, password);
+            isLoggedIn = userService.canUserLogIn(username, password);
 
             if (isLoggedIn) {
                 userInterface.showMainMenuUser(username);

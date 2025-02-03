@@ -5,8 +5,6 @@ import com.deliciouspizza.enums.DrinkVolume;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import java.util.Objects;
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder({"type", "drink", "volume", "statusProduct"})
 public class Drink extends Product {

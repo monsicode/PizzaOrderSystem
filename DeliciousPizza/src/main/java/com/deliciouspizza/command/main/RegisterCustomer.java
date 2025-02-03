@@ -10,6 +10,11 @@ public class RegisterCustomer implements Command {
     private static final int COUNT_NEEDED_ARGUMENTS = 4;
     private final UserService userService;
 
+    private static final int USERNAME_FIELD = 0;
+    private static final int PASSWORD_FIELD = 1;
+    private static final int ADDRESS_FIELD = 2;
+    private static final int AGE_FIELD = 3;
+
     public RegisterCustomer(UserService userService) {
         this.userService = userService;
     }
@@ -21,10 +26,10 @@ public class RegisterCustomer implements Command {
             return "Usage: register-customer <username> <password> <address> <age>";
         }
 
-        String username = args[0];
-        String password = args[1];
-        String address = args[2];
-        int age = Integer.parseInt(args[3]);
+        String username = args[USERNAME_FIELD];
+        String password = args[PASSWORD_FIELD];
+        String address = args[ADDRESS_FIELD];
+        int age = Integer.parseInt(args[AGE_FIELD]);
 
         userService.registerCustomer(username, password, address, age);
         return "User " + username + " successfully registered! ";

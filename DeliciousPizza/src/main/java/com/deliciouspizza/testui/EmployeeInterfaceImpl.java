@@ -4,7 +4,6 @@ import com.deliciouspizza.entity.product.Drink;
 import com.deliciouspizza.entity.product.Pizza;
 import com.deliciouspizza.entity.product.Product;
 import com.deliciouspizza.entity.product.Sauce;
-import com.deliciouspizza.entity.user.User;
 import com.deliciouspizza.enums.DrinkType;
 import com.deliciouspizza.enums.DrinkVolume;
 import com.deliciouspizza.enums.PizzaSize;
@@ -62,7 +61,7 @@ public class EmployeeInterfaceImpl extends UserInterfaceImpl implements Employee
 
     @Override
     public void handleLogin(String username, String password) {
-        isLoggedIn = userService.loginUser(username, password);
+        isLoggedIn = userService.canUserLogIn(username, password);
 
         if (isLoggedIn) {
             showMainMenuEmployee(username);

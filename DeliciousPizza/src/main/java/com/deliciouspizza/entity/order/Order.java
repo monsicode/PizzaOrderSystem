@@ -97,7 +97,6 @@ public class Order {
 
     }
 
-    @SuppressWarnings("checkstyle:MethodLength")
     public void removeProduct(String productKey, Integer quantity) throws ProductNotInOrderException {
         if (productKey == null || productKey.isBlank()) {
             throw new IllegalArgumentException("Product key cannot be empty string.");
@@ -127,7 +126,6 @@ public class Order {
         Product product = productRepository.getProduct(productKey);
         totalPrice -= (product.calculatePrice() * order.getOrDefault(productKey, 1));
         LOGGER.info("Product {} removed {} successfully!", productKey, quantity);
-
     }
 
     private double calculateTotalPrice(Map<String, Integer> order) {

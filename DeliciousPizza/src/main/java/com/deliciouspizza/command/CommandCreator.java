@@ -4,12 +4,16 @@ import com.deliciouspizza.command.cutomer.AddProduct;
 import com.deliciouspizza.command.cutomer.CreateOrder;
 import com.deliciouspizza.command.cutomer.FinishOrder;
 import com.deliciouspizza.command.cutomer.RemoveProduct;
+import com.deliciouspizza.command.cutomer.RepeatOrderForCustomer;
 import com.deliciouspizza.command.cutomer.ViewActiveProducts;
+import com.deliciouspizza.command.cutomer.ViewHistoryOfOrders;
 import com.deliciouspizza.command.main.Exit;
 import com.deliciouspizza.command.main.LogIn;
+import com.deliciouspizza.command.main.LogOut;
 import com.deliciouspizza.command.main.RegisterCustomer;
 import com.deliciouspizza.command.main.RegisterEmployee;
 import com.deliciouspizza.command.main.ShowMainMenu;
+import com.deliciouspizza.repository.Warehouse;
 import com.deliciouspizza.service.OrderService;
 import com.deliciouspizza.service.ProductService;
 import com.deliciouspizza.service.UserService;
@@ -52,7 +56,9 @@ public class CommandCreator {
                                      SocketChannel client,
                                      UserService userService,
                                      OrderService orderService,
-                                     ProductService productService) {
+                                     ProductService productService,
+                                     Warehouse warehouse) {
+
         if (clientInput == null || clientInput.isBlank()) {
             System.out.println("No command provided.");
             return null;
@@ -62,14 +68,15 @@ public class CommandCreator {
 
         String commandName = tokens[0].toLowerCase();
 
-        return factoryCommand(commandName, manager, client, userService, orderService, productService);
+        return factoryCommand(commandName, manager, client, userService, orderService, productService, warehouse);
 
     }
 
     private static Command factoryCommand(String commandName, SessionManager manager, SocketChannel client,
                                           UserService userService,
                                           OrderService orderService,
-                                          ProductService productService) {
+                                          ProductService productService,
+                                          Warehouse warehouse) {
 
         return switch (commandName) {
             case "register-customer" -> new RegisterCustomer(userService);
@@ -82,6 +89,9 @@ public class CommandCreator {
             case "remove-product" -> new RemoveProduct(orderService, manager);
             case "finish-order" -> new FinishOrder(orderService, manager);
             case "products" -> new ViewActiveProducts(productService);
+            case "view-history" -> new ViewHistoryOfOrders(userService, manager);
+            case "repeat-order" -> new RepeatOrderForCustomer(userService, orderService, warehouse, manager);
+            case "logout" -> new LogOut(manager);
             default -> {
                 System.out.println("Unknown command: " + commandName);
                 yield null;

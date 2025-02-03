@@ -49,7 +49,7 @@ public class CustomerInterfaceImpl extends UserInterfaceImpl implements Customer
 
     @Override
     public void handleLogin(String username, String password) throws ProductException {
-        isLoggedIn = userService.loginUser(username, password);
+        isLoggedIn = userService.canUserLogIn(username, password);
 
         if (isLoggedIn) {
             showMainMenuCustomer(username);

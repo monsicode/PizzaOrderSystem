@@ -67,7 +67,7 @@ public class EmployeeInterfaceImpl extends UserInterfaceImpl implements Employee
         System.out.print("Enter password: ");
         String password = scanner.nextLine();
 
-        isLoggedIn = userService.loginUser(username, password);
+        isLoggedIn = userService.canUserLogIn(username, password);
 
         if (isLoggedIn) {
             showMainMenuEmployee(username);

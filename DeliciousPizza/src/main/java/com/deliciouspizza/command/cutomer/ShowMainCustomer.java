@@ -12,6 +12,8 @@ public class ShowMainCustomer implements Command {
     private static final String PINK = "\u001B[35m";
     private static final String GRAY = "\u001B[90m";
 
+    private static final int USERNAME_FIELD = 0;
+
     @Override
     public String execute(String[] args, SocketChannel client) {
         return String.format("""
@@ -27,7 +29,7 @@ public class ShowMainCustomer implements Command {
                 %s8.%s %s logout %s - Log out of your account
                 =====================
                 Choose a command:\s""",
-            YELLOW, args[0], RESET,
+            YELLOW, args[USERNAME_FIELD], RESET,
             PINK, RESET, BLUE, RESET,
             PINK, RESET, BLUE, RESET, GRAY, RESET,
             PINK, RESET, BLUE, RESET, GRAY, RESET,

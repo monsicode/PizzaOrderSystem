@@ -14,7 +14,6 @@ public class Main {
         SocketChannel mockChannel = Mockito.mock(SocketChannel.class);
 
         while (true) {
-            //System.out.println(executor.start("menu", mockChannel));
             String input = scanner.nextLine();
 
             if (input.equalsIgnoreCase("exit")) {

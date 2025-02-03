@@ -15,6 +15,10 @@ public class LogIn implements Command {
     private final UserService userService;
     private final SessionManager manager;
 
+    private static final int COUNT_NEEDED_ARGUMENTS = 2;
+    private static final int USERNAME_FIELD = 0;
+    private static final int PASSWORD_FIELD = 1;
+
     public LogIn(UserService userService, SessionManager manager) {
         this.userService = userService;
         this.manager = manager;
@@ -26,19 +30,19 @@ public class LogIn implements Command {
             .filter(arg -> !arg.trim().isEmpty())
             .toArray(String[]::new);
 
-        if (args.length != 2) {
+        if (args.length != COUNT_NEEDED_ARGUMENTS) {
             return "Usage: login <username> <password>";
         }
 
-        String username = args[0].trim();
-        String password = args[1].trim();
+        String username = args[USERNAME_FIELD];
+        String password = args[PASSWORD_FIELD];
 
         UserRights role = userService.getUserRights(username);
 
         if (role == null) {
             return "Invalid username. Try again.";
         } else {
-            boolean isLoggedIn = userService.loginUser(username, password);
+            boolean isLoggedIn = userService.canUserLogIn(username, password);
             manager.addSession(client, username);
 
             if (isLoggedIn) {

@@ -8,11 +8,13 @@ import java.nio.channels.SocketChannel;
 
 public class RegisterEmployee implements Command {
 
-    private static final int COUNT_NEEDED_ARGUMENTS = 3;
     private static final String ADMIN_HASHED_PASSWORD = "$2a$10$QVQziCS3KXdEwgTQrT3LieiUrr5yd1iuwwYgOymQFoPqbnTJL1csq";
-    private static final int ATTEMPTS_PASSWORD = 3;
-
     private final UserService userService;
+
+    private static final int COUNT_NEEDED_ARGUMENTS = 3;
+    private static final int ADMIN_PASSWORD_FIELD = 0;
+    private static final int USERNAME_FIELD = 1;
+    private static final int PASSWORD_FIELD = 2;
 
     public RegisterEmployee(UserService userService) {
         this.userService = userService;
@@ -25,11 +27,11 @@ public class RegisterEmployee implements Command {
             return "Usage: register-employee <admin password> <username> <password>";
         }
 
-        String inputPassword = args[0];
+        String inputPassword = args[ADMIN_PASSWORD_FIELD];
 
         if (verifyPassword(inputPassword)) {
-            String username = args[1];
-            String password = args[2];
+            String username = args[USERNAME_FIELD];
+            String password = args[PASSWORD_FIELD];
 
             userService.registerEmployee(username, password);
             return "User " + username + " successfully registered! ";

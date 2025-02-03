@@ -55,7 +55,7 @@ public class CustomerInterfaceImpl extends UserInterfaceImpl implements Customer
         System.out.print("Enter password: ");
         String password = scanner.nextLine();
 
-        isLoggedIn = userService.loginUser(username, password);
+        isLoggedIn = userService.canUserLogIn(username, password);
 
         if (isLoggedIn) {
             showMainMenuCustomer(username);
