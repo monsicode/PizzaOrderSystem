@@ -253,3 +253,15 @@ com.deliciouspizza.exception.UserNotFoundException: User with username workN not
 Order : 
 2025-02-03 10:47:53,228 [main] WARN com.deliciouspizza.repository.OrderRepository - Current order is empty for user monkata: 
 Order : 
+2025-02-03 14:57:48,072 [main] WARN com.deliciouspizza.service.UserService - Wrong password.
+2025-02-04 16:13:34,465 [main] WARN com.deliciouspizza.repository.ProductRepository - Product does not exist in the warehouse: pizza_margherita_medium
+2025-02-04 16:20:28,664 [main] WARN com.deliciouspizza.repository.ProductRepository - Product pizza_hawaiian_medium doesn't exist
+2025-02-04 17:51:47,841 [main] ERROR com.deliciouspizza.service.ProductService - The product is already active!
+com.deliciouspizza.exception.ProductAlreadyActiveException: The product is already active!
+	at com.deliciouspizza.repository.ProductRepository.activateProduct(ProductRepository.java:96) ~[classes/:?]
+	at com.deliciouspizza.service.ProductService.activateProduct(ProductService.java:45) [classes/:?]
+	at com.deliciouspizza.command.employee.AddProductToMenu.execute(AddProductToMenu.java:35) [classes/:?]
+	at com.deliciouspizza.command.CommandExecutor.start(CommandExecutor.java:26) [classes/:?]
+	at com.deliciouspizza.command.Main.main(Main.java:23) [classes/:?]
+2025-02-04 17:56:15,946 [main] WARN com.deliciouspizza.repository.ProductRepository - Product pizza_pepperoni_smal doesn't exist
+2025-02-04 18:07:38,189 [main] WARN com.deliciouspizza.repository.ProductRepository - Product pizza_bbq_chicken_large doesn't exist

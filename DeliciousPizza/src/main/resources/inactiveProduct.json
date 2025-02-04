@@ -1,8 +1,1 @@
-{
-  "pizza_pepperoni_large" : {
-    "type" : "pizza",
-    "pizzaType" : "PEPPERONI",
-    "pizzaSize" : "LARGE",
-    "statusProduct" : "INACTIVE"
-  }
-}
+{ }

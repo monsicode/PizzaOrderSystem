@@ -41,7 +41,7 @@ public class TestingUserService {
 //        orderService.addProductToActiveOrder(userHistory, "pizza_pepperoni", 4);
         //orderService.finalizeOrder("monkata");
 //
-        orderService.processCurrentOrder();
+        //orderService.processCurrentOrder();
 
 //        LocalDateTime start = LocalDateTime.of(2024, 11, 17, 0, 0);
 //        LocalDateTime end = LocalDateTime.of(2024, 11, 17, 23, 59);

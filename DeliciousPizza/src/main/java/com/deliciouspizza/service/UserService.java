@@ -19,6 +19,8 @@ public class UserService {
     private final UserRepository userRepository = Singleton.getInstance(UserRepository.class);
     private static final Logger LOGGER = LogManager.getLogger(UserService.class);
 
+    public UserService() {
+    }
     //maybe to remove ?
     public boolean checkIfUserExists(String username) {
         return userRepository.isUsernamePresent(username);

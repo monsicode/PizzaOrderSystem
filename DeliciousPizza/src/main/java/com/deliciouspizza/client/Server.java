@@ -122,7 +122,7 @@ public class Server {
 
         System.out.println("New client connected: " + accept.getRemoteAddress());
 
-        String welcomeMenu = commandExecutor.start("menu", null);
+        String welcomeMenu = commandExecutor.start("main", null);
         writeClientOutput(accept, welcomeMenu);
     }
 

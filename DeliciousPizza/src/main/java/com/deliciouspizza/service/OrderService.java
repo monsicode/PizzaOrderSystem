@@ -11,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 
@@ -74,27 +75,25 @@ public class OrderService {
     }
 
     //for employees
-    public void processCurrentOrder() {
-        try {
-            Order currentOrder = orderRepository.getNextOrder();
-            LOGGER.info("Started processing current order: {} ", currentOrder);
+    public void processCurrentOrder() throws InterruptedException {
+        Order currentOrder = orderRepository.getNextOrder();
+        LOGGER.info("Started processing current order: {} ", currentOrder);
 
-            if (currentOrder != null) {
-                orderRepository.completeOrder(currentOrder);
-                String username = currentOrder.getUsernameCustomer();
-                userRepository.addToOrderHistory(username, currentOrder);
-            } else {
-                LOGGER.warn("There are no orders to process.");
-            }
-
-        } catch (InterruptedException err) {
-            Thread.currentThread().interrupt();
-            LOGGER.error("Error processing the order {}", err.getMessage(), err);
+        if (currentOrder != null) {
+            orderRepository.completeOrder(currentOrder);
+            String username = currentOrder.getUsernameCustomer();
+            userRepository.addToOrderHistory(username, currentOrder);
+        } else {
+            LOGGER.warn("There are no orders to process.");
         }
     }
 
     public BlockingQueue<Order> getPendingOrders() {
         return orderRepository.getPendingOrders();
+    }
+
+    public List<Order> getHistoryOfOrders() {
+        return orderRepository.getHistoryOrders();
     }
 
     public long getCountOrderInPeriod(LocalDateTime from, LocalDateTime to) {

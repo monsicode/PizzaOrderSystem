@@ -2,6 +2,9 @@ package com.deliciouspizza.repository;
 
 import com.deliciouspizza.entity.order.Order;
 import com.deliciouspizza.entity.product.Product;
+import com.deliciouspizza.exception.ProductAlreadyDeactivatedException;
+import com.deliciouspizza.service.ProductService;
+import com.deliciouspizza.utils.Singleton;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
@@ -25,6 +28,9 @@ public class Warehouse {
 
     private static final String FILE_PATH_STOCK = "src/main/resources/stock.json";
     private final File jsonFileStock = new File(FILE_PATH_STOCK);
+
+    //THAT SHIT BUGGED MY WHOLE PROGRAM WITH AWFUL EXCEPTIONS
+   // private final ProductService productService = Singleton.getInstance(ProductService.class);
 
     public Warehouse() {
         this.productStock = new ConcurrentHashMap<>();
@@ -54,7 +60,7 @@ public class Warehouse {
         }
     }
 
-    public void addStock(Product product, int quantity) {
+    public void addStock(Product product, int quantity) throws ProductAlreadyDeactivatedException {
         if (product == null) {
             throw new IllegalArgumentException("Product can't be null");
         }
@@ -62,6 +68,7 @@ public class Warehouse {
         String productKey = product.generateKey();
         productStock.put(productKey, productStock.getOrDefault(productKey, 0) + quantity);
         LOGGER.info("Added {} units of product {} to stock.", quantity, productKey);
+        //productService.deactivateProduct(product);
         saveStock();
     }
 
@@ -125,6 +132,29 @@ public class Warehouse {
                 RESET, entry.getKey());
         }
         System.out.println(BLUE + "----------------------------" + RESET);
+    }
+
+    public String getStock() {
+        StringBuilder report = new StringBuilder();
+
+        report.append("Product Stock List:\n")
+            .append(BLUE).append("----------------------------").append(RESET).append("\n");
+
+        for (Map.Entry<String, Integer> entry : productStock.entrySet()) {
+            String product = capitalizeWords(entry.getKey().replaceAll("_", " "));
+            int stock = entry.getValue();
+
+            report.append(String.format(
+                BLUE + "- " + RESET + "%-30s %sStock: %-3d%s" + BLUE + "   KEY" + RESET + ":%s\n",
+                product,
+                GREEN, stock,
+                RESET, entry.getKey()
+            ));
+        }
+
+        report.append(BLUE).append("----------------------------").append(RESET).append("\n");
+
+        return report.toString();
     }
 
     private String capitalizeWords(String input) {

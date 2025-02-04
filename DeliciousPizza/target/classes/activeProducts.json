@@ -4,5 +4,11 @@
     "pizzaType" : "PEPPERONI",
     "pizzaSize" : "SMALL",
     "statusProduct" : "ACTIVE"
+  },
+  "pizza_pepperoni_large" : {
+    "type" : "pizza",
+    "pizzaType" : "PEPPERONI",
+    "pizzaSize" : "LARGE",
+    "statusProduct" : "ACTIVE"
   }
 }

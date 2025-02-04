@@ -32,20 +32,12 @@ public class ProductService {
         }
     }
 
-    public void deactivateProduct(Product product) {
-        try {
-            productRepository.deactivateProduct(product);
-        } catch (ProductAlreadyDeactivatedException | IllegalArgumentException err) {
-            LOGGER.error(err.getMessage(), err);
-        }
+    public void deactivateProduct(Product product) throws ProductAlreadyDeactivatedException {
+        productRepository.deactivateProduct(product);
     }
 
-    public void activateProduct(Product product) {
-        try {
-            productRepository.activateProduct(product);
-        } catch (ProductAlreadyActiveException | IllegalArgumentException err) {
-            LOGGER.error(err.getMessage(), err);
-        }
+    public void activateProduct(Product product) throws ProductAlreadyActiveException {
+        productRepository.activateProduct(product);
     }
 
     public double getProductPriceByKey(String productKey) {

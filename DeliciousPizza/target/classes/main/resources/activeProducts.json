@@ -1,8 +1,0 @@
-{
-  "pizza_pepperoni_small" : {
-    "type" : "pizza",
-    "pizzaType" : "PEPPERONI",
-    "pizzaSize" : "SMALL",
-    "statusProduct" : "ACTIVE"
-  }
-}

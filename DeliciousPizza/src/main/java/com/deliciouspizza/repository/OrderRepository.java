@@ -3,7 +3,6 @@ package com.deliciouspizza.repository;
 import com.deliciouspizza.exception.ErrorInProductNameException;
 import com.deliciouspizza.exception.ProductDoesNotExistException;
 import com.deliciouspizza.exception.ProductException;
-import com.deliciouspizza.utils.Singleton;
 import com.deliciouspizza.entity.order.Order;
 import com.deliciouspizza.exception.InactiveProductException;
 import com.deliciouspizza.exception.ProductNotInOrderException;
@@ -17,12 +16,12 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingQueue;
-
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -34,10 +33,9 @@ public class OrderRepository {
     private final BlockingQueue<Order> pendingOrders;
     private final Set<Order> historyOrders = ConcurrentHashMap.newKeySet();
 
-    private final ProductRepository productRepository = Singleton.getInstance(ProductRepository.class);
-
     private static final String FILE_PATH_ORDERS = "src/main/resources/pendingOrders.json";
     private static final String FILE_PATH_HISTORY_ORDERS = "src/main/resources/historyOrders.json";
+    private static final int DAYS_IN_WEEK = 7;
 
     private final ObjectMapper objectMapper;
 
@@ -113,6 +111,14 @@ public class OrderRepository {
 
     public BlockingQueue<Order> getPendingOrders() {
         return pendingOrders;
+    }
+
+    public List<Order> getHistoryOrders() {
+        LocalDateTime oneWeekAgo = LocalDateTime.now().minusDays(DAYS_IN_WEEK);
+
+        return historyOrders.stream()
+            .filter(order -> order.getOrderDate().isAfter(oneWeekAgo))
+            .toList();
     }
 
     public void completeOrder(Order order) {

@@ -7,6 +7,12 @@ import com.deliciouspizza.command.cutomer.RemoveProduct;
 import com.deliciouspizza.command.cutomer.RepeatOrderForCustomer;
 import com.deliciouspizza.command.cutomer.ViewActiveProducts;
 import com.deliciouspizza.command.cutomer.ViewHistoryOfOrders;
+import com.deliciouspizza.command.employee.AddProductToMenu;
+import com.deliciouspizza.command.employee.ProcessNextOrder;
+import com.deliciouspizza.command.employee.RemoveProductFromMenu;
+import com.deliciouspizza.command.employee.ViewFinishedOrders;
+import com.deliciouspizza.command.employee.ViewPendingOrders;
+//import com.deliciouspizza.command.employee.ViewWarehouse;
 import com.deliciouspizza.command.main.Exit;
 import com.deliciouspizza.command.main.LogIn;
 import com.deliciouspizza.command.main.LogOut;
@@ -82,16 +88,28 @@ public class CommandCreator {
             case "register-customer" -> new RegisterCustomer(userService);
             case "register-employee" -> new RegisterEmployee(userService);
             case "login" -> new LogIn(userService, manager);
-            case "menu" -> new ShowMainMenu();
+            case "main" -> new ShowMainMenu();
             case "exit" -> new Exit();
             case "create-order" -> new CreateOrder(orderService, manager);
             case "add-product" -> new AddProduct(orderService, manager);
             case "remove-product" -> new RemoveProduct(orderService, manager);
             case "finish-order" -> new FinishOrder(orderService, manager);
-            case "products" -> new ViewActiveProducts(productService);
+            case "menu" -> new ViewActiveProducts(productService);
             case "view-history" -> new ViewHistoryOfOrders(userService, manager);
             case "repeat-order" -> new RepeatOrderForCustomer(userService, orderService, warehouse, manager);
             case "logout" -> new LogOut(manager);
+
+            case "process" -> new ProcessNextOrder(orderService, manager);
+            case "view-pending" -> new ViewPendingOrders(orderService, manager);
+            case "finished-orders" -> new ViewFinishedOrders(orderService, manager);
+            case "add" -> new AddProductToMenu(productService, manager);
+            case "remove" -> new RemoveProductFromMenu(productService, manager);
+            // case "warehouse" -> new ViewWarehouse(warehouse, manager);
+            //case "add-stock" -> new AddStockToWarehouse();
+            //case "add-new-stock"
+            //case "profit" -> new ProfitForPeriod();;
+            //case "count-orders" -> new CountOrdersForPeriod();
+
             default -> {
                 System.out.println("Unknown command: " + commandName);
                 yield null;

@@ -134,7 +134,7 @@ public class ProductRepository {
         return inactiveProducts.get(productName);
     }
 
-    //tova za warehouse-a li e ????
+    //tova za warehouse-a li e ????       -----      add new in the menu from the warehouse
     public void addProduct(Product product) {
         // We add the product to the Map, only if the key is unique
         String key = product.generateKey();

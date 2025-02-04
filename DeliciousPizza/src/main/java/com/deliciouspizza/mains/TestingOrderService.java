@@ -29,7 +29,7 @@ public class TestingOrderService {
 //        orderService.finalizeOrder("customer3");
 //
 //        System.out.println("Employee starts processing orders...");
-        orderService.processCurrentOrder();
+       // orderService.processCurrentOrder();
 //        orderService.processCurrentOrder();
 
     }

@@ -149,7 +149,7 @@ public class EmployeeInterfaceImpl extends UserInterfaceImpl implements Employee
 
     @Override
     public void processOrder() {
-        orderService.processCurrentOrder();
+      //  orderService.processCurrentOrder();
     }
 
     @Override
@@ -261,7 +261,7 @@ public class EmployeeInterfaceImpl extends UserInterfaceImpl implements Employee
         Integer quantity = scanner.nextInt();
         scanner.nextLine();
 
-        warehouse.addStock(product, quantity);
+        //warehouse.addStock(product, quantity);
     }
 
     private void deactivateProduct() {
@@ -277,7 +277,7 @@ public class EmployeeInterfaceImpl extends UserInterfaceImpl implements Employee
         }
 
         if (product != null) {
-            productService.deactivateProduct(product);
+          //  productService.deactivateProduct(product);
         }
 
     }
@@ -295,7 +295,7 @@ public class EmployeeInterfaceImpl extends UserInterfaceImpl implements Employee
         }
 
         if (product != null) {
-            productService.activateProduct(product);
+          //  productService.activateProduct(product);
         }
 
     }
