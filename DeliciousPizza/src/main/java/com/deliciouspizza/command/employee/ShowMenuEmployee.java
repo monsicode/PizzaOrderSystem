@@ -22,7 +22,7 @@ public class ShowMenuEmployee implements Command {
                 %sOrder maintenance%s
                     %s1.%s%s process %s - Process next order
                     %s2.%s%s view-pending %s - View pending orders
-                    %s3.%s%s finished-orders %s - View finished orders from the last week
+                    %s3.%s%s view-finished %s - View finished orders from the last week
                 
                 %sCustomer menu maintenance%s
                     %s4.%s%s menu %s - View current menu
@@ -30,9 +30,9 @@ public class ShowMenuEmployee implements Command {
                     %s6.%s%s remove %s<product-key>%s - Remove product from menu (Deactivate)
                 
                 %sStock maintenance%s
-                    %s7.%s%s warehouse %s - View available products and their quantities in the warehouse
-                    %s8.%s%s add-stock %s<product-key> <quantity>%s - Stock the warehouse with product
-                    %s9.%s%s add-new-stock %s<product-name> <product-type> <product-size> <quantity>%s - Add new product to the warehouse
+                    %s7.%s%s catalog %s<product-name>%s - Products on the market (pizza, drink, sauce), including their sizes and id keys
+                    %s8.%s%s warehouse %s - View available products and their quantities in the warehouse
+                    %s9.%s%s add-stock %s<product-key> <quantity>%s - Stock the warehouse with product
                 
                 %sReports%s
                     %s10.%s%s profit %s<start-date> <end-date>%s - View profit for period (yyyy-MM-dd)
@@ -54,10 +54,9 @@ public class ShowMenuEmployee implements Command {
             PINK, RESET, BLUE, YELLOW, RESET,
 
             PINK, RESET,
+            PINK, RESET, BLUE, YELLOW, RESET,
             PINK, RESET, BLUE, RESET,
             PINK, RESET, BLUE, YELLOW, RESET,
-            PINK, RESET, BLUE, YELLOW, RESET,
-
             PINK, RESET,
             PINK, RESET, BLUE, YELLOW, RESET,
             PINK, RESET, BLUE, YELLOW, RESET

@@ -1,1 +1,8 @@
-{ }
+{
+  "pizza_meat_lovers_large" : {
+    "type" : "pizza",
+    "pizzaType" : "MEAT_LOVERS",
+    "pizzaSize" : "LARGE",
+    "statusProduct" : "INACTIVE"
+  }
+}

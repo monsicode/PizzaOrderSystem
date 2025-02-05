@@ -17,7 +17,6 @@ public class UserInterfaceImpl implements UserInterface {
     protected static final String GREEN = "\u001B[32m";
     protected static final String BLUE = "\u001B[34m";
 
-
     protected final UserService userService = Singleton.getInstance(UserService.class);
     protected final OrderService orderService = Singleton.getInstance(OrderService.class);
     protected final ProductService productService = Singleton.getInstance(ProductService.class);

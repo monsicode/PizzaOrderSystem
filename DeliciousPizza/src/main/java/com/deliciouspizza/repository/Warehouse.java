@@ -2,6 +2,9 @@ package com.deliciouspizza.repository;
 
 import com.deliciouspizza.entity.order.Order;
 import com.deliciouspizza.entity.product.Product;
+import com.deliciouspizza.enums.DrinkType;
+import com.deliciouspizza.enums.PizzaType;
+import com.deliciouspizza.enums.SauceType;
 import com.deliciouspizza.exception.ProductAlreadyDeactivatedException;
 import com.deliciouspizza.service.ProductService;
 import com.deliciouspizza.utils.Singleton;
@@ -12,8 +15,10 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 public class Warehouse {
 
@@ -25,6 +30,7 @@ public class Warehouse {
     private static final String RESET = "\u001B[0m";
     private static final String BLUE = "\u001B[34m";
     private static final String GREEN = "\u001B[32m";
+    private static final String RED = "\u001B[38;5;214m";
 
     private static final String FILE_PATH_STOCK = "data-storage/stock.json";
     private final File jsonFileStock = new File(FILE_PATH_STOCK);
@@ -59,15 +65,21 @@ public class Warehouse {
         }
     }
 
-    public void addStockInWarehouse(Product product, int quantity) throws ProductAlreadyDeactivatedException {
+    public void addStockInWarehouse(String productKey, int quantity) {
+        Product product = productService.getProductByKey(productKey);
         if (product == null) {
             throw new IllegalArgumentException("Product can't be null");
         }
 
-        String productKey = product.generateKey();
         productStock.put(productKey, productStock.getOrDefault(productKey, 0) + quantity);
         LOGGER.info("Added {} units of product {} to stock.", quantity, productKey);
-        productService.deactivateProduct(product);
+
+        try {
+            productService.deactivateProduct(product);
+        } catch (ProductAlreadyDeactivatedException err) {
+            //
+        }
+
         saveStock();
     }
 
@@ -112,27 +124,6 @@ public class Warehouse {
         saveStock();
     }
 
-    public boolean doesProductExist(String productKey) {
-        return productStock.containsKey(productKey);
-    }
-
-    public void printStock() {
-        System.out.println("Product Stock List:");
-        System.out.println(BLUE + "----------------------------" + RESET);
-        for (Map.Entry<String, Integer> entry : productStock.entrySet()) {
-            String product = entry.getKey();
-            int stock = entry.getValue();
-
-            product = capitalizeWords(product.replaceAll("_", " "));
-
-            System.out.printf(BLUE + "- " + RESET + "%-30s %sStock: %-3d%s" + BLUE + "   KEY" + RESET + ":%s\n",
-                product,
-                GREEN, stock,
-                RESET, entry.getKey());
-        }
-        System.out.println(BLUE + "----------------------------" + RESET);
-    }
-
     public String getStock() {
         StringBuilder report = new StringBuilder();
 
@@ -156,18 +147,58 @@ public class Warehouse {
         return report.toString();
     }
 
-    private String capitalizeWords(String input) {
-        String[] words = input.split("_");
-        StringBuilder capitalizedString = new StringBuilder();
+    public String getCatalogProduct(String productName) {
+        if (productName.isEmpty()) {
+            throw new IllegalArgumentException("Product name cannot be empty");
+        }
 
-        for (String word : words) {
-            if (!word.isEmpty()) {
-                capitalizedString.append(word.substring(0, 1).toUpperCase());
-                capitalizedString.append(word.substring(1).toLowerCase());
-                capitalizedString.append(" ");
+        return switch (productName) {
+            case "pizza" ->
+                getCatalog("Pizza Catalog", "large, medium, small", PizzaType.values(), "pizza_", BLUE, true);
+            case "drink" -> getCatalog("Drink Catalog", "large, small", DrinkType.values(), "drink_", RED, true);
+            case "sauce" -> getCatalog("Sauce Catalog", "only small ", SauceType.values(), "sauce_", GREEN, false);
+            default -> "No such product!";
+        };
+
+    }
+
+    private <T extends Enum<T>> String getCatalog(String title, String sizeInfo, T[] values, String keyPrefix,
+                                                  String color, boolean size) {
+        StringBuilder catalog = new StringBuilder();
+
+        catalog.append(color).append(title).append("\n").append(RESET)
+            .append("----------------------------\n")
+            .append("Available sizes: ")
+            .append(sizeInfo)
+            .append(color).append("\n----------------------------\n").append(RESET);
+
+        for (T value : values) {
+            String productName = capitalizeWords(value.name().replaceAll("_", " ").toLowerCase());
+
+            if (size) {
+                catalog.append(String.format(
+                    "%s-%s %-15s %sKEY_EXAMPLE:%s %s_small\n",
+                    color, RESET, productName,
+                    color, RESET, keyPrefix + value.name().toLowerCase()
+                ));
+            } else {
+                catalog.append(String.format(
+                    "%s-%s %-15s %sKEY_EXAMPLE:%s %s\n",
+                    color, RESET, productName,
+                    color, RESET, keyPrefix + value.name().toLowerCase()
+                ));
             }
         }
-        return capitalizedString.toString().trim();
+
+        catalog.append(color).append("----------------------------").append(RESET).append("\n");
+        return catalog.toString();
+    }
+
+    private String capitalizeWords(String input) {
+        return Arrays.stream(input.split("_"))
+            .filter(word -> !word.isEmpty())
+            .map(word -> Character.toUpperCase(word.charAt(0)) + word.substring(1).toLowerCase())
+            .collect(Collectors.joining(" "));
     }
 
 }

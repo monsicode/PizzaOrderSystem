@@ -8,11 +8,15 @@ import com.deliciouspizza.command.cutomer.RepeatOrderForCustomer;
 import com.deliciouspizza.command.cutomer.ViewActiveProducts;
 import com.deliciouspizza.command.cutomer.ViewHistoryOfOrders;
 import com.deliciouspizza.command.employee.AddProductToMenu;
-import com.deliciouspizza.command.employee.ProcessNextOrder;
+import com.deliciouspizza.command.employee.reports.CountOrdersForPeriod;
+import com.deliciouspizza.command.employee.reports.ProfitForPeriod;
+import com.deliciouspizza.command.employee.stock.AddStockToWarehouse;
+import com.deliciouspizza.command.employee.orders.ProcessNextOrder;
 import com.deliciouspizza.command.employee.RemoveProductFromMenu;
-import com.deliciouspizza.command.employee.ViewFinishedOrders;
-import com.deliciouspizza.command.employee.ViewPendingOrders;
-import com.deliciouspizza.command.employee.ViewWarehouse;
+import com.deliciouspizza.command.employee.stock.ViewCatalogProducts;
+import com.deliciouspizza.command.employee.orders.ViewFinishedOrders;
+import com.deliciouspizza.command.employee.orders.ViewPendingOrders;
+import com.deliciouspizza.command.employee.stock.ViewWarehouse;
 import com.deliciouspizza.command.main.Exit;
 import com.deliciouspizza.command.main.LogIn;
 import com.deliciouspizza.command.main.LogOut;
@@ -104,11 +108,11 @@ public class CommandCreator {
             case "view-finished" -> new ViewFinishedOrders(orderService, manager);
             case "add" -> new AddProductToMenu(productService, manager);
             case "remove" -> new RemoveProductFromMenu(productService, manager);
+            case "catalog" -> new ViewCatalogProducts(warehouse, manager);
             case "warehouse" -> new ViewWarehouse(warehouse, manager);
-            //case "add-stock" -> new AddStockToWarehouse();
-            //case "add-new-stock"
-            //case "profit" -> new ProfitForPeriod();;
-            //case "count-orders" -> new CountOrdersForPeriod();
+            case "add-stock" -> new AddStockToWarehouse(warehouse, manager);
+            case "profit" -> new ProfitForPeriod(orderService, manager);
+            case "count-orders" -> new CountOrdersForPeriod(orderService, manager);
 
             default -> {
                 System.out.println("Unknown command: " + commandName);

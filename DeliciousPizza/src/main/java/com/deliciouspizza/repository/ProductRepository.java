@@ -1,7 +1,6 @@
 package com.deliciouspizza.repository;
 
 import com.deliciouspizza.entity.product.Product;
-import com.deliciouspizza.enums.StatusProduct;
 import com.deliciouspizza.exception.ProductAlreadyActiveException;
 import com.deliciouspizza.exception.ProductAlreadyDeactivatedException;
 import com.deliciouspizza.exception.ProductDoesNotExistException;

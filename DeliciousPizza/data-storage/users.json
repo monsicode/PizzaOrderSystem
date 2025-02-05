@@ -27,7 +27,7 @@
       "orderDate" : [ 2025, 2, 3, 10, 29, 15, 958840000 ],
       "totalPrice" : 9.0,
       "usernameCustomer" : "monkata",
-      "orderId" : 17
+      "orderId" : 2
     }, {
       "order" : {
         "pizza_pepperoni_small" : 10
@@ -36,7 +36,16 @@
       "orderDate" : [ 2024, 11, 21, 20, 25, 55, 809074900 ],
       "totalPrice" : 90.0,
       "usernameCustomer" : "monkata",
-      "orderId" : 2
+      "orderId" : 3
+    }, {
+      "order" : {
+        "pizza_pepperoni_small" : 10
+      },
+      "statusOrder" : "COMPLETED",
+      "orderDate" : [ 2025, 2, 3, 12, 28, 6, 498406100 ],
+      "totalPrice" : 90.0,
+      "usernameCustomer" : "monkata",
+      "orderId" : 19
     }, {
       "order" : {
         "pizza_pepperoni_small" : 10
@@ -45,7 +54,7 @@
       "orderDate" : [ 2024, 11, 21, 20, 9, 0, 744598800 ],
       "totalPrice" : 90.0,
       "usernameCustomer" : "monkata",
-      "orderId" : 3
+      "orderId" : 4
     }, {
       "order" : {
         "pizza_pepperoni_small" : 10
@@ -54,7 +63,7 @@
       "orderDate" : [ 2024, 11, 21, 20, 7, 0, 272483600 ],
       "totalPrice" : 90.0,
       "usernameCustomer" : "monkata",
-      "orderId" : 4
+      "orderId" : 5
     }, {
       "order" : {
         "pizza_pepperoni_small" : 3
@@ -63,7 +72,7 @@
       "orderDate" : [ 2024, 12, 15, 15, 39, 27, 876749100 ],
       "totalPrice" : 27.0,
       "usernameCustomer" : "monkata",
-      "orderId" : 5
+      "orderId" : 6
     }, {
       "order" : {
         "pizza_pepperoni_small" : 3
@@ -72,7 +81,7 @@
       "orderDate" : [ 2024, 12, 16, 16, 13, 9, 860924700 ],
       "totalPrice" : 27.0,
       "usernameCustomer" : "monkata",
-      "orderId" : 6
+      "orderId" : 7
     }, {
       "order" : {
         "pizza_pepperoni_small" : 2
@@ -81,7 +90,7 @@
       "orderDate" : [ 2025, 2, 2, 17, 20, 21, 467785600 ],
       "totalPrice" : 18.0,
       "usernameCustomer" : "monkata",
-      "orderId" : 7
+      "orderId" : 8
     }, {
       "order" : {
         "pizza_pepperoni_small" : 1
@@ -90,7 +99,7 @@
       "orderDate" : [ 2025, 2, 2, 19, 54, 31, 175190100 ],
       "totalPrice" : 9.0,
       "usernameCustomer" : "monkata",
-      "orderId" : 8
+      "orderId" : 9
     } ],
     "hashedPassword" : "$2a$10$0sP5x1tsaGS/RRNxZPFlQOocRtg.L.UcFtuKxVsc2ipwOm12g4006",
     "userType" : "customer"

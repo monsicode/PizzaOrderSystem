@@ -21,6 +21,7 @@ public class UserService {
 
     public UserService() {
     }
+
     //maybe to remove ?
     public boolean checkIfUserExists(String username) {
         return userRepository.isUsernamePresent(username);
@@ -86,7 +87,7 @@ public class UserService {
         try {
             return userRepository.getUserByUsername(username).getRights();
         } catch (UserNotFoundException err) {
-            LOGGER.error(err.getMessage(), err);
+            LOGGER.error(err.getMessage());
         }
 
         return null;

@@ -74,7 +74,7 @@ public class OrderService {
         return orderRepository.getTotalPriceOfOrder(username);
     }
 
-    //for employees
+    //for employees     TODO: check if its an employee
     public void processCurrentOrder() throws InterruptedException {
         Order currentOrder = orderRepository.getNextOrder();
         LOGGER.info("Started processing current order: {} ", currentOrder);

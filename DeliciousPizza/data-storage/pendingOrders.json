@@ -3,17 +3,8 @@
     "pizza_pepperoni_small" : 10
   },
   "statusOrder" : "PROCESSING",
-  "orderDate" : [ 2025, 2, 3, 12, 28, 6, 498406100 ],
-  "totalPrice" : 90.0,
-  "usernameCustomer" : "monkata",
-  "orderId" : 18
-}, {
-  "order" : {
-    "pizza_pepperoni_small" : 10
-  },
-  "statusOrder" : "PROCESSING",
   "orderDate" : [ 2025, 2, 3, 12, 32, 35, 485539100 ],
   "totalPrice" : 90.0,
   "usernameCustomer" : "monkata",
-  "orderId" : 19
+  "orderId" : 20
 } ]

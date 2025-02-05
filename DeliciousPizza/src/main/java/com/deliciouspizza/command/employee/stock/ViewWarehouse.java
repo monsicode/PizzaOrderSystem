@@ -1,4 +1,4 @@
-package com.deliciouspizza.command.employee;
+package com.deliciouspizza.command.employee.stock;
 
 import com.deliciouspizza.command.Command;
 import com.deliciouspizza.command.SessionManager;

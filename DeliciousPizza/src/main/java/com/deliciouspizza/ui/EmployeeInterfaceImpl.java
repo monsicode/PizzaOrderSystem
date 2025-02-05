@@ -245,7 +245,7 @@ public class EmployeeInterfaceImpl extends UserInterfaceImpl implements Employee
             switch (choice) {
                 case FIRST_CHOICE -> deactivateProduct();
                 case SECOND_CHOICE -> activateProduct();
-                case THIRD_CHOICE -> warehouse.printStock();
+                //case THIRD_CHOICE -> warehouse.printStock();
                 case FOURTH_CHOICE -> addMoreProductsInStock();
                 case FIFTH_CHOICE -> maintaining = false;
                 default -> System.out.println("Invalid choice!");

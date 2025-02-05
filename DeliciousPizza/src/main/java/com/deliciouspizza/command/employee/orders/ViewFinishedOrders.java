@@ -1,4 +1,4 @@
-package com.deliciouspizza.command.employee;
+package com.deliciouspizza.command.employee.orders;
 
 import com.deliciouspizza.command.Command;
 import com.deliciouspizza.command.SessionManager;
@@ -6,12 +6,12 @@ import com.deliciouspizza.service.OrderService;
 
 import java.nio.channels.SocketChannel;
 
-public class ProcessNextOrder implements Command {
+public class ViewFinishedOrders implements Command {
 
     private final OrderService orderService;
     private final SessionManager manager;
 
-    public ProcessNextOrder(OrderService orderService, SessionManager manager) {
+    public ViewFinishedOrders(OrderService orderService, SessionManager manager) {
         this.orderService = orderService;
         this.manager = manager;
     }
@@ -19,12 +19,10 @@ public class ProcessNextOrder implements Command {
     @Override
     public String execute(String[] args, SocketChannel client) {
         if (manager.isLoggedIn(client)) {
-            try {
-                orderService.processCurrentOrder();
-                return "Order processed successfully!";
-            } catch (InterruptedException err) {
-                Thread.currentThread().interrupt();
-                return "Error processing the order";
+            if (!orderService.getHistoryOfOrders().isEmpty()) {
+                return orderService.getHistoryOfOrders().toString();
+            } else {
+                return "No finished orders from the last week";
             }
         } else {
             return "Not logged in, error occurred";
