@@ -265,3 +265,18 @@ com.deliciouspizza.exception.ProductAlreadyActiveException: The product is alrea
 	at com.deliciouspizza.command.Main.main(Main.java:23) [classes/:?]
 2025-02-04 17:56:15,946 [main] WARN com.deliciouspizza.repository.ProductRepository - Product pizza_pepperoni_smal doesn't exist
 2025-02-04 18:07:38,189 [main] WARN com.deliciouspizza.repository.ProductRepository - Product pizza_bbq_chicken_large doesn't exist
+2025-02-05 11:54:13,283 [main] ERROR com.deliciouspizza.service.UserService - User with username worker1 not found
+com.deliciouspizza.exception.UserNotFoundException: User with username worker1 not found
+	at com.deliciouspizza.repository.UserRepository.getUserByUsername(UserRepository.java:73) ~[classes/:?]
+	at com.deliciouspizza.service.UserService.getUserRights(UserService.java:87) [classes/:?]
+	at com.deliciouspizza.command.main.LogIn.execute(LogIn.java:40) [classes/:?]
+	at com.deliciouspizza.command.CommandExecutor.start(CommandExecutor.java:26) [classes/:?]
+	at com.deliciouspizza.command.Main.main(Main.java:25) [classes/:?]
+2025-02-05 12:01:02,684 [main] ERROR com.deliciouspizza.service.UserService - User with username worker1 not found
+com.deliciouspizza.exception.UserNotFoundException: User with username worker1 not found
+	at com.deliciouspizza.repository.UserRepository.getUserByUsername(UserRepository.java:73) ~[classes/:?]
+	at com.deliciouspizza.service.UserService.getUserRights(UserService.java:87) [classes/:?]
+	at com.deliciouspizza.command.main.LogIn.execute(LogIn.java:40) [classes/:?]
+	at com.deliciouspizza.command.CommandExecutor.start(CommandExecutor.java:26) [classes/:?]
+	at com.deliciouspizza.command.Main.main(Main.java:25) [classes/:?]
+2025-02-05 12:02:22,329 [main] WARN com.deliciouspizza.service.UserService - Wrong password.

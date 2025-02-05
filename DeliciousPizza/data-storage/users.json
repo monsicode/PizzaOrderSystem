@@ -21,6 +21,15 @@
       "orderId" : 1
     }, {
       "order" : {
+        "pizza_pepperoni_small" : 1
+      },
+      "statusOrder" : "COMPLETED",
+      "orderDate" : [ 2025, 2, 3, 10, 29, 15, 958840000 ],
+      "totalPrice" : 9.0,
+      "usernameCustomer" : "monkata",
+      "orderId" : 17
+    }, {
+      "order" : {
         "pizza_pepperoni_small" : 10
       },
       "statusOrder" : "COMPLETED",
@@ -81,7 +90,7 @@
       "orderDate" : [ 2025, 2, 2, 19, 54, 31, 175190100 ],
       "totalPrice" : 9.0,
       "usernameCustomer" : "monkata",
-      "orderId" : 15
+      "orderId" : 8
     } ],
     "hashedPassword" : "$2a$10$0sP5x1tsaGS/RRNxZPFlQOocRtg.L.UcFtuKxVsc2ipwOm12g4006",
     "userType" : "customer"

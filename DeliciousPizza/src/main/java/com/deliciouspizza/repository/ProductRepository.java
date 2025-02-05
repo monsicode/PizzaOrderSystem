@@ -1,11 +1,10 @@
 package com.deliciouspizza.repository;
 
 import com.deliciouspizza.entity.product.Product;
+import com.deliciouspizza.enums.StatusProduct;
 import com.deliciouspizza.exception.ProductAlreadyActiveException;
 import com.deliciouspizza.exception.ProductAlreadyDeactivatedException;
 import com.deliciouspizza.exception.ProductDoesNotExistException;
-import com.deliciouspizza.enums.StatusProduct;
-import com.deliciouspizza.utils.Singleton;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
@@ -18,17 +17,18 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ProductRepository {
-    private static final String FILE_PATH_INACTIVE_PRODUCTS = "src/main/resources/inactiveProduct.json";
-    private static final String FILE_PATH_ACTIVE_PRODUCTS = "src/main/resources/activeProducts.json";
+    private static final String FILE_PATH_INACTIVE_PRODUCTS = "data-storage/inactiveProduct.json";
+    private static final String FILE_PATH_ACTIVE_PRODUCTS = "data-storage/activeProducts.json";
     private final File jsonFileActive = new File(FILE_PATH_ACTIVE_PRODUCTS);
     private final File jsonFileInactive = new File(FILE_PATH_INACTIVE_PRODUCTS);
 
-    private final Warehouse warehouse = Singleton.getInstance(Warehouse.class);
     private static final Logger LOGGER = LogManager.getLogger(ProductRepository.class);
 
     private Map<String, Product> inactiveProducts;
     private Map<String, Product> activeProducts;
     private final ObjectMapper objectMapper;
+
+   // private final Warehouse warehouse = new Warehouse();
 
     public ProductRepository() {
         inactiveProducts = new ConcurrentHashMap<>();
@@ -135,31 +135,31 @@ public class ProductRepository {
     }
 
     //tova za warehouse-a li e ????       -----      add new in the menu from the warehouse
-    public void addProduct(Product product) {
-        // We add the product to the Map, only if the key is unique
-        String key = product.generateKey();
-
-        //If the product exists in the warehouse --> we can add it to the menu or check it as not active for now
-        if (warehouse.doesProductExist(key)) {
-            //Checks to add in inactive.json
-            if (!inactiveProducts.containsKey(key) && product.getStatusProduct() == StatusProduct.INACTIVE) {
-                inactiveProducts.put(key, product);
-                saveProducts(FILE_PATH_INACTIVE_PRODUCTS, inactiveProducts);
-                LOGGER.info("Product added successfully to inactive list: {}", product.generateKey());
-
-                //Checks to add in active.json
-            } else if (product.getStatusProduct() == StatusProduct.ACTIVE && !activeProducts.containsKey(key)) {
-                activeProducts.put(key, product);
-                saveProducts(FILE_PATH_ACTIVE_PRODUCTS, activeProducts);
-                LOGGER.info("Product added successfully to active list: {}", product.generateKey());
-
-            } else {
-                throw new IllegalArgumentException("Product can't be added, because it already exist!");
-            }
-        } else {
-            LOGGER.warn("Product does not exist in the warehouse: {}", product.generateKey());
-        }
-    }
+//    public void addProduct(Product product) {
+//        // We add the product to the Map, only if the key is unique
+//        String key = product.generateKey();
+//
+//        //If the product exists in the warehouse --> we can add it to the menu or check it as not active for now
+//        if (warehouse.doesProductExist(key)) {
+//            //Checks to add in inactive.json
+//            if (!inactiveProducts.containsKey(key) && product.getStatusProduct() == StatusProduct.INACTIVE) {
+//                inactiveProducts.put(key, product);
+//                saveProducts(FILE_PATH_INACTIVE_PRODUCTS, inactiveProducts);
+//                LOGGER.info("Product added successfully to inactive list: {}", product.generateKey());
+//
+//                //Checks to add in active.json
+//            } else if (product.getStatusProduct() == StatusProduct.ACTIVE && !activeProducts.containsKey(key)) {
+//                activeProducts.put(key, product);
+//                saveProducts(FILE_PATH_ACTIVE_PRODUCTS, activeProducts);
+//                LOGGER.info("Product added successfully to active list: {}", product.generateKey());
+//
+//            } else {
+//                throw new IllegalArgumentException("Product can't be added, because it already exist!");
+//            }
+//        } else {
+//            LOGGER.warn("Product does not exist in the warehouse: {}", product.generateKey());
+//        }
+//    }
 
     //modified
     public Product getProduct(String productName) {

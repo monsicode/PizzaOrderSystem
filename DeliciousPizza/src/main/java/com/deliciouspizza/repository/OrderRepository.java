@@ -22,6 +22,7 @@ import java.util.Set;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingQueue;
+
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -33,8 +34,8 @@ public class OrderRepository {
     private final BlockingQueue<Order> pendingOrders;
     private final Set<Order> historyOrders = ConcurrentHashMap.newKeySet();
 
-    private static final String FILE_PATH_ORDERS = "src/main/resources/pendingOrders.json";
-    private static final String FILE_PATH_HISTORY_ORDERS = "src/main/resources/historyOrders.json";
+    private static final String FILE_PATH_ORDERS = "data-storage/pendingOrders.json";
+    private static final String FILE_PATH_HISTORY_ORDERS = "data-storage/historyOrders.json";
     private static final int DAYS_IN_WEEK = 7;
 
     private final ObjectMapper objectMapper;

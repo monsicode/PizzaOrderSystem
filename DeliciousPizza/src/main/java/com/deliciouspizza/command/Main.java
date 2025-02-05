@@ -13,6 +13,8 @@ public class Main {
         CommandExecutor executor = new CommandExecutor();
         SocketChannel mockChannel = Mockito.mock(SocketChannel.class);
 
+        System.out.println(executor.start("main", mockChannel));
+
         while (true) {
             String input = scanner.nextLine();
 
@@ -27,3 +29,4 @@ public class Main {
     }
 
 }
+

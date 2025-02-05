@@ -24,13 +24,13 @@ public class ProductService {
         return productRepository.getAllInactiveProducts();
     }
 
-    public void addNewProduct(Product product) {
-        try {
-            productRepository.addProduct(product);
-        } catch (IllegalArgumentException err) {
-            LOGGER.error(err.getMessage(), err);
-        }
-    }
+//    public void addNewProduct(Product product) {
+//        try {
+//            productRepository.addProduct(product);
+//        } catch (IllegalArgumentException err) {
+//            LOGGER.error(err.getMessage(), err);
+//        }
+//    }
 
     public void deactivateProduct(Product product) throws ProductAlreadyDeactivatedException {
         productRepository.deactivateProduct(product);

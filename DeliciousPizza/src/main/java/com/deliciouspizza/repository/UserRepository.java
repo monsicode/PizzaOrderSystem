@@ -20,7 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class UserRepository {
 
     private Map<String, User> users = new ConcurrentHashMap<>();
-    private static final String USER_FILE = "src/main/resources/users.json";
+    private static final String USER_FILE = "data-storage/users.json";
     private final File jsonFile = new File(USER_FILE);
     TypeReference<Map<String, User>> typeRef = new TypeReference<>() {
     };

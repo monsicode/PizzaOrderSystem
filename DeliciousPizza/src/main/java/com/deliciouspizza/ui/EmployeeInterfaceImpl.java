@@ -144,7 +144,7 @@ public class EmployeeInterfaceImpl extends UserInterfaceImpl implements Employee
 
     @Override
     public void addNewProduct() {
-        productService.addNewProduct(creatProduct());
+     //   productService.addNewProduct(creatProduct());
     }
 
     @Override

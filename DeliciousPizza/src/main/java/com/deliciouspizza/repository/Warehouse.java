@@ -26,11 +26,10 @@ public class Warehouse {
     private static final String BLUE = "\u001B[34m";
     private static final String GREEN = "\u001B[32m";
 
-    private static final String FILE_PATH_STOCK = "src/main/resources/stock.json";
+    private static final String FILE_PATH_STOCK = "data-storage/stock.json";
     private final File jsonFileStock = new File(FILE_PATH_STOCK);
 
-    //THAT SHIT BUGGED MY WHOLE PROGRAM WITH AWFUL EXCEPTIONS
-   // private final ProductService productService = Singleton.getInstance(ProductService.class);
+    private final ProductService productService = Singleton.getInstance(ProductService.class);
 
     public Warehouse() {
         this.productStock = new ConcurrentHashMap<>();
@@ -60,7 +59,7 @@ public class Warehouse {
         }
     }
 
-    public void addStock(Product product, int quantity) throws ProductAlreadyDeactivatedException {
+    public void addStockInWarehouse(Product product, int quantity) throws ProductAlreadyDeactivatedException {
         if (product == null) {
             throw new IllegalArgumentException("Product can't be null");
         }
@@ -68,7 +67,7 @@ public class Warehouse {
         String productKey = product.generateKey();
         productStock.put(productKey, productStock.getOrDefault(productKey, 0) + quantity);
         LOGGER.info("Added {} units of product {} to stock.", quantity, productKey);
-        //productService.deactivateProduct(product);
+        productService.deactivateProduct(product);
         saveStock();
     }
 
