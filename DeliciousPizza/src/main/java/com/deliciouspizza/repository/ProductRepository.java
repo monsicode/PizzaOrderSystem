@@ -16,10 +16,10 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ProductRepository {
-    private static final String FILE_PATH_INACTIVE_PRODUCTS = "data-storage/inactiveProduct.json";
-    private static final String FILE_PATH_ACTIVE_PRODUCTS = "data-storage/activeProducts.json";
-    private final File jsonFileActive = new File(FILE_PATH_ACTIVE_PRODUCTS);
-    private final File jsonFileInactive = new File(FILE_PATH_INACTIVE_PRODUCTS);
+    protected String filePathInactiveProducts = "data-storage/inactiveProduct.json";
+    private String filePathActiveProducts = "data-storage/activeProducts.json";
+    private File jsonFileActive = new File(filePathActiveProducts);
+    private File jsonFileInactive = new File(filePathInactiveProducts);
 
     private static final Logger LOGGER = LogManager.getLogger(ProductRepository.class);
 
@@ -27,7 +27,14 @@ public class ProductRepository {
     private Map<String, Product> activeProducts;
     private final ObjectMapper objectMapper;
 
-   // private final Warehouse warehouse = new Warehouse();
+    public ProductRepository(ObjectMapper objectMapper, File jsonFileActive, Map<String, Product> activeProducts,
+                             File jsonFileInactive, Map<String, Product> inactiveProducts) {
+        this.objectMapper = objectMapper;
+        this.jsonFileActive = jsonFileActive;
+        this.jsonFileInactive = jsonFileInactive;
+        this.activeProducts = activeProducts;
+        this.inactiveProducts = inactiveProducts;
+    }
 
     public ProductRepository() {
         inactiveProducts = new ConcurrentHashMap<>();
@@ -65,11 +72,11 @@ public class ProductRepository {
         }
     }
 
-    private synchronized void saveProducts(String path, Map<String, Product> productsMap) {
+    protected synchronized void saveProducts(String path, Map<String, Product> productsMap) {
         try {
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(path), productsMap);
         } catch (IOException e) {
-            LOGGER.error("Error saving products to file: {}", path, e);
+            LOGGER.error("Error saving products to file: {}", path);
         }
     }
 
@@ -98,8 +105,8 @@ public class ProductRepository {
         product.activateProduct();
         inactiveProducts.remove(key);
         activeProducts.put(key, product);
-        saveProducts(FILE_PATH_ACTIVE_PRODUCTS, activeProducts);
-        saveProducts(FILE_PATH_INACTIVE_PRODUCTS, inactiveProducts);
+        saveProducts(filePathActiveProducts, activeProducts);
+        saveProducts(filePathInactiveProducts, inactiveProducts);
         LOGGER.info("Product activated successfully: {}", product.generateKey());
     }
 
@@ -120,8 +127,8 @@ public class ProductRepository {
         product.deactivateProduct();
         activeProducts.remove(key);
         inactiveProducts.put(key, product);
-        saveProducts(FILE_PATH_ACTIVE_PRODUCTS, activeProducts);
-        saveProducts(FILE_PATH_INACTIVE_PRODUCTS, inactiveProducts);
+        saveProducts(filePathActiveProducts, activeProducts);
+        saveProducts(filePathInactiveProducts, inactiveProducts);
         LOGGER.info("Product deactivated successfully: {}", product.generateKey());
     }
 

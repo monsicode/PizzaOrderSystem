@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f9e54522-3b21-4fe5-911b-c3ac885ffae2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/deliciouspizza/repository/OrderRepositoryTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/log4j2-test.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DeliciousPizza.iml" beforeDir="false" afterPath="$PROJECT_DIR$/DeliciousPizza.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-storage/stock.json" beforeDir="false" afterPath="$PROJECT_DIR$/data-storage/stock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/entity/product/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/entity/product/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/repository/OrderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/repository/OrderRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/repository/ProductRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/command/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/command/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/entity/product/Product.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/entity/product/Product.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/repository/ProductRepository$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/repository/ProductRepository$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/repository/ProductRepository$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/repository/ProductRepository$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/repository/ProductRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/repository/ProductRepository.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2sfW27PwLBLRGqzib75zUYtNIdh" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JUnit.OrderRepositoryTest.executor": "Coverage",
+    "JUnit.OrderRepositoryTest.testAddOrder.executor": "Run",
+    "JUnit.ProductRepositoryTest.executor": "Coverage",
+    "JUnit.ProductRepositoryTest.testActivateProduct.executor": "Run",
+    "JUnit.ProductRepositoryTest.testActivateProductWithAlreadyActiveProduct.executor": "Run",
+    "JUnit.ProductRepositoryTest.testActivateProductWithNonExcistingProduct.executor": "Run",
+    "JUnit.ProductRepositoryTest.testDeactivateProduct.executor": "Run",
+    "JUnit.ProductRepositoryTest.testDeactivateProductWithNonExcistingProduct.executor": "Run",
+    "JUnit.ProductRepositoryTest.testFilePathChange.executor": "Run",
+    "JUnit.ProductRepositoryTest.testGetProductFromActiveProducts.executor": "Run",
+    "JUnit.ProductRepositoryTest.testGetProductFromInactiveProducts.executor": "Run",
+    "JUnit.ProductRepositoryTest.testGetProductWithNonExcistingProduct.executor": "Run",
+    "JUnit.ProductRepositoryTest.testIOExceptionDuringLoadActiveProducts.executor": "Debug",
+    "JUnit.ProductRepositoryTest.testIOExceptionDuringLoadInactiveProducts.executor": "Run",
+    "JUnit.ProductRepositoryTest.testIsItGoodForUnderAgedCustomers.executor": "Run",
+    "JUnit.ProductRepositoryTest.testIsItGoodForUnderAgedCustomersWhenNotInActiveProducts.executor": "Run",
+    "JUnit.ProductRepositoryTest.testIsItGoodForUnderAgedCustomersWithAlcoholicDrink.executor": "Run",
+    "JUnit.ProductRepositoryTest.testIsProductActive.executor": "Run",
+    "JUnit.ProductRepositoryTest.testIsProductActiveWithFalseReturn.executor": "Run",
+    "JUnit.ProductRepositoryTest.testLoadActiveProducts.executor": "Run",
+    "JUnit.ProductRepositoryTest.testLoadActiveProductsWithEmptyFile.executor": "Debug",
+    "JUnit.ProductRepositoryTest.testLoadInactiveProducts.executor": "Run",
+    "JUnit.ProductRepositoryTest.testLoadInactiveProductsWithEmptyFile.executor": "Coverage",
+    "JUnit.ProductRepositoryTest.testSavingProductWithException.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Monika/Downloads/checkstyle.xml",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.3402299",
+    "settings.editor.selected.configurable": "org.infernus.idea.checkstyle.CheckStyleConfigurable"
+  }
+}]]></component>
+  <component name="RunManager" selected="JUnit.OrderRepositoryTest">
+    <configuration name="OrderRepositoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="DeliciousPizza" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.deliciouspizza.repository.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.deliciouspizza.repository" />
+      <option name="MAIN_CLASS_NAME" value="com.deliciouspizza.repository.OrderRepositoryTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OrderRepositoryTest.testAddOrder" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="DeliciousPizza" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.deliciouspizza.repository.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.deliciouspizza.repository" />
+      <option name="MAIN_CLASS_NAME" value="com.deliciouspizza.repository.OrderRepositoryTest" />
+      <option name="METHOD_NAME" value="testAddOrder" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProductRepositoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="DeliciousPizza" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.deliciouspizza.repository.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.deliciouspizza.repository" />
+      <option name="MAIN_CLASS_NAME" value="com.deliciouspizza.repository.ProductRepositoryTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProductRepositoryTest.testIsItGoodForUnderAgedCustomersWithAlcoholicDrink" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="DeliciousPizza" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.deliciouspizza.repository.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.deliciouspizza.repository" />
+      <option name="MAIN_CLASS_NAME" value="com.deliciouspizza.repository.ProductRepositoryTest" />
+      <option name="METHOD_NAME" value="testIsItGoodForUnderAgedCustomersWithAlcoholicDrink" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProductRepositoryTest.testSavingProductWithException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="DeliciousPizza" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.deliciouspizza.repository.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.deliciouspizza.repository" />
+      <option name="MAIN_CLASS_NAME" value="com.deliciouspizza.repository.ProductRepositoryTest" />
+      <option name="METHOD_NAME" value="testSavingProductWithException" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.OrderRepositoryTest" />
+        <item itemvalue="JUnit.OrderRepositoryTest.testAddOrder" />
+        <item itemvalue="JUnit.ProductRepositoryTest" />
+        <item itemvalue="JUnit.ProductRepositoryTest.testSavingProductWithException" />
+        <item itemvalue="JUnit.ProductRepositoryTest.testIsItGoodForUnderAgedCustomersWithAlcoholicDrink" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f9e54522-3b21-4fe5-911b-c3ac885ffae2" name="Changes" comment="" />
+      <created>1738846900938</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1738846900938</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/DeliciousPizza$OrderRepositoryTest.ic" NAME="OrderRepositoryTest Coverage Results" MODIFIED="1738946373929" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.deliciouspizza.repository.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/DeliciousPizza$ProductRepositoryTest.ic" NAME="ProductRepositoryTest Coverage Results" MODIFIED="1738945189270" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.deliciouspizza.repository.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/DeliciousPizza$ProductRepositoryTest_testLoadInactiveProductsWithEmptyFile.ic" NAME="ProductRepositoryTest.testLoadInactiveProductsWithEmptyFile Coverage Results" MODIFIED="1738849670030" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.deliciouspizza.repository.*</FILTER>
+    </SUITE>
+  </component>
+</project>

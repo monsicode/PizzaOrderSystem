@@ -28,7 +28,7 @@ public abstract class Product {
     protected String type;
 
     public Product() {
-        this.statusProduct = StatusProduct.ACTIVE;
+        this.statusProduct = StatusProduct.INACTIVE;
     }
 
     public void activateProduct() {

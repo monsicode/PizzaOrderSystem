@@ -1,6 +1,6 @@
 package com.deliciouspizza.command;
 
-import org.mockito.Mockito;
+//import org.mockito.Mockito;
 
 import java.nio.channels.SocketChannel;
 import java.util.Scanner;
@@ -11,9 +11,9 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         CommandExecutor executor = new CommandExecutor();
-        SocketChannel mockChannel = Mockito.mock(SocketChannel.class);
+       // SocketChannel mockChannel = Mockito.mock(SocketChannel.class);
 
-        System.out.println(executor.start("main", mockChannel));
+        System.out.println(executor.start("main", null));
 
         while (true) {
             String input = scanner.nextLine();
@@ -22,7 +22,7 @@ public class Main {
                 break;
             }
 
-            System.out.println(executor.start(input, mockChannel));
+            System.out.println(executor.start(input, null));
         }
 
         scanner.close();

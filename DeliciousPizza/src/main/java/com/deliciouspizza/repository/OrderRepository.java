@@ -40,8 +40,8 @@ public class OrderRepository {
 
     private final ObjectMapper objectMapper;
 
-    private final File jsonFile = new File(FILE_PATH_ORDERS);
-    private final File historyJsonFile = new File(FILE_PATH_HISTORY_ORDERS);
+    private File pendingJsonFile = new File(FILE_PATH_ORDERS);
+    private File historyJsonFile = new File(FILE_PATH_HISTORY_ORDERS);
 
     private final Map<String, Order> activeOrdersForCustomers = new ConcurrentHashMap<>();
 
@@ -53,6 +53,15 @@ public class OrderRepository {
 
         historyOrders.addAll(loadHistoryOrders());
         loadPendingOrders();
+    }
+
+    public OrderRepository(ObjectMapper objectMapper, File tempFilePendingOrders, File tempFileHistoryOrders) {
+        this.objectMapper = objectMapper;
+        pendingJsonFile = tempFilePendingOrders;
+        historyJsonFile = tempFileHistoryOrders;
+
+        pendingOrders = new LinkedBlockingQueue<>();
+
     }
 
     public void addOrder(Order order) {
@@ -68,11 +77,11 @@ public class OrderRepository {
         return order;
     }
 
-    private synchronized void loadPendingOrders() {
+    synchronized void loadPendingOrders() {
         try {
-            if (jsonFile.exists() && jsonFile.length() > 0) {
+            if (pendingJsonFile.exists() && pendingJsonFile.length() > 0) {
                 BlockingQueue<Order> loadedOrders =
-                    objectMapper.readValue(jsonFile, new TypeReference<LinkedBlockingQueue<Order>>() {
+                    objectMapper.readValue(pendingJsonFile, new TypeReference<LinkedBlockingQueue<Order>>() {
                     });
                 pendingOrders.addAll(loadedOrders);
             }
@@ -81,7 +90,7 @@ public class OrderRepository {
         }
     }
 
-    private synchronized Set<Order> loadHistoryOrders() {
+    synchronized Set<Order> loadHistoryOrders() {
         try {
             if (historyJsonFile.exists() && historyJsonFile.length() > 0) {
                 return objectMapper.readValue(historyJsonFile, new TypeReference<Set<Order>>() {
@@ -93,9 +102,9 @@ public class OrderRepository {
         return new HashSet<>();
     }
 
-    private synchronized void savePendingOrders() {
+    synchronized void savePendingOrders() {
         try {
-            objectMapper.writerWithDefaultPrettyPrinter().writeValue(jsonFile, pendingOrders);
+            objectMapper.writerWithDefaultPrettyPrinter().writeValue(pendingJsonFile, pendingOrders);
         } catch (IOException e) {
             LOGGER.error("Error saving pending orders: ", e);
         }
