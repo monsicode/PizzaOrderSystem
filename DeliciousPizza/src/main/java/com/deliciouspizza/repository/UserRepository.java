@@ -20,43 +20,49 @@ import java.util.concurrent.ConcurrentHashMap;
 public class UserRepository {
 
     private Map<String, User> users = new ConcurrentHashMap<>();
-    private static final String USER_FILE = "data-storage/users.json";
-    private final File jsonFile = new File(USER_FILE);
+    private String USER_FILE = "data-storage/users.json";
+    private File jsonFileUsers = new File(USER_FILE);
     TypeReference<Map<String, User>> typeRef = new TypeReference<>() {
     };
 
     private static final Logger LOGGER = LogManager.getLogger(UserRepository.class);
 
-    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+    private final ObjectMapper OBJECT_MAPPER;
 
-    static {
+    public UserRepository(ObjectMapper objectMapper, File fileUsers, Map<String, User> users) {
+        OBJECT_MAPPER = objectMapper;
+        jsonFileUsers = fileUsers;
+        this.users = users;
         OBJECT_MAPPER.registerModule(new JavaTimeModule());
         OBJECT_MAPPER.findAndRegisterModules();
     }
 
     public UserRepository() {
         users = loadUsers();
+        OBJECT_MAPPER = new ObjectMapper();
+        OBJECT_MAPPER.registerModule(new JavaTimeModule());
+        OBJECT_MAPPER.findAndRegisterModules();
     }
 
-    private Map<String, User> loadUsers() {
+    Map<String, User> loadUsers() {
         try {
-            if (jsonFile.exists() && jsonFile.length() > 0) {
-                users = OBJECT_MAPPER.readValue(jsonFile, typeRef);
+            if (jsonFileUsers.exists() && jsonFileUsers.length() > 0) {
+                users = OBJECT_MAPPER.readValue(jsonFileUsers, typeRef);
                 return users;
             } else {
                 return new ConcurrentHashMap<>();
             }
         } catch (IOException e) {
-            System.err.println("Error loading users: " + e.getMessage());
+            LOGGER.error("Error loading users from file");
             return new ConcurrentHashMap<>();
         }
     }
 
     private void saveUsers() {
         try {
-            OBJECT_MAPPER.writerWithDefaultPrettyPrinter().writeValue(jsonFile, users);
+            OBJECT_MAPPER.writerWithDefaultPrettyPrinter().writeValue(jsonFileUsers, users);
         } catch (IOException e) {
-            System.err.println("Error saving users: " + e.getMessage());
+            LOGGER.error("Error saving users: {}", e.getMessage());
         }
     }
 
@@ -73,7 +79,6 @@ public class UserRepository {
             throw new UserNotFoundException("User with username " + username + " not found");
         }
 
-       // LOGGER.info("User {} successfully retrieved.", username);
         return user;
     }
 

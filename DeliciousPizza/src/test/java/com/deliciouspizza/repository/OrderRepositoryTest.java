@@ -2,6 +2,8 @@ package com.deliciouspizza.repository;
 
 import com.deliciouspizza.entity.order.Order;
 import com.deliciouspizza.enums.StatusOrder;
+import com.deliciouspizza.exception.ErrorInProductNameException;
+import com.deliciouspizza.exception.InactiveProductException;
 import com.deliciouspizza.exception.ProductException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,9 +19,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -43,143 +47,172 @@ public class OrderRepositoryTest {
 
     @BeforeEach
     void setUp() throws IOException {
-        // Създаване на временни файлове
         tempFilePendingOrders = tempDir.resolve("pendingOrders.json").toFile();
-        tempFileHistoryOrders = tempDir.resolve("historyOrders.json").toFile();
+        tempFileHistoryOrders = tempDir.resolve("historyOrdersTest.json").toFile();
 
-        // Инициализация на OrderRepository с временните файлове
         orderRepository = new OrderRepository(objectMapper, tempFilePendingOrders, tempFileHistoryOrders);
     }
 
     @Test
     void testAddOrder() throws IOException {
-        // Arrange
         Order order = new Order();
         order.setUsernameCustomer("testUser");
 
-        // Мокване на записването във файл
         ObjectWriter objectWriter = mock(ObjectWriter.class);
         when(objectMapper.writerWithDefaultPrettyPrinter()).thenReturn(objectWriter);
         doNothing().when(objectWriter).writeValue(any(File.class), any());
 
-        // Act
         orderRepository.addOrder(order);
 
-        // Assert
         assertTrue(orderRepository.getPendingOrders().contains(order));
     }
 
     @Test
     void testGetNextOrder() throws InterruptedException, IOException {
-        // Arrange
         Order order = new Order();
         order.setUsernameCustomer("testUser");
 
-        // Мокване на записването във файл
         ObjectWriter objectWriter = mock(ObjectWriter.class);
         when(objectMapper.writerWithDefaultPrettyPrinter()).thenReturn(objectWriter);
         doNothing().when(objectWriter).writeValue(any(File.class), any());
 
         orderRepository.addOrder(order);
-
-        // Act
         Order nextOrder = orderRepository.getNextOrder();
 
-        // Assert
         assertEquals(order, nextOrder);
         assertFalse(orderRepository.getPendingOrders().contains(order));
     }
 
     @Test
+    void testLoadPendingOrdersWithException() throws IOException {
+        when(objectMapper.readValue(any(File.class), any(TypeReference.class))).thenThrow(
+            new IOException("Test IO Exception"));
+
+        try (LogCaptor logCaptor = LogCaptor.forClass(OrderRepository.class)) {
+            orderRepository.loadPendingOrders();
+            assertTrue(logCaptor.getErrorLogs().contains("Error loading pending orders!"));
+        }
+    }
+
+    @Test
     void testLoadPendingOrders() throws IOException {
-        // Arrange
         Set<Order> orders = new HashSet<>();
         Order order = new Order();
         order.setUsernameCustomer("testUser");
         orders.add(order);
 
-        when(objectMapper.readValue(tempFilePendingOrders, new TypeReference<LinkedBlockingQueue<Order>>() {}))
+        when(objectMapper.readValue(tempFilePendingOrders, new TypeReference<LinkedBlockingQueue<Order>>() {
+        }))
             .thenReturn(new LinkedBlockingQueue<>(orders));
 
-        // Act
         orderRepository.loadPendingOrders();
-
-        // Assert
         assertTrue(orderRepository.getPendingOrders().contains(order));
     }
 
     @Test
     void testLoadHistoryOrders() throws IOException {
-        // Arrange
         Set<Order> orders = new HashSet<>();
         Order order = new Order();
         order.setUsernameCustomer("testUser");
         orders.add(order);
 
-        when(objectMapper.readValue(tempFileHistoryOrders, new TypeReference<Set<Order>>() {}))
-            .thenReturn(orders);
+//        when(objectMapper.readValue(tempFileHistoryOrders, new TypeReference<Set<Order>>() {
+//        })).thenReturn(orders);
 
-        // Act
-        orderRepository.loadHistoryOrders();
+        doReturn(orders).when(objectMapper)
+            .readValue(eq(tempFileHistoryOrders), eq(new TypeReference<Set<Order>>() {
+            }));
 
-        // Assert
-        assertTrue(orderRepository.getHistoryOrders().contains(order));
+        Set<Order> result = orderRepository.loadHistoryOrders();
+        assertTrue(result.contains(order));
+    }
+
+    //why this test dosent work?
+    @Test
+    void testLoadHistoryOrdersWithException() throws IOException {
+        when(objectMapper.readValue(any(File.class), any(TypeReference.class))).thenThrow(
+            new IOException("Test IO Exception"));
+
+        try (LogCaptor logCaptor = LogCaptor.forClass(OrderRepository.class)) {
+            orderRepository.loadHistoryOrders();
+            assertTrue(logCaptor.getErrorLogs().contains("Error loading completed orders history!"));
+        }
     }
 
     @Test
     void testCompleteOrder() throws IOException {
-        // Arrange
         Order order = new Order();
         order.setUsernameCustomer("testUser");
 
-        // Мокване на записването във файл
         ObjectWriter objectWriter = mock(ObjectWriter.class);
         when(objectMapper.writerWithDefaultPrettyPrinter()).thenReturn(objectWriter);
         doNothing().when(objectWriter).writeValue(any(File.class), any());
 
         orderRepository.addOrder(order);
-
-        // Act
         orderRepository.completeOrder(order);
 
-        // Assert
         assertEquals(StatusOrder.COMPLETED, order.getStatusOrder());
         assertTrue(orderRepository.getCompletedOrders().contains(order));
     }
 
     @Test
     void testStartNewOrder() {
-        // Arrange
         String username = "testUser";
 
-        // Act
         orderRepository.startNewOrder(username);
-
-        // Assert
         assertNotNull(orderRepository.getCurrentOrderForUser(username));
     }
 
     @Test
+    void testStartNewOrderWithAlreadyActiveOrder() {
+        String username = "testUser";
+        orderRepository.startNewOrder(username);
+
+        assertThrows(IllegalStateException.class, () -> orderRepository.startNewOrder("testUser"),
+            "Should throw exception if order is already started for user");
+    }
+
+
+    @Test
     void testAddProductToActiveOrder() throws ProductException {
-        // Arrange
         String username = "testUser";
         String productKey = "pizza_pepperoni_small";
         int quantity = 1;
 
         orderRepository.startNewOrder(username);
-
-        // Act
         orderRepository.addProductToActiveOrder(username, productKey, quantity);
 
-        // Assert
         Order order = orderRepository.getCurrentOrderForUser(username);
         assertTrue(order.getOrder().containsKey(productKey));
         assertEquals(quantity, order.getOrder().get(productKey));
     }
 
     @Test
+    void testAddProductToActiveOrderWithInactiveOrder() throws ProductException {
+        String username = "testUser";
+        String productKey = "pizza_pepperoni_small";
+        int quantity = 1;
+
+        assertThrows(IllegalStateException.class,
+            () -> orderRepository.addProductToActiveOrder(username, productKey, quantity),
+            "User does not have an active order");
+    }
+
+    @Test
+    void testAddProductToActiveOrderWithInactiveProduct() throws InactiveProductException, ErrorInProductNameException {
+        String username = "testUser";
+        String productKey = "inactive_product";
+        int quantity = 1;
+
+        orderRepository.startNewOrder(username);
+
+        assertThrows(ProductException.class,
+            () -> orderRepository.addProductToActiveOrder(username, productKey, quantity));
+    }
+
+
+    @Test
     void testRemoveFromCurrentOrderForUser() throws ProductException {
-        // Arrange
         String username = "testUser";
         String productKey = "pizza_pepperoni_small";
         int quantity = 1;
@@ -187,66 +220,188 @@ public class OrderRepositoryTest {
         orderRepository.startNewOrder(username);
         orderRepository.addProductToActiveOrder(username, productKey, quantity);
 
-        // Act
         orderRepository.removeFromCurrentOrderForUser(username, productKey, quantity);
 
-        // Assert
         Order order = orderRepository.getCurrentOrderForUser(username);
         assertFalse(order.getOrder().containsKey(productKey));
     }
 
     @Test
-    void testFinalizeOrder() throws IOException {
-        // Arrange
+    void testRemoveFromCurrentOrderForUserWithInactiveOrder() throws ProductException {
+        String username = "testUser";
+        String productKey = "pizza_pepperoni_small";
+        int quantity = 1;
+
+        orderRepository.startNewOrder(username);
+
+        assertThrows(IllegalStateException.class,
+            () -> orderRepository.removeFromCurrentOrderForUser(username, productKey, quantity),
+            "User does not have an active order");
+    }
+
+    @Test
+    void testRemoveFromCurrentOrderForUserWithEmptyOrder() {
+        String username = "testUser";
+        String productKey = "pizza_pepperoni_small";
+        int quantity = 1;
+
+        assertThrows(IllegalStateException.class,
+            () -> orderRepository.removeFromCurrentOrderForUser(username, productKey, quantity),
+            "User does not have anything in his order to be removed");
+    }
+
+    @Test
+    void testRemoveFromCurrentOrderForUserWithNonExcistingProduct() throws ProductException {
+        String username = "testUser";
+        String productKey = "pizza_pepperoni_small";
+        int quantity = 1;
+
+        orderRepository.startNewOrder(username);
+        orderRepository.addProductToActiveOrder(username, productKey, quantity);
+
+        assertThrows(ProductException.class,
+            () -> orderRepository.removeFromCurrentOrderForUser(username, productKey, 2));
+    }
+
+    @Test
+    void testGetCurrentOrderForUserWithInactiveOrder() {
+        assertThrows(IllegalStateException.class, () -> orderRepository.getCurrentOrderForUser("user"));
+    }
+
+    @Test
+    void testFinalizeOrderWithInactiveOrder() {
+        String username = "testUser";
+
+        assertThrows(IllegalStateException.class, () -> orderRepository.finalizeOrder(username),
+            "User does not have an active order to finalize!");
+    }
+
+    @Test
+    void testFinalizeOrderWithEmptyOrder() {
         String username = "testUser";
         orderRepository.startNewOrder(username);
 
-        // Мокване на записването във файл
+        assertThrows(IllegalStateException.class, () -> orderRepository.finalizeOrder(username),
+            "User does has empty order, cannot finalize!");
+    }
+
+    @Test
+    void testFinalizeOrder() throws IOException, ProductException {
+        String username = "testUser";
+        String productKey = "pizza_pepperoni_small";
+        int quantity = 1;
+
+        orderRepository.startNewOrder(username);
+        orderRepository.addProductToActiveOrder(username, productKey, quantity);
+
         ObjectWriter objectWriter = mock(ObjectWriter.class);
         when(objectMapper.writerWithDefaultPrettyPrinter()).thenReturn(objectWriter);
         doNothing().when(objectWriter).writeValue(any(File.class), any());
 
-        // Act
-        orderRepository.finalizeOrder(username);
 
-        // Assert
-        assertTrue(orderRepository.getPendingOrders().contains(orderRepository.getCurrentOrderForUser(username)));
+        try (LogCaptor logCaptor = LogCaptor.forClass(OrderRepository.class)) {
+            orderRepository.finalizeOrder(username);
+            assertTrue(logCaptor.getInfoLogs().contains("Order finalized for user testUser: \nOrder : \n" +
+                "\tProduct: pizza_pepperoni_small; Quantity: 1"));
+        }
+    }
+
+
+    @Test
+    void testGetCountOrderInPeriod() throws IOException {
+        Order order1 = new Order();
+        order1.resetOrderDate();
+
+        ObjectWriter objectWriter = mock(ObjectWriter.class);
+        when(objectMapper.writerWithDefaultPrettyPrinter()).thenReturn(objectWriter);
+        doNothing().when(objectWriter).writeValue(any(File.class), any());
+
+        orderRepository.completeOrder(order1);
+
+        LocalDateTime from = LocalDateTime.now().minusDays(1);
+        LocalDateTime to = LocalDateTime.now();
+
+        long count = orderRepository.getCountOrderInPeriod(from, to);
+
+        assertEquals(1, count);
     }
 
     @Test
-    void testGetProfitInPeriod() throws IOException {
+    void testGetProfitInPeriod() throws IOException, InactiveProductException, ErrorInProductNameException {
         Order order1 = new Order();
-//        order1.setOrderDate(LocalDateTime.now().minusDays(1));
-//        order1.setTotalPrice(10.0);
-//
-//        Order order2 = new Order();
-//        order2.setOrderDate(LocalDateTime.now().minusDays(2));
-//        order2.setTotalPrice(20.0);
+        order1.addProduct("pizza_pepperoni_small", 1); //have to simulate this
+        order1.resetOrderDate();
+
+        ObjectWriter objectWriter = mock(ObjectWriter.class);
+        when(objectMapper.writerWithDefaultPrettyPrinter()).thenReturn(objectWriter);
+        doNothing().when(objectWriter).writeValue(any(File.class), any());
 
         orderRepository.completeOrder(order1);
-       // orderRepository.completeOrder(order2);
 
-        LocalDateTime from = LocalDateTime.now().minusDays(3);
+        LocalDateTime from = LocalDateTime.now().minusDays(1);
         LocalDateTime to = LocalDateTime.now();
 
-        // Act
         double profit = orderRepository.getProfitInPeriod(from, to);
 
-        // Assert
-        assertEquals(30.0, profit);
+        assertEquals(9.0, profit);
     }
 
     @Test
     void testIOExceptionDuringSavePendingOrders() throws IOException {
-        // Arrange
         ObjectWriter objectWriter = mock(ObjectWriter.class);
         when(objectMapper.writerWithDefaultPrettyPrinter()).thenReturn(objectWriter);
         doThrow(new IOException("Test IO Exception")).when(objectWriter).writeValue(any(File.class), any());
 
-        // Act & Assert
         try (LogCaptor logCaptor = LogCaptor.forClass(OrderRepository.class)) {
             orderRepository.savePendingOrders();
             assertTrue(logCaptor.getErrorLogs().contains("Error saving pending orders: "));
         }
     }
+
+    @Test
+    void testGetHistoryOrdersWithEmptyHistory() {
+        List<Order> historyOrders = orderRepository.getHistoryOrders();
+        assertTrue(historyOrders.isEmpty());
+    }
+
+    @Test
+    void testGetTotalPriceOfOrderWithInactiveOrder() {
+        String username = "testUser";
+
+        try (LogCaptor logCaptor = LogCaptor.forClass(OrderRepository.class)) {
+            orderRepository.getTotalPriceOfOrder(username);
+            assertTrue(logCaptor.getErrorLogs().contains("User does not have an active order."));
+        }
+
+    }
+
+    @Test
+    void testGetTotalPriceOfOrder() {
+        String username = "testUser";
+        orderRepository.startNewOrder(username);
+        double totalPrice = orderRepository.getTotalPriceOfOrder(username);
+
+        assertEquals(0.0, totalPrice);
+    }
+
+
+    @Test
+    void testFinalizeRepeatedOrder() throws IOException {
+        Order order = new Order();
+        order.setUsernameCustomer("testUser");
+
+        ObjectWriter objectWriter = mock(ObjectWriter.class);
+        when(objectMapper.writerWithDefaultPrettyPrinter()).thenReturn(objectWriter);
+        doNothing().when(objectWriter).writeValue(any(File.class), any());
+
+        orderRepository.finalizeRepeatedOrder(order);
+
+        assertTrue(orderRepository.getPendingOrders().contains(order));
+    }
+
+    @Test
+    void testFinalizeRepeatedOrderWithNullOrder(){
+      assertThrows(IllegalStateException.class, ()->orderRepository.finalizeRepeatedOrder(null), "Order doesn't exist to be finialized" );
+    }
+
 }

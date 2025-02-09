@@ -34,8 +34,8 @@ public class OrderRepository {
     private final BlockingQueue<Order> pendingOrders;
     private final Set<Order> historyOrders = ConcurrentHashMap.newKeySet();
 
-    private static final String FILE_PATH_ORDERS = "data-storage/pendingOrders.json";
-    private static final String FILE_PATH_HISTORY_ORDERS = "data-storage/historyOrders.json";
+    private String FILE_PATH_ORDERS = "data-storage/pendingOrders.json";
+    private String FILE_PATH_HISTORY_ORDERS = "data-storage/historyOrders.json";
     private static final int DAYS_IN_WEEK = 7;
 
     private final ObjectMapper objectMapper;
@@ -86,7 +86,7 @@ public class OrderRepository {
                 pendingOrders.addAll(loadedOrders);
             }
         } catch (IOException e) {
-            LOGGER.error("Error loading pending orders: ", e);
+            LOGGER.error("Error loading pending orders!");
         }
     }
 
@@ -97,7 +97,7 @@ public class OrderRepository {
                 });
             }
         } catch (IOException e) {
-            LOGGER.error("Error loading completed orders history: ", e);
+            LOGGER.error("Error loading completed orders history!");
         }
         return new HashSet<>();
     }
@@ -177,8 +177,9 @@ public class OrderRepository {
 
     public Order getCurrentOrderForUser(String username) {
         Order order = activeOrdersForCustomers.get(username);
+
         if (order == null) {
-            throw new IllegalStateException("User does not have an order.");
+            throw new IllegalStateException("User does not have an active order.");
         }
 
         if (order.getOrder().isEmpty()) {
@@ -263,9 +264,9 @@ public class OrderRepository {
             Order order = getCurrentOrderForUser(username);
             return order.getTotalPrice();
         } catch (IllegalStateException err) {
-            System.out.println(err.getMessage());
+            LOGGER.error(err.getMessage());
+            return 0;
         }
-        return 0;
     }
 
     public void finalizeRepeatedOrder(Order order) {

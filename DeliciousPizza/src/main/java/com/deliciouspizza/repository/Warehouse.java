@@ -24,7 +24,7 @@ public class Warehouse {
 
     private static final Logger LOGGER = LogManager.getLogger(Warehouse.class);
 
-    private static final ObjectMapper MAPPER = new ObjectMapper();
+    private final ObjectMapper objectMapper;
     private final Map<String, Integer> productStock;
 
     private static final String RESET = "\u001B[0m";
@@ -38,6 +38,7 @@ public class Warehouse {
     private final ProductService productService = Singleton.getInstance(ProductService.class);
 
     public Warehouse() {
+        this.objectMapper = new ObjectMapper();
         this.productStock = new ConcurrentHashMap<>();
         loadStock();
     }
@@ -47,7 +48,7 @@ public class Warehouse {
             if (!jsonFileStock.exists() || jsonFileStock.length() == 0) {
                 productStock.clear();
             } else {
-                productStock.putAll(MAPPER.readValue(jsonFileStock, new TypeReference<Map<String, Integer>>() {
+                productStock.putAll(objectMapper.readValue(jsonFileStock, new TypeReference<Map<String, Integer>>() {
                 }));
                 LOGGER.info("Stock loaded successfully from file.");
             }
@@ -58,7 +59,7 @@ public class Warehouse {
 
     public synchronized void saveStock() {
         try {
-            MAPPER.writerWithDefaultPrettyPrinter().writeValue(jsonFileStock, productStock);
+            objectMapper.writerWithDefaultPrettyPrinter().writeValue(jsonFileStock, productStock);
             LOGGER.info("Stock saved successfully to file.");
         } catch (IOException e) {
             LOGGER.error("Error saving stock data: {}", e.getMessage(), e);

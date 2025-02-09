@@ -96,7 +96,6 @@ public class ProductRepositoryTest {
 
     @Test
     void testLoadActiveProducts() throws IOException {
-        activeProducts = new ConcurrentHashMap<>();
         activeProducts.put("pizza_pepperoni_small", new Pizza(PizzaType.PEPPERONI, PizzaSize.SMALL));
 
         when(objectMapper.readValue(any(File.class), any(TypeReference.class))).thenReturn(activeProducts);
