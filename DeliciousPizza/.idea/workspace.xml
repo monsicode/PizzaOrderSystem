@@ -5,19 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f9e54522-3b21-4fe5-911b-c3ac885ffae2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/deliciouspizza/repository/WarehouseTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data-storage/stock.json" beforeDir="false" afterPath="$PROJECT_DIR$/data-storage/stock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/repository/OrderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/repository/OrderRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DebugTest.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/repository/Warehouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/repository/Warehouse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/deliciouspizza/repository/OrderRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/deliciouspizza/repository/OrderRepositoryTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/deliciouspizza/repository/ProductRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/deliciouspizza/repository/ProductRepositoryTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/repository/OrderRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/repository/OrderRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/repository/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/repository/UserRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/deliciouspizza/repository/UserRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/deliciouspizza/repository/UserRepositoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/deliciouspizza/repository/WarehouseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/deliciouspizza/repository/WarehouseTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DebugTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/repository/Warehouse$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/repository/Warehouse$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/repository/Warehouse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/repository/Warehouse.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/com/deliciouspizza/repository/OrderRepositoryTest$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/deliciouspizza/repository/OrderRepositoryTest$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/deliciouspizza/repository/OrderRepositoryTest$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/deliciouspizza/repository/OrderRepositoryTest$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/com/deliciouspizza/repository/OrderRepositoryTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/deliciouspizza/repository/OrderRepositoryTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/com/deliciouspizza/repository/ProductRepositoryTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/deliciouspizza/repository/ProductRepositoryTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/deliciouspizza/repository/UserRepositoryTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/deliciouspizza/repository/UserRepositoryTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +71,7 @@
     &quot;JUnit.OrderRepositoryTest.testRemoveFromCurrentOrderForUserWithNonExcistingProduct.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.OrderRepositoryTest.testShutdown.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.OrderRepositoryTest.testStartNewOrderWithAlreadyActiveOrder.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.ProductRepositoryTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.ProductRepositoryTest.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.ProductRepositoryTest.testActivateProduct.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.ProductRepositoryTest.testActivateProductWithAlreadyActiveProduct.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.ProductRepositoryTest.testActivateProductWithNonExcistingProduct.executor&quot;: &quot;Run&quot;,
@@ -106,6 +109,28 @@
     &quot;JUnit.UserRepositoryTest.testLoadUsers.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.UserRepositoryTest.testLoadUsersWithEmptyFile.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.UserRepositoryTest.testLoadUsersWithIOException.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.WarehouseTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.WarehouseTest.testAddStockInWarehouse.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.WarehouseTest.testAddStockInWarehouseWithAlreadyDeactivatedProduct.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.WarehouseTest.testAddStockInWarehouseWithNonExcistingProduct.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.WarehouseTest.testGetCatalogProduct.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.WarehouseTest.testGetCatalogProductWithSauce.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.WarehouseTest.testGetProductCatalogWithNoProduct.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.WarehouseTest.testGetProductCatalogWithWrongProductName.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.WarehouseTest.testGetStock.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.WarehouseTest.testLoadStock.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.WarehouseTest.testLoadStockWithEmptyFile.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.WarehouseTest.testLoadStockWithIOException.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.WarehouseTest.testReduceStock.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.WarehouseTest.testReduceStockWithExactQuantity.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.WarehouseTest.testReduceStockWithInsufficientStock.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.WarehouseTest.testReduceStockWithNonExcistingProduct.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.WarehouseTest.testReduceStockWithOrder.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.WarehouseTest.testReduceStockWithOrderWithExactQuantityOfOneProduct.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.WarehouseTest.testReduceStockWithOrderWithOneInsufficientQuantity.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.WarehouseTest.testReduceStockWithOrderWithOneInvalidProduct.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.WarehouseTest.testSaveStock.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.WarehouseTest.testSaveStockWithIOException.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.repository in DeliciousPizza.executor&quot;: &quot;Coverage&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
@@ -118,7 +143,7 @@
   }
 }</component>
   <component name="RunManager" selected="JUnit.repository in DeliciousPizza">
-    <configuration name="UserRepositoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ProductRepositoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="DeliciousPizza" />
       <extension name="coverage">
         <pattern>
@@ -127,13 +152,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.deliciouspizza.repository" />
-      <option name="MAIN_CLASS_NAME" value="com.deliciouspizza.repository.UserRepositoryTest" />
+      <option name="MAIN_CLASS_NAME" value="com.deliciouspizza.repository.ProductRepositoryTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserRepositoryTest.testGetOrderHistory" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="WarehouseTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="DeliciousPizza" />
       <extension name="coverage">
         <pattern>
@@ -142,14 +167,29 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.deliciouspizza.repository" />
-      <option name="MAIN_CLASS_NAME" value="com.deliciouspizza.repository.UserRepositoryTest" />
-      <option name="METHOD_NAME" value="testGetOrderHistory" />
+      <option name="MAIN_CLASS_NAME" value="com.deliciouspizza.repository.WarehouseTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WarehouseTest.testGetCatalogProductWithSauce" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="DeliciousPizza" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.deliciouspizza.repository.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.deliciouspizza.repository" />
+      <option name="MAIN_CLASS_NAME" value="com.deliciouspizza.repository.WarehouseTest" />
+      <option name="METHOD_NAME" value="testGetCatalogProductWithSauce" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserRepositoryTest.testGetOrderHistoryWithEmployee" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="WarehouseTest.testGetProductCatalogWithWrongProductName" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="DeliciousPizza" />
       <extension name="coverage">
         <pattern>
@@ -158,24 +198,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.deliciouspizza.repository" />
-      <option name="MAIN_CLASS_NAME" value="com.deliciouspizza.repository.UserRepositoryTest" />
-      <option name="METHOD_NAME" value="testGetOrderHistoryWithEmployee" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="UserRepositoryTest.testGetOrderHistoryWithNonExcistingUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="DeliciousPizza" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.deliciouspizza.repository.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.deliciouspizza.repository" />
-      <option name="MAIN_CLASS_NAME" value="com.deliciouspizza.repository.UserRepositoryTest" />
-      <option name="METHOD_NAME" value="testGetOrderHistoryWithNonExcistingUser" />
+      <option name="MAIN_CLASS_NAME" value="com.deliciouspizza.repository.WarehouseTest" />
+      <option name="METHOD_NAME" value="testGetProductCatalogWithWrongProductName" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -192,10 +216,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.repository in DeliciousPizza" />
-        <item itemvalue="JUnit.UserRepositoryTest" />
-        <item itemvalue="JUnit.UserRepositoryTest.testGetOrderHistory" />
-        <item itemvalue="JUnit.UserRepositoryTest.testGetOrderHistoryWithEmployee" />
-        <item itemvalue="JUnit.UserRepositoryTest.testGetOrderHistoryWithNonExcistingUser" />
+        <item itemvalue="JUnit.ProductRepositoryTest" />
+        <item itemvalue="JUnit.WarehouseTest.testGetProductCatalogWithWrongProductName" />
+        <item itemvalue="JUnit.WarehouseTest" />
+        <item itemvalue="JUnit.WarehouseTest.testGetCatalogProductWithSauce" />
       </list>
     </recent_temporary>
   </component>
@@ -210,23 +234,8 @@
     </task>
     <servers />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/test/java/com/deliciouspizza/repository/OrderRepositoryTest.java</url>
-          <line>91</line>
-          <properties class="com.deliciouspizza.repository.OrderRepositoryTest">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/DeliciousPizza$repository_in_DeliciousPizza.ic" NAME="repository in DeliciousPizza Coverage Results" MODIFIED="1739033863217" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+    <SUITE FILE_PATH="coverage/DeliciousPizza$repository_in_DeliciousPizza.ic" NAME="repository in DeliciousPizza Coverage Results" MODIFIED="1739116930396" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
     <SUITE FILE_PATH="coverage/DeliciousPizza$OrderRepositoryTest.ic" NAME="OrderRepositoryTest Coverage Results" MODIFIED="1739029682166" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>com.deliciouspizza.repository.*</FILTER>
     </SUITE>
@@ -234,6 +243,9 @@
       <FILTER>com.deliciouspizza.repository.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/DeliciousPizza$UserRepositoryTest.ic" NAME="UserRepositoryTest Coverage Results" MODIFIED="1739033828383" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.deliciouspizza.repository.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/DeliciousPizza$WarehouseTest.ic" NAME="WarehouseTest Coverage Results" MODIFIED="1739116659815" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>com.deliciouspizza.repository.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/DeliciousPizza$ProductRepositoryTest_testLoadInactiveProductsWithEmptyFile.ic" NAME="ProductRepositoryTest.testLoadInactiveProductsWithEmptyFile Coverage Results" MODIFIED="1738849670030" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">

@@ -131,7 +131,7 @@ public class UserRepositoryTest {
     }
 
     @Test
-    void testGetUserByUsernameWithNonExcistingUser() {
+    void testGetUserByUsernameWithNonExistingUser() {
         assertThrows(UserNotFoundException.class, () -> userRepository.getUserByUsername("monkata"));
     }
 
@@ -161,7 +161,7 @@ public class UserRepositoryTest {
     }
 
     @Test
-    void testAddToOrderHistoryWithNonExcistingUser() {
+    void testAddToOrderHistoryWithNonExistingUser() {
         Order orderUser = new Order();
 
         try (LogCaptor logCaptor = LogCaptor.forClass(UserRepository.class)) {
@@ -194,7 +194,7 @@ public class UserRepositoryTest {
     }
 
     @Test
-    void testGetOrderHistoryWithNonExcistingUser() {
+    void testGetOrderHistoryWithNonExistingUser() {
         try (LogCaptor logCaptor = LogCaptor.forClass(UserRepository.class)) {
             userRepository.getOrderHistory("baba");
             assertTrue(logCaptor.getErrorLogs().contains("User with username baba not found"));
@@ -219,7 +219,7 @@ public class UserRepositoryTest {
     }
 
     @Test
-    void testGetAgeCustomerWithNonExcistingUser() {
+    void testGetAgeCustomerWithNonExistingUser() {
         try (LogCaptor logCaptor = LogCaptor.forClass(UserRepository.class)) {
             userRepository.getAgeCustomer("baba");
             assertTrue(logCaptor.getErrorLogs().contains("User with username baba not found"));

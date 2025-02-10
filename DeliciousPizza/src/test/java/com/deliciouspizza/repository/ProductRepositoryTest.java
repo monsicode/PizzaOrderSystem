@@ -55,16 +55,13 @@ public class ProductRepositoryTest {
     private Map<String, Product> activeProducts;
     private Map<String, Product> inactiveProducts;
 
-    private File tempFileActive;
-    private File tempFileInactive;
-
     @BeforeEach
     void setUp() throws IOException {
 
         activeProducts = new ConcurrentHashMap<>();
         inactiveProducts = new ConcurrentHashMap<>();
 
-        tempFileActive = tempDir.resolve("activeProducts.json").toFile();
+        File tempFileActive = tempDir.resolve("activeProducts.json").toFile();
         String jsonContent = """
             {
               "pizza_pepperoni_small": {
@@ -77,7 +74,7 @@ public class ProductRepositoryTest {
             """;
         Files.write(tempFileActive.toPath(), jsonContent.getBytes());
 
-        tempFileInactive = tempDir.resolve("inactiveProducts.json").toFile();
+        File tempFileInactive = tempDir.resolve("inactiveProducts.json").toFile();
         String jsonContent2 = """
             {
               "pizza_meat_lovers_large": {
@@ -171,7 +168,6 @@ public class ProductRepositoryTest {
         Product product = new Pizza(PizzaType.MEAT_LOVERS, PizzaSize.LARGE);
         String key = product.generateKey();
 
-        //to not write in real file
         ObjectWriter objectWriter = mock(ObjectWriter.class);
         when(objectMapper.writerWithDefaultPrettyPrinter()).thenReturn(objectWriter);
         doNothing().when(objectWriter).writeValue(any(File.class), any());
@@ -195,7 +191,7 @@ public class ProductRepositoryTest {
     }
 
     @Test
-    void testActivateProductWithNonExcistingProduct() throws ProductAlreadyActiveException {
+    void testActivateProductWithNonExistingProduct() throws ProductAlreadyActiveException {
         Product product = null;
 
         try (LogCaptor logCaptor = LogCaptor.forClass(ProductRepository.class)) {
@@ -209,7 +205,6 @@ public class ProductRepositoryTest {
         Product product = new Pizza(PizzaType.MEAT_LOVERS, PizzaSize.LARGE);
         String key = product.generateKey();
 
-        //to not write in real file
         ObjectWriter objectWriter = mock(ObjectWriter.class);
         when(objectMapper.writerWithDefaultPrettyPrinter()).thenReturn(objectWriter);
         doNothing().when(objectWriter).writeValue(any(File.class), any());
@@ -232,7 +227,7 @@ public class ProductRepositoryTest {
     }
 
     @Test
-    void testDeactivateProductWithNonExcistingProduct() throws ProductAlreadyDeactivatedException {
+    void testDeactivateProductWithNonExistingProduct() throws ProductAlreadyDeactivatedException {
         Product product = null;
 
         try (LogCaptor logCaptor = LogCaptor.forClass(ProductRepository.class)) {
@@ -267,7 +262,7 @@ public class ProductRepositoryTest {
     }
 
     @Test
-    void testGetProductWithNonExcistingProduct() {
+    void testGetProductWithNonExistingProduct() {
         assertThrows(ProductDoesNotExistException.class, () -> productRepository.getProduct("baba"));
     }
 

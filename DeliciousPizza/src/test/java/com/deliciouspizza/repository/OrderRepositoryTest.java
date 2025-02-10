@@ -9,6 +9,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import nl.altindag.log.LogCaptor;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -46,7 +47,7 @@ public class OrderRepositoryTest {
     private File tempFileHistoryOrders;
 
     @BeforeEach
-    void setUp() throws IOException {
+    void setUp() {
         tempFilePendingOrders = tempDir.resolve("pendingOrders.json").toFile();
         tempFileHistoryOrders = tempDir.resolve("historyOrdersTest.json").toFile();
 
@@ -251,7 +252,7 @@ public class OrderRepositoryTest {
     }
 
     @Test
-    void testRemoveFromCurrentOrderForUserWithNonExcistingProduct() throws ProductException {
+    void testRemoveFromCurrentOrderForUserWithNonExistingProduct() throws ProductException {
         String username = "testUser";
         String productKey = "pizza_pepperoni_small";
         int quantity = 1;
@@ -400,8 +401,9 @@ public class OrderRepositoryTest {
     }
 
     @Test
-    void testFinalizeRepeatedOrderWithNullOrder(){
-      assertThrows(IllegalStateException.class, ()->orderRepository.finalizeRepeatedOrder(null), "Order doesn't exist to be finialized" );
+    void testFinalizeRepeatedOrderWithNullOrder() {
+        assertThrows(IllegalStateException.class, () -> orderRepository.finalizeRepeatedOrder(null),
+            "Order doesn't exist to be finialized");
     }
 
 }

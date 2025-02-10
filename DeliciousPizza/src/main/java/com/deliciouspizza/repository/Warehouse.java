@@ -6,6 +6,7 @@ import com.deliciouspizza.enums.DrinkType;
 import com.deliciouspizza.enums.PizzaType;
 import com.deliciouspizza.enums.SauceType;
 import com.deliciouspizza.exception.ProductAlreadyDeactivatedException;
+import com.deliciouspizza.exception.ProductDoesNotExistException;
 import com.deliciouspizza.service.ProductService;
 import com.deliciouspizza.utils.Singleton;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -33,13 +34,21 @@ public class Warehouse {
     private static final String RED = "\u001B[38;5;214m";
 
     private static final String FILE_PATH_STOCK = "data-storage/stock.json";
-    private final File jsonFileStock = new File(FILE_PATH_STOCK);
+    private final File jsonFileStock;
 
-    private final ProductService productService = Singleton.getInstance(ProductService.class);
+    private ProductService productService = Singleton.getInstance(ProductService.class);
+
+    public Warehouse(ObjectMapper objectMapper, ProductService productService, File jsonFileStock) {
+        this.objectMapper = objectMapper;
+        this.productService = productService;
+        this.jsonFileStock = jsonFileStock;
+        this.productStock = new ConcurrentHashMap<>();
+    }
 
     public Warehouse() {
         this.objectMapper = new ObjectMapper();
         this.productStock = new ConcurrentHashMap<>();
+        jsonFileStock = new File(FILE_PATH_STOCK);
         loadStock();
     }
 
@@ -53,7 +62,7 @@ public class Warehouse {
                 LOGGER.info("Stock loaded successfully from file.");
             }
         } catch (IOException e) {
-            LOGGER.error("Error loading stock data: {}", e.getMessage(), e);
+            LOGGER.error("Error loading stock data: {}", e.getMessage());
         }
     }
 
@@ -69,7 +78,7 @@ public class Warehouse {
     public void addStockInWarehouse(String productKey, int quantity) {
         Product product = productService.getProductByKey(productKey);
         if (product == null) {
-            throw new IllegalArgumentException("Product can't be null");
+            throw new ProductDoesNotExistException("Product can't be null");
         }
 
         productStock.put(productKey, productStock.getOrDefault(productKey, 0) + quantity);
@@ -202,4 +211,7 @@ public class Warehouse {
             .collect(Collectors.joining(" "));
     }
 
+    Map<String, Integer> getProductStock() {
+        return productStock;
+    }
 }
