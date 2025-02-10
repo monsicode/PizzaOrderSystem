@@ -16,15 +16,15 @@ import java.util.Set;
 
 public class UserService {
 
-    private final UserRepository userRepository = Singleton.getInstance(UserRepository.class);
+    private final UserRepository userRepository;
     private static final Logger LOGGER = LogManager.getLogger(UserService.class);
 
     public UserService() {
+        userRepository = Singleton.getInstance(UserRepository.class);
     }
 
-    //maybe to remove ?
-    public boolean checkIfUserExists(String username) {
-        return userRepository.isUsernamePresent(username);
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     public void registerCustomer(String username, String plainPassword, String address, int age) {
@@ -36,11 +36,7 @@ public class UserService {
         String hashedPassword = BCrypt.hashpw(plainPassword, BCrypt.gensalt());
 
         User newUser = new Customer(username, hashedPassword, address, age);
-        try {
-            userRepository.addUser(newUser);
-        } catch (Exception e) {
-            LOGGER.error("Error when saving customer {} : {}", username, e.getMessage(), e);
-        }
+        userRepository.addUser(newUser);
 
         LOGGER.info("Customer {} is successfully registered!", username);
     }
@@ -54,12 +50,7 @@ public class UserService {
         String hashedPassword = BCrypt.hashpw(plainPassword, BCrypt.gensalt());
 
         User newUser = new Employee(username, hashedPassword);
-
-        try {
-            userRepository.addUser(newUser);
-        } catch (Exception e) {
-            LOGGER.error("Error when saving employee {} : {}", username, e.getMessage(), e);
-        }
+        userRepository.addUser(newUser);
 
         LOGGER.info("Employee {} is successfully registered!", username);
     }
@@ -93,9 +84,9 @@ public class UserService {
         return null;
     }
 
-    public void addToOrderHistory(String usernameCustomer, Order order) {
-        userRepository.addToOrderHistory(usernameCustomer, order);
-    }
+//    public void addToOrderHistory(String usernameCustomer, Order order) {
+//        userRepository.addToOrderHistory(usernameCustomer, order);
+//    }
 
     public Set<Order> getOrderHistory(String usernameCustomer) {
         return userRepository.getOrderHistory(usernameCustomer);

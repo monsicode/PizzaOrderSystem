@@ -19,13 +19,25 @@ public class OrderService {
 
     private static final Logger LOGGER = LogManager.getLogger(OrderService.class);
 
-    private final OrderRepository orderRepository = Singleton.getInstance(OrderRepository.class);
-    private final UserRepository userRepository = Singleton.getInstance(UserRepository.class);
-    private final ProductService productService = Singleton.getInstance(ProductService.class);
+    private final OrderRepository orderRepository;
+    private final UserRepository userRepository;
+    private final ProductService productService;
 
     private static final int ADULT_AGE = 18;
     private static final String RESET = "\u001B[0m";
     private static final String YELLOW = "\u001B[33m";
+
+    public OrderService() {
+        orderRepository = Singleton.getInstance(OrderRepository.class);
+        userRepository = Singleton.getInstance(UserRepository.class);
+        productService = Singleton.getInstance(ProductService.class);
+    }
+
+    public OrderService(OrderRepository orderRepository, UserRepository userRepository, ProductService productService) {
+        this.orderRepository = orderRepository;
+        this.userRepository = userRepository;
+        this.productService = productService;
+    }
 
     public void startNewOrder(String username) {
         orderRepository.startNewOrder(username);

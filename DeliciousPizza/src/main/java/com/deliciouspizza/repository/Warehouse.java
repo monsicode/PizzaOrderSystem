@@ -36,7 +36,7 @@ public class Warehouse {
     private static final String FILE_PATH_STOCK = "data-storage/stock.json";
     private final File jsonFileStock;
 
-    private ProductService productService = Singleton.getInstance(ProductService.class);
+    private final ProductService productService;
 
     public Warehouse(ObjectMapper objectMapper, ProductService productService, File jsonFileStock) {
         this.objectMapper = objectMapper;
@@ -46,6 +46,7 @@ public class Warehouse {
     }
 
     public Warehouse() {
+        productService = Singleton.getInstance(ProductService.class);
         this.objectMapper = new ObjectMapper();
         this.productStock = new ConcurrentHashMap<>();
         jsonFileStock = new File(FILE_PATH_STOCK);

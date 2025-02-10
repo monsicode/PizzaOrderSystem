@@ -14,7 +14,15 @@ import java.util.Map;
 public class ProductService {
 
     private static final Logger LOGGER = LogManager.getLogger(ProductService.class);
-    private final ProductRepository productRepository = Singleton.getInstance(ProductRepository.class);
+    private final ProductRepository productRepository;
+
+    public ProductService() {
+        productRepository = Singleton.getInstance(ProductRepository.class);
+    }
+
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     public Map<String, Product> getAllActiveProducts() {
         return productRepository.getAllActiveProducts();
@@ -23,14 +31,6 @@ public class ProductService {
     public Map<String, Product> getAllInactiveProducts() {
         return productRepository.getAllInactiveProducts();
     }
-
-//    public void addNewProduct(Product product) {
-//        try {
-//            productRepository.addProduct(product);
-//        } catch (IllegalArgumentException err) {
-//            LOGGER.error(err.getMessage(), err);
-//        }
-//    }
 
     public void deactivateProduct(Product product) throws ProductAlreadyDeactivatedException {
         productRepository.deactivateProduct(product);
