@@ -1,6 +1,7 @@
 package com.deliciouspizza.enums;
 
 public enum SauceType {
+
     TOMATO_SAUCE(1.00),
     GARLIC_SAUCE(1.20),
     BBQ_SAUCE(1.50),
@@ -19,4 +20,14 @@ public enum SauceType {
     public double getPrice() {
         return price;
     }
+
+    public static boolean isValid(String type) {
+        try {
+            SauceType.valueOf(type.toUpperCase());
+            return true;
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
+    }
+
 }

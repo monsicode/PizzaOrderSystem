@@ -4,5 +4,58 @@
     "pizzaType" : "MEAT_LOVERS",
     "pizzaSize" : "LARGE",
     "statusProduct" : "INACTIVE"
+  },
+  "pizza_bbq_chicken_large" : {
+    "type" : "pizza",
+    "pizzaType" : "BBQ_CHICKEN",
+    "pizzaSize" : "LARGE",
+    "statusProduct" : "INACTIVE"
+  },
+  "sauce_spicy_sauce" : {
+    "type" : "sauce",
+    "sauce" : "SPICY_SAUCE",
+    "statusProduct" : "INACTIVE"
+  },
+  "pizza_meat_lovers_small" : {
+    "type" : "pizza",
+    "pizzaType" : "MEAT_LOVERS",
+    "pizzaSize" : "SMALL",
+    "statusProduct" : "INACTIVE"
+  },
+  "sauce_bbq_sauce" : {
+    "type" : "sauce",
+    "sauce" : "BBQ_SAUCE",
+    "statusProduct" : "INACTIVE"
+  },
+  "sauce_pesto" : {
+    "type" : "sauce",
+    "sauce" : "PESTO",
+    "statusProduct" : "INACTIVE"
+  },
+  "drink_lemonade_small" : {
+    "type" : "drink",
+    "drink" : "LEMONADE",
+    "volume" : "SMALL",
+    "statusProduct" : "INACTIVE",
+    "isAlcoholic" : false
+  },
+  "drink_orange_juice_large" : {
+    "type" : "drink",
+    "drink" : "ORANGE_JUICE",
+    "volume" : "LARGE",
+    "statusProduct" : "INACTIVE",
+    "isAlcoholic" : false
+  },
+  "pizza_pepperoni_large" : {
+    "type" : "pizza",
+    "pizzaType" : "PEPPERONI",
+    "pizzaSize" : "LARGE",
+    "statusProduct" : "INACTIVE"
+  },
+  "pizza_hawaiian_medium" : {
+    "type" : "pizza",
+    "pizzaType" : "HAWAIIAN",
+    "pizzaSize" : "MEDIUM",
+    "statusProduct" : "INACTIVE"
   }
 }

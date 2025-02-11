@@ -94,6 +94,7 @@ public class CommandCreator {
             case "login" -> new LogIn(userService, manager);
             case "main" -> new ShowMainMenu();
             case "exit" -> new Exit();
+
             case "create-order" -> new CreateOrder(orderService, manager);
             case "add-product" -> new AddProduct(orderService, manager);
             case "remove-product" -> new RemoveProduct(orderService, manager);

@@ -2,9 +2,10 @@ package com.deliciouspizza.utils;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Singleton<T> {
-    private static final Map<Class<?>, Object> INSTANCES = new HashMap<>();
+    private static final Map<Class<?>, Object> INSTANCES = new ConcurrentHashMap<>();
 
     private Singleton() {
         // Private constructor to prevent direct object creation
@@ -25,3 +26,16 @@ public class Singleton<T> {
         }
     }
 }
+
+//@SuppressWarnings("unchecked")
+//public static <T> T getInstance(Class<T> clazz) {
+//    synchronized (INSTANCES) {
+//        return (T) INSTANCES.computeIfAbsent(clazz, key -> {
+//            try {
+//                return clazz.getDeclaredConstructor().newInstance();
+//            } catch (Exception e) {
+//                throw new IllegalStateException("Cannot create instance of " + clazz.getName(), e);
+//            }
+//        });
+//    }
+//}

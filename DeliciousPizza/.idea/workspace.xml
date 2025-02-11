@@ -5,43 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f9e54522-3b21-4fe5-911b-c3ac885ffae2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/deliciouspizza/service/OrderServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/deliciouspizza/service/ProductServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/deliciouspizza/service/UserServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-storage/activeProducts.json" beforeDir="false" afterPath="$PROJECT_DIR$/data-storage/activeProducts.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-storage/historyOrders.json" beforeDir="false" afterPath="$PROJECT_DIR$/data-storage/historyOrders.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-storage/inactiveProduct.json" beforeDir="false" afterPath="$PROJECT_DIR$/data-storage/inactiveProduct.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-storage/pendingOrders.json" beforeDir="false" afterPath="$PROJECT_DIR$/data-storage/pendingOrders.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-storage/stock.json" beforeDir="false" afterPath="$PROJECT_DIR$/data-storage/stock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-storage/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/data-storage/users.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.log" beforeDir="false" afterPath="$PROJECT_DIR$/main.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/mains/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/mains/MainOrderTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/mains/MainWarehouse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/mains/SecondMain.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/mains/TestCustomerInterfaceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/mains/TestEmployeeInterfaceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/mains/TestingOrderService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/mains/TestingUserService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/CommandCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/CommandCreator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/employee/AddProductToMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/employee/AddProductToMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/employee/RemoveProductFromMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/employee/RemoveProductFromMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/employee/stock/AddStockToWarehouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/employee/stock/AddStockToWarehouse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/enums/DrinkType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/enums/DrinkType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/enums/PizzaType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/enums/PizzaType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/enums/SauceType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/enums/SauceType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/repository/ProductRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/repository/UserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/repository/Warehouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/repository/Warehouse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/service/OrderService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/service/ProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/ui/CustomerInterface.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/ui/CustomerInterfaceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/ui/EmployeeInterface.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/ui/EmployeeInterfaceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/ui/UserInterface.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/ui/UserInterfaceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/mains/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/mains/MainOrderTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/mains/MainWarehouse.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/mains/SecondMain.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/mains/TestCustomerInterfaceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/mains/TestEmployeeInterfaceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/mains/TestingOrderService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/mains/TestingUserService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/repository/Warehouse$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/repository/Warehouse$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/repository/Warehouse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/repository/Warehouse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/service/OrderService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/service/OrderService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/service/ProductService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/service/ProductService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/service/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/utils/Singleton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/utils/Singleton.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,198 +52,147 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;JUnit.OrderRepositoryTest.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.OrderRepositoryTest.testAddOrder.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.OrderRepositoryTest.testAddProductToActiveOrderWithInactiveOrder.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.OrderRepositoryTest.testAddProductToActiveOrderWithInactiveProduct.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.OrderRepositoryTest.testFinalizeOrder.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.OrderRepositoryTest.testFinalizeOrderWithEmptyOrder.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.OrderRepositoryTest.testFinalizeOrderWithInactiveOrder.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.OrderRepositoryTest.testFinalizeRepeatedOrder.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.OrderRepositoryTest.testFinalizeRepeatedOrderWithNullOrder.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.OrderRepositoryTest.testGetCountOrderInPeriod.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.OrderRepositoryTest.testGetCurrentOrderForUserWithInactiveOrder.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.OrderRepositoryTest.testGetHistoryOrdersWithEmptyHistory.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.OrderRepositoryTest.testGetProfitInPeriod.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.OrderRepositoryTest.testGetTotalPriceOfOrder.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.OrderRepositoryTest.testGetTotalPriceOfOrderWithInactiveOrder.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.OrderRepositoryTest.testLoadHistoryOrders.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.OrderRepositoryTest.testLoadHistoryOrdersWithException.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.OrderRepositoryTest.testLoadPendingOrdersWithEmptyFile.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.OrderRepositoryTest.testLoadPendingOrdersWithException.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.OrderRepositoryTest.testRemoveFromCurrentOrderForUserWithInactiveOrder.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.OrderRepositoryTest.testRemoveFromCurrentOrderForUserWithNonExcistingProduct.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.OrderRepositoryTest.testShutdown.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.OrderRepositoryTest.testStartNewOrderWithAlreadyActiveOrder.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.OrderServiceTest.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.OrderServiceTest.testAddProductToActiveOrder.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.OrderServiceTest.testAddProductToActiveOrder_AgeRestriction.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.OrderServiceTest.testFinalizeRepeatedOrder.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.OrderServiceTest.testGetCurrentOrderForUser.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.OrderServiceTest.testGetCurrentOrderForUserWithInactiveOrderForUser.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.OrderServiceTest.testGetTotalPriceOfOrderForCustomer.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.OrderServiceTest.testProcessCurrentOrder.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.OrderServiceTest.testProcessCurrentOrderWithWarning.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.OrderServiceTest.testShowCurrentOrderForUser.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.OrderServiceTest.testStartNewOrderWithCorrectUsername.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.ProductRepositoryTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.ProductRepositoryTest.testActivateProduct.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.ProductRepositoryTest.testActivateProductWithAlreadyActiveProduct.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.ProductRepositoryTest.testActivateProductWithNonExcistingProduct.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.ProductRepositoryTest.testDeactivateProduct.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.ProductRepositoryTest.testDeactivateProductWithNonExcistingProduct.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.ProductRepositoryTest.testFilePathChange.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.ProductRepositoryTest.testGetProductFromActiveProducts.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.ProductRepositoryTest.testGetProductFromInactiveProducts.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.ProductRepositoryTest.testGetProductWithNonExcistingProduct.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.ProductRepositoryTest.testIOExceptionDuringLoadActiveProducts.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.ProductRepositoryTest.testIOExceptionDuringLoadInactiveProducts.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.ProductRepositoryTest.testIsItGoodForUnderAgedCustomers.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.ProductRepositoryTest.testIsItGoodForUnderAgedCustomersWhenNotInActiveProducts.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.ProductRepositoryTest.testIsItGoodForUnderAgedCustomersWithAlcoholicDrink.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.ProductRepositoryTest.testIsProductActive.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.ProductRepositoryTest.testIsProductActiveWithFalseReturn.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.ProductRepositoryTest.testLoadActiveProducts.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.ProductRepositoryTest.testLoadActiveProductsWithEmptyFile.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.ProductRepositoryTest.testLoadInactiveProducts.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.ProductRepositoryTest.testLoadInactiveProductsWithEmptyFile.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.ProductRepositoryTest.testSavingProductWithException.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.ProductServiceTest.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.ProductServiceTest.testGetAllActiveProducts.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.ProductServiceTest.testGetProductByKeyWithNonExistentProduct.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.UserRepositoryTest.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.UserRepositoryTest.testAddToOrderHistory.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.UserRepositoryTest.testAddToOrderHistoryWithEmployee.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.UserRepositoryTest.testAddToOrderHistoryWithNonExcistingUser.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.UserRepositoryTest.testAddUser.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.UserRepositoryTest.testGetAgeCustomer.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.UserRepositoryTest.testGetAgeCustomerWithEmployee.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.UserRepositoryTest.testGetAgeCustomerWithNonExcistingUser.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.UserRepositoryTest.testGetOrderHistory.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.UserRepositoryTest.testGetOrderHistoryWithEmployee.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.UserRepositoryTest.testGetOrderHistoryWithNonExcistingUser.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.UserRepositoryTest.testGetUserByUsername.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.UserRepositoryTest.testGetUserByUsernameWithNonExcistingUser.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.UserRepositoryTest.testLoadUsers.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.UserRepositoryTest.testLoadUsersWithEmptyFile.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.UserRepositoryTest.testLoadUsersWithIOException.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.UserServiceTest.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.UserServiceTest.testCanUserLogIn_Success.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.UserServiceTest.testCanUserLogIn_UserNotFound.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.UserServiceTest.testGetOrderHistory.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.UserServiceTest.testGetUserRights.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.UserServiceTest.testGetUserRightsWithNotFoundUser.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.UserServiceTest.testRegisterCustomerSuccessfulRegistration.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.UserServiceTest.testRegisterCustomer_UserAlreadyExists.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.WarehouseTest.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.WarehouseTest.testAddStockInWarehouse.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.WarehouseTest.testAddStockInWarehouseWithAlreadyDeactivatedProduct.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.WarehouseTest.testAddStockInWarehouseWithNonExcistingProduct.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.WarehouseTest.testGetCatalogProduct.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.WarehouseTest.testGetCatalogProductWithSauce.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.WarehouseTest.testGetProductCatalogWithNoProduct.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.WarehouseTest.testGetProductCatalogWithWrongProductName.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.WarehouseTest.testGetStock.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.WarehouseTest.testLoadStock.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.WarehouseTest.testLoadStockWithEmptyFile.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.WarehouseTest.testLoadStockWithIOException.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.WarehouseTest.testReduceStock.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.WarehouseTest.testReduceStockWithExactQuantity.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.WarehouseTest.testReduceStockWithInsufficientStock.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.WarehouseTest.testReduceStockWithNonExcistingProduct.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.WarehouseTest.testReduceStockWithOrder.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.WarehouseTest.testReduceStockWithOrderWithExactQuantityOfOneProduct.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.WarehouseTest.testReduceStockWithOrderWithOneInsufficientQuantity.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.WarehouseTest.testReduceStockWithOrderWithOneInvalidProduct.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.WarehouseTest.testSaveStock.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.WarehouseTest.testSaveStockWithIOException.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.deliciouspizza in DeliciousPizza.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.repository in DeliciousPizza.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.service in DeliciousPizza.executor&quot;: &quot;Coverage&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Monika/Downloads/checkstyle.xml&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.3402299&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.infernus.idea.checkstyle.CheckStyleConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Application.ProductRepository.executor": "Run",
+    "Application.Server.executor": "Run",
+    "JUnit.OrderRepositoryTest.executor": "Coverage",
+    "JUnit.OrderRepositoryTest.testAddOrder.executor": "Run",
+    "JUnit.OrderRepositoryTest.testAddProductToActiveOrderWithInactiveOrder.executor": "Run",
+    "JUnit.OrderRepositoryTest.testAddProductToActiveOrderWithInactiveProduct.executor": "Run",
+    "JUnit.OrderRepositoryTest.testFinalizeOrder.executor": "Run",
+    "JUnit.OrderRepositoryTest.testFinalizeOrderWithEmptyOrder.executor": "Run",
+    "JUnit.OrderRepositoryTest.testFinalizeOrderWithInactiveOrder.executor": "Run",
+    "JUnit.OrderRepositoryTest.testFinalizeRepeatedOrder.executor": "Run",
+    "JUnit.OrderRepositoryTest.testFinalizeRepeatedOrderWithNullOrder.executor": "Run",
+    "JUnit.OrderRepositoryTest.testGetCountOrderInPeriod.executor": "Run",
+    "JUnit.OrderRepositoryTest.testGetCurrentOrderForUserWithInactiveOrder.executor": "Run",
+    "JUnit.OrderRepositoryTest.testGetHistoryOrdersWithEmptyHistory.executor": "Run",
+    "JUnit.OrderRepositoryTest.testGetProfitInPeriod.executor": "Run",
+    "JUnit.OrderRepositoryTest.testGetTotalPriceOfOrder.executor": "Run",
+    "JUnit.OrderRepositoryTest.testGetTotalPriceOfOrderWithInactiveOrder.executor": "Run",
+    "JUnit.OrderRepositoryTest.testLoadHistoryOrders.executor": "Debug",
+    "JUnit.OrderRepositoryTest.testLoadHistoryOrdersWithException.executor": "Debug",
+    "JUnit.OrderRepositoryTest.testLoadPendingOrdersWithEmptyFile.executor": "Run",
+    "JUnit.OrderRepositoryTest.testLoadPendingOrdersWithException.executor": "Run",
+    "JUnit.OrderRepositoryTest.testRemoveFromCurrentOrderForUserWithInactiveOrder.executor": "Run",
+    "JUnit.OrderRepositoryTest.testRemoveFromCurrentOrderForUserWithNonExcistingProduct.executor": "Run",
+    "JUnit.OrderRepositoryTest.testShutdown.executor": "Run",
+    "JUnit.OrderRepositoryTest.testStartNewOrderWithAlreadyActiveOrder.executor": "Run",
+    "JUnit.OrderServiceTest.executor": "Coverage",
+    "JUnit.OrderServiceTest.testAddProductToActiveOrder.executor": "Run",
+    "JUnit.OrderServiceTest.testAddProductToActiveOrder_AgeRestriction.executor": "Run",
+    "JUnit.OrderServiceTest.testFinalizeRepeatedOrder.executor": "Run",
+    "JUnit.OrderServiceTest.testGetCurrentOrderForUser.executor": "Run",
+    "JUnit.OrderServiceTest.testGetCurrentOrderForUserWithInactiveOrderForUser.executor": "Run",
+    "JUnit.OrderServiceTest.testGetTotalPriceOfOrderForCustomer.executor": "Run",
+    "JUnit.OrderServiceTest.testProcessCurrentOrder.executor": "Run",
+    "JUnit.OrderServiceTest.testProcessCurrentOrderWithWarning.executor": "Run",
+    "JUnit.OrderServiceTest.testShowCurrentOrderForUser.executor": "Run",
+    "JUnit.OrderServiceTest.testStartNewOrderWithCorrectUsername.executor": "Run",
+    "JUnit.ProductRepositoryTest.executor": "Run",
+    "JUnit.ProductRepositoryTest.testActivateProduct.executor": "Run",
+    "JUnit.ProductRepositoryTest.testActivateProductWithAlreadyActiveProduct.executor": "Run",
+    "JUnit.ProductRepositoryTest.testActivateProductWithNonExcistingProduct.executor": "Run",
+    "JUnit.ProductRepositoryTest.testDeactivateProduct.executor": "Run",
+    "JUnit.ProductRepositoryTest.testDeactivateProductWithNonExcistingProduct.executor": "Run",
+    "JUnit.ProductRepositoryTest.testFilePathChange.executor": "Run",
+    "JUnit.ProductRepositoryTest.testGetProductFromActiveProducts.executor": "Run",
+    "JUnit.ProductRepositoryTest.testGetProductFromInactiveProducts.executor": "Run",
+    "JUnit.ProductRepositoryTest.testGetProductWithNonExcistingProduct.executor": "Run",
+    "JUnit.ProductRepositoryTest.testIOExceptionDuringLoadActiveProducts.executor": "Debug",
+    "JUnit.ProductRepositoryTest.testIOExceptionDuringLoadInactiveProducts.executor": "Run",
+    "JUnit.ProductRepositoryTest.testIsItGoodForUnderAgedCustomers.executor": "Run",
+    "JUnit.ProductRepositoryTest.testIsItGoodForUnderAgedCustomersWhenNotInActiveProducts.executor": "Run",
+    "JUnit.ProductRepositoryTest.testIsItGoodForUnderAgedCustomersWithAlcoholicDrink.executor": "Run",
+    "JUnit.ProductRepositoryTest.testIsProductActive.executor": "Run",
+    "JUnit.ProductRepositoryTest.testIsProductActiveWithFalseReturn.executor": "Run",
+    "JUnit.ProductRepositoryTest.testLoadActiveProducts.executor": "Run",
+    "JUnit.ProductRepositoryTest.testLoadActiveProductsWithEmptyFile.executor": "Debug",
+    "JUnit.ProductRepositoryTest.testLoadInactiveProducts.executor": "Run",
+    "JUnit.ProductRepositoryTest.testLoadInactiveProductsWithEmptyFile.executor": "Coverage",
+    "JUnit.ProductRepositoryTest.testSavingProductWithException.executor": "Run",
+    "JUnit.ProductServiceTest.executor": "Coverage",
+    "JUnit.ProductServiceTest.testGetAllActiveProducts.executor": "Run",
+    "JUnit.ProductServiceTest.testGetProductByKeyWithNonExistentProduct.executor": "Run",
+    "JUnit.UserRepositoryTest.executor": "Coverage",
+    "JUnit.UserRepositoryTest.testAddToOrderHistory.executor": "Run",
+    "JUnit.UserRepositoryTest.testAddToOrderHistoryWithEmployee.executor": "Run",
+    "JUnit.UserRepositoryTest.testAddToOrderHistoryWithNonExcistingUser.executor": "Run",
+    "JUnit.UserRepositoryTest.testAddUser.executor": "Run",
+    "JUnit.UserRepositoryTest.testGetAgeCustomer.executor": "Run",
+    "JUnit.UserRepositoryTest.testGetAgeCustomerWithEmployee.executor": "Run",
+    "JUnit.UserRepositoryTest.testGetAgeCustomerWithNonExcistingUser.executor": "Run",
+    "JUnit.UserRepositoryTest.testGetOrderHistory.executor": "Debug",
+    "JUnit.UserRepositoryTest.testGetOrderHistoryWithEmployee.executor": "Run",
+    "JUnit.UserRepositoryTest.testGetOrderHistoryWithNonExcistingUser.executor": "Run",
+    "JUnit.UserRepositoryTest.testGetUserByUsername.executor": "Run",
+    "JUnit.UserRepositoryTest.testGetUserByUsernameWithNonExcistingUser.executor": "Run",
+    "JUnit.UserRepositoryTest.testLoadUsers.executor": "Run",
+    "JUnit.UserRepositoryTest.testLoadUsersWithEmptyFile.executor": "Run",
+    "JUnit.UserRepositoryTest.testLoadUsersWithIOException.executor": "Run",
+    "JUnit.UserServiceTest.executor": "Coverage",
+    "JUnit.UserServiceTest.testCanUserLogIn_Success.executor": "Run",
+    "JUnit.UserServiceTest.testCanUserLogIn_UserNotFound.executor": "Run",
+    "JUnit.UserServiceTest.testGetOrderHistory.executor": "Run",
+    "JUnit.UserServiceTest.testGetUserRights.executor": "Run",
+    "JUnit.UserServiceTest.testGetUserRightsWithNotFoundUser.executor": "Run",
+    "JUnit.UserServiceTest.testRegisterCustomerSuccessfulRegistration.executor": "Run",
+    "JUnit.UserServiceTest.testRegisterCustomer_UserAlreadyExists.executor": "Run",
+    "JUnit.WarehouseTest.executor": "Coverage",
+    "JUnit.WarehouseTest.testAddStockInWarehouse.executor": "Run",
+    "JUnit.WarehouseTest.testAddStockInWarehouseWithAlreadyDeactivatedProduct.executor": "Run",
+    "JUnit.WarehouseTest.testAddStockInWarehouseWithNonExcistingProduct.executor": "Run",
+    "JUnit.WarehouseTest.testGetCatalogProduct.executor": "Run",
+    "JUnit.WarehouseTest.testGetCatalogProductWithSauce.executor": "Run",
+    "JUnit.WarehouseTest.testGetProductCatalogWithNoProduct.executor": "Run",
+    "JUnit.WarehouseTest.testGetProductCatalogWithWrongProductName.executor": "Run",
+    "JUnit.WarehouseTest.testGetStock.executor": "Debug",
+    "JUnit.WarehouseTest.testLoadStock.executor": "Run",
+    "JUnit.WarehouseTest.testLoadStockWithEmptyFile.executor": "Run",
+    "JUnit.WarehouseTest.testLoadStockWithIOException.executor": "Run",
+    "JUnit.WarehouseTest.testReduceStock.executor": "Run",
+    "JUnit.WarehouseTest.testReduceStockWithExactQuantity.executor": "Run",
+    "JUnit.WarehouseTest.testReduceStockWithInsufficientStock.executor": "Run",
+    "JUnit.WarehouseTest.testReduceStockWithNonExcistingProduct.executor": "Run",
+    "JUnit.WarehouseTest.testReduceStockWithOrder.executor": "Run",
+    "JUnit.WarehouseTest.testReduceStockWithOrderWithExactQuantityOfOneProduct.executor": "Run",
+    "JUnit.WarehouseTest.testReduceStockWithOrderWithOneInsufficientQuantity.executor": "Debug",
+    "JUnit.WarehouseTest.testReduceStockWithOrderWithOneInvalidProduct.executor": "Run",
+    "JUnit.WarehouseTest.testSaveStock.executor": "Run",
+    "JUnit.WarehouseTest.testSaveStockWithIOException.executor": "Run",
+    "JUnit.deliciouspizza in DeliciousPizza.executor": "Coverage",
+    "JUnit.repository in DeliciousPizza.executor": "Coverage",
+    "JUnit.service in DeliciousPizza.executor": "Coverage",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Monika/Downloads/checkstyle.xml",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.3402299",
+    "settings.editor.selected.configurable": "org.infernus.idea.checkstyle.CheckStyleConfigurable"
   }
-}</component>
-  <component name="RunManager" selected="JUnit.deliciouspizza in DeliciousPizza">
-    <configuration name="UserServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+}]]></component>
+  <component name="RunManager">
+    <configuration name="ProductRepository" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.deliciouspizza.repository.ProductRepository" />
       <module name="DeliciousPizza" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.deliciouspizza.service.*" />
+          <option name="PATTERN" value="com.deliciouspizza.repository.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.deliciouspizza.service" />
-      <option name="MAIN_CLASS_NAME" value="com.deliciouspizza.service.UserServiceTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="UserServiceTest.testGetOrderHistory" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="DeliciousPizza" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.deliciouspizza.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.deliciouspizza.service" />
-      <option name="MAIN_CLASS_NAME" value="com.deliciouspizza.service.UserServiceTest" />
-      <option name="METHOD_NAME" value="testGetOrderHistory" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="UserServiceTest.testGetUserRightsWithNotFoundUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="DeliciousPizza" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.deliciouspizza.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.deliciouspizza.service" />
-      <option name="MAIN_CLASS_NAME" value="com.deliciouspizza.service.UserServiceTest" />
-      <option name="METHOD_NAME" value="testGetUserRightsWithNotFoundUser" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="deliciouspizza in DeliciousPizza" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="DeliciousPizza" />
-      <option name="TEST_OBJECT" value="directory" />
-      <dir value="$PROJECT_DIR$/src/test/java/com/deliciouspizza" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="service in DeliciousPizza" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="DeliciousPizza" />
-      <option name="TEST_OBJECT" value="directory" />
-      <dir value="$PROJECT_DIR$/src/test/java/com/deliciouspizza/service" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.deliciouspizza in DeliciousPizza" />
-        <item itemvalue="JUnit.service in DeliciousPizza" />
-        <item itemvalue="JUnit.UserServiceTest" />
-        <item itemvalue="JUnit.UserServiceTest.testGetOrderHistory" />
-        <item itemvalue="JUnit.UserServiceTest.testGetUserRightsWithNotFoundUser" />
+        <item itemvalue="Application.ProductRepository" />
       </list>
     </recent_temporary>
   </component>

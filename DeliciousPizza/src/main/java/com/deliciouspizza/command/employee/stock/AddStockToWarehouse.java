@@ -33,8 +33,8 @@ public class AddStockToWarehouse implements Command {
 
             try {
                 warehouse.addStockInWarehouse(productKey, quantity);
-                return "Product " + productKey + "stocked successfully with" + quantity;
-            } catch (ProductDoesNotExistException err) {
+                return "Product " + productKey + " stocked successfully with " + quantity;
+            } catch (ProductDoesNotExistException | IllegalArgumentException err) {
                 return err.getMessage();
             }
 

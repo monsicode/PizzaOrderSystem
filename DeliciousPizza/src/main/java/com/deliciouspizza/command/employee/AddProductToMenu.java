@@ -34,7 +34,7 @@ public class AddProductToMenu implements Command {
             try {
                 Product product = productService.getProductByKey(productKey);
                 productService.activateProduct(product);
-                return "Product " + productKey + " activated successfully";
+                return "Product " + productKey + " added to menu successfully!";
             } catch (ProductDoesNotExistException | ProductAlreadyActiveException err) {
                 return err.getMessage();
             }

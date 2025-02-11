@@ -280,3 +280,17 @@ com.deliciouspizza.exception.UserNotFoundException: User with username worker1 n
 	at com.deliciouspizza.command.CommandExecutor.start(CommandExecutor.java:26) [classes/:?]
 	at com.deliciouspizza.command.Main.main(Main.java:25) [classes/:?]
 2025-02-05 12:02:22,329 [main] WARN com.deliciouspizza.service.UserServiceTest - Wrong password.
+2025-02-11 14:37:44,618 [main] ERROR com.deliciouspizza.repository.UserRepository - Error loading users from file
+2025-02-11 14:47:50,266 [main] WARN com.deliciouspizza.repository.ProductRepository - Product sauce_ranch doesn't exist
+2025-02-11 14:49:31,373 [main] WARN com.deliciouspizza.repository.ProductRepository - Product sauce_spicy_sauce doesn't exist
+2025-02-11 14:56:44,723 [main] ERROR com.deliciouspizza.repository.UserRepository - Error loading users from file
+2025-02-11 14:58:10,745 [main] ERROR com.deliciouspizza.repository.UserRepository - Error loading users from file
+2025-02-11 14:58:35,785 [main] ERROR com.deliciouspizza.repository.UserRepository - Error loading users from file
+2025-02-11 14:58:46,849 [main] ERROR com.deliciouspizza.repository.UserRepository - Error loading users from file
+2025-02-11 15:00:01,961 [main] WARN com.deliciouspizza.service.UserService - Wrong password.
+2025-02-11 15:01:53,386 [main] WARN com.deliciouspizza.repository.ProductRepository - Product drink_orange_juice_large doesn't exist
+2025-02-11 16:40:42,019 [main] WARN com.deliciouspizza.service.UserService - Wrong password.
+2025-02-11 16:41:30,069 [main] WARN com.deliciouspizza.repository.ProductRepository - Product sauce_garlic_sauce doesn't exist
+2025-02-11 16:42:07,610 [main] WARN com.deliciouspizza.repository.ProductRepository - Product sauce_honey_mustard doesn't exist
+2025-02-11 16:50:07,195 [main] WARN com.deliciouspizza.repository.ProductRepository - Product drink_pepsi_large doesn't exist
+2025-02-11 16:51:33,634 [main] WARN com.deliciouspizza.repository.ProductRepository - Product aa doesn't exist

@@ -20,34 +20,35 @@ import java.util.concurrent.ConcurrentHashMap;
 public class UserRepository {
 
     private Map<String, User> users = new ConcurrentHashMap<>();
-    private String USER_FILE = "data-storage/users.json";
-    private File jsonFileUsers = new File(USER_FILE);
-    TypeReference<Map<String, User>> typeRef = new TypeReference<>() {
+    private String userFile = "data-storage/users.json";
+    private File jsonFileUsers = new File(userFile);
+    private final TypeReference<Map<String, User>> typeRef = new TypeReference<>() {
     };
 
     private static final Logger LOGGER = LogManager.getLogger(UserRepository.class);
 
-    private final ObjectMapper OBJECT_MAPPER;
+    private final ObjectMapper objectMapper;
 
     public UserRepository(ObjectMapper objectMapper, File fileUsers, Map<String, User> users) {
-        OBJECT_MAPPER = objectMapper;
+        this.objectMapper = objectMapper;
         jsonFileUsers = fileUsers;
         this.users = users;
-        OBJECT_MAPPER.registerModule(new JavaTimeModule());
-        OBJECT_MAPPER.findAndRegisterModules();
+        this.objectMapper.registerModule(new JavaTimeModule());
+        this.objectMapper.findAndRegisterModules();
     }
 
     public UserRepository() {
+        objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.findAndRegisterModules();
+
         users = loadUsers();
-        OBJECT_MAPPER = new ObjectMapper();
-        OBJECT_MAPPER.registerModule(new JavaTimeModule());
-        OBJECT_MAPPER.findAndRegisterModules();
     }
 
     Map<String, User> loadUsers() {
         try {
             if (jsonFileUsers.exists() && jsonFileUsers.length() > 0) {
-                users = OBJECT_MAPPER.readValue(jsonFileUsers, typeRef);
+                users = objectMapper.readValue(jsonFileUsers, typeRef);
                 return users;
             } else {
                 return new ConcurrentHashMap<>();
@@ -60,7 +61,7 @@ public class UserRepository {
 
     private void saveUsers() {
         try {
-            OBJECT_MAPPER.writerWithDefaultPrettyPrinter().writeValue(jsonFileUsers, users);
+            objectMapper.writerWithDefaultPrettyPrinter().writeValue(jsonFileUsers, users);
         } catch (IOException e) {
             LOGGER.error("Error saving users: {}", e.getMessage());
         }

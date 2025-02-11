@@ -77,7 +77,8 @@ public class Warehouse {
     }
 
     public void addStockInWarehouse(String productKey, int quantity) {
-        Product product = productService.getProductByKey(productKey);
+        Product product = productService.createProductFromKey(productKey);
+
         if (product == null) {
             throw new ProductDoesNotExistException("Product can't be null");
         }

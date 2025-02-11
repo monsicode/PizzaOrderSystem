@@ -50,9 +50,13 @@ public class ProductService {
         return 0;
     }
 
-    //catching the exception in EmployeeImpl
+    //catching the exception in the commands
     public Product getProductByKey(String productKey) {
         return productRepository.getProduct(productKey);
+    }
+
+    public Product createProductFromKey(String productKey) {
+        return productRepository.createProductFromKey(productKey);
     }
 
     public boolean isItGoodForUnderAgedCustomers(String key) {

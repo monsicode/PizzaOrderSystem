@@ -20,4 +20,13 @@ public enum PizzaType {
         return price;
     }
 
+    public static boolean isValid(String type) {
+        try {
+            PizzaType.valueOf(type.toUpperCase());
+            return true;
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
+    }
+
 }

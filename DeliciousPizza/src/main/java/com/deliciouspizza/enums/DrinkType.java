@@ -1,6 +1,7 @@
 package com.deliciouspizza.enums;
 
 public enum DrinkType {
+
     COKE(false, 2.50),
     PEPSI(false, 2.40),
     WATER(false, 1.50),
@@ -27,6 +28,15 @@ public enum DrinkType {
 
     public double getPrice() {
         return price;
+    }
+
+    public static boolean isValid(String type) {
+        try {
+            DrinkType.valueOf(type.toUpperCase());
+            return true;
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
     }
 
 }

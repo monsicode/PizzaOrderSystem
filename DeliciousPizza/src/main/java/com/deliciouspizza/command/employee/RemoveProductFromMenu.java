@@ -34,7 +34,7 @@ public class RemoveProductFromMenu implements Command {
             try {
                 Product product = productService.getProductByKey(productKey);
                 productService.deactivateProduct(product);
-                return "Product " + productKey + " activated successfully";
+                return "Product " + productKey + " removed from menu successfully!";
             } catch (ProductDoesNotExistException | ProductAlreadyDeactivatedException | IllegalArgumentException err) {
                 return err.getMessage();
             }

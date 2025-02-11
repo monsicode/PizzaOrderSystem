@@ -5,10 +5,47 @@
     "pizzaSize" : "SMALL",
     "statusProduct" : "ACTIVE"
   },
-  "pizza_pepperoni_large" : {
+  "pizza_margherita_small" : {
     "type" : "pizza",
-    "pizzaType" : "PEPPERONI",
-    "pizzaSize" : "LARGE",
+    "pizzaType" : "MARGHERITA",
+    "pizzaSize" : "SMALL",
+    "statusProduct" : "ACTIVE"
+  },
+  "pizza_veggie_medium" : {
+    "type" : "pizza",
+    "pizzaType" : "VEGGIE",
+    "pizzaSize" : "MEDIUM",
+    "statusProduct" : "ACTIVE"
+  },
+  "drink_beer_large" : {
+    "type" : "drink",
+    "drink" : "BEER",
+    "volume" : "LARGE",
+    "statusProduct" : "ACTIVE",
+    "isAlcoholic" : true
+  },
+  "sauce_honey_mustard" : {
+    "type" : "sauce",
+    "sauce" : "HONEY_MUSTARD",
+    "statusProduct" : "ACTIVE"
+  },
+  "drink_water_small" : {
+    "type" : "drink",
+    "drink" : "WATER",
+    "volume" : "SMALL",
+    "statusProduct" : "ACTIVE",
+    "isAlcoholic" : false
+  },
+  "drink_pepsi_small" : {
+    "type" : "drink",
+    "drink" : "PEPSI",
+    "volume" : "SMALL",
+    "statusProduct" : "ACTIVE",
+    "isAlcoholic" : false
+  },
+  "sauce_garlic_sauce" : {
+    "type" : "sauce",
+    "sauce" : "GARLIC_SAUCE",
     "statusProduct" : "ACTIVE"
   }
 }
