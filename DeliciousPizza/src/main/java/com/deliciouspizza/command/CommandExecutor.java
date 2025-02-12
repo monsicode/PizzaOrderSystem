@@ -29,4 +29,8 @@ public class CommandExecutor {
         }
     }
 
+    public SocketChannel getChannelByUser(String customer) {
+        return sessionManager.getClientByUsername(customer);
+    }
+
 }

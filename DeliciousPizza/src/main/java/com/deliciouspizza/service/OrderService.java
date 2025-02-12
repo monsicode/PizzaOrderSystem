@@ -64,7 +64,7 @@ public class OrderService {
         try {
             return orderRepository.getCurrentOrderForUser(username).getOrder();
         } catch (IllegalStateException err) {
-            LOGGER.error(err.getMessage(), err);
+            LOGGER.error(err.getMessage());
         }
         return new HashMap<>();
     }
@@ -86,8 +86,13 @@ public class OrderService {
         return orderRepository.getTotalPriceOfOrder(username);
     }
 
-    //for employees     TODO: check if its an employee
+    public String getUserForCurrentOrder() {
+        return orderRepository.getUserForNextOrder();
+    }
+
+    //for employees  check if its an employee
     public void processCurrentOrder() throws InterruptedException {
+
         Order currentOrder = orderRepository.getNextOrder();
         LOGGER.info("Started processing current order: {} ", currentOrder);
 
@@ -98,6 +103,7 @@ public class OrderService {
         } else {
             LOGGER.warn("There are no orders to process.");
         }
+
     }
 
     public BlockingQueue<Order> getPendingOrders() {

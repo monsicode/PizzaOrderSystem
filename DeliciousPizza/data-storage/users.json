@@ -12,11 +12,11 @@
     "age" : 22,
     "orderHistory" : [ {
       "order" : {
-        "pizza_pepperoni_small" : 10
+        "pizza_margherita_small" : 3
       },
       "statusOrder" : "COMPLETED",
-      "orderDate" : [ 2024, 11, 21, 20, 27, 16, 436522400 ],
-      "totalPrice" : 90.0,
+      "orderDate" : [ 2025, 2, 11, 17, 52, 6, 424849900 ],
+      "totalPrice" : 24.0,
       "usernameCustomer" : "monkata",
       "orderId" : 1
     }, {
@@ -24,73 +24,19 @@
         "pizza_pepperoni_small" : 1
       },
       "statusOrder" : "COMPLETED",
-      "orderDate" : [ 2025, 2, 3, 10, 29, 15, 958840000 ],
+      "orderDate" : [ 2025, 2, 11, 23, 3, 53, 108261200 ],
       "totalPrice" : 9.0,
       "usernameCustomer" : "monkata",
       "orderId" : 2
     }, {
       "order" : {
-        "pizza_pepperoni_small" : 10
+        "drink_beer_large" : 1
       },
       "statusOrder" : "COMPLETED",
-      "orderDate" : [ 2024, 11, 21, 20, 25, 55, 809074900 ],
-      "totalPrice" : 90.0,
+      "orderDate" : [ 2025, 2, 11, 17, 55, 55, 519960600 ],
+      "totalPrice" : 6.0,
       "usernameCustomer" : "monkata",
       "orderId" : 3
-    }, {
-      "order" : {
-        "pizza_pepperoni_small" : 10
-      },
-      "statusOrder" : "COMPLETED",
-      "orderDate" : [ 2025, 2, 3, 12, 28, 6, 498406100 ],
-      "totalPrice" : 90.0,
-      "usernameCustomer" : "monkata",
-      "orderId" : 4
-    }, {
-      "order" : {
-        "pizza_pepperoni_small" : 10
-      },
-      "statusOrder" : "COMPLETED",
-      "orderDate" : [ 2024, 11, 21, 20, 9, 0, 744598800 ],
-      "totalPrice" : 90.0,
-      "usernameCustomer" : "monkata",
-      "orderId" : 5
-    }, {
-      "order" : {
-        "pizza_pepperoni_small" : 10
-      },
-      "statusOrder" : "COMPLETED",
-      "orderDate" : [ 2025, 2, 3, 12, 32, 35, 485539100 ],
-      "totalPrice" : 90.0,
-      "usernameCustomer" : "monkata",
-      "orderId" : 21
-    }, {
-      "order" : {
-        "pizza_pepperoni_small" : 10
-      },
-      "statusOrder" : "COMPLETED",
-      "orderDate" : [ 2024, 11, 21, 20, 7, 0, 272483600 ],
-      "totalPrice" : 90.0,
-      "usernameCustomer" : "monkata",
-      "orderId" : 6
-    }, {
-      "order" : {
-        "pizza_pepperoni_small" : 3
-      },
-      "statusOrder" : "COMPLETED",
-      "orderDate" : [ 2024, 12, 15, 15, 39, 27, 876749100 ],
-      "totalPrice" : 27.0,
-      "usernameCustomer" : "monkata",
-      "orderId" : 7
-    }, {
-      "order" : {
-        "pizza_pepperoni_small" : 3
-      },
-      "statusOrder" : "COMPLETED",
-      "orderDate" : [ 2024, 12, 16, 16, 13, 9, 860924700 ],
-      "totalPrice" : 27.0,
-      "usernameCustomer" : "monkata",
-      "orderId" : 8
     }, {
       "order" : {
         "pizza_pepperoni_small" : 2
@@ -99,7 +45,133 @@
       "orderDate" : [ 2025, 2, 2, 17, 20, 21, 467785600 ],
       "totalPrice" : 18.0,
       "usernameCustomer" : "monkata",
+      "orderId" : 4
+    }, {
+      "order" : {
+        "drink_beer_large" : 1
+      },
+      "statusOrder" : "COMPLETED",
+      "orderDate" : [ 2025, 2, 11, 17, 55, 55, 519960600 ],
+      "totalPrice" : 6.0,
+      "usernameCustomer" : "monkata",
+      "orderId" : 5
+    }, {
+      "order" : {
+        "pizza_pepperoni_small" : 10
+      },
+      "statusOrder" : "COMPLETED",
+      "orderDate" : [ 2024, 11, 21, 20, 27, 16, 436522400 ],
+      "totalPrice" : 90.0,
+      "usernameCustomer" : "monkata",
+      "orderId" : 6
+    }, {
+      "order" : {
+        "pizza_margherita_small" : 3
+      },
+      "statusOrder" : "COMPLETED",
+      "orderDate" : [ 2025, 2, 11, 17, 52, 6, 424849900 ],
+      "totalPrice" : 24.0,
+      "usernameCustomer" : "monkata",
+      "orderId" : 7
+    }, {
+      "order" : {
+        "pizza_pepperoni_small" : 3
+      },
+      "statusOrder" : "COMPLETED",
+      "orderDate" : [ 2025, 2, 2, 17, 20, 21, 467785600 ],
+      "totalPrice" : 18.0,
+      "usernameCustomer" : "monkata",
+      "orderId" : 8
+    }, {
+      "order" : {
+        "pizza_pepperoni_small" : 1
+      },
+      "statusOrder" : "COMPLETED",
+      "orderDate" : [ 2025, 2, 11, 23, 3, 53, 108261200 ],
+      "totalPrice" : 9.0,
+      "usernameCustomer" : "monkata",
       "orderId" : 9
+    }, {
+      "order" : {
+        "pizza_pepperoni_small" : 1
+      },
+      "statusOrder" : "COMPLETED",
+      "orderDate" : [ 2025, 2, 3, 10, 29, 15, 958840000 ],
+      "totalPrice" : 9.0,
+      "usernameCustomer" : "monkata",
+      "orderId" : 10
+    }, {
+      "order" : {
+        "pizza_pepperoni_small" : 10
+      },
+      "statusOrder" : "COMPLETED",
+      "orderDate" : [ 2024, 11, 21, 20, 25, 55, 809074900 ],
+      "totalPrice" : 90.0,
+      "usernameCustomer" : "monkata",
+      "orderId" : 11
+    }, {
+      "order" : {
+        "pizza_pepperoni_small" : 10
+      },
+      "statusOrder" : "COMPLETED",
+      "orderDate" : [ 2025, 2, 3, 12, 28, 6, 498406100 ],
+      "totalPrice" : 90.0,
+      "usernameCustomer" : "monkata",
+      "orderId" : 12
+    }, {
+      "order" : {
+        "pizza_pepperoni_small" : 10
+      },
+      "statusOrder" : "COMPLETED",
+      "orderDate" : [ 2024, 11, 21, 20, 9, 0, 744598800 ],
+      "totalPrice" : 90.0,
+      "usernameCustomer" : "monkata",
+      "orderId" : 13
+    }, {
+      "order" : {
+        "pizza_pepperoni_small" : 10
+      },
+      "statusOrder" : "COMPLETED",
+      "orderDate" : [ 2025, 2, 3, 12, 32, 35, 485539100 ],
+      "totalPrice" : 90.0,
+      "usernameCustomer" : "monkata",
+      "orderId" : 14
+    }, {
+      "order" : {
+        "pizza_pepperoni_small" : 10
+      },
+      "statusOrder" : "COMPLETED",
+      "orderDate" : [ 2024, 11, 21, 20, 7, 0, 272483600 ],
+      "totalPrice" : 90.0,
+      "usernameCustomer" : "monkata",
+      "orderId" : 15
+    }, {
+      "order" : {
+        "pizza_pepperoni_small" : 3
+      },
+      "statusOrder" : "COMPLETED",
+      "orderDate" : [ 2024, 12, 15, 15, 39, 27, 876749100 ],
+      "totalPrice" : 27.0,
+      "usernameCustomer" : "monkata",
+      "orderId" : 16
+    }, {
+      "order" : {
+        "pizza_pepperoni_small" : 3
+      },
+      "statusOrder" : "COMPLETED",
+      "orderDate" : [ 2024, 12, 16, 16, 13, 9, 860924700 ],
+      "totalPrice" : 27.0,
+      "usernameCustomer" : "monkata",
+      "orderId" : 17
+    }, {
+      "order" : {
+        "pizza_pepperoni_small" : 2
+      },
+      "statusOrder" : "COMPLETED",
+      "orderDate" : [ 2025, 2, 2, 17, 20, 21, 467785600 ],
+      "totalPrice" : 18.0,
+      "usernameCustomer" : "monkata",
+      "orderId" : 18
     }, {
       "order" : {
         "pizza_pepperoni_small" : 1
@@ -108,16 +180,127 @@
       "orderDate" : [ 2025, 2, 2, 19, 54, 31, 175190100 ],
       "totalPrice" : 9.0,
       "usernameCustomer" : "monkata",
-      "orderId" : 10
+      "orderId" : 19
+    }, {
+      "order" : {
+        "pizza_margherita_small" : 3
+      },
+      "statusOrder" : "COMPLETED",
+      "orderDate" : [ 2025, 2, 11, 17, 52, 6, 424849900 ],
+      "totalPrice" : 24.0,
+      "usernameCustomer" : "monkata",
+      "orderId" : 20
+    }, {
+      "order" : {
+        "drink_beer_large" : 1
+      },
+      "statusOrder" : "COMPLETED",
+      "orderDate" : [ 2025, 2, 11, 17, 55, 55, 519960600 ],
+      "totalPrice" : 6.0,
+      "usernameCustomer" : "monkata",
+      "orderId" : 21
+    }, {
+      "order" : {
+        "pizza_pepperoni_small" : 1
+      },
+      "statusOrder" : "COMPLETED",
+      "orderDate" : [ 2025, 2, 11, 23, 3, 53, 108261200 ],
+      "totalPrice" : 9.0,
+      "usernameCustomer" : "monkata",
+      "orderId" : 22
+    }, {
+      "order" : {
+        "pizza_margherita_small" : 3
+      },
+      "statusOrder" : "COMPLETED",
+      "orderDate" : [ 2025, 2, 11, 17, 52, 6, 424849900 ],
+      "totalPrice" : 24.0,
+      "usernameCustomer" : "monkata",
+      "orderId" : 23
+    }, {
+      "order" : {
+        "drink_beer_large" : 1
+      },
+      "statusOrder" : "COMPLETED",
+      "orderDate" : [ 2025, 2, 11, 17, 55, 55, 519960600 ],
+      "totalPrice" : 6.0,
+      "usernameCustomer" : "monkata",
+      "orderId" : 24
+    }, {
+      "order" : {
+        "pizza_pepperoni_small" : 4
+      },
+      "statusOrder" : "COMPLETED",
+      "orderDate" : [ 2025, 2, 2, 17, 20, 21, 467785600 ],
+      "totalPrice" : 18.0,
+      "usernameCustomer" : "monkata",
+      "orderId" : 25
+    }, {
+      "order" : {
+        "drink_beer_large" : 1
+      },
+      "statusOrder" : "COMPLETED",
+      "orderDate" : [ 2025, 2, 11, 17, 55, 55, 519960600 ],
+      "totalPrice" : 6.0,
+      "usernameCustomer" : "monkata",
+      "orderId" : 26
+    }, {
+      "order" : {
+        "pizza_pepperoni_small" : 1
+      },
+      "statusOrder" : "COMPLETED",
+      "orderDate" : [ 2025, 2, 3, 10, 29, 15, 958840000 ],
+      "totalPrice" : 9.0,
+      "usernameCustomer" : "monkata",
+      "orderId" : 27
+    }, {
+      "order" : {
+        "pizza_pepperoni_small" : 10
+      },
+      "statusOrder" : "COMPLETED",
+      "orderDate" : [ 2024, 11, 21, 20, 7, 0, 272483600 ],
+      "totalPrice" : 90.0,
+      "usernameCustomer" : "monkata",
+      "orderId" : 28
+    }, {
+      "order" : {
+        "pizza_pepperoni_small" : 4
+      },
+      "statusOrder" : "COMPLETED",
+      "orderDate" : [ 2025, 2, 2, 17, 20, 21, 467785600 ],
+      "totalPrice" : 18.0,
+      "usernameCustomer" : "monkata",
+      "orderId" : 29
+    }, {
+      "order" : {
+        "drink_beer_large" : 1
+      },
+      "statusOrder" : "COMPLETED",
+      "orderDate" : [ 2025, 2, 11, 17, 55, 55, 519960600 ],
+      "totalPrice" : 6.0,
+      "usernameCustomer" : "monkata",
+      "orderId" : 56
+    }, {
+      "order" : {
+        "pizza_pepperoni_small" : 1
+      },
+      "statusOrder" : "COMPLETED",
+      "orderDate" : [ 2025, 2, 3, 10, 29, 15, 958840000 ],
+      "totalPrice" : 9.0,
+      "usernameCustomer" : "monkata",
+      "orderId" : 57
+    }, {
+      "order" : {
+        "pizza_pepperoni_small" : 10
+      },
+      "statusOrder" : "COMPLETED",
+      "orderDate" : [ 2024, 11, 21, 20, 7, 0, 272483600 ],
+      "totalPrice" : 90.0,
+      "usernameCustomer" : "monkata",
+      "orderId" : 58
     } ],
     "hashedPassword" : "$2a$10$0sP5x1tsaGS/RRNxZPFlQOocRtg.L.UcFtuKxVsc2ipwOm12g4006",
     "userType" : "customer"
-  },
-  "worker22" : {
-    "username" : "worker22",
-    "rights" : "ADMIN",
-    "hashedPassword" : "$2a$10$53u9tek9uEAtmgnzff.K1emLCgGh/Al0hr.ReYCVkmv0V7z7I2WkC",
-    "userType" : "employee"
   },
   "dani" : {
     "username" : "dani",
@@ -130,7 +313,47 @@
     "rights" : "CUSTOMER",
     "address" : "daka str.",
     "age" : 123,
-    "orderHistory" : [ ],
+    "orderHistory" : [ {
+      "order" : {
+        "pizza_pepperoni_small" : 5,
+        "drink_pepsi_small" : 1
+      },
+      "statusOrder" : "COMPLETED",
+      "orderDate" : [ 2025, 2, 11, 17, 57, 26, 738171600 ],
+      "totalPrice" : 48.4,
+      "usernameCustomer" : "daka",
+      "orderId" : 32
+    }, {
+      "order" : {
+        "pizza_pepperoni_small" : 5,
+        "drink_pepsi_small" : 1
+      },
+      "statusOrder" : "COMPLETED",
+      "orderDate" : [ 2025, 2, 11, 17, 57, 26, 738171600 ],
+      "totalPrice" : 48.4,
+      "usernameCustomer" : "daka",
+      "orderId" : 33
+    }, {
+      "order" : {
+        "pizza_pepperoni_small" : 5,
+        "drink_pepsi_small" : 1
+      },
+      "statusOrder" : "COMPLETED",
+      "orderDate" : [ 2025, 2, 11, 17, 57, 26, 738171600 ],
+      "totalPrice" : 48.4,
+      "usernameCustomer" : "daka",
+      "orderId" : 30
+    }, {
+      "order" : {
+        "pizza_pepperoni_small" : 5,
+        "drink_pepsi_small" : 1
+      },
+      "statusOrder" : "COMPLETED",
+      "orderDate" : [ 2025, 2, 11, 17, 57, 26, 738171600 ],
+      "totalPrice" : 48.4,
+      "usernameCustomer" : "daka",
+      "orderId" : 31
+    } ],
     "hashedPassword" : "$2a$10$Hbv91czUwJfYCB8urFvps.nRZfC8RVlhX8SktYH7kxU7hKDMtKkP.",
     "userType" : "customer"
   }

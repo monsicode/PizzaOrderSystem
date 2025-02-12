@@ -58,6 +58,9 @@ public class Server {
                             }
 
                             String output = commandExecutor.start(clientInput, clientChannel);
+
+                            informClientForProcessedOrder(output);
+
                             writeClientOutput(clientChannel, output);
 
                         } else if (key.isAcceptable()) {
@@ -106,11 +109,12 @@ public class Server {
     }
 
     private void writeClientOutput(SocketChannel clientChannel, String output) throws IOException {
-        buffer.clear();
-        buffer.put(output.getBytes());
-        buffer.flip();
+        byte[] outputBytes = output.getBytes(StandardCharsets.UTF_8);
+        ByteBuffer buffer = ByteBuffer.wrap(outputBytes);
 
-        clientChannel.write(buffer);
+        while (buffer.hasRemaining()) {
+            clientChannel.write(buffer);
+        }
     }
 
     private void accept(Selector selector, SelectionKey key) throws IOException {
@@ -124,6 +128,20 @@ public class Server {
 
         String welcomeMenu = commandExecutor.start("main", null);
         writeClientOutput(accept, welcomeMenu);
+    }
+
+    private void informClientForProcessedOrder(String output) throws IOException {
+        if (output.contains("processed")) {
+            System.out.println("We are in if");
+            String[] words = output.split(" ");
+            String customerName = words[4];
+
+            SocketChannel clientToInform = commandExecutor.getChannelByUser(customerName);
+
+            if (clientToInform != null) {
+                writeClientOutput(clientToInform, "Your order was processed");
+            }
+        }
     }
 
     public static void main(String[] args) {

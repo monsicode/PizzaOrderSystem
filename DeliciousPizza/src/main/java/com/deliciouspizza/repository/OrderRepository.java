@@ -70,6 +70,17 @@ public class OrderRepository {
         LOGGER.info("Order added to the queue");
     }
 
+    public String getUserForNextOrder() {
+        Order order = pendingOrders.peek();
+
+        if (order != null) {
+            return order.getUsernameCustomer();
+        }
+
+        return null;
+
+    }
+
     public Order getNextOrder() throws InterruptedException {
         Order order = pendingOrders.take();
         savePendingOrders();

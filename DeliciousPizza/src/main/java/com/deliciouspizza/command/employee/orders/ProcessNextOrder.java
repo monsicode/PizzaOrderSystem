@@ -20,8 +20,10 @@ public class ProcessNextOrder implements Command {
     public String execute(String[] args, SocketChannel client) {
         if (manager.isLoggedIn(client)) {
             try {
+                String customer = orderService.getUserForCurrentOrder();
                 orderService.processCurrentOrder();
-                return "Order processed successfully!";
+                return "Order processed for user: " + customer;
+
             } catch (InterruptedException err) {
                 Thread.currentThread().interrupt();
                 return "Error processing the order";
@@ -32,3 +34,19 @@ public class ProcessNextOrder implements Command {
     }
 
 }
+
+
+//  @Override
+//    public String execute(String[] args, SocketChannel client) {
+//        if (manager.isLoggedIn(client)) {
+//            try {
+//                orderService.processCurrentOrder();
+//                return "Order processed successfully!";
+//            } catch (InterruptedException err) {
+//                Thread.currentThread().interrupt();
+//                return "Error processing the order";
+//            }
+//        } else {
+//            return "Not logged in, error occurred";
+//        }
+//    }

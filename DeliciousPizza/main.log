@@ -294,3 +294,37 @@ com.deliciouspizza.exception.UserNotFoundException: User with username worker1 n
 2025-02-11 16:42:07,610 [main] WARN com.deliciouspizza.repository.ProductRepository - Product sauce_honey_mustard doesn't exist
 2025-02-11 16:50:07,195 [main] WARN com.deliciouspizza.repository.ProductRepository - Product drink_pepsi_large doesn't exist
 2025-02-11 16:51:33,634 [main] WARN com.deliciouspizza.repository.ProductRepository - Product aa doesn't exist
+2025-02-11 17:52:41,593 [main] ERROR com.deliciouspizza.service.OrderService - User does not have an active order.
+java.lang.IllegalStateException: User does not have an active order.
+	at com.deliciouspizza.repository.OrderRepository.getCurrentOrderForUser(OrderRepository.java:182) ~[classes/:?]
+	at com.deliciouspizza.service.OrderService.getCurrentOrderForUser(OrderService.java:65) [classes/:?]
+	at com.deliciouspizza.service.OrderService.showCurrentOrderForUser(OrderService.java:127) [classes/:?]
+	at com.deliciouspizza.command.cutomer.FinishOrder.execute(FinishOrder.java:27) [classes/:?]
+	at com.deliciouspizza.command.CommandExecutor.start(CommandExecutor.java:26) [classes/:?]
+	at com.deliciouspizza.command.Main.main(Main.java:25) [classes/:?]
+2025-02-11 17:52:41,612 [main] ERROR com.deliciouspizza.repository.OrderRepository - User does not have an active order.
+2025-02-11 17:56:19,554 [main] ERROR com.deliciouspizza.service.OrderService - User does not have an active order.
+java.lang.IllegalStateException: User does not have an active order.
+	at com.deliciouspizza.repository.OrderRepository.getCurrentOrderForUser(OrderRepository.java:182) ~[classes/:?]
+	at com.deliciouspizza.service.OrderService.getCurrentOrderForUser(OrderService.java:65) [classes/:?]
+	at com.deliciouspizza.service.OrderService.showCurrentOrderForUser(OrderService.java:127) [classes/:?]
+	at com.deliciouspizza.command.cutomer.FinishOrder.execute(FinishOrder.java:27) [classes/:?]
+	at com.deliciouspizza.command.CommandExecutor.start(CommandExecutor.java:26) [classes/:?]
+	at com.deliciouspizza.command.Main.main(Main.java:25) [classes/:?]
+2025-02-11 17:56:19,554 [main] ERROR com.deliciouspizza.repository.OrderRepository - User does not have an active order.
+2025-02-11 17:58:06,606 [main] ERROR com.deliciouspizza.service.OrderService - User does not have an active order.
+java.lang.IllegalStateException: User does not have an active order.
+	at com.deliciouspizza.repository.OrderRepository.getCurrentOrderForUser(OrderRepository.java:182) ~[classes/:?]
+	at com.deliciouspizza.service.OrderService.getCurrentOrderForUser(OrderService.java:65) [classes/:?]
+	at com.deliciouspizza.service.OrderService.showCurrentOrderForUser(OrderService.java:127) [classes/:?]
+	at com.deliciouspizza.command.cutomer.FinishOrder.execute(FinishOrder.java:27) [classes/:?]
+	at com.deliciouspizza.command.CommandExecutor.start(CommandExecutor.java:26) [classes/:?]
+	at com.deliciouspizza.command.Main.main(Main.java:25) [classes/:?]
+2025-02-11 17:58:06,607 [main] ERROR com.deliciouspizza.repository.OrderRepository - User does not have an active order.
+2025-02-11 22:51:25,453 [main] ERROR com.deliciouspizza.service.UserService - User with username monkata1 not found
+2025-02-11 23:07:37,912 [main] WARN com.deliciouspizza.service.UserService - Wrong password.
+2025-02-11 23:21:57,129 [main] ERROR com.deliciouspizza.service.UserService - User with username worker not found
+2025-02-11 23:41:03,164 [main] WARN com.deliciouspizza.service.UserService - Wrong password.
+2025-02-11 23:45:54,073 [main] WARN com.deliciouspizza.service.UserService - Wrong password.
+2025-02-12 00:17:11,358 [main] WARN com.deliciouspizza.service.UserService - Wrong password.
+2025-02-12 12:21:18,771 [main] ERROR com.deliciouspizza.repository.OrderRepository - Error loading pending orders!

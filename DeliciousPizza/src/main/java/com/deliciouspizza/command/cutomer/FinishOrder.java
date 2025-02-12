@@ -23,8 +23,9 @@ public class FinishOrder implements Command {
             String username = manager.getUsername(client);
 
             try {
+                String currentOrder = orderService.showCurrentOrderForUser(username);
                 orderService.finalizeOrder(username);
-                return "Order finalized successfully!\n" + orderService.showCurrentOrderForUser(username);
+                return "Order finalized successfully!\n" + currentOrder;
             } catch (IllegalStateException err) {
                 return err.getMessage();
             }

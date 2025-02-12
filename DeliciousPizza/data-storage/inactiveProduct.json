@@ -27,11 +27,6 @@
     "sauce" : "BBQ_SAUCE",
     "statusProduct" : "INACTIVE"
   },
-  "sauce_pesto" : {
-    "type" : "sauce",
-    "sauce" : "PESTO",
-    "statusProduct" : "INACTIVE"
-  },
   "drink_lemonade_small" : {
     "type" : "drink",
     "drink" : "LEMONADE",

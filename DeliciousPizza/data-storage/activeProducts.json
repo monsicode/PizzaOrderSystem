@@ -47,5 +47,10 @@
     "type" : "sauce",
     "sauce" : "GARLIC_SAUCE",
     "statusProduct" : "ACTIVE"
+  },
+  "sauce_pesto" : {
+    "type" : "sauce",
+    "sauce" : "PESTO",
+    "statusProduct" : "ACTIVE"
   }
 }
