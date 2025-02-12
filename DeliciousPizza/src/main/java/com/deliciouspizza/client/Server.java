@@ -11,6 +11,9 @@ import java.nio.channels.SocketChannel;
 import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 
+import com.deliciouspizza.api.DistanceClient;
+import com.deliciouspizza.api.data.Delivery;
+import com.deliciouspizza.api.exceptions.ApiException;
 import com.deliciouspizza.command.CommandExecutor;
 
 public class Server {
@@ -59,7 +62,11 @@ public class Server {
 
                             String output = commandExecutor.start(clientInput, clientChannel);
 
-                            informClientForProcessedOrder(output);
+                            try {
+                                informClientForProcessedOrder(output);
+                            } catch (ApiException err) {
+                                System.out.println(err.getMessage());
+                            }
 
                             writeClientOutput(clientChannel, output);
 
@@ -130,18 +137,25 @@ public class Server {
         writeClientOutput(accept, welcomeMenu);
     }
 
-    private void informClientForProcessedOrder(String output) throws IOException {
+    private void informClientForProcessedOrder(String output) throws IOException, ApiException {
         if (output.contains("processed")) {
             System.out.println("We are in if");
             String[] words = output.split(" ");
             String customerName = words[4];
+            String customerAddress = words[9];
 
             SocketChannel clientToInform = commandExecutor.getChannelByUser(customerName);
+            Delivery delivery = getEstimatedTimeForDelivery(customerAddress);
 
-            if (clientToInform != null) {
-                writeClientOutput(clientToInform, "Your order was processed");
+            if (clientToInform != null && delivery != null) {
+                writeClientOutput(clientToInform, delivery.toString());
             }
         }
+    }
+
+    private Delivery getEstimatedTimeForDelivery(String address) throws ApiException {
+        DistanceClient client = new DistanceClient();
+        return client.getDistanceAndDuration(address);
     }
 
     public static void main(String[] args) {

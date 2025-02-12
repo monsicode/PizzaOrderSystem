@@ -154,4 +154,8 @@ public class OrderService {
         return orderBuilder.toString();
     }
 
+    public String getDeliveryAddress(String username) {
+        return userRepository.getAddressCustomer(username);
+    }
+
 }

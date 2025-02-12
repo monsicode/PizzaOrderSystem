@@ -144,4 +144,21 @@ public class UserRepository {
 
     }
 
+    public String getAddressCustomer(String username) {
+        try {
+            User user = getUserByUsername(username);
+
+            if (!(user instanceof Customer customer)) {
+                throw new IllegalStateException("User is not of type Customer!");
+            }
+
+            return customer.getAddress();
+
+        } catch (UserNotFoundException err) {
+            LOGGER.error(err.getMessage());
+        }
+
+        return null;
+    }
+
 }

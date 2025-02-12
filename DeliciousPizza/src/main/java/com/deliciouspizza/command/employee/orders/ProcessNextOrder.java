@@ -21,8 +21,10 @@ public class ProcessNextOrder implements Command {
         if (manager.isLoggedIn(client)) {
             try {
                 String customer = orderService.getUserForCurrentOrder();
+                String addressCustomer = orderService.getDeliveryAddress(customer);
+
                 orderService.processCurrentOrder();
-                return "Order processed for user: " + customer;
+                return "Order processed for user: " + customer + " . Delivering for address: " + addressCustomer ;
 
             } catch (InterruptedException err) {
                 Thread.currentThread().interrupt();
@@ -32,6 +34,13 @@ public class ProcessNextOrder implements Command {
             return "Not logged in, error occurred";
         }
     }
+
+//    public static void main(String[] args) {
+//        String output = "Order processed for user: customer ; Delivering for address: 'st. baba meca' ";
+//        String[] words = output.split(" ");
+//        String customerName = words[4];
+//        System.out.println(words[9]);
+//    }
 
 }
 
