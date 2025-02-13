@@ -43,7 +43,6 @@ public class OrderService {
         orderRepository.startNewOrder(username);
     }
 
-    //GOOD
     public void addProductToActiveOrder(String username, String productKey, int quantity)
         throws ProductException, UnderAgedException {
 
@@ -106,18 +105,22 @@ public class OrderService {
 
     }
 
+    //for empl
     public BlockingQueue<Order> getPendingOrders() {
         return orderRepository.getPendingOrders();
     }
 
+    //for empl
     public List<Order> getHistoryOfOrders() {
         return orderRepository.getHistoryOrders();
     }
 
+    //for empl
     public long getCountOrderInPeriod(LocalDateTime from, LocalDateTime to) {
         return orderRepository.getCountOrderInPeriod(from, to);
     }
 
+    //for empl
     public double getProfitInPeriod(LocalDateTime from, LocalDateTime to) {
         return orderRepository.getProfitInPeriod(from, to);
     }

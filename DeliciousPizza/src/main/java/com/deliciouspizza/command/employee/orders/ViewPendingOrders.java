@@ -19,11 +19,19 @@ public class ViewPendingOrders implements Command {
     @Override
     public String execute(String[] args, SocketChannel client) {
         if (manager.isLoggedIn(client)) {
-            if (!orderService.getPendingOrders().isEmpty()) {
-                return orderService.getPendingOrders().toString();
+            String username = manager.getUsername(client);
+
+            if (manager.isUserEmployee(username)) {
+                if (!orderService.getPendingOrders().isEmpty()) {
+                    return orderService.getPendingOrders().toString();
+                } else {
+                    return "No pending";
+                }
+
             } else {
-                return "No pending";
+                return "You don't have the rights for this command!";
             }
+
         } else {
             return "Not logged in, error occurred";
         }

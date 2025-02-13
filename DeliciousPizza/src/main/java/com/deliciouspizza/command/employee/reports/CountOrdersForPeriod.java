@@ -33,13 +33,19 @@ public class CountOrdersForPeriod implements Command {
         }
 
         if (manager.isLoggedIn(client)) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String username = manager.getUsername(client);
 
-            LocalDate from = LocalDate.parse(args[START_DATE_FIELD], formatter);
-            LocalDate to = LocalDate.parse(args[END_DATE_FIELD], formatter);
+            if (manager.isUserEmployee(username)) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-            long numberOfOrders = orderService.getCountOrderInPeriod(from.atTime(00, 00), to.atTime(00, 00));
-            return "Profit for period " + from + " - " + to + " is: $" + BLUE + numberOfOrders + RESET;
+                LocalDate from = LocalDate.parse(args[START_DATE_FIELD], formatter);
+                LocalDate to = LocalDate.parse(args[END_DATE_FIELD], formatter);
+
+                long numberOfOrders = orderService.getCountOrderInPeriod(from.atTime(00, 00), to.atTime(00, 00));
+                return "Profit for period " + from + " - " + to + " is: $" + BLUE + numberOfOrders + RESET;
+            } else {
+                return "You don't have the rights for this command!";
+            }
 
         } else {
             return "Not logged in, error occurred";

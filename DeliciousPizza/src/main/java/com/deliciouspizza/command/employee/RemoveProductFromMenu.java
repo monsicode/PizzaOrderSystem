@@ -29,14 +29,20 @@ public class RemoveProductFromMenu implements Command {
         }
 
         if (manager.isLoggedIn(client)) {
-            String productKey = args[PRODUCT_KEY_FIELD];
+            String username = manager.getUsername(client);
 
-            try {
-                Product product = productService.getProductByKey(productKey);
-                productService.deactivateProduct(product);
-                return "Product " + productKey + " removed from menu successfully!";
-            } catch (ProductDoesNotExistException | ProductAlreadyDeactivatedException | IllegalArgumentException err) {
-                return err.getMessage();
+            if (manager.isUserEmployee(username)) {
+                String productKey = args[PRODUCT_KEY_FIELD];
+                try {
+                    Product product = productService.getProductByKey(productKey);
+                    productService.deactivateProduct(product);
+                    return "Product " + productKey + " removed from menu successfully!";
+                } catch (ProductDoesNotExistException | ProductAlreadyDeactivatedException |
+                         IllegalArgumentException err) {
+                    return err.getMessage();
+                }
+            } else {
+                return "You don't have the rights for this command!";
             }
 
         } else {

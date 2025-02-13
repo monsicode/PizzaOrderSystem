@@ -29,14 +29,19 @@ public class AddProductToMenu implements Command {
         }
 
         if (manager.isLoggedIn(client)) {
-            String productKey = args[PRODUCT_KEY_FIELD];
+            String username = manager.getUsername(client);
 
-            try {
-                Product product = productService.getProductByKey(productKey);
-                productService.activateProduct(product);
-                return "Product " + productKey + " added to menu successfully!";
-            } catch (ProductDoesNotExistException | ProductAlreadyActiveException err) {
-                return err.getMessage();
+            if (manager.isUserEmployee(username)) {
+                String productKey = args[PRODUCT_KEY_FIELD];
+                try {
+                    Product product = productService.getProductByKey(productKey);
+                    productService.activateProduct(product);
+                    return "Product " + productKey + " added to menu successfully!";
+                } catch (ProductDoesNotExistException | ProductAlreadyActiveException err) {
+                    return err.getMessage();
+                }
+            } else {
+                return "You don't have the rights for this command!";
             }
 
         } else {

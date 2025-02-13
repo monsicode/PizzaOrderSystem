@@ -19,11 +19,18 @@ public class ViewFinishedOrders implements Command {
     @Override
     public String execute(String[] args, SocketChannel client) {
         if (manager.isLoggedIn(client)) {
-            if (!orderService.getHistoryOfOrders().isEmpty()) {
-                return orderService.getHistoryOfOrders().toString();
+            String username = manager.getUsername(client);
+
+            if (manager.isUserEmployee(username)) {
+                if (!orderService.getHistoryOfOrders().isEmpty()) {
+                    return orderService.getHistoryOfOrders().toString();
+                } else {
+                    return "No finished orders from the last week";
+                }
             } else {
-                return "No finished orders from the last week";
+                return "You don't have the rights for this command!";
             }
+
         } else {
             return "Not logged in, error occurred";
         }

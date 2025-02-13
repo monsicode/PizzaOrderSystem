@@ -28,14 +28,20 @@ public class AddStockToWarehouse implements Command {
         }
 
         if (manager.isLoggedIn(client)) {
-            String productKey = args[PRODUCT_KEY_FIELD];
-            int quantity = Integer.parseInt(args[QUANTITY_KEY_FIELD]);
+            String username = manager.getUsername(client);
 
-            try {
-                warehouse.addStockInWarehouse(productKey, quantity);
-                return "Product " + productKey + " stocked successfully with " + quantity;
-            } catch (ProductDoesNotExistException | IllegalArgumentException err) {
-                return err.getMessage();
+            if (manager.isUserEmployee(username)) {
+                String productKey = args[PRODUCT_KEY_FIELD];
+                int quantity = Integer.parseInt(args[QUANTITY_KEY_FIELD]);
+
+                try {
+                    warehouse.addStockInWarehouse(productKey, quantity);
+                    return "Product " + productKey + " stocked successfully with " + quantity;
+                } catch (ProductDoesNotExistException | IllegalArgumentException err) {
+                    return err.getMessage();
+                }
+            } else {
+                return "You don't have the rights for this command!";
             }
 
         } else {

@@ -92,4 +92,9 @@ public class UserService {
         userRepository.changeAddressCustomer(username, newAddress);
     }
 
+    public boolean isUserEmployee(String username) {
+        UserRights rights = getUserRights(username);
+        return rights.equals(UserRights.ADMIN);
+    }
+
 }

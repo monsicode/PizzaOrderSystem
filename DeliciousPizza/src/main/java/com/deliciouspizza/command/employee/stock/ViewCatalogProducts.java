@@ -26,7 +26,14 @@ public class ViewCatalogProducts implements Command {
         }
 
         if (manager.isLoggedIn(client)) {
-            return warehouse.getCatalogProduct(args[PRODUCT_NAME_FIELD]);
+            String username = manager.getUsername(client);
+
+            if (manager.isUserEmployee(username)) {
+                return warehouse.getCatalogProduct(args[PRODUCT_NAME_FIELD]);
+            } else {
+                return "You don't have the rights for this command!";
+            }
+
         } else {
             return "Not logged in, error occurred";
         }

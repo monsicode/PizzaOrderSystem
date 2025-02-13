@@ -1,9 +1,13 @@
 package com.deliciouspizza.command;
 
+import com.deliciouspizza.service.UserService;
+
 import java.nio.channels.SocketChannel;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class SessionManager {
+
+    private final UserService userService = new UserService();
 
     private final ConcurrentHashMap<SocketChannel, String> userSessions = new ConcurrentHashMap<>();
     private final ConcurrentHashMap<String, SocketChannel> userToClientMap = new ConcurrentHashMap<>();
@@ -28,4 +32,9 @@ public class SessionManager {
     public boolean isLoggedIn(SocketChannel clientChannel) {
         return userSessions.containsKey(clientChannel);
     }
+
+    public boolean isUserEmployee(String username) {
+        return userService.isUserEmployee(username);
+    }
+
 }

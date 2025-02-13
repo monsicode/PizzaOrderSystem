@@ -19,17 +19,24 @@ public class ProcessNextOrder implements Command {
     @Override
     public String execute(String[] args, SocketChannel client) {
         if (manager.isLoggedIn(client)) {
-            try {
-                String customer = orderService.getUserForCurrentOrder();
-                String addressCustomer = orderService.getDeliveryAddress(customer);
+            String username = manager.getUsername(client);
 
-                orderService.processCurrentOrder();
-                return "Order processed for user: " + customer + " --- Address: " + addressCustomer;
+            if (manager.isUserEmployee(username)) {
+                try {
+                    String customer = orderService.getUserForCurrentOrder();
+                    String addressCustomer = orderService.getDeliveryAddress(customer);
 
-            } catch (InterruptedException err) {
-                Thread.currentThread().interrupt();
-                return "Error processing the order";
+                    orderService.processCurrentOrder();
+                    return "Order processed for user: " + customer + " --- Address: " + addressCustomer;
+
+                } catch (InterruptedException err) {
+                    Thread.currentThread().interrupt();
+                    return "Error processing the order";
+                }
+            } else {
+                return "You don't have the rights for this command!";
             }
+
         } else {
             return "Not logged in, error occurred";
         }
