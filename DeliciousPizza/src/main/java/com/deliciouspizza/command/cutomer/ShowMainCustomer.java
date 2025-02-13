@@ -21,9 +21,9 @@ public class ShowMainCustomer implements Command {
                 %s1.%s %s create-order %s - Start a new order
                 %s2.%s %s add-product %s %s<product-key> <quantity>%s - Add product to current order
                 %s3.%s %s remove-product %s %s<product-key> <quantity>%s - Remove product to current order
-                %s4.%s %s finish-order %s - Start a new order
+                %s4.%s %s finish-order %s - Finish your current order
                 %s5.%s %s view-history %s - View your order history
-                %s6.%s %s repeat-order %s %s<orderId>%s - Log in with your credentials
+                %s6.%s %s repeat-order %s %s<orderId>%s - Repeat previous order
                 %s7.%s %s menu %s - View active products menu with product keys
                 %s8.%s %s change-address %s %s<"new-address"> %s - Change your delivery address (!use "")
                 %s9.%s %s logout %s - Log out of your account

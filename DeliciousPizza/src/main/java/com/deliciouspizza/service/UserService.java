@@ -1,5 +1,6 @@
 package com.deliciouspizza.service;
 
+import com.deliciouspizza.exception.UserAlreadyExistsException;
 import com.deliciouspizza.utils.Singleton;
 import com.deliciouspizza.entity.order.Order;
 import com.deliciouspizza.entity.user.Customer;
@@ -27,10 +28,10 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public void registerCustomer(String username, String plainPassword, String address, int age) {
+    public void registerCustomer(String username, String plainPassword, String address, int age)
+        throws UserAlreadyExistsException {
         if (userRepository.isUsernamePresent(username)) {
-            LOGGER.warn("User with username {} already exists.", username);
-            return;
+            throw new UserAlreadyExistsException("User with this username already exists!");
         }
 
         String hashedPassword = BCrypt.hashpw(plainPassword, BCrypt.gensalt());

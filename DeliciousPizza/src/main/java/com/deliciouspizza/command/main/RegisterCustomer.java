@@ -1,6 +1,7 @@
 package com.deliciouspizza.command.main;
 
 import com.deliciouspizza.command.Command;
+import com.deliciouspizza.exception.UserAlreadyExistsException;
 import com.deliciouspizza.service.UserService;
 
 import java.nio.channels.SocketChannel;
@@ -31,8 +32,13 @@ public class RegisterCustomer implements Command {
         String address = args[ADDRESS_FIELD];
         int age = Integer.parseInt(args[AGE_FIELD]);
 
-        userService.registerCustomer(username, password, address, age);
-        return "User " + username + " successfully registered! ";
+        try {
+            userService.registerCustomer(username, password, address, age);
+            return "User " + username + " successfully registered! ";
+        } catch (UserAlreadyExistsException err) {
+            return err.getMessage();
+        }
+
     }
 
 }
