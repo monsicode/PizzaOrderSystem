@@ -54,7 +54,7 @@ public class Sauce extends Product {
 
     @Override
     public String getFormattedDetails() {
-        return String.format("Sauce: %s, Price: $%.2f", getNameSauce(), calculatePrice());
+        return String.format("Sauce: %s", getNameSauce());
     }
 
 }

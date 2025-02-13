@@ -23,7 +23,7 @@ public class ViewPendingOrders implements Command {
 
             if (manager.isUserEmployee(username)) {
                 if (!orderService.getPendingOrders().isEmpty()) {
-                    return orderService.getPendingOrders().toString();
+                    return orderService.formatPendingOrders();
                 } else {
                     return "No pending";
                 }

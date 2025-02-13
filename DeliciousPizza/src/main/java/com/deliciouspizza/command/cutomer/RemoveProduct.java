@@ -31,12 +31,12 @@ public class RemoveProduct implements Command {
         if (manager.isLoggedIn(client)) {
             String username = manager.getUsername(client);
             String productKey = args[PRODUCT_KEY_FIELD];
-            int quantity = Integer.parseInt(args[QUANTITY_FIELD]);
 
             try {
+                int quantity = Integer.parseInt(args[QUANTITY_FIELD]);
                 orderService.removeFromCurrentOrderForUser(username, productKey, quantity);
                 return "Product " + productKey + " removed!\n" + orderService.showCurrentOrderForUser(username);
-            } catch (IllegalStateException | ProductException err) {
+            } catch (IllegalStateException | ProductException | NumberFormatException err) {
                 return err.getMessage();
             }
 

@@ -30,13 +30,16 @@ public class ViewHistoryOfOrders implements Command {
         if (manager.isLoggedIn(client)) {
             String username = manager.getUsername(client);
 
-            Set<Order> orderHistory = userService.getOrderHistory(username);
-
-            if (orderHistory.isEmpty()) {
-                return "No orders in history.";
-            } else {
-                Map<Integer, Order> temp = new HashMap<>();
-                return getOrderHistoryString(orderHistory, temp);
+            try {
+                Set<Order> orderHistory = userService.getOrderHistory(username);
+                if (orderHistory.isEmpty()) {
+                    return "No orders in history.";
+                } else {
+                    Map<Integer, Order> temp = new HashMap<>();
+                    return getOrderHistoryString(orderHistory, temp);
+                }
+            } catch (IllegalStateException err) {
+                return err.getMessage();
             }
 
         } else {

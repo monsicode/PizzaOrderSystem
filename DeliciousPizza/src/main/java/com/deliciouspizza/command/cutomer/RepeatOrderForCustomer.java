@@ -42,13 +42,16 @@ public class RepeatOrderForCustomer implements Command {
             String username = manager.getUsername(client);
             int choice = Integer.parseInt(args[CHOICE_FIELD]);
 
-            Set<Order> orderHistory = userService.getOrderHistory(username);
-            if (orderHistory.isEmpty()) {
-                return "No order history found.";
+            try {
+                Set<Order> orderHistory = userService.getOrderHistory(username);
+                if (orderHistory.isEmpty()) {
+                    return "No order history found.";
+                }
+                Order selectedOrder = selectedOrder(orderHistory, choice);
+                return checkIfOrderIsValid(selectedOrder);
+            } catch (IllegalStateException err) {
+                return err.getMessage();
             }
-
-            Order selectedOrder = selectedOrder(orderHistory, choice);
-            return checkIfOrderIsValid(selectedOrder);
 
         } else {
             return "Not logged in, error occurred";

@@ -10,7 +10,6 @@ public class ShowMainCustomer implements Command {
     private static final String YELLOW = "\u001B[33m";
     private static final String BLUE = "\u001B[34m";
     private static final String PINK = "\u001B[35m";
-    private static final String GRAY = "\u001B[90m";
 
     private static final int USERNAME_FIELD = 0;
 

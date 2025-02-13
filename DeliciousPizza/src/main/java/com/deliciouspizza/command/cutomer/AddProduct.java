@@ -32,12 +32,12 @@ public class AddProduct implements Command {
         if (manager.isLoggedIn(client)) {
             String username = manager.getUsername(client);
             String productKey = args[PRODUCT_KEY_FIELD];
-            int quantity = Integer.parseInt(args[QUANTITY_FIELD]);
 
             try {
+                int quantity = Integer.parseInt(args[QUANTITY_FIELD]);
                 orderService.addProductToActiveOrder(username, productKey, quantity);
                 return "Product " + productKey + " added!\n" + orderService.showCurrentOrderForUser(username);
-            } catch (ProductException | UnderAgedException | IllegalStateException err) {
+            } catch (ProductException | UnderAgedException | IllegalStateException | NumberFormatException err) {
                 return err.getMessage();
             }
 

@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class Client {
     private static final String SERVER_HOST = "localhost";
     private static final int SERVER_PORT = 8080;
-    private static final int BUFFER_SIZE = 1024;
+    private static final int BUFFER_SIZE = 2048;
 
     public static void main(String[] args) {
         try {

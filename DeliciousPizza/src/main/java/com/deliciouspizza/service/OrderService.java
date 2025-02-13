@@ -26,6 +26,8 @@ public class OrderService {
     private static final int ADULT_AGE = 18;
     private static final String RESET = "\u001B[0m";
     private static final String YELLOW = "\u001B[33m";
+    private static final String BLUE = "\u001B[34m";
+    protected static final String GREEN = "\u001B[32m";
 
     public OrderService() {
         orderRepository = Singleton.getInstance(OrderRepository.class);
@@ -155,6 +157,49 @@ public class OrderService {
             getTotalPriceOfOrderForCustomer(username)));
 
         return orderBuilder.toString();
+    }
+
+    public String formatPendingOrders() {
+        BlockingQueue<Order> pendingOrders = orderRepository.getPendingOrders();
+        StringBuilder result = new StringBuilder();
+
+        result.append("\n").append("===== Pending Orders =====").append("\n");
+
+        int orderNumber = 1;
+        for (Order order : pendingOrders) {
+            result.append(String.format(BLUE + "Order #%d:\n" + RESET, orderNumber++));
+            result.append("--------------------------------------------\n");
+
+            Map<String, Integer> orderItems = order.getOrder();
+            double totalOrderPrice = 0;
+
+            for (Map.Entry<String, Integer> entry : orderItems.entrySet()) {
+                String productKey = entry.getKey();
+                String product = formatProductName(productKey);
+                int quantity = entry.getValue();
+                double unitPrice = productService.getProductPriceByKey(productKey);
+                double totalPrice = unitPrice * quantity;
+                totalOrderPrice += totalPrice;
+
+                result.append(String.format(
+                    YELLOW + " - " + RESET + " %-25s | Qty: %-2d | Unit: " + GREEN + "$%-5.2f" + RESET + " | Total: " +
+                        GREEN + "$%-6.2f" + RESET + "\n",
+                    product, quantity, unitPrice, totalPrice));
+            }
+
+            result.append("--------------------------------------------\n");
+            result.append(String.format("Total Order Price: " + GREEN + "$%.2f\n" + RESET, totalOrderPrice));
+            result.append("\n"); // Празен ред за разделяне на поръчките
+        }
+
+        result.append("============================================\n");
+        result.append("Choose a command:");
+        return result.toString();
+    }
+
+    private String formatProductName(String productKey) {
+        String formatted = productKey.replaceAll("_", " ");
+        return formatted.substring(0, 1).toUpperCase() + formatted.substring(1).toLowerCase();
     }
 
     public String getDeliveryAddress(String username) {

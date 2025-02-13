@@ -106,8 +106,8 @@ public class Order {
             throw new ProductNotInOrderException("The product is not in the order and cannot be removed.");
         }
 
-        if (quantity < 0) {
-            throw new IllegalArgumentException("The quantity you want to remove cannot be less than 0");
+        if (quantity <= 0) {
+            throw new IllegalArgumentException("The quantity you want to remove cannot be less or equal to 0");
         }
 
         int currentQuantity = getQuantityProduct(productKey);

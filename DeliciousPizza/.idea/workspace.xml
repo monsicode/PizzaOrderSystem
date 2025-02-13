@@ -5,24 +5,54 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f9e54522-3b21-4fe5-911b-c3ac885ffae2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/command/main/ViewActiveProducts.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/SessionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/SessionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/employee/AddProductToMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/employee/AddProductToMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/employee/RemoveProductFromMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/employee/RemoveProductFromMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/employee/orders/ProcessNextOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/employee/orders/ProcessNextOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/employee/orders/ViewFinishedOrders.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/employee/orders/ViewFinishedOrders.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-storage/historyOrders.json" beforeDir="false" afterPath="$PROJECT_DIR$/data-storage/historyOrders.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-storage/pendingOrders.json" beforeDir="false" afterPath="$PROJECT_DIR$/data-storage/pendingOrders.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-storage/stock.json" beforeDir="false" afterPath="$PROJECT_DIR$/data-storage/stock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-storage/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/data-storage/users.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.log" beforeDir="false" afterPath="$PROJECT_DIR$/main.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new_cache.json" beforeDir="false" afterPath="$PROJECT_DIR$/new_cache.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/CommandCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/CommandCreator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/cutomer/AddProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/cutomer/AddProduct.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/cutomer/ChangeAddressInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/cutomer/ChangeAddressInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/cutomer/RemoveProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/cutomer/RemoveProduct.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/cutomer/RepeatOrderForCustomer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/cutomer/RepeatOrderForCustomer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/cutomer/ShowMainCustomer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/cutomer/ShowMainCustomer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/cutomer/ViewActiveProducts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/main/ViewActiveProducts.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/cutomer/ViewHistoryOfOrders.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/cutomer/ViewHistoryOfOrders.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/employee/orders/ViewPendingOrders.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/employee/orders/ViewPendingOrders.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/employee/reports/CountOrdersForPeriod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/employee/reports/CountOrdersForPeriod.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/employee/reports/ProfitForPeriod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/employee/reports/ProfitForPeriod.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/employee/stock/AddStockToWarehouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/employee/stock/AddStockToWarehouse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/employee/stock/ViewCatalogProducts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/employee/stock/ViewCatalogProducts.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/employee/stock/ViewWarehouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/employee/stock/ViewWarehouse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/main/ShowMainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/main/ShowMainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/entity/order/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/entity/order/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/entity/product/Drink.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/entity/product/Drink.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/entity/product/Pizza.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/entity/product/Pizza.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/entity/product/Sauce.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/entity/product/Sauce.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/service/OrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/command/SessionManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/command/SessionManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/command/CommandCreator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/command/CommandCreator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/command/cutomer/ChangeAddressInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/command/cutomer/ChangeAddressInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/command/cutomer/RepeatOrderForCustomer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/command/cutomer/RepeatOrderForCustomer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/command/cutomer/ShowMainCustomer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/command/cutomer/ShowMainCustomer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/command/cutomer/ViewActiveProducts.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/command/cutomer/ViewHistoryOfOrders.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/command/cutomer/ViewHistoryOfOrders.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/command/employee/AddProductToMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/command/employee/AddProductToMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/command/employee/RemoveProductFromMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/command/employee/RemoveProductFromMenu.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/command/employee/orders/ProcessNextOrder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/command/employee/orders/ProcessNextOrder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/command/employee/orders/ViewFinishedOrders.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/command/employee/orders/ViewFinishedOrders.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/command/employee/orders/ViewPendingOrders.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/command/employee/orders/ViewPendingOrders.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/command/employee/reports/CountOrdersForPeriod.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/command/employee/reports/CountOrdersForPeriod.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/command/employee/reports/ProfitForPeriod.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/command/employee/reports/ProfitForPeriod.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/command/employee/stock/AddStockToWarehouse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/command/employee/stock/AddStockToWarehouse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/command/employee/stock/ViewCatalogProducts.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/command/employee/stock/ViewCatalogProducts.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/command/employee/stock/ViewWarehouse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/command/employee/stock/ViewWarehouse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/command/main/ShowMainMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/command/main/ShowMainMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/entity/product/Drink.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/entity/product/Drink.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/entity/product/Pizza.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/entity/product/Pizza.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/entity/product/Sauce.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/entity/product/Sauce.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/service/OrderService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/service/OrderService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/service/UserService.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,6 +87,7 @@
     &quot;Application.ProductRepository.executor&quot;: &quot;Run&quot;,
     &quot;Application.Server.executor&quot;: &quot;Run&quot;,
     &quot;Application.com.deliciouspizza.command.employee.orders.ProcessNextOrder.executor&quot;: &quot;Run&quot;,
+    &quot;Application.menuMain.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.OrderRepositoryTest.executor&quot;: &quot;Coverage&quot;,
     &quot;JUnit.OrderRepositoryTest.testAddOrder.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.OrderRepositoryTest.testAddProductToActiveOrderWithInactiveOrder.executor&quot;: &quot;Run&quot;,
@@ -177,6 +208,40 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;org.infernus.idea.checkstyle.CheckStyleConfigurable&quot;
   }
 }</component>
+  <component name="RunManager">
+    <configuration name="Client" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.deliciouspizza.client.Client" />
+      <module name="DeliciousPizza" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.deliciouspizza.client.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.deliciouspizza.client.Server" />
+      <module name="DeliciousPizza" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.deliciouspizza.client.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Client" />
+        <item itemvalue="Application.Server" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

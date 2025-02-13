@@ -29,8 +29,12 @@ public class ChangeAddressInfo implements Command {
             String username = manager.getUsername(client);
             String newAddress = args[ADDRESS_FIELD];
 
-            userService.changeAddressCustomer(username, newAddress);
-            return "Address changed successfully to " + newAddress + " !";
+            try {
+                userService.changeAddressCustomer(username, newAddress);
+                return "Address changed successfully to " + newAddress + " !";
+            } catch (IllegalStateException err) {
+                return err.getMessage();
+            }
 
         } else {
             return "Not logged in, error occurred";

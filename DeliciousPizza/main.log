@@ -334,3 +334,13 @@ java.lang.IllegalStateException: User does not have an active order.
 2025-02-13 13:53:57,925 [main] WARN com.deliciouspizza.service.OrderService - Under aged user nedko is trying to order drink_beer_large
 2025-02-13 14:07:35,090 [main] ERROR com.deliciouspizza.service.UserService - User with username pencho not found
 2025-02-13 14:14:57,197 [main] ERROR com.deliciouspizza.service.UserService - User with username pencho not found
+2025-02-13 18:07:29,449 [main] WARN com.deliciouspizza.repository.OrderRepository - Current order is empty for user monkata: 
+Order : 
+2025-02-13 18:07:29,455 [main] WARN com.deliciouspizza.repository.OrderRepository - Current order is empty for user monkata: 
+Order : 
+2025-02-13 20:11:04,740 [main] WARN com.deliciouspizza.service.UserService - User with username daka already exists.
+2025-02-13 20:11:22,902 [main] WARN com.deliciouspizza.service.UserService - Wrong password.
+2025-02-13 20:12:04,267 [main] WARN com.deliciouspizza.service.UserService - Wrong password.
+2025-02-13 20:27:57,911 [main] ERROR com.deliciouspizza.repository.UserRepository - User with username null not found
+2025-02-13 20:53:54,516 [main] WARN com.deliciouspizza.service.UserService - Wrong password.
+2025-02-13 21:17:53,708 [main] ERROR com.deliciouspizza.repository.UserRepository - User with username null not found
