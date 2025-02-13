@@ -84,12 +84,12 @@ public class UserService {
         return null;
     }
 
-//    public void addToOrderHistory(String usernameCustomer, Order order) {
-//        userRepository.addToOrderHistory(usernameCustomer, order);
-//    }
-
     public Set<Order> getOrderHistory(String usernameCustomer) {
         return userRepository.getOrderHistory(usernameCustomer);
+    }
+
+    public void changeAddressCustomer(String username, String newAddress) {
+        userRepository.changeAddressCustomer(username, newAddress);
     }
 
 }

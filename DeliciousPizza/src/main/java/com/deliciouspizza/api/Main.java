@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) throws ApiException {
         DistanceClient client = new DistanceClient();
       //  Delivery delivery = client.getDistanceAndDuration(42.645649, 23.337200, 42.674439, 23.330766);
-        Delivery delivery = client.getDistanceAndDuration("НДК София");
+        Delivery delivery = client.getDistanceAndDuration("кв. Витоша, ул. „Марин Тодоров“ 2                    ");
 
         System.out.println(delivery.toString());
 

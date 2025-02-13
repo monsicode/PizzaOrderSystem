@@ -34,14 +34,14 @@ public class OrderRepository {
     private final BlockingQueue<Order> pendingOrders;
     private final Set<Order> historyOrders = ConcurrentHashMap.newKeySet();
 
-    private String FILE_PATH_ORDERS = "data-storage/pendingOrders.json";
-    private String FILE_PATH_HISTORY_ORDERS = "data-storage/historyOrders.json";
+    private final String filePathOrders = "data-storage/pendingOrders.json";
+    private final String filePathHistoryOrders = "data-storage/historyOrders.json";
     private static final int DAYS_IN_WEEK = 7;
 
     private final ObjectMapper objectMapper;
 
-    private File pendingJsonFile = new File(FILE_PATH_ORDERS);
-    private File historyJsonFile = new File(FILE_PATH_HISTORY_ORDERS);
+    private File pendingJsonFile = new File(filePathOrders);
+    private File historyJsonFile = new File(filePathHistoryOrders);
 
     private final Map<String, Order> activeOrdersForCustomers = new ConcurrentHashMap<>();
 

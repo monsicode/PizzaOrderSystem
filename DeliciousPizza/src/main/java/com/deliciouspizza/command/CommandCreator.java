@@ -1,6 +1,7 @@
 package com.deliciouspizza.command;
 
 import com.deliciouspizza.command.cutomer.AddProduct;
+import com.deliciouspizza.command.cutomer.ChangeAddressInfo;
 import com.deliciouspizza.command.cutomer.CreateOrder;
 import com.deliciouspizza.command.cutomer.FinishOrder;
 import com.deliciouspizza.command.cutomer.RemoveProduct;
@@ -102,6 +103,7 @@ public class CommandCreator {
             case "menu" -> new ViewActiveProducts(productService);
             case "view-history" -> new ViewHistoryOfOrders(userService, manager);
             case "repeat-order" -> new RepeatOrderForCustomer(userService, orderService, warehouse, manager);
+            case "change-address" -> new ChangeAddressInfo(userService, manager);
             case "logout" -> new LogOut(manager);
 
             case "process" -> new ProcessNextOrder(orderService, manager);

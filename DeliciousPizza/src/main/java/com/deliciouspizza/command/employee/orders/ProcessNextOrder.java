@@ -24,7 +24,7 @@ public class ProcessNextOrder implements Command {
                 String addressCustomer = orderService.getDeliveryAddress(customer);
 
                 orderService.processCurrentOrder();
-                return "Order processed for user: " + customer + " . Delivering for address: " + addressCustomer ;
+                return "Order processed for user: " + customer + " --- Address: " + addressCustomer;
 
             } catch (InterruptedException err) {
                 Thread.currentThread().interrupt();
@@ -35,27 +35,4 @@ public class ProcessNextOrder implements Command {
         }
     }
 
-//    public static void main(String[] args) {
-//        String output = "Order processed for user: customer ; Delivering for address: 'st. baba meca' ";
-//        String[] words = output.split(" ");
-//        String customerName = words[4];
-//        System.out.println(words[9]);
-//    }
-
 }
-
-
-//  @Override
-//    public String execute(String[] args, SocketChannel client) {
-//        if (manager.isLoggedIn(client)) {
-//            try {
-//                orderService.processCurrentOrder();
-//                return "Order processed successfully!";
-//            } catch (InterruptedException err) {
-//                Thread.currentThread().interrupt();
-//                return "Error processing the order";
-//            }
-//        } else {
-//            return "Not logged in, error occurred";
-//        }
-//    }

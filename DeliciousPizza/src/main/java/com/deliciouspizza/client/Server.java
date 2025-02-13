@@ -10,6 +10,9 @@ import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.deliciouspizza.api.DistanceClient;
 import com.deliciouspizza.api.data.Delivery;
@@ -63,9 +66,10 @@ public class Server {
                             String output = commandExecutor.start(clientInput, clientChannel);
 
                             try {
-                                informClientForProcessedOrder(output);
+                                informClientForProcessedOrder(output, clientChannel);
                             } catch (ApiException err) {
                                 System.out.println(err.getMessage());
+                                writeClientOutput(clientChannel, "Problem with the address of the customer. ");
                             }
 
                             writeClientOutput(clientChannel, output);
@@ -137,18 +141,36 @@ public class Server {
         writeClientOutput(accept, welcomeMenu);
     }
 
-    private void informClientForProcessedOrder(String output) throws IOException, ApiException {
+    private void informClientForProcessedOrder(String output, SocketChannel employeeChannel)
+        throws IOException, ApiException {
         if (output.contains("processed")) {
-            System.out.println("We are in if");
             String[] words = output.split(" ");
             String customerName = words[4];
-            String customerAddress = words[9];
+            String customerAddress;
 
-            SocketChannel clientToInform = commandExecutor.getChannelByUser(customerName);
-            Delivery delivery = getEstimatedTimeForDelivery(customerAddress);
+            Pattern pattern = Pattern.compile(" --- Address: (.+)");
+            Matcher matcher = pattern.matcher(output);
 
-            if (clientToInform != null && delivery != null) {
-                writeClientOutput(clientToInform, delivery.toString());
+            if (matcher.find()) {
+                customerAddress = matcher.group(1);
+                SocketChannel clientToInform = commandExecutor.getChannelByUser(customerName);
+
+                try {
+                    Delivery delivery = getEstimatedTimeForDelivery(customerAddress);
+
+                    if (clientToInform != null && delivery != null) {
+                        writeClientOutput(clientToInform, delivery.toString());
+                    }
+
+                } catch (NoSuchElementException e) {
+                    if (clientToInform != null) {
+                        writeClientOutput(clientToInform, "Your address is invalid. Check for mistakes!");
+                    }
+                    throw new ApiException("Error! Problem with the address of the customer.");
+                }
+                writeClientOutput(employeeChannel, "Order processed successfully! ");
+            } else {
+                System.out.println("No address found.");
             }
         }
     }

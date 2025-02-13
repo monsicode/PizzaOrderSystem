@@ -26,17 +26,19 @@ public class ShowMainCustomer implements Command {
                 %s5.%s %s view-history %s - View your order history
                 %s6.%s %s repeat-order %s %s<orderId>%s - Log in with your credentials
                 %s7.%s %s menu %s - View active products menu with product keys
-                %s8.%s %s logout %s - Log out of your account
+                %s8.%s %s change-address %s %s<"new-address"> %s - Change your delivery address (!use "")
+                %s9.%s %s logout %s - Log out of your account
                 =====================
                 Choose a command:\s""",
             YELLOW, args[USERNAME_FIELD], RESET,
             PINK, RESET, BLUE, RESET,
-            PINK, RESET, BLUE, RESET, GRAY, RESET,
-            PINK, RESET, BLUE, RESET, GRAY, RESET,
+            PINK, RESET, BLUE, RESET, YELLOW, RESET,
+            PINK, RESET, BLUE, RESET, YELLOW, RESET,
             PINK, RESET, BLUE, RESET,
             PINK, RESET, BLUE, RESET,
-            PINK, RESET, BLUE, RESET, GRAY, RESET,
+            PINK, RESET, BLUE, RESET, YELLOW, RESET,
             PINK, RESET, BLUE, RESET,
+            PINK, RESET, BLUE, RESET, YELLOW, RESET,
             PINK, RESET, BLUE, RESET);
     }
 

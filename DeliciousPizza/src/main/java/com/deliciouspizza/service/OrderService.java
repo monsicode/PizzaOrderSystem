@@ -51,7 +51,7 @@ public class OrderService {
             orderRepository.addProductToActiveOrder(username, productKey, quantity);
         } else {
             LOGGER.warn("Under aged user {} is trying to order {}", username, productKey);
-            throw new UnderAgedException("Sorry , you can't have this drink, you are under aged" + username);
+            throw new UnderAgedException("Sorry, you can't have this drink, you are under aged " + username);
         }
     }
 

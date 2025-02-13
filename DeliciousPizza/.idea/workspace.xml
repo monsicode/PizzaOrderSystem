@@ -5,20 +5,52 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f9e54522-3b21-4fe5-911b-c3ac885ffae2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/api/cache/CacheDistance.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/cutomer/ChangeAddressInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-storage/activeProducts.json" beforeDir="false" afterPath="$PROJECT_DIR$/data-storage/activeProducts.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data-storage/historyOrders.json" beforeDir="false" afterPath="$PROJECT_DIR$/data-storage/historyOrders.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-storage/inactiveProduct.json" beforeDir="false" afterPath="$PROJECT_DIR$/data-storage/inactiveProduct.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data-storage/pendingOrders.json" beforeDir="false" afterPath="$PROJECT_DIR$/data-storage/pendingOrders.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data-storage/stock.json" beforeDir="false" afterPath="$PROJECT_DIR$/data-storage/stock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data-storage/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/data-storage/users.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.log" beforeDir="false" afterPath="$PROJECT_DIR$/main.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DebugTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/PizzaApp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/api/DistanceClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/api/DistanceClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/api/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/api/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/api/data/Delivery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/api/data/Delivery.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/client/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/client/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/CommandCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/CommandCreator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/cutomer/ShowMainCustomer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/cutomer/ShowMainCustomer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/employee/orders/ProcessNextOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/command/employee/orders/ProcessNextOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/repository/OrderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/repository/OrderRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/repository/UserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/service/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/ui/CustomerInterface.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/ui/CustomerInterfaceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/ui/EmployeeInterface.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/ui/EmployeeInterfaceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/ui/UserInterface.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/ui/UserInterfaceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/utils/Singleton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/deliciouspizza/utils/Singleton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/PizzaApp.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/api/DistanceClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/api/DistanceClient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/api/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/api/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/api/data/Delivery.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/api/data/Delivery.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/client/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/client/Server.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/command/employee/orders/ProcessNextOrder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/command/employee/orders/ProcessNextOrder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/repository/OrderRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/repository/OrderRepository.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/service/OrderService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/service/OrderService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/ui/CustomerInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/ui/CustomerInterfaceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/ui/EmployeeInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/ui/EmployeeInterfaceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/ui/UserInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/ui/UserInterfaceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/deliciouspizza/utils/Singleton.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/deliciouspizza/utils/Singleton.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +78,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.A.executor": "Run",
     "Application.Client.executor": "Run",
     "Application.Main.executor": "Run",
     "Application.ProcessNextOrder.executor": "Run",
@@ -158,6 +191,7 @@
     "JUnit.WarehouseTest.testSaveStock.executor": "Run",
     "JUnit.WarehouseTest.testSaveStockWithIOException.executor": "Run",
     "JUnit.deliciouspizza in DeliciousPizza.executor": "Coverage",
+    "JUnit.java in DeliciousPizza.executor": "Coverage",
     "JUnit.repository in DeliciousPizza.executor": "Coverage",
     "JUnit.service in DeliciousPizza.executor": "Coverage",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -165,60 +199,12 @@
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Monika/Downloads/checkstyle.xml",
-    "project.structure.last.edited": "Libraries",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.3402299",
     "settings.editor.selected.configurable": "org.infernus.idea.checkstyle.CheckStyleConfigurable"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.Client">
-    <configuration name="Client" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.deliciouspizza.client.Client" />
-      <module name="DeliciousPizza" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.deliciouspizza.client.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ProcessNextOrder" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.deliciouspizza.command.employee.orders.ProcessNextOrder" />
-      <module name="DeliciousPizza" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.deliciouspizza.command.employee.orders.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.deliciouspizza.client.Server" />
-      <module name="DeliciousPizza" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.deliciouspizza.client.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.Client" />
-        <item itemvalue="Application.ProcessNextOrder" />
-        <item itemvalue="Application.Server" />
-      </list>
-    </recent_temporary>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -234,13 +220,8 @@
     <SUITE FILE_PATH="coverage/DeliciousPizza$UserServiceTest.ic" NAME="UserServiceTest Coverage Results" MODIFIED="1739200966988" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>com.deliciouspizza.service.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/DeliciousPizza$java_in_DeliciousPizza.ic" NAME="java in DeliciousPizza Coverage Results" MODIFIED="1739374276589" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
     <SUITE FILE_PATH="coverage/DeliciousPizza$repository_in_DeliciousPizza.ic" NAME="repository in DeliciousPizza Coverage Results" MODIFIED="1739192260810" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
-    <SUITE FILE_PATH="coverage/DeliciousPizza$OrderRepositoryTest.ic" NAME="OrderRepositoryTest Coverage Results" MODIFIED="1739029682166" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>com.deliciouspizza.repository.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/DeliciousPizza$ProductServiceTest.ic" NAME="ProductServiceTest Coverage Results" MODIFIED="1739195212720" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>com.deliciouspizza.service.*</FILTER>
-    </SUITE>
     <SUITE FILE_PATH="coverage/DeliciousPizza$Client.ic" NAME="Client Coverage Results" MODIFIED="1739356335493" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>com.deliciouspizza.client.*</FILTER>
     </SUITE>
@@ -251,13 +232,19 @@
       <FILTER>com.deliciouspizza.repository.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/DeliciousPizza$deliciouspizza_in_DeliciousPizza.ic" NAME="deliciouspizza in DeliciousPizza Coverage Results" MODIFIED="1739201097889" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
-    <SUITE FILE_PATH="coverage/DeliciousPizza$WarehouseTest.ic" NAME="WarehouseTest Coverage Results" MODIFIED="1739116659815" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>com.deliciouspizza.repository.*</FILTER>
-    </SUITE>
     <SUITE FILE_PATH="coverage/DeliciousPizza$OrderServiceTest.ic" NAME="OrderServiceTest Coverage Results" MODIFIED="1739200036666" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>com.deliciouspizza.service.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/DeliciousPizza$ProductRepositoryTest_testLoadInactiveProductsWithEmptyFile.ic" NAME="ProductRepositoryTest.testLoadInactiveProductsWithEmptyFile Coverage Results" MODIFIED="1738849670030" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.deliciouspizza.repository.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/DeliciousPizza$OrderRepositoryTest.ic" NAME="OrderRepositoryTest Coverage Results" MODIFIED="1739029682166" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.deliciouspizza.repository.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/DeliciousPizza$ProductServiceTest.ic" NAME="ProductServiceTest Coverage Results" MODIFIED="1739195212720" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.deliciouspizza.service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/DeliciousPizza$WarehouseTest.ic" NAME="WarehouseTest Coverage Results" MODIFIED="1739116659815" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>com.deliciouspizza.repository.*</FILTER>
     </SUITE>
   </component>

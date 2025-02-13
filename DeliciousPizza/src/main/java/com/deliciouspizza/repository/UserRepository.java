@@ -161,4 +161,20 @@ public class UserRepository {
         return null;
     }
 
+    public void changeAddressCustomer(String username, String newAddress) {
+        try {
+            User user = getUserByUsername(username);
+
+            if (!(user instanceof Customer customer)) {
+                throw new IllegalStateException("User is not of type Customer!");
+            }
+
+            customer.setAddress(newAddress);
+            saveUsers();
+
+        } catch (UserNotFoundException err) {
+            LOGGER.error(err.getMessage());
+        }
+    }
+
 }

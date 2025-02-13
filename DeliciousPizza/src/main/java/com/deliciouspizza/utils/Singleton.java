@@ -1,6 +1,5 @@
 package com.deliciouspizza.utils;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -26,16 +25,3 @@ public class Singleton<T> {
         }
     }
 }
-
-//@SuppressWarnings("unchecked")
-//public static <T> T getInstance(Class<T> clazz) {
-//    synchronized (INSTANCES) {
-//        return (T) INSTANCES.computeIfAbsent(clazz, key -> {
-//            try {
-//                return clazz.getDeclaredConstructor().newInstance();
-//            } catch (Exception e) {
-//                throw new IllegalStateException("Cannot create instance of " + clazz.getName(), e);
-//            }
-//        });
-//    }
-//}
